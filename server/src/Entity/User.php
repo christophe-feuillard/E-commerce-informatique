@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -16,24 +17,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups("groupe:get")]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups("groupe:get")]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups("groupe:get")]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("groupe:get")]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("groupe:get")]
     private $phone;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("groupe:get")]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("groupe:get")]
     private $ville;
 
     public function getId(): ?int

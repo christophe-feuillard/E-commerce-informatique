@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Categorie;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -16,18 +18,23 @@ class Article
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("groupe:get")]
     private $titre;
 
     #[ORM\Column(type: 'float')]
+    #[Groups("groupe:get")]
     private $prix;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("groupe:get")]
     private $photo;
 
     #[ORM\Column(type: 'text')]
+    #[Groups("groupe:get")]
     private $description;
 
     #[ORM\Column(type: 'text')]
+    #[Groups("groupe:get")]
     private $caracteristique;
 
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
@@ -91,14 +98,14 @@ class Article
         return $this;
     }
 
-    public function getCaract�eristique(): ?string
+    public function getCaracteristique(): ?string
     {
         return $this->caracteristique;
     }
 
     public function setCaracteristique(string $caracteristique): self
     {
-        $this->caract�eristique = $caracteristique;
+        $this->caracteristique = $caracteristique;
 
         return $this;
     }

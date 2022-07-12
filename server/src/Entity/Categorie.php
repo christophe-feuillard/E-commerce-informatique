@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
@@ -16,9 +17,11 @@ class Categorie
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups("groupe:get")]
     private $titre;
 
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categorie')]
+    #[Groups("groupe:get")]
     private $articles;
 
     public function __construct()
