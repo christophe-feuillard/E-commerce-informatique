@@ -68,6 +68,11 @@
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/security-csrf" />
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/security-core" />
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/security-http" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/symfony/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/doctrine/doctrine-fixtures-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/doctrine/data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/sensio/framework-extra-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
