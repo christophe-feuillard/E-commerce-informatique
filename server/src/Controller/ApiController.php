@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'app_api')]
+    #[Route('/api/articles', name: 'app_api')]
         public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface)
         {
 
@@ -37,7 +37,14 @@ class ApiController extends AbstractController
 
 
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
-            //
+        }
+
+
+        #[Route('/api/article/{id}', name: 'app_api_id')]
+        public function getArticleById(ArticleRepository $articleRepository, $id)
+        {
+            return $this->json($articleRepository->find($id), 200,[],['groups' => 'groupe:get']);
+            
         }
 
         
