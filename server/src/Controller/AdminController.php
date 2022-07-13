@@ -20,14 +20,14 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/api', name: 'app_admin')]
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/admin/show', name: 'app_admin_show')]
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function show(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface): JsonResponse
     {
         return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
     }
 
-    #[Route('/admin/delete/{id}', name: 'app_admin')]
+    #[Route('/admin/delete/{id}', name: 'app_admin_delete')]
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function delete(ManagerRegistry $doctrine,UserRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface, $id): JsonResponse
     {
@@ -46,7 +46,7 @@ class AdminController extends AbstractController
 
     }
 
-    #[Route('/admin/add', name: 'app_admin', methods:('POST'))]
+    #[Route('/admin/add', name: 'app_admin_add', methods:('POST'))]
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function add(Request $request,ManagerRegistry $doctrine): JsonResponse
     {
@@ -79,7 +79,7 @@ class AdminController extends AbstractController
         }
     }
 
-    #[Route('/admin/update/{id}', name: 'app_admin', methods:('POST'))]
+    #[Route('/admin/update/{id}', name: 'app_admin_update', methods:('POST'))]
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function update(Request $request,ManagerRegistry $doctrine, $id, ArticleRepository $articleRepository): JsonResponse
     {
