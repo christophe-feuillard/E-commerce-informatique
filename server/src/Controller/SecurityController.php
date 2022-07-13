@@ -32,18 +32,32 @@ throw new \Exception('Will be intercepted before getting here');
     {
         // TODO - use Symfony forms & validation
         if ($request->isMethod('POST')) {
+                $data = json_decode($request->getContent(), true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                return false;
+            }
+            if ($data === null) {
+                return true;
+            }
+
+            $request->request->replace($data);
+            $entityManager = $doctrine->getManager();
+            
+
             $entityManager = $doctrine->getManager();
             $user = new User();
             $user->setEmail($request->request->get('email'));
             $user->setName($request->request->get('name'));
             $user->setPhone($request->request->get('phone'));
-            $user->setAdresse($request->request->get('adress'));
+            $user->setAdresse($request->request->get('adresse'));
             $user->setVille($request->request->get('ville'));
 
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
                 $request->request->get('password')
             );
+            $user->setPassword($hashedPassword);
 
 
             $entityManager->persist($user);
