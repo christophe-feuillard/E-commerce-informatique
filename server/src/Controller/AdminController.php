@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/api', name: 'app_admin')]
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/admin/show', name: 'app_admin')]
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function show(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface): JsonResponse
     {
