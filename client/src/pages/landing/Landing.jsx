@@ -23,7 +23,7 @@ const Landing = () => {
           <h3>Les meilleurs composants pour les meilleurs performances chez <br/><span>Seteup Dream</span> </h3>
           <Button value='Commencer' handleckick={()=> navigate("/home")}/>
         </div>
-        <img src={ComputerImage} alt="Computer"/>
+        <img src={ComputerImage} alt="Computer" className='computer'/>
       </div>
 
     </>

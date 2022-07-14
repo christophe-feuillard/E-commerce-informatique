@@ -6,7 +6,6 @@ const Button = ({value,handleckick}) => {
     <a onClick={handleckick} class="cta">
         <span>{value}</span>
     </a>
-
 </>
   )
 }

@@ -36,6 +36,7 @@
     letter-spacing: 0.25em;
     text-transform: uppercase;
     vertical-align: middle;
+    font-family: 'Press Start 2P', cursive;
   }
   .cta:hover:before {
     width: 100%;
