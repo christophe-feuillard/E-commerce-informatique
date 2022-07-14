@@ -9,14 +9,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use App\Entity\User;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
+
 
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'app_api')]
+    #[Route('/api/articles', name: 'app_api')]
         public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface)
         {
 
-            // $article = $articleRepository->findAll();                                               //RECUPERATION DANS LA BDD
+            // $article = $articleRepository->findAll();                                                  //RECUPERATION DANS LA BDD
 
             // $articleRepository = $normalize->normalize($article, null, ['groups' => 'groupe:get']);    //CONVERTIT EN TABLEAU ASSOCIATIF
             // $json = json_encode($articleRepository);                                                   //L'ENCODE EN JSON
@@ -34,6 +37,15 @@ class ApiController extends AbstractController
 
 
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
-            //
         }
+
+
+        #[Route('/api/article/{id}', name: 'app_api_id')]
+        public function getArticleById(ArticleRepository $articleRepository, $id)
+        {
+            return $this->json($articleRepository->find($id), 200,[],['groups' => 'groupe:get']);
+            
+        }
+
+        
 }
