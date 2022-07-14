@@ -1,0 +1,49 @@
+.overlay{
+    background-color: rgba(0,0,0,0.9);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    margin-top: -15vh;
+}
+
+.modelContainer{
+    border: 2px solid #eb4f29;
+    background-color: black;
+    position: fixed;
+    width: 70%;
+    height: 85%;
+    top: 10%;
+    left: 15%;
+    border-radius: 10px;
+}
+
+.allimages{
+    border-radius: 10px;
+    width: 100%;
+    height: 60%;
+}
+.imageModal{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.modelInfo{
+    text-align: center;
+}
+.modelInfo h2{
+    margin-top: 10px;
+    margin-bottom: 5vh;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 2.5em;
+    text-align: center;
+}
+.description {
+    margin-top: 5px;
+    margin-bottom: 2vh;
+}
+.modelInfo .price{
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+}

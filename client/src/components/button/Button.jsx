@@ -1,9 +1,9 @@
 import './Button.css'
 
-const Button = ({value,handleckick}) => {
+const Button = ({value,handelclick}) => {
   return (
     <>
-    <a onClick={handleckick} class="cta">
+    <a onClick={handelclick} class="cta">
         <span>{value}</span>
     </a>
 </>
