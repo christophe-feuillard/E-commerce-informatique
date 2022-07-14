@@ -1,11 +1,15 @@
 import React, {useEffect,useState} from 'react';
 import Header from "../../components/header/Header";
 import Card from '../../components/card/Card';
+import Modal from '../../components/modal/Modal';
 import axios from 'axios';
+import "./Home.css";
 
 const Home = () => {
 
     const [data, setData] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
+    const [dataModal, setDataModal] = useState({});
 
     useEffect(() => {
 
@@ -22,14 +26,22 @@ const Home = () => {
 
     }, []);
 
+    const showMore = (item) =>{
+      setDataModal(item);
+      setOpenModal(true);
+    }
+
   return (
     <>
       <Header />
-      <div style={{display:"flex",flexDirection:"row",flexWrap:"wrap",justifyContent:"center"}}>
+      <div className='homeContainer'>
         {data.map((item) => (
-          <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}/>
-        ) 
-        )}
+          <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
+            handleckick={()=>{showMore(item)}}
+          />
+        ))}
+      <Modal open={openModal} data={dataModal} onclose={()=>setOpenModal(false)} 
+        buyclick={()=>{alert("Vous avez acheté un article")} }/>
       </div>
     </>
   )
