@@ -14,7 +14,7 @@ const Home = () => {
     useEffect(() => {
 
       const callAPI = () => {
-        axios.get('/api')
+        axios.get('/api/articles')
           .then(res => {
             setData(res.data);
           })
