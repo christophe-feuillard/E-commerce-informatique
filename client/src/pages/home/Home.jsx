@@ -15,6 +15,7 @@ const Home = () => {
   const [dataModal, setDataModal] = useState({});
 
   useEffect(() => {
+    
     const callAPI = () => {
       axios.get('/api/articles')
         .then(res => {
@@ -35,7 +36,7 @@ const Home = () => {
 
 return (
   <>
-    <Header register={()=> navigate("/register")} />
+    <Header/>
     <div className='homeContainer'>
       {data.map((item) => (
         <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}

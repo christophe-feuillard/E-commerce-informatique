@@ -96,7 +96,7 @@ const Register = () => {
                     <Input type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
                 ))}
                 <Button value={"S'inscrire"} handelclick={()=>verifyValue()}/>
-                <p>Vous avez déjà un compte ? <span className='connect'>Connectez-vous</span></p>
+                <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")} >Connectez-vous</span></p>
             </div>
         </div>
     </div>
