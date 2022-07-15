@@ -1,0 +1,13 @@
+input{
+    width: 25vw;
+    height: 3vh;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #eb4f29;
+    background-color: black;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    outline: none;
+}

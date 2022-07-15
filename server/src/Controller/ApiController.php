@@ -13,11 +13,13 @@ use Symfony\Component\Serializer\SerializerInterface;
 use App\Entity\User;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
+
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'app_api')]
+    #[Route('/api/articles', name: 'app_api')]
         public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface)
         {
+<<<<<<< HEAD
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
             
         }
@@ -28,4 +30,36 @@ class ApiController extends AbstractController
         return $this->json($userRepository->findAll(), 200,[],['groups' => 'groupe:get']);
         
     }
+=======
+
+            // $article = $articleRepository->findAll();                                                  //RECUPERATION DANS LA BDD
+
+            // $articleRepository = $normalize->normalize($article, null, ['groups' => 'groupe:get']);    //CONVERTIT EN TABLEAU ASSOCIATIF
+            // $json = json_encode($articleRepository);                                                   //L'ENCODE EN JSON
+
+            //////////////////////////////////OU//////////////////////////
+
+            // $json = $serializerInterface->serialize($articleRepository, 'json', ['groups' => 'groupe:get']);    // CONVERIT ET ENCODE 
+
+
+            // $resonse = new Response($json, 200, [
+            //     "Content-Type" => "application/json"
+            // ]);
+
+            // return $resonse;
+
+
+            return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
+        }
+
+
+        #[Route('/api/article/{id}', name: 'app_api_id')]
+        public function getArticleById(ArticleRepository $articleRepository, $id)
+        {
+            return $this->json($articleRepository->find($id), 200,[],['groups' => 'groupe:get']);
+            
+        }
+
+        
+>>>>>>> 8ade2e4d9ca02b83da6782f58cf96582af1dfae8
 }
