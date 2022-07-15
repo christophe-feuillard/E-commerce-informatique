@@ -1,0 +1,42 @@
+.registerMain{
+    background-image: url('../../asset/pc.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.error{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+.registerContainer{
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    width: 50%;
+}
+
+.registerContainer h2{
+    text-align: center;
+    color: white;
+}
+.registerFormulaire{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.registerFormulaire input{
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+}
+.registerFormulaire .connect{
+    cursor: pointer;
+    color: #eb4f29;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}

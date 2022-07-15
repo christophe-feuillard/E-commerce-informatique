@@ -1,0 +1,27 @@
+.logo{
+    display: flex;
+    flex-direction: row;
+    padding-left: 2vh;
+    width: 30%;
+}
+h2{
+    font-family: 'Press Start 2P', cursive;
+    color: #eb4f29;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+.icon{
+    font-size: 30px;
+    color: #eb4f29;
+    margin-left: 2vh;
+    margin-top: 2vh;
+}
+
+@media (max-width: 915px){
+    .logo{
+        width: 100%;
+    }
+}
