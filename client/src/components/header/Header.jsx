@@ -2,6 +2,7 @@ import './Header.css';
 import Logo from "../logo/Logo";
 import Input from "../input/Input";
 import Button from '../button/Button';
+import NavItems from '../navItem/NavItems';
 
 const Header = () => {
 
@@ -13,11 +14,7 @@ const Header = () => {
             <Input placeholder={"Etrez votre recherche ici"}/>
             <Button value={"chercher"}/>
         </div>
-
-        <div className='login'>
-          <h3>Inscription</h3>
-          <h3> Connexion</h3>
-        </div>
+        <NavItems/>
 
     </div>
   )
