@@ -26,6 +26,11 @@ class CategorieFixtures extends Fixture
         $categorie1->addArticle($this->getReference('article_1'));
         $categorie1->addArticle($this->getReference('article_2'));
         $categorie1->addArticle($this->getReference('article_3'));
+        $categorie1->addArticle($this->getReference('article_11'));
+        $categorie1->addArticle($this->getReference('article_12'));
+        $categorie1->addArticle($this->getReference('article_13'));
+        $categorie1->addArticle($this->getReference('article_14'));
+
         $manager->persist($categorie1);
 
         $categorie2 = new Categorie();
@@ -33,6 +38,10 @@ class CategorieFixtures extends Fixture
         $categorie2->addArticle($this->getReference('article_4'));
         $categorie2->addArticle($this->getReference('article_5'));
         $categorie2->addArticle($this->getReference('article_6'));
+        $categorie2->addArticle($this->getReference('article_7'));
+        $categorie2->addArticle($this->getReference('article_8'));
+        $categorie2->addArticle($this->getReference('article_9'));
+        $categorie2->addArticle($this->getReference('article_10'));
         $manager->persist($categorie2);
 
 
