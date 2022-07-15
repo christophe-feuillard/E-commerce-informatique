@@ -32,6 +32,7 @@ throw new \Exception('Will be intercepted before getting here');
     {
         // TODO - use Symfony forms & validation
         if ($request->isMethod('POST')) {
+                $entityManager = $doctrine->getManager();
                 $data = json_decode($request->getContent(), true);
                 $emailFromDataBase = $entityManager->getRepository(User::class)->findOneByEmail($request->request->get('email'));
                 $emailFromForm = $request->request->get('email');
@@ -41,12 +42,12 @@ throw new \Exception('Will be intercepted before getting here');
             if ($data === null) {
                 return true;
             }
-            if ($emailFromDataBase === $check){
+            if ($emailFromDataBase === $emailFromForm){
                 return $this->json('utilisateur deja inscrit');
             }
 
             $request->request->replace($data);
-            $entityManager = $doctrine->getManager();
+            
             
 
             $entityManager = $doctrine->getManager();
