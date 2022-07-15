@@ -15,6 +15,7 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("groupe:get")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]

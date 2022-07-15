@@ -12,7 +12,7 @@ php bin/console lexik:jwt:generate-keypair
 http://localhost:8000/account/register
 ```
 
-2. utlisé la methode POST biensur.
+2. utlisé la methode POST bien-sûr.
 
 3. créez un objet json comme ça:
 
@@ -177,7 +177,7 @@ headers: {
 
 
 
-######  Mupprimé un article
+######  Supprimé un article
 
 1. methode GET et l'url c'est 
 ```javascript
