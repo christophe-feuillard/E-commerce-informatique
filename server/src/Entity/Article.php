@@ -41,9 +41,16 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $visit;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Visit::class)]
+    private $user;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +138,48 @@ class Article
     public function removeCategorie(Categorie $categorie): self
     {
         $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+
+    public function getVisit(): ?int
+    {
+        return $this->visit;
+    }
+
+    public function setVisit(?int $visit): self
+    {
+        $this->visit = $visit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Visit>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(Visit $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Visit $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getArticle() === $this) {
+                $user->setArticle(null);
+            }
+        }
 
         return $this;
     }
