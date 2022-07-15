@@ -3,7 +3,7 @@ import Logo from "../logo/Logo";
 import Input from "../input/Input";
 import Button from '../button/Button';
 
-const Header = () => {
+const Header = ({register,login}) => {
 
   return (
     <div className='mainDiv'>
@@ -15,8 +15,8 @@ const Header = () => {
         </div>
 
         <div className='login'>
-          <h3>Inscription</h3>
-          <h3> Connexion</h3>
+          <h3 onClick={register}>Inscription</h3>
+          <h3 onClick={login}> Connexion</h3>
         </div>
 
     </div>
