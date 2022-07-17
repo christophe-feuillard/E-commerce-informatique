@@ -41,6 +41,10 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("groupe:get")]
+    private $stock;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -131,6 +135,18 @@ class Article
     public function removeCategorie(Categorie $categorie): self
     {
         $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }

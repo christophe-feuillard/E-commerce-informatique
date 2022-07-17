@@ -69,6 +69,7 @@ class AdminController extends AbstractController
             $user->setPhoto($request->request->get('photo'));
             $user->setDescription($request->request->get('description'));
             $user->setCaracteristique($request->request->get('caracteristique'));
+            $user->setStock($request->request->get('stock'));
             $entityManager->persist($user);
             $entityManager->flush($user);
 
@@ -112,6 +113,7 @@ class AdminController extends AbstractController
         $product->setPrix($request->request->get('prix'));
         $product->setPhoto($request->request->get('photo'));
         $product->setDescription($request->request->get('description'));
+        $product->setStock($request->request->get('stock'));
         $product->setCaracteristique($request->request->get('caracteristique'));
         $entityManager->flush();
         
