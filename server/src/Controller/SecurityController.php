@@ -32,17 +32,22 @@ throw new \Exception('Will be intercepted before getting here');
     {
         // TODO - use Symfony forms & validation
         if ($request->isMethod('POST')) {
+                $entityManager = $doctrine->getManager();
                 $data = json_decode($request->getContent(), true);
-
+                $emailFromDataBase = $entityManager->getRepository(User::class)->findOneByEmail($request->request->get('email'));
+                $emailFromForm = $request->request->get('email');
             if (json_last_error() !== JSON_ERROR_NONE) {
-                return false;
+                return $this->json('erreur sur format JSON');;
             }
             if ($data === null) {
                 return true;
             }
+            if ($emailFromDataBase === $emailFromForm){
+                return $this->json('utilisateur deja inscrit');
+            }
 
             $request->request->replace($data);
-            $entityManager = $doctrine->getManager();
+            
             
 
             $entityManager = $doctrine->getManager();
@@ -59,12 +64,18 @@ throw new \Exception('Will be intercepted before getting here');
             );
             $user->setPassword($hashedPassword);
 
-
-            $entityManager->persist($user);
-            $entityManager->flush($user);
-            return $this->json('parfait');
+            try{
+               $entityManager->persist($user);
+               $entityManager->flush($user);
+               return $this->json('inscription effectué avec succées ');
+            }
+            catch(\Exception $e){
+                return $this->json('impossible d\'inscrire');
+            }
+            
+            
         }else{
-            return $this->json('problem mon ami');
+            return $this->json('utilise une requette post');
         }
 
     }

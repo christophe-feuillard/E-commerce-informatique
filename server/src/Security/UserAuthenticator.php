@@ -25,7 +25,7 @@ class UserAuthenticator extends AbstractAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): RedirectResponse
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
+            return new RedirectResponse();
         }
         //on renvoie à la liste des utilisateurs
         return new RedirectResponse($this->urlGenerator->generate('utilisateur_index'));
