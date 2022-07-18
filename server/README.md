@@ -273,3 +273,10 @@ headers: {
 
 }
 ```
+
+
+
+## Attribuer un role admin ou user dans la bd
+
+
+1. modifier dans la table user la colonne Role et ajouter "ROLE_ADMIN" pour attribuer un role admin sinon laisser vide si c'est juste un user.
