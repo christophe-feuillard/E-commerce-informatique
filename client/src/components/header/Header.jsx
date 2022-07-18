@@ -4,14 +4,14 @@ import Input from "../input/Input";
 import Button from '../button/Button';
 import NavItems from '../navItem/NavItems';
 
-const Header = () => {
+const Header = ({search,change}) => {
 
   return (
     <div className='mainDiv'>
         <Logo />
 
         <div className='search'>
-            <Input placeholder={"Etrez votre recherche ici"}/>
+            <Input placeholder={"Etrez votre recherche ici"} type={"text"} value={search} change={change}/>
             <Button value={"chercher"}/>
         </div>
         <NavItems/>

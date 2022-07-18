@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useState,useEffect} from 'react';
+import {useNavigate,Navigate} from 'react-router-dom';
 import Input from '../../components/input/Input';
 import Button from "../../components/button/Button";
 import axios from 'axios';
@@ -16,6 +16,7 @@ const Register = () => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [islogin, setIslogin] = useState(false);
 
     const inputData = [{
         type: 'text',placeholder: 'Name',value: name,change: (e) => setName(e.target.value)
@@ -36,6 +37,10 @@ const Register = () => {
         type: 'password',placeholder: 'Mots de passe',value: password,change: (e) => setPassword(e.target.value)
     }];
     
+    useEffect(() => {
+        if(localStorage.getItem('token')) setIslogin(true);
+    },[]);
+
     const verifyValue = () => {
 
         const regexName = /^[a-zA-Z]{2,}$/;
@@ -86,6 +91,7 @@ const Register = () => {
           });
           
     }
+    if(islogin) return <Navigate to="/home"/> ;
     return (
     <div className='registerMain'>
         <div className='registerContainer'>
