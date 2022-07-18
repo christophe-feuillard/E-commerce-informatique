@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\Entity\User;
+use App\Repository\CategorieRepository;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 
@@ -47,4 +49,19 @@ class ApiController extends AbstractController
             return $this->json($articleRepository->find($id), 200,[],['groups' => 'groupe:get']);
             
         }
+
+        #[Route('/api/categorie', name: 'app_api_categorie')]
+        public function getArticleByCategorie(CategorieRepository $categorieRepository)
+        {
+            return $this->json($categorieRepository->findAll(), 200,[],['groups' => 'groupe:get']);
+            
+        }
+
+        #[Route('/api/categorie/{id}', name: 'app_api_categorie_id')]
+        public function getArticleByCategorieId(CategorieRepository $categorieRepository, $id)
+        {
+            return $this->json($categorieRepository->find($id), 200,[],['groups' => 'groupe:get']);
+            
+        }
+        // categorie.title = categorie
 }
