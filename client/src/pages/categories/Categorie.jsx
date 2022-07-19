@@ -9,6 +9,13 @@ const CategorieReact = () => {
     const [categorie, setCategorie] = useState("");
     const [articles, setArticles] = useState([]);
 
+    // const articleId = data[0];
+    const categoryId = articles[0];
+
+    // const allId = () => {
+    //   Tant que i < data.id(object) alors => itemId++(data[0++])
+    // } 
+
     useEffect(() => {
         const callAPI = async () => {
           axios.get('/api/categorie')
@@ -36,14 +43,18 @@ const CategorieReact = () => {
         }
         callAPI();
       }, []);
+
+    // console.log(data);
     // console.log(categorie);
     // console.log(articles);
-    console.log(test, 'test')
-
+    // console.log(categoryId);
 
     const filter = () => {
-        const filterData = articles.filter(item => item.id === categorie);
+        const filterData = articles.filter(item => item === categoryId).map(item => {
+          return item;
+        });
         console.log(filterData, "filterdata");
+        // si item.category === category.id
         return filterData;
     }
 
