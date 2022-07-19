@@ -14,12 +14,11 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [dataModal, setDataModal] = useState({});
   const [search,setSearch] = useState("");
-  console.log(data);
   useEffect(() => {
     
     const callAPI = () => {
       axios.get('/api/articles')
-        .then(res => {
+      .then(res => {
           setData(res.data);
         })
         .catch(err => {
@@ -40,7 +39,7 @@ return (
     <Header search={search} change={(e)=>setSearch(e.target.value)}/>
     <div className='homeContainer'>
       {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item) => (
-        <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
+        <Card  key={item.id} imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
           handleckick={()=>{showMore(item)}}
         />
       ))}
