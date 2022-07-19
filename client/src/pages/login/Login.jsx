@@ -14,10 +14,10 @@ const Login = () => {
     const [islogin, setIslogin] = useState(false);
 
     const inputData = [{
-        type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
+        name : 'email', type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
     },
     {
-        type: 'password',placeholder: 'Mots de passe',value: password,change: (e) => setPassword(e.target.value)
+        name: 'pwd', type: 'password',placeholder: 'Mots de passe',value: password,change: (e) => setPassword(e.target.value)
     }];
 
     useEffect(() => {
@@ -72,7 +72,7 @@ const Login = () => {
             {error && <p className='error'>{error}</p>}
             <div className='loginFormulaire'>
                 {inputData.map((input) => (
-                    <Input type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
+                    <Input key={input.name} type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
                 ))}
                 <Button value={"Se connecter"} handelclick={()=>verifyValue()}/>
                 <p>Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>
