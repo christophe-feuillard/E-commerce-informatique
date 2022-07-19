@@ -24,7 +24,7 @@ const NavItems = () => {
             <div class="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
                 <div class="dropdown-content">
-                    <a onClick={()=> navigate("/")}>Mon Compte</a>
+                    <a onClick={()=> navigate("/account")}>Mon Compte</a>
                     <a onClick={()=>Deconnexion()}>Deconnexion</a>
                 </div>
             </div>
