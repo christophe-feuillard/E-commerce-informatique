@@ -3,8 +3,9 @@ import Ptag from "../ptag/Ptag";
 import './Cart.css'
 import { APIdelete } from "../../requette/requette";
 
-const Cart = ({values}) => {
-console.log(values.id)
+const Cart = ({values, setEdit, setElementUpdate}) => {
+
+   
     return (
         <div>
             <article>
@@ -12,11 +13,15 @@ console.log(values.id)
                 return <Ptag data={key} yoyo={values[key]} />
                 })}
                 <div className="containerbutton">
-                    <div onClick={APIdelete(values.id)}>
-                        <h3>supprimer</h3>
+                    <div>
+                        <h3 onClick={()=>APIdelete(values.id)}>supprimer</h3>
                     </div>
 
-                    <div>
+                    <div 
+                    onClick={() => {
+                        setEdit('update') 
+                        setElementUpdate(values)}}
+                    >
                         <h3>modifier</h3>
                     </div>
                 </div>

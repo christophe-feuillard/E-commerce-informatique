@@ -7,11 +7,10 @@ const NavBAr = ({title,url, setURL}) =>{
     
 
   return (
-    <div>
+    <div className="containernavbar">
         {title.map(v =>{
             return <Link title={v} setURL={setURL}  />
         })}
-        <h2>Count: {url}</h2>
     </div>
   );
 }

@@ -3,8 +3,8 @@ import React from 'react'
 
 const Link = ({title, url, setURL}) => {
   return (
-    <div>
-      <h3 onClick={event => setURL(title.url)}>{title.title}</h3>
+    <div className='containerlink'>
+      <h2 onClick={event => setURL(title.url)}>{title.title}</h2>
     </div>
   )
 }

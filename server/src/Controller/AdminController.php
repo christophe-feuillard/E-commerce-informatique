@@ -31,16 +31,18 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function delete(ManagerRegistry $doctrine,UserRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface, $id): JsonResponse
     {
-        $entityManager = $doctrine->getManager();
-        $product = $entityManager->getRepository(Article::class)->find($id);
+        $em = $doctrine->getManager();
+        $product = $em->getRepository(Article::class)->find($id);
 
 
         if (!$product) {
             return $this->json('pas d\'article trouver '.$id);
         }
-
-         $entityManager->remove($product);
-         $entityManager->flush();
+        
+        $em->remove($product);
+        $em->flush();
+        //  $entityManager->remove($product);
+        //  $entityManager->flush();
          return $this->json('c\'est carré');
 
 

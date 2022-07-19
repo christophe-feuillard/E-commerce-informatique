@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import NavBAr from "../../admin/components/Navbar/NavBar";
 import ContainerCart from "../../admin/components/containerCart/ContainerCart";
 import { getItem } from "../../admin/requette/requette";
+import './account.css'
 
 const Account = () =>{
     const [url, setURL] = useState('/api/admin/show');
@@ -11,11 +12,11 @@ const Account = () =>{
 
     useEffect(() => {
        getItem(url, setData);
-       
+
     },[url]);
     
     return (
-        <div>
+        <div className="homecontainer">
             <NavBAr title={info} setURL={setURL} url={url}/>
             <ContainerCart data={data} />
         </div>

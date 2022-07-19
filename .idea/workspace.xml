@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fe55c0d-a850-48f1-acdd-21a85e7fe809" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1aa070da-e616-4824-8f56-f219beab554e.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1aa070da-e616-4824-8f56-f219beab554e/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1aa070da-e616-4824-8f56-f219beab554e/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1aa070da-e616-4824-8f56-f219beab554e/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1aa070da-e616-4824-8f56-f219beab554e/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c9b898a-bae2-418c-ba96-7515750566cd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7c9b898a-bae2-418c-ba96-7515750566cd.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/admin/components/cart/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/admin/components/cart/Cart.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/admin/components/cart/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/admin/components/cart/Cart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/admin/components/containerCart/ContainerCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/admin/components/containerCart/ContainerCart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/admin/components/ptag/Ptag.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/admin/components/ptag/Ptag.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/account/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/account/Account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controller/AdminController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +106,7 @@
       <path value="$PROJECT_DIR$/server/vendor/namshi/jose" />
       <path value="$PROJECT_DIR$/server/vendor/lexik/jwt-authentication-bundle" />
       <path value="$PROJECT_DIR$/server/vendor/nelmio/cors-bundle" />
+      <path value="$PROJECT_DIR$/server/vendor/symfony/apache-pack" />
     </include_path>
   </component>
   <component name="ProjectId" id="2BnUthU7qr2GX4nf6cItSC7LpxK" />
@@ -154,6 +148,9 @@
       <workItem from="1658084227919" duration="145000" />
       <workItem from="1658227281304" duration="1125000" />
       <workItem from="1658242569819" duration="51000" />
+      <workItem from="1658243872108" duration="26000" />
+      <workItem from="1658244585021" duration="32000" />
+      <workItem from="1658245179984" duration="556000" />
     </task>
     <servers />
   </component>
