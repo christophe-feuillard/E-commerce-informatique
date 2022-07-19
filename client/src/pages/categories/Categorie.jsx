@@ -8,13 +8,17 @@ const CategorieReact = () => {
     const [dataArticles, setdataArticles] = useState([]);
     const [categorie, setCategorie] = useState("");
     const [articles, setArticles] = useState([]);
+    // let categoryId = articles[0];
+    const [categoryId, setcategoryId] = useState(articles);
 
-    // const articleId = data[0];
-    const categoryId = articles[0];
-
-    // const allId = () => {
-    //   Tant que i < data.id(object) alors => itemId++(data[0++])
-    // } 
+    const iterationId = () => {
+      for(let i = 0; i < data.length; i++) {
+        setcategoryId(articles[i]);
+        // console.log(i);
+      }
+      console.log(categoryId , 'categoryId')
+      return categoryId
+    }
 
     useEffect(() => {
         const callAPI = async () => {
@@ -46,33 +50,31 @@ const CategorieReact = () => {
 
     // console.log(data);
     // console.log(categorie);
-    // console.log(articles);
+    // console.log(articles[1]);
     // console.log(categoryId);
+    // console.log(data.length)
 
     const filter = () => {
+        iterationId();
         const filterData = articles.filter(item => item === categoryId).map(item => {
           return item;
         });
+        // const result =  data.map((item) => {return item.titre})
+        // const filterData = result.filter(item => item.titre === categorie)
         console.log(filterData, "filterdata");
-        // si item.category === category.id
+
         return filterData;
     }
-
+ 
       return (
         <>
         <div className='homeContainer'>
             <fieldset>
             <legend>Choose your categorie's:</legend>
             <div>
-                {/* {data.map((value) => (
-                    <div>
-                    <input type="checkbox" id={value.id} name={value.id}/>
-                    <label htmlFor={value.id}>{value.titre}</label>
-                    </div>
-                ))} */}
                     {data.map((value) => (
                     <div>
-                    <button type="button" id={value.id} name={value.id} onClick={filter}>{value.titre}</button>
+                    <button type="button" id={value.id} name={value.id} key={categoryId} onClick={filter}>{value.titre}</button>
                     </div>
                 ))}
             </div>
@@ -84,11 +86,6 @@ const CategorieReact = () => {
             <Card imgSrc={value.photo} title={value.titre} price={value.prix + "€"} characteristic={value.caracteristique} key={value.id}/>
             ))}
         </div>
-        {/* <div className='homeContainer'>
-            {data.map((value) => (
-            <Card imgSrc={value.articles[0].photo} title={value.articles[0].titre} price={value.articles[0].prix + "€"} characteristic={value.articles[0].caracteristique} key={value.articles.id}/>
-            ))}
-        </div> */}
         </>
       )
 }
