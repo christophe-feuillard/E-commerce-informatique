@@ -41,7 +41,7 @@ class UserController extends AbstractController
                 $entityManager->flush();
                 return $this->json('achat effectué');
             }else{
-                return $this->json('stock insuffisant');
+                return $this->json(`stock insuffisant il reste $stock en stock`);
             }
     
     }else{

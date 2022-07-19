@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fe55c0d-a850-48f1-acdd-21a85e7fe809" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/W-WEB-502-PAR-2-2-ecommerce-clarisse.wathanyuta.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/W-WEB-502-PAR-2-2-ecommerce-clarisse.wathanyuta.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/navItem/NavItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/navItem/NavItems.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/Controller/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controller/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,6 +146,7 @@
       <workItem from="1657739798216" duration="306000" />
       <workItem from="1657878075050" duration="46000" />
       <workItem from="1658084227919" duration="145000" />
+      <workItem from="1658227281304" duration="1125000" />
     </task>
     <servers />
   </component>
