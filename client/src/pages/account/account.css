@@ -1,5 +1,6 @@
 .homecontainer{
     display: flex;
-    flex: row;
+    flex-direction: column;
+    width: 100vw;
 
 }

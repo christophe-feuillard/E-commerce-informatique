@@ -4,9 +4,7 @@ import Link from '../link/Link'
 const NavBAr = ({title,url, setURL}) =>{
     
 
-    
-
-  return (
+    return (
     <div className="containernavbar">
         {title.map(v =>{
             return <Link title={v} setURL={setURL}  />

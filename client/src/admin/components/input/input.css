@@ -1,6 +1,14 @@
-form{
+.containerinput{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.containerDivinput h2{
+    padding-left: 630px;
+}
+
+h2{
+    padding-top: 10px;
 }

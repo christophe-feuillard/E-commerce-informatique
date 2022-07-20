@@ -60,18 +60,20 @@ export const APIupdate = (url, data) => {
       axios(config)
           .then(response => {
           return response.data;
+          
           })
           .catch(error => {
             console.log(error);
           });
+          
 }
 
 
-export const getItem = (url, setData) => {
+export const getItem = (setData) => {
     const Token = localStorage.getItem("token");
     var config = {
         method: 'post',
-        url: url,
+        url: '/api/admin/show',
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${Token}`
@@ -85,5 +87,24 @@ export const getItem = (url, setData) => {
       });
 
     }
+
+    export const getRole = (setRole, setInfoPerso) => {
+      const Token = localStorage.getItem("token");
+      var config = {
+          method: 'get',
+          url: '/api/user/role',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Token}`
+          }
+        };
+        
+        axios(config)
+        .then(response => {setInfoPerso(response.data); setRole(response.data.roles[0]);})
+        .catch(error => {
+          console.log(error);
+        });
+  
+      }
 
 
