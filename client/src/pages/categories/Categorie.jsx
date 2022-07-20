@@ -34,12 +34,15 @@ const CategorieReact = () => {
       callAPI();
     }, []);
 
-  const filter = () => {
-      const filterData = dataArticles.filter(item => item.category === resultCat);
-      console.log(filterData, "filterdata");
+    const filter = () => {
+      const filterResult = dataArticles.filter((curData) =>{
+          return curData.category === resultCat;
+      });
+      setdataArticles(filterResult);
+      console.log(filterResult, "filterdata");
+    }
 
-      return filterData;
-  }
+    console.log(dataArticles, 'res')
 
     return (
       <>
