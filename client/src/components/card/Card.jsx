@@ -18,7 +18,9 @@ const Card = ({imgSrc,title,characteristic,price,handleckick,colorStore,clickSto
         </div>
         <div className="contentCard">
             <h3 onClick={handleckick}>{title}</h3>
-            <p className='characteristic'>{characteristic}</p>
+            <div className='divCharacteristic'>
+              <p className='characteristic'>{characteristic}</p>
+            </div>
             <p className='price'>{price}</p>
             <div className='divIconsCard'>
                 <MdOutlineLocalGroceryStore className='iconCard' color={color} onClick={clickStore}/>

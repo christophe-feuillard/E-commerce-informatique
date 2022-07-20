@@ -15,7 +15,8 @@ const Home = () => {
   const [dataModal, setDataModal] = useState({});
   const [search,setSearch] = useState("");
   const [colorStore,setColorStore] = useState([]);
-
+  const [store,setStore] = useState([]);
+  
   useEffect(() => {
     
     const callAPI = () => {
@@ -27,10 +28,15 @@ const Home = () => {
         .catch(err => {
           console.log(err);
         });
+        setStore(JSON.parse(localStorage.getItem("store")) || []);
     }
     callAPI();
 
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("store", JSON.stringify(store));
+  },[store]);
 
   const showMore = (item) => {
     setDataModal(item);
@@ -38,10 +44,20 @@ const Home = () => {
   }
 
   const addStore = (item,key) => {
+
     setColorStore((prev) => {
       const res = Object.assign([], prev, { [key]: !prev[key] });
       return res;
     });
+
+    const exist = verifyIfExistInStore(item.id);
+    // setStore((store) => [...store, item]);
+  }
+
+  const verifyIfExistInStore = (id) => {
+    for(let i = 0; i < store.length; i++) 
+      if(store[i].id === id) return false;
+    return true;
   }
 
 return (
