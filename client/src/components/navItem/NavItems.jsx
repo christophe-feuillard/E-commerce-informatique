@@ -4,7 +4,7 @@ import {AiOutlineUser} from "react-icons/ai";
 import {MdOutlineLocalGroceryStore} from "react-icons/md";
 import './NavItems.css';
 
-const NavItems = ({storeClick}) => {
+const NavItems = ({storeClick,number}) => {
     const navigate = useNavigate();
     const [isLogged, setIsLogged] = useState(false);
     
@@ -21,6 +21,7 @@ const NavItems = ({storeClick}) => {
         return(
             <div className='login'>
             <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
+            <span>{number}</span>
             <div class="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
                 <div class="dropdown-content">

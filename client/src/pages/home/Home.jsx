@@ -19,9 +19,9 @@ const Home = () => {
   const [colorStore,setColorStore] = useState([]);
   const [store,setStore] = useState([]);
   const [total,setTotal] = useState(0);
+  const [articleNumber,setArticleNumber] = useState(0);
 
   useEffect(() => {
-    
     const callAPI = () => {
       axios.get('/api/articles')
         .then(res => {
@@ -31,7 +31,8 @@ const Home = () => {
         .catch(err => {
           console.log(err);
         });
-        setStore(JSON.parse(localStorage.getItem("store")) || []);
+        setStore(JSON.parse(localStorage.getItem("store")));
+        setArticleNumber(store.length);
     }
     callAPI();
 
@@ -40,6 +41,7 @@ const Home = () => {
   useEffect(() => {
     setTotal(store.reduce((acc,item) => acc + item.prix,0));
     localStorage.setItem("store", JSON.stringify(store));
+    setArticleNumber(store.length);
   },[store]);
 
   const showMore = (item) => {
@@ -55,20 +57,21 @@ const Home = () => {
     });
 
     const exist = verifyIfExistInStore(item.id);
-
+    console.log(exist);
     if(!exist) setStore((store) => [...store, item]);
     else setStore((store) => store.slice(0,store.indexOf(item)).concat(store.slice(store.indexOf(item)+1)));
   }
 
   const verifyIfExistInStore = (id) => {
-    for(let i = 0; i < store.length; i++) 
-      if(store[i].id === id) return true;
+    for(let i = 0; i < store.length; i++){
+      if(store[i].id === id) return true; 
+    }
     return false;
   }
 
 return (
   <>
-    <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)}/>
+    <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber}/>
     <div className='homeContainer'>
       {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
         <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
