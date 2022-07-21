@@ -14,34 +14,61 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [dataModal, setDataModal] = useState({});
   const [search,setSearch] = useState("");
-  console.log(data);
+  const [colorStore,setColorStore] = useState([]);
+  const [store,setStore] = useState([]);
+  
   useEffect(() => {
     
     const callAPI = () => {
       axios.get('/api/articles')
         .then(res => {
           setData(res.data);
+          setColorStore(Array(res.data.length).fill(false))
         })
         .catch(err => {
           console.log(err);
         });
+        setStore(JSON.parse(localStorage.getItem("store")) || []);
     }
     callAPI();
 
   }, []);
 
-  const showMore = (item) =>{
+  useEffect(() => {
+    localStorage.setItem("store", JSON.stringify(store));
+  },[store]);
+
+  const showMore = (item) => {
     setDataModal(item);
     setOpenModal(true);
+  }
+
+  const addStore = (item,key) => {
+
+    setColorStore((prev) => {
+      const res = Object.assign([], prev, { [key]: !prev[key] });
+      return res;
+    });
+
+    const exist = verifyIfExistInStore(item.id);
+    // setStore((store) => [...store, item]);
+  }
+
+  const verifyIfExistInStore = (id) => {
+    for(let i = 0; i < store.length; i++) 
+      if(store[i].id === id) return false;
+    return true;
   }
 
 return (
   <>
     <Header search={search} change={(e)=>setSearch(e.target.value)}/>
     <div className='homeContainer'>
-      {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item) => (
+      {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
         <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
           handleckick={()=>{showMore(item)}}
+          colorStore={colorStore[key]}
+          clickStore={()=>{addStore(item,key)}}
         />
       ))}
     <Modal open={openModal} data={dataModal} onclose={()=>setOpenModal(false)} 
