@@ -2,17 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\CategorieRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
-use App\Entity\User;
-use App\Repository\CategorieRepository;
 
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+
 
 
 class ApiController extends AbstractController
@@ -43,10 +48,22 @@ class ApiController extends AbstractController
 
 
         #[Route('/api/article/{id}', name: 'app_api_id')]
-        public function getArticleById(ArticleRepository $articleRepository, $id)
+        public function getArticleById(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em, $id)
         {
-            return $this->json($articleRepository->find($id), 200,[],['groups' => 'groupe:get']);
-            
+        try{
+        $new = $em->getRepository(Article::class)->find($id);
+        $increments = $new->getVisit() + 1;
+        $new->setVisit($increments);
+        $em->persist($new);
+        $em->flush();
+        return $this->json($articleRepository->find($id), 200,[],['groups' => 'groupe:get']);            
+        } catch (NotEncodableValueException $e) {
+            return $this->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+            ], 400);
+        }
+
         }
 
         #[Route('/api/categories', name: 'app_api_categories')]

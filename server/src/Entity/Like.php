@@ -16,10 +16,10 @@ class Like
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[ORM\ManyToMany(targetEntity: User::class, fetch: 'EAGER')]
     private Collection $user;
 
-    #[ORM\ManyToMany(targetEntity: Article::class)]
+    #[ORM\ManyToMany(targetEntity: Article::class, fetch: 'EAGER')]
     private Collection $article;
 
     #[ORM\Column(nullable: true)]
