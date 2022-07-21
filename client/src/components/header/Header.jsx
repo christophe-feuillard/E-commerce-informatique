@@ -4,17 +4,17 @@ import Input from "../input/Input";
 import Button from '../button/Button';
 import NavItems from '../navItem/NavItems';
 
-const Header = ({search,change}) => {
+const Header = ({search,change,storeClick,articleNumber}) => {
 
   return (
     <div className='mainDiv'>
-        <Logo />
+        <Logo/>
 
         <div className='search'>
             <Input placeholder={"Etrez votre recherche ici"} type={"text"} value={search} change={change}/>
             <Button value={"chercher"}/>
         </div>
-        <NavItems/>
+        <NavItems storeClick={storeClick} number={articleNumber}/>
 
     </div>
   )

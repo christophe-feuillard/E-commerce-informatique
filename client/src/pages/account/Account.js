@@ -1,43 +1,51 @@
-import {useState, useEffect} from "react";
-import NavBAr from "../../admin/components/Navbar/NavBar";
 import ContainerCart from "../../admin/components/containerCart/ContainerCart";
-import axios from "axios";
+import { getRole } from "../../admin/requette/requette";
+import './account.css';
+import {useState, useEffect} from 'react';
+import Header from "../../components/header/Header";
+import PersonalInfo from "../../admin/components/PersonalInfo/PersonalInfo";
+import NavBAr from "../../admin/components/Navbar/NavBar";
 
 const Account = () =>{
-    const [url, setURL] = useState('/api/admin/show');
-    const [data, setData] = useState([])
-    const info = [{title:"Articles", url:"/api/admin/show"},{title:"Utilisateurs", url:"/api/admin/showW"}];
-    const Token = localStorage.getItem("token");
-    
+    const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}];
+    const [role, setRole] = useState('')
+    const [infoPerso, setInfoPerso] = useState({})
+    const [edit, setEdit] = useState('home')
+
     useEffect(() => {
-        MakeRequest();
-    },[url]);
+        getRole(setRole, setInfoPerso);
+        
+    }, [role]);
 
-    const MakeRequest = () => {
+    if(role === 'ROLE_USER'){
+        return (
+            <div>
+                <Header />
+                <div className="Userhome"><PersonalInfo data={infoPerso}/></div>
+            </div>
+            
+        )
+    }
 
-        var config = {
-            method: 'post',
-            url: url,
-            headers: { 
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${Token}`
-            }
-          };
-          
-          axios(config)
-          .then(response => {
-          setData(response.data);
-          })
-          .catch(error => {
-          console.log(error);
-          });
-        }
-    return (
-        <div>
-            <NavBAr title={info} setURL={setURL} url={url}/>
-            <ContainerCart data={data} />
+    if(role === 'ROLE_ADMIN'){
+        
+        return (
+        <div className="homecontainer">
+            <div className="accountcontainer">
+                <div className="navbarcontaineraccount">
+                    <NavBAr title={info} setEdit={setEdit}/> 
+                </div>
+                <div className="navbarcontainercartaccount">
+                    <ContainerCart role={role} edit={edit} setEdit={setEdit}/>
+                </div>
+                
+            </div>
+            
         </div>
-    )
+        )
+    }
+    
+    
 }
 
 export default Account;

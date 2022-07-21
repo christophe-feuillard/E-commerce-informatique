@@ -2,7 +2,8 @@
     border: 2px solid #eb4f29;
     border-radius: 10px;
     width: 400px;
-    height: 470px;
+    min-height: 470px;
+    max-height: 100%;
     margin: 2vh;
 }
 .picture{
@@ -38,7 +39,12 @@
     margin-right: auto;
 }
 
+.divCharacteristic{
+    overflow: hidden;
+}
 .cacharacteristic{
+    text-overflow: ellipsis;
+    /* text-overflow: "…"; */
     font-family: 'Raleway', sans-serif;
     margin-top: 0px;
     margin-bottom: 2vh;

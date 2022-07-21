@@ -1,26 +1,18 @@
-.Containercart{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
-    text-align: center;
-}
-
-.Container{
+.infoperso{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.titlecontainerhome{
+.Userhome{
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.backhome{
     text-align: center;
-    
 }
-
-.titlecontaint{
-    font-size: 50px;
-    
-}
-
-

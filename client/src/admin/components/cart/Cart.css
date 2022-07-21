@@ -5,3 +5,14 @@ article{
    height: 470px;
    margin: 2vh;
 }
+
+.containerbutton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerbutton div{
+    margin: 10px;
+}
