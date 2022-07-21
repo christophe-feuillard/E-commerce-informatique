@@ -21,9 +21,9 @@ const NavItems = () => {
         return(
             <div className='login'>
             <MdOutlineLocalGroceryStore className='storeNavItems'/>
-            <div class="dropdown">
+            <div className="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
-                <div class="dropdown-content">
+                <div className="dropdown-content">
                     <a onClick={()=> navigate("/account")}>Mon Compte</a>
                     <a onClick={()=>Deconnexion()}>Deconnexion</a>
                 </div>
