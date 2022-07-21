@@ -49,9 +49,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
     private $apiToken;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Visit::class)]
-    private $stats;
-
     public function __construct()
     {
         $this->stats = new ArrayCollection();
@@ -187,33 +184,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Visit>
-     */
-    public function getStats(): Collection
-    {
-        return $this->stats;
-    }
-
-    public function addStat(Visit $stat): self
-    {
-        if (!$this->stats->contains($stat)) {
-            $this->stats[] = $stat;
-            $stat->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStat(Visit $stat): self
-    {
-        if ($this->stats->removeElement($stat)) {
-            // set the owning side to null (unless already changed)
-            if ($stat->getUser() === $this) {
-                $stat->setUser(null);
-            }
-        }
-
-        return $this;
-    }
+ 
 }

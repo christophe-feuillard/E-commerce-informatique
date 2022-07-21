@@ -44,8 +44,6 @@ class Article
     #[ORM\Column(type: 'integer', nullable: true)]
     private $visit;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Visit::class)]
-    private $user;
 
     public function __construct()
     {
@@ -154,33 +152,4 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection<int, Visit>
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
-    }
-
-    public function addUser(Visit $user): self
-    {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-            $user->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Visit $user): self
-    {
-        if ($this->user->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getArticle() === $this) {
-                $user->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
 }

@@ -1378,16 +1378,16 @@
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.19.0",
+            "version": "v1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "d7f08a622b3346766325488aa32ddc93ccdecc75"
+                "reference": "37f751c67a5372d4e26353bd9384bc03744ec77b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/d7f08a622b3346766325488aa32ddc93ccdecc75",
-                "reference": "d7f08a622b3346766325488aa32ddc93ccdecc75",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/37f751c67a5372d4e26353bd9384bc03744ec77b",
+                "reference": "37f751c67a5372d4e26353bd9384bc03744ec77b",
                 "shasum": ""
             },
             "require": {
@@ -1414,7 +1414,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "v1.19-dev"
+                    "dev-main": "v1.20-dev"
                 }
             },
             "autoload": {
@@ -1439,9 +1439,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.19.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.20.0"
             },
-            "time": "2022-02-02T17:38:57+00:00"
+            "time": "2022-07-20T13:12:54+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
@@ -6184,22 +6184,22 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.43.0",
+            "version": "v1.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "e3f9a1d9e0f4968f68454403e820dffc7db38a59"
+                "reference": "fa535d792e9261ae7a78481f643c00991e1d1588"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/e3f9a1d9e0f4968f68454403e820dffc7db38a59",
-                "reference": "e3f9a1d9e0f4968f68454403e820dffc7db38a59",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/fa535d792e9261ae7a78481f643c00991e1d1588",
+                "reference": "fa535d792e9261ae7a78481f643c00991e1d1588",
                 "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "^2.0",
                 "nikic/php-parser": "^4.11",
-                "php": ">=7.2.5",
+                "php": ">=8.0",
                 "symfony/config": "^5.4.7|^6.0",
                 "symfony/console": "^5.4.7|^6.0",
                 "symfony/dependency-injection": "^5.4.7|^6.0",
@@ -6210,7 +6210,9 @@
                 "symfony/http-kernel": "^5.4.7|^6.0"
             },
             "conflict": {
-                "doctrine/orm": "<2.10"
+                "doctrine/doctrine-bundle": "<2.4",
+                "doctrine/orm": "<2.10",
+                "symfony/doctrine-bridge": "<5.4"
             },
             "require-dev": {
                 "composer/semver": "^3.0",
@@ -6255,7 +6257,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.43.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.44.0"
             },
             "funding": [
                 {
@@ -6271,7 +6273,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-17T15:46:50+00:00"
+            "time": "2022-07-13T17:37:04+00:00"
         }
     ],
     "aliases": [],
