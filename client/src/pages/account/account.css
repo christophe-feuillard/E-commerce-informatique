@@ -6,8 +6,9 @@
 }  
 /* checker la taille */
  .navbarcontaineraccount{
-    width: 500px;
-    border-right: 2px solid #eb4f29;
+    width: 300px;
+    padding-top: 150px;
+    font-size: 30px;
 }
 
 .navbarcontainercartaccount{
