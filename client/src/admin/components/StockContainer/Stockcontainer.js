@@ -21,7 +21,7 @@ export default function Stockcontainer({data, setEdit, setElementUpdate}) {
             </div>
 
             <div className='stockelement'>
-                {data.stock === 0 &&  <p className='redstock'>Rupture de stock</p>}
+                {/* {data.stock === 0 &&  <p className='redstock'>Rupture de stock</p>} */}
                 {data.stock <= 100  && <p className='yellowstock'>stock faible</p>}
                 {data.stock >= 100 && <p className='greenstock'>stock suffisant</p>}
             </div>
