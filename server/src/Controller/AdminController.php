@@ -122,6 +122,13 @@ class AdminController extends AbstractController
         return $this->json('changement effectué');
     }
 
+    #[Route('/admin/showStock', name: 'app_admin_show_stock')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
+    public function showStock(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface): JsonResponse
+    {
+        return $this->json($articleRepository->findBy(array(), array('stock' => 'ASC')), 200,[],['groups' => 'groupe:get']);
+    }
+
 
 
 

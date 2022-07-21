@@ -72,7 +72,7 @@ export const APIupdate = (url, data) => {
 export const getItem = (setData) => {
     const Token = localStorage.getItem("token");
     var config = {
-        method: 'post',
+        method: 'get',
         url: '/api/admin/show',
         headers: { 
           'Content-Type': 'application/json',
@@ -106,5 +106,24 @@ export const getItem = (setData) => {
         });
   
       }
+     
+      export const getStock = (setData, setIsLoading) => {
+        const Token = localStorage.getItem("token");
+        var config = {
+            method: 'get',
+            url: '/api/admin/showStock',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${Token}`
+            }
+          };
+          
+          axios(config)
+          .then(response => {setData(response.data); setIsLoading(false);})
+          .catch(error => {
+            console.log(error);
+          });
+    
+        }      
 
 
