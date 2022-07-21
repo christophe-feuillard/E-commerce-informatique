@@ -14,18 +14,42 @@ const ContainerCart = ({role, edit, setEdit}) => {
 
     if(role === 'ROLE_ADMIN'){
         if(edit === 'create'){
-            return <Input dataTochange={created} isCreated={true} setEdit={setEdit}/>
+            return (
+            <div className='titlecontainerhome'>
+                <p className='titlecontaint'>Créer un article</p>
+                <Input dataTochange={created} isCreated={true} setEdit={setEdit}/>
+            </div>
+            
+            )
         }
 
         if(edit === 'update'){
-            return <Input dataTochange={elementUpdate} isCreated={false} setEdit={setEdit} edit={edit}/>
+            return (
+                <div className='titlecontainerhome'>
+                    <p className='titlecontaint'>mettre a jour un article</p>
+                    <Input dataTochange={elementUpdate} isCreated={false} setEdit={setEdit} edit={edit}/>
+                </div>
+            
+            )
 
         }
         if(edit === 'home'){
-            return <Container2 setEdit={setEdit} setElementUpdate={setElementUpdate}  />
+            return (
+                <div className='titlecontainerhome'>
+                    <p className='titlecontaint'>Article</p>
+                    <Container2 setEdit={setEdit} setElementUpdate={setElementUpdate}  />
+                </div>
+            
+            )
         }
         if(edit === 'stock'){
-            return <Rowstock setEdit={setEdit} setElementUpdate={setElementUpdate}/>
+            return (
+                <div className='titlecontainerhome'>
+                    <p className='titlecontaint'>Gestion du stock</p>
+                    <Rowstock setEdit={setEdit} setElementUpdate={setElementUpdate}/>
+                </div>
+                
+            )
         }
     }else{
         return <Input dataTochange={elementUpdate} />

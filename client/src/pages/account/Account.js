@@ -32,8 +32,13 @@ const Account = () =>{
         return (
         <div className="homecontainer">
             <div className="accountcontainer">
-                <NavBAr title={info} setEdit={setEdit}/> 
-                <ContainerCart role={role} edit={edit} setEdit={setEdit}/>
+                <div className="navbarcontaineraccount">
+                    <NavBAr title={info} setEdit={setEdit}/> 
+                </div>
+                <div className="navbarcontainercartaccount">
+                    <ContainerCart role={role} edit={edit} setEdit={setEdit}/>
+                </div>
+                
             </div>
             
         </div>

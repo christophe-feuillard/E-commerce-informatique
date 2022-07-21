@@ -13,6 +13,14 @@
     align-items: center;
 }
 
-h2{
-    font-size: 15px;
+.titlecontainerhome{
+    text-align: center;
+    
 }
+
+.titlecontaint{
+    font-size: 50px;
+    
+}
+
+
