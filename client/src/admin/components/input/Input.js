@@ -40,8 +40,8 @@ const Input = ({dataTochange, isCreated, setEdit}) => {
                 }
                
             })}
-            {isCreated ? <h2 onClick={() => {APIadd(`/api/admin/add`,values); setEdit('home');}}>Créer l'article</h2> : <h2 onClick={() => { APIupdate(`/api/admin/update/${dataTochange.id}`,values); setEdit('home');}}>Enregistrer les changements</h2>}
-             <h2 onClick={() => setEdit('home')}>retour</h2>
+            {isCreated ? <h2 className="buttonclikc" onClick={() => {APIadd(`/api/admin/add`,values); setEdit('home');}}>Créer l'article</h2> : <h2 className="buttonclikc" onClick={() => { APIupdate(`/api/admin/update/${dataTochange.id}`,values); setEdit('home');}}>Enregistrer les changements</h2>}
+             <h2 className="buttonclikc" onClick={() => setEdit('home')}>retour</h2>
         </div>
         
     )
