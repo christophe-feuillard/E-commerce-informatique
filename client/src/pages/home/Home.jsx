@@ -13,8 +13,10 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [dataModal, setDataModal] = useState({});
-
+  const [search,setSearch] = useState("");
+  console.log(data);
   useEffect(() => {
+    
     const callAPI = () => {
       axios.get('/api/articles')
         .then(res => {
@@ -35,9 +37,9 @@ const Home = () => {
 
 return (
   <>
-    <Header register={()=> navigate("/register")} />
+    <Header search={search} change={(e)=>setSearch(e.target.value)}/>
     <div className='homeContainer'>
-      {data.map((item) => (
+      {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item) => (
         <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
           handleckick={()=>{showMore(item)}}
         />
@@ -49,4 +51,4 @@ return (
 )
 }
 
-export default Home
+export default Home;

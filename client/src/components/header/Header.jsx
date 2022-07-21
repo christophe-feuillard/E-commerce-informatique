@@ -2,22 +2,19 @@ import './Header.css';
 import Logo from "../logo/Logo";
 import Input from "../input/Input";
 import Button from '../button/Button';
+import NavItems from '../navItem/NavItems';
 
-const Header = ({register,login}) => {
+const Header = ({search,change}) => {
 
   return (
     <div className='mainDiv'>
         <Logo />
 
         <div className='search'>
-            <Input placeholder={"Etrez votre recherche ici"}/>
+            <Input placeholder={"Etrez votre recherche ici"} type={"text"} value={search} change={change}/>
             <Button value={"chercher"}/>
         </div>
-
-        <div className='login'>
-          <h3 onClick={register}>Inscription</h3>
-          <h3 onClick={login}> Connexion</h3>
-        </div>
+        <NavItems/>
 
     </div>
   )

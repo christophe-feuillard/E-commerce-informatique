@@ -1,3 +1,4 @@
+
 import './Input.css';
 
 const Input = ({type,placeholder,value,change}) => {

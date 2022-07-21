@@ -17,23 +17,3 @@
     flex-direction: column;
     width: 30%;
 }
-
-.login{
-    padding-right: 10vh;
-    width: 15vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 8vh;
-}
-
-.login h3{
-    cursor: pointer;
-    font-family: 'Raleway', sans-serif;
-    font-size: 18px;
-}
-
-.login h3:hover{
-    border-bottom: 2px solid #eb4f29;
-    transition: all 0.2s ease-out;
-}

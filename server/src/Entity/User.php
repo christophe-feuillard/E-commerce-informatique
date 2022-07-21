@@ -27,7 +27,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Groups("groupe:get")]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -48,11 +47,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
     private $apiToken;
-
-    public function __construct()
-    {
-        $this->stats = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {

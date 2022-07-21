@@ -41,9 +41,13 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $visit;
+    #[Groups("groupe:get")]
+    #[ORM\Column(nullable: true)]
+    private $stock;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $visit = null;
 
     public function __construct()
     {
@@ -140,6 +144,18 @@ class Article
         return $this;
     }
 
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
     public function getVisit(): ?int
     {
         return $this->visit;
@@ -151,5 +167,4 @@ class Article
 
         return $this;
     }
-
 }

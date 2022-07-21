@@ -31,16 +31,18 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function delete(ManagerRegistry $doctrine,UserRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface, $id): JsonResponse
     {
-        $entityManager = $doctrine->getManager();
-        $product = $entityManager->getRepository(Article::class)->find($id);
+        $em = $doctrine->getManager();
+        $product = $em->getRepository(Article::class)->find($id);
 
 
         if (!$product) {
             return $this->json('pas d\'article trouver '.$id);
         }
-
-         $entityManager->remove($product);
-         $entityManager->flush();
+        
+        $em->remove($product);
+        $em->flush();
+        //  $entityManager->remove($product);
+        //  $entityManager->flush();
          return $this->json('c\'est carré');
 
 
@@ -69,6 +71,7 @@ class AdminController extends AbstractController
             $user->setPhoto($request->request->get('photo'));
             $user->setDescription($request->request->get('description'));
             $user->setCaracteristique($request->request->get('caracteristique'));
+            $user->setStock($request->request->get('stock'));
             $entityManager->persist($user);
             $entityManager->flush($user);
 
@@ -112,6 +115,7 @@ class AdminController extends AbstractController
         $product->setPrix($request->request->get('prix'));
         $product->setPhoto($request->request->get('photo'));
         $product->setDescription($request->request->get('description'));
+        $product->setStock($request->request->get('stock'));
         $product->setCaracteristique($request->request->get('caracteristique'));
         $entityManager->flush();
         
