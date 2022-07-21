@@ -1,0 +1,47 @@
+.overlaySmall{
+    background-color: rgba(0,0,0,0.9);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    margin-top: -15vh;
+}
+
+.modelContainerSmall{
+    border: 2px solid #eb4f29;
+    background-color: white;
+    position: fixed;
+    width: 60%;
+    /* height: 70%; */
+    top: 15%;
+    left: 25%;
+    border-radius: 10px;
+}
+.modelContainerSmall table{
+    color: black;
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+}
+
+.modelContainerSmall tbody{
+    width: 100%;
+}
+
+.modelContainerSmall td{
+    padding: 10px;
+    text-align: center;
+}
+.tdImage{
+    width: 100px;
+    height: 100px;
+}
+.tdImage img{
+    width: 100%;
+    height: 100%;
+}
+.total{
+    color: #eb4f29;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em;
+    margin-left: 10px;
+}
