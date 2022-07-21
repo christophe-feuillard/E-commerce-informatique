@@ -14,6 +14,8 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [dataModal, setDataModal] = useState({});
   const [search,setSearch] = useState("");
+  const [stock, setStock] = useState(0);
+  
   useEffect(() => {
     
     const callAPI = () => {
@@ -43,8 +45,12 @@ return (
           handleckick={()=>{showMore(item)}}
         />
       ))}
-    <Modal open={openModal} data={dataModal} onclose={()=>setOpenModal(false)} 
-       buyclick={()=>{alert("Vous avez acheté un article")} }/>
+      {stock === 0 ? (
+      <Modal onclose={()=>setOpenModal(false)} />
+      ) : (
+      <Modal open={openModal} data={dataModal} onclose={()=>setOpenModal(false)} 
+        buyclick={()=>{alert("Vous avez acheté un article")} }/>
+      )}
     </div>
   </>
 )

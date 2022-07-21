@@ -14,16 +14,18 @@ const Card = ({imgSrc,title,characteristic,price,handleckick}) => {
     const callAPI = () => {
       axios.get('/api/articles')
       .then(res => {
-        setStock(res.data.stock);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    }
+        for (let i = 0; i < res.data.length; i ++) setStock(stock => [...stock, res.data[i].stock])
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
     callAPI();
-    console.log(stock, 'stockstock');
 
   }, []);
+  
+  console.log(stock);
+
   return (
     <div className='main'>
         <div className="picture" onClick={handleckick}>
@@ -36,7 +38,13 @@ const Card = ({imgSrc,title,characteristic,price,handleckick}) => {
             <div className='divIconsCard'>
                 <MdOutlineLocalGroceryStore className='iconCard'/>
                 <AiOutlineHeart className='iconCard'/>
-                <Button value={"Ajouter au panier"}/>
+                {stock.map(stock => (
+                  stock = 0 === 0 || stock === null ? (
+                  <p className="rupture">Rupture de stock</p>
+                  ) : (
+                  <Button value={"Ajouter au panier"} handelclick={()=>{alert("Vous avez acheté un article")}}/>
+                  )
+                ))}
             </div>
         </div>
     </div>
