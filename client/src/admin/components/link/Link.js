@@ -1,10 +1,10 @@
 import './Link.css'
 import React from 'react'
 
-const Link = ({title, url, setURL}) => {
+const Link = ({title, setEdit}) => {
   return (
     <div className='containerlink'>
-      <h2 onClick={event => setURL(title.url)}>{title.title}</h2>
+      <p onClick={event => setEdit(title.url)}>{title.title}</p>
     </div>
   )
 }

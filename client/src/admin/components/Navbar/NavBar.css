@@ -1,7 +1,11 @@
-.containernavbar{
+/* .containernavbar{
+
+}*/
+
+.containerLinkNav{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 50px;
-}
+    border-right: 2px solid #eb4f29;
+} 

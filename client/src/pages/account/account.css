@@ -1,6 +1,16 @@
-.homecontainer{
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
 
+
+.accountcontainer{
+   display: flex;
+   flex-direction: row;
+}  
+/* checker la taille */
+ .navbarcontaineraccount{
+    width: 500px;
+    border-right: 2px solid #eb4f29;
 }
+
+.navbarcontainercartaccount{
+    width: 100%;
+    
+} 
