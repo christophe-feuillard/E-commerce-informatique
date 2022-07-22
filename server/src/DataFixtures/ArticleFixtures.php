@@ -26,8 +26,8 @@ class ArticleFixtures extends Fixture
         ->setPrix($this->faker->numberBetween($min = 50, $max = 1200))
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3203328/20210203082949/macbook_pro_myd92fna_-_gris_-_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
-        ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setCategory('Ordinateur Portable');
+        ->setDescription($this->faker->text($maxNbChars = 100));
+
        
 
         $manager->persist($article1);
@@ -37,8 +37,8 @@ class ArticleFixtures extends Fixture
         ->setPrix($this->faker->numberBetween($min = 50, $max = 1200))
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3285552/20210910082316/ordinateur-portable-classique-inspiron-15-3510-1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
-        ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setCategory('Ordinateur Portable');
+        ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article2);
 
@@ -48,8 +48,8 @@ class ArticleFixtures extends Fixture
         ->setPrix($this->faker->numberBetween($min = 50, $max = 1200))
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3173496/20210120101301/pavilion_laptop_15-eh0006nf_-_gris_3_1200x1200.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
-        ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setCategory('Ordinateur Portable');
+        ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article3);
 
@@ -58,8 +58,8 @@ class ArticleFixtures extends Fixture
         ->setPrix($this->faker->numberBetween($min = 50, $max = 1200))
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3258783/20210601142016/geforce_rtx_3080_ti_ventus_3x_12g_oc_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
-        ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setCategory('Carte Graphique');
+        ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article4);
 
@@ -68,8 +68,8 @@ class ArticleFixtures extends Fixture
         ->setPrix($this->faker->numberBetween($min = 50, $max = 1200))
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3255819/20220208134940/nitro_amd_radeon_rx_6900_xt_se_1_1140x1140.png')
         ->setCaracteristique($this->faker->paragraph(2))
-        ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setCategory('Carte Graphique');
+        ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article5);
 
@@ -78,8 +78,8 @@ class ArticleFixtures extends Fixture
         ->setPrix($this->faker->numberBetween($min = 50, $max = 1200))
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3263410/20210604060616/gv-n307taorus_m-8gd_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
-        ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setCategory('Carte Graphique');
+        ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article6);
 
