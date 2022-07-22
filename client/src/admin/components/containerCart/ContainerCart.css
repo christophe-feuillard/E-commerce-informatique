@@ -1,0 +1,26 @@
+.Containercart{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    text-align: center;
+}
+
+.Container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titlecontainerhome{
+    text-align: center;
+    
+}
+
+.titlecontaint{
+    font-size: 50px;
+    
+}
+
+

@@ -4,7 +4,8 @@ import Landing from "./pages/landing/Landing";
 import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
- 
+import Account from './pages/account/Account';
+
 function App() {
   return (
     <Routes>
@@ -13,6 +14,7 @@ function App() {
       <Route path="/register" element={<Register/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<Landing/>}/>
+      <Route path='/account' element={<Account/>}/>
     </Routes>
   );
 }

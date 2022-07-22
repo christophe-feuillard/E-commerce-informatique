@@ -1,0 +1,13 @@
+.containerinput{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.buttonclikc{
+    
+    padding-top: 10px;
+}
+

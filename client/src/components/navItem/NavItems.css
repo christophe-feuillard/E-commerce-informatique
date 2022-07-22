@@ -1,0 +1,58 @@
+.login{
+    padding-right: 10vh;
+    width: 15vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 8vh;
+}
+
+.login h3{
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.login h3:hover{
+    border-bottom: 2px solid #eb4f29;
+    transition: all 0.2s ease-out;
+}
+
+.dropdown{
+  width: 100%;
+}
+  .dropdown-content {
+    display: none;
+    overflow: auto;
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content a {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px;
+    display: block;
+    color: white;
+    padding: 5px;
+    text-decoration: none;
+  }
+  .dropdown-content a:hover {
+    color: #FFFFFF;
+    background-color: #eb4f29;
+  }
+
+  .iconNavItems{
+    cursor: pointer;
+    font-size: 30px;
+    color: wite;
+    margin-top: 2vh;
+  }
+  .storeNavItems{
+    cursor: pointer;
+    font-size: 30px;
+    color: white;
+    margin-top: 2vh;
+    margin-left: -3vw;
+  }

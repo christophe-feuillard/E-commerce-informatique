@@ -10,6 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Repository\UserRepository;
 
 /**
  * @Route("/account", name="api_")
@@ -28,25 +29,26 @@ throw new \Exception('Will be intercepted before getting here');
 /**
  * @Route("/register", name="app_register", methods={"POST"})
  */
-    public function register(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher)
+    public function register(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository)
     {
         // TODO - use Symfony forms & validation
         if ($request->isMethod('POST')) {
                 $entityManager = $doctrine->getManager();
                 $data = json_decode($request->getContent(), true);
-                $emailFromDataBase = $entityManager->getRepository(User::class)->findOneByEmail($request->request->get('email'));
+                $request->request->replace($data);
                 $emailFromForm = $request->request->get('email');
+                $emailFromDataBase = $userRepository->findOneByEmail($emailFromForm);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 return $this->json('erreur sur format JSON');;
             }
             if ($data === null) {
                 return true;
             }
-            if ($emailFromDataBase === $emailFromForm){
+            if ($emailFromDataBase){
                 return $this->json('utilisateur deja inscrit');
             }
 
-            $request->request->replace($data);
+            
             
             
 

@@ -50,18 +50,24 @@ class ApiController extends AbstractController
             
         }
 
-        #[Route('/api/categorie', name: 'app_api_categorie')]
-        public function getArticleByCategorie(CategorieRepository $categorieRepository)
+        #[Route('/api/categories', name: 'app_api_categories')]
+        public function getCategorie(CategorieRepository $categorieRepository)
         {
             return $this->json($categorieRepository->findAll(), 200,[],['groups' => 'groupe:get']);
-            
         }
 
-        #[Route('/api/categorie/{id}', name: 'app_api_categorie_id')]
-        public function getArticleByCategorieId(CategorieRepository $categorieRepository, $id)
+
+        #[Route('/api/categories/{id}', name: 'app_api_id_categories')]
+        public function getCategorieById(CategorieRepository $categorieRepository, $id)
         {
             return $this->json($categorieRepository->find($id), 200,[],['groups' => 'groupe:get']);
             
         }
-        // categorie.title = categorie
+
+
+
+
+
+
+        
 }
