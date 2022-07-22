@@ -1,4 +1,3 @@
-
 import InputModel from '../../../model/InputModel';
 import './Input.css';
 

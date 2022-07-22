@@ -5,4 +5,4 @@ export function InputModel(type,change,value = "",placeholder = ""){
     this.change = change;
 }
 
-// export default InputModel;/
+// export default InputModel;/ 
