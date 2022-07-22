@@ -74,10 +74,15 @@ class ApiController extends AbstractController
                     'article' => $articleRepository->find($id),
                     'quantity' => $quantity
                 ];
+
+                $total = 0;     // Init le total du panier
+
+                foreach($panierData as $item) {
+                    $totalItem = $item['article']->getPrix() * $item['quantity'];    // Multiplie le prix de l'article par sa quantity
+                    $total += $totalItem;
+                }
             }
-
-            return $this->json(['item' => $panierData], 200,[],['groups' => 'groupe:get']);
-
+            return $this->json(['item' => $panierData, 'total' => $total], 200,[],['groups' => 'groupe:get']);
             // dd($panierData);
         }
 
