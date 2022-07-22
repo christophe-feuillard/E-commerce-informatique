@@ -98,6 +98,20 @@ class ApiController extends AbstractController
             }
 
             $session->set('panier', $panier);   // Update le panier / Save le panier
-            dd($session->get('panier'));    
+            // dd($session->get('panier'));    
+            return $this->json($panier, 200,[],['groups' => 'groupe:get']);
+        }
+
+        #[Route('/api/panier/remove/{id}', name: 'app_api_panier_remove')]  // Route pour supprimer un element du panier
+        public function removePanier($id, SessionInterface $session) {
+            $panier = $session->get('panier', []);
+
+            if(!empty($panier[$id])) {
+                unset($panier[$id]);
+            }
+
+            $session->set('panier', $panier);
+
+            return $this->redirectToRoute("app_api_panier");
         }
 }
