@@ -13,7 +13,7 @@ const NavBAr = ({title, setEdit}) =>{
              })}
         </div>
         
-        <div>
+        <div className="backtohomep">
             <p className="titleNavbar" onClick={()=> navigate('/home')}>Retour à l'accueil</p>
         </div>
      </div>

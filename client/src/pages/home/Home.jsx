@@ -35,7 +35,7 @@ const Home = () => {
         setArticleNumber(store.length);
     }
     callAPI();
-
+    
   }, []);
 
   useEffect(() => {

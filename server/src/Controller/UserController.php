@@ -50,7 +50,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/role', name: 'app_user_info', methods:('GET'))]
-    public function userRole(UserInterface $user)
+    public function userRole()
     {
         return $this->json($this->getUser(), 200,[],['groups' => 'groupe:get']);
     }
