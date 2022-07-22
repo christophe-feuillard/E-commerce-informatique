@@ -64,12 +64,16 @@ class ApiController extends AbstractController
         
         // #[Route('/api/panier/', name: 'app_api_id_categories')] ALL PANIER
 
-        #[Route('/api/panier/add/{id}', name: 'app_api_panier_add')]  // Route pour ajouter article dans le panier via Button Add
+        #[Route('/api/panier/add/{id}', name: 'app_api_panier_add')]  // Route pour ajouter article dans le panier via Button Ajouter Panier
         public function addPanier($id, Request $request) {
             $session = $request->getSession();              // Recup la session
             $panier = $session->get('panier', []);      // Recup le panier ou le creez 
 
-            $panier[$id] = 1;       // Ajoute l'article dans le panier et ajoute 1 au stock du panier
+            if(!empty($panier[$id])) {      // Si j'ai déja cet article dans mon panier
+                $panier[$id]++;             // Alors incremente le 
+            }else {
+                $panier[$id] = 1;       // Ajoute l'article dans le panier et ajoute 1 au stock du panier
+            }
 
             $session->set('panier', $panier);   // Update le panier / Save le panier
             dd($session->get('panier'));    
