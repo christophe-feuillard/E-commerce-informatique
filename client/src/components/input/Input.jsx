@@ -1,14 +1,13 @@
 
-import InputModel from '../../../model/InputModel';
 import './Input.css';
 
-const Input = ({data}) => {
+const Input = ({type,placeholder,value,change}) => {
   return (
-    <div>
-        <input className="" type={data.type} placeholder={data.placeholder} value={data.value}
+    <>
+        <input type={type} placeholder={placeholder} value={value}
           onChange={change}
         />
-    </div>
+    </>
   )
 }
 
