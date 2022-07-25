@@ -10,11 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use  Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use App\Entity\User;
-use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/api', name: 'app_admin')]
@@ -31,16 +28,18 @@ class AdminController extends AbstractController
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function delete(ManagerRegistry $doctrine,UserRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface, $id): JsonResponse
     {
-        $entityManager = $doctrine->getManager();
-        $product = $entityManager->getRepository(Article::class)->find($id);
+        $em = $doctrine->getManager();
+        $product = $em->getRepository(Article::class)->find($id);
 
 
         if (!$product) {
             return $this->json('pas d\'article trouver '.$id);
         }
-
-         $entityManager->remove($product);
-         $entityManager->flush();
+        
+        $em->remove($product);
+        $em->flush();
+        //  $entityManager->remove($product);
+        //  $entityManager->flush();
          return $this->json('c\'est carré');
 
 
@@ -69,13 +68,14 @@ class AdminController extends AbstractController
             $user->setPhoto($request->request->get('photo'));
             $user->setDescription($request->request->get('description'));
             $user->setCaracteristique($request->request->get('caracteristique'));
+            $user->setStock($request->request->get('stock'));
             $entityManager->persist($user);
             $entityManager->flush($user);
 
             return $this->json('parfait');
 
         }else{
-            return $this->json('problem mon ami');
+            return $this->json('problème mon ami');
         }
     }
 
@@ -90,7 +90,7 @@ class AdminController extends AbstractController
             $data = json_decode($request->getContent(), true);
 
              if($product === null){
-                return $this->json('aucune article correspond a l\'id');
+                return $this->json('aucun article correspond à l\'id');
              }
 
              if (json_last_error() !== JSON_ERROR_NONE) {
@@ -98,7 +98,7 @@ class AdminController extends AbstractController
             }
 
             if ($data === null) {
-            return $this->json('rien a ete envoyé');
+            return $this->json('rien a été envoyé');
             }   
 
             $request->request->replace($data);
@@ -106,16 +106,24 @@ class AdminController extends AbstractController
         
         
     }else{
-        return $this->json('problem mon ami');
+        return $this->json('problème mon ami');
     }
         $product->setTitre($request->request->get('titre'));
         $product->setPrix($request->request->get('prix'));
         $product->setPhoto($request->request->get('photo'));
         $product->setDescription($request->request->get('description'));
+        $product->setStock($request->request->get('stock'));
         $product->setCaracteristique($request->request->get('caracteristique'));
         $entityManager->flush();
         
         return $this->json('changement effectué');
+    }
+
+    #[Route('/admin/showStock', name: 'app_admin_show_stock')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
+    public function showStock(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface): JsonResponse
+    {
+        return $this->json($articleRepository->findBy(array(), array('stock' => 'ASC')), 200,[],['groups' => 'groupe:get']);
     }
 
 

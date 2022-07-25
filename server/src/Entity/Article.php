@@ -41,14 +41,18 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $visit;
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $visit = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
+    private Collection $users;
 
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
         $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,4 +156,30 @@ class Article
         return $this;
     }
 
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavori($this);
+        }
+
+        return $this;
+    }
 }
