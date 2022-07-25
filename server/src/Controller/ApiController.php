@@ -11,7 +11,6 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\Entity\User;
 use App\Repository\CategorieRepository;
-
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 
@@ -62,8 +61,6 @@ class ApiController extends AbstractController
             return $this->json($categorieRepository->find($id), 200,[],['groups' => 'groupe:get']);
             
         }
-
-
 
 
 

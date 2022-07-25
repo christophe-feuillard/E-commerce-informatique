@@ -10,7 +10,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\Repository\UserRepository;
 
 /**
  * @Route("/account", name="api_")
@@ -29,27 +28,21 @@ throw new \Exception('Will be intercepted before getting here');
 /**
  * @Route("/register", name="app_register", methods={"POST"})
  */
-    public function register(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository)
+    public function register(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher)
     {
         // TODO - use Symfony forms & validation
         if ($request->isMethod('POST')) {
-                $entityManager = $doctrine->getManager();
                 $data = json_decode($request->getContent(), true);
-                $request->request->replace($data);
-                $emailFromForm = $request->request->get('email');
-                $emailFromDataBase = $userRepository->findOneByEmail($emailFromForm);
+
             if (json_last_error() !== JSON_ERROR_NONE) {
-                return $this->json('erreur sur format JSON');;
+                return false;
             }
             if ($data === null) {
                 return true;
             }
-            if ($emailFromDataBase){
-                return $this->json('utilisateur deja inscrit');
-            }
 
-            
-            
+            $request->request->replace($data);
+            $entityManager = $doctrine->getManager();
             
 
             $entityManager = $doctrine->getManager();
@@ -66,18 +59,12 @@ throw new \Exception('Will be intercepted before getting here');
             );
             $user->setPassword($hashedPassword);
 
-            try{
-               $entityManager->persist($user);
-               $entityManager->flush($user);
-               return $this->json('inscription effectué avec succées ');
-            }
-            catch(\Exception $e){
-                return $this->json('impossible d\'inscrire');
-            }
-            
-            
+
+            $entityManager->persist($user);
+            $entityManager->flush($user);
+            return $this->json('parfait');
         }else{
-            return $this->json('utilise une requette post');
+            return $this->json('problem mon ami');
         }
 
     }

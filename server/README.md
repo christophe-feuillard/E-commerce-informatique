@@ -69,7 +69,7 @@ pour vous inscrire vous devez envoyé les information sous format json dans le b
 http://localhost:8000/api/login_check/
 ```
 
-4. NE PAS OUBLIER D'UTILISER LA METHODE POST SVP.
+4. NE PAS OUBLIER D'UTILISER LA METHODE GET SVP.
 
 
 5. Si tout se passe bien vous aurez un token en reponse comme ce si et ne pas oublier Bearer sinon le token ne sera reconnu:
@@ -231,52 +231,9 @@ headers: {
 
 "caracteristique":"carara",
 
-"photo":"jdbjkdfbdkjf",
-
-"stock": Nombre de stock en INT
+"photo":"jdbjkdfbdkjf"
 
 }
 ```
 
 4. si tout est bon vous allez avoir un message de confimation.
-
-
-## User
-
-pouvoir simuler un achat et enlever un nombre d'article souhaiter,
-
-1.  methode POST et l'url c'est 
-```javascript
-	http://localhost:8000/api/user/buy
-
-```
-
-2.  Set le headers comme dans l'exemple
-
-```javascript
-headers: {
-
-'Content-Type': 'application/json',
-
-'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE...'
-
-}
-```
-
-3. Voici le schéma a utilisé pour le body avec les données en format JSON svp.
-
-```javascript
-{
-
-"id": ID de l article ,
-"qty": Nombre de article selectionnée
-
-}
-```
-
-
-
-## Attribuer un role admin ou user dans la bd
-
-
-1. modifier dans la table user la colonne Role et ajouter "ROLE_ADMIN" pour attribuer un role admin sinon laisser vide si c'est juste un user.

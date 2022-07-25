@@ -2,7 +2,6 @@
 
 namespace App\Security;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -10,11 +9,12 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
-class UserAuthenticator extends AbstractAuthenticator
+class UsersAuthenticator extends AbstractAuthenticator
 {
     public function supports(Request $request): ?bool
     {
-        dd('your are here');
+        // TODO: Implement supports() method.
+
     }
 
     public function authenticate(Request $request): Passport
@@ -22,13 +22,9 @@ class UserAuthenticator extends AbstractAuthenticator
         // TODO: Implement authenticate() method.
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): RedirectResponse
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }
-        //on renvoie à la liste des utilisateurs
-        return new RedirectResponse($this->urlGenerator->generate('utilisateur_index'));
+        // TODO: Implement onAuthenticationSuccess() method.
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response

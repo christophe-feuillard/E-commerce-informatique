@@ -42,10 +42,6 @@ class Article
     private $categorie;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-
-    #[Groups("groupe:get")]
-    private $stock;
-
     private $visit;
 
 
@@ -144,19 +140,6 @@ class Article
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(?int $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-=======
     public function getVisit(): ?int
     {
         return $this->visit;
@@ -169,5 +152,4 @@ class Article
         return $this;
     }
 
->>>>>>> 830e2640e5e97c7fb7598b53bb4181ae6e5f34a5
 }
