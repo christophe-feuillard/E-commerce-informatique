@@ -1,0 +1,39 @@
+.price {
+	border-top-left-radius: 20px;
+	height: 5vh;
+	box-sizing: border-box;
+	align-self: flex-end;
+	width: 8em;
+	background-color: #eb4f29;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+}
+.price > i {
+	align-self: center;
+	font-size: 1.4em;
+	color: white;
+}
+.price > span {
+	color: white;
+	align-self: center;
+	font-size: 1.4em;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+.price:hover {
+	animation-name: animation1;
+	animation-duration: 0.2s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes animation1 {
+	from {
+		border: 0px solid white;
+		background-image: linear-gradient(to right bottom, #eb4f29, #b23532, #77242d, #3d171f, #000000);
+	}
+	to {
+		border: 3px solid white;
+		background-image: linear-gradient(to right bottom, #eb4f29, #b23532, #77242d, #3d171f, #000000);
+	}
+}
