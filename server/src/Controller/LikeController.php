@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LikeController extends AbstractController
 {
-    #[Route('/like', name: 'app_like')]
-    public function Like()
+    #[Route('/like/{id}', name: 'app_like')]
+    public function Like($id, EntityManagerInterface $em)
     {
-        // $new = $em->getRepository(User::class)->find($id);
-        
-        
-        // dd($new);
-        return $this->json($this->getUser(), 200,[],['groups' => 'groupe:get']);
+        $users = $this->json($this->getUser(), 200,[],['groups' => 'groupe:get']);
+        $new = $em->getRepository(Article::class)->find($id);
+        $new->getUsers();
+
+        dd($new);
 
     }
 }
