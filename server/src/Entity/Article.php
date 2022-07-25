@@ -42,12 +42,17 @@ class Article
     private $categorie;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+
     #[Groups("groupe:get")]
     private $stock;
+
+    private $visit;
+
 
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,6 +144,7 @@ class Article
         return $this;
     }
 
+<<<<<<< HEAD
     public function getStock(): ?int
     {
         return $this->stock;
@@ -150,4 +156,18 @@ class Article
 
         return $this;
     }
+=======
+    public function getVisit(): ?int
+    {
+        return $this->visit;
+    }
+
+    public function setVisit(?int $visit): self
+    {
+        $this->visit = $visit;
+
+        return $this;
+    }
+
+>>>>>>> 830e2640e5e97c7fb7598b53bb4181ae6e5f34a5
 }
