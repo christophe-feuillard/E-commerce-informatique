@@ -41,7 +41,7 @@ class ApiController extends AbstractController
         }
 
 
-        #[Route('/api/article/{id}', name: 'app_api_id')]
+        #[Route('/api/article_details/{id}', name: 'app_api_id')]
         public function getArticleById(ArticleRepository $articleRepository, $id)
         {
             return $this->json($articleRepository->find($id), 200,[],['groups' => 'groupe:get']);
