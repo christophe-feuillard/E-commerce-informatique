@@ -1,8 +1,9 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 
-const dataFDP = () => {
+const DataFDP = () => {
     const [dataUser, setdataUser] = useState([]);
+    const [dataAllPanier, setdataAllPanier] = useState([]);
     const [dataPanier, setdataPanier] = useState([]);
 
     const fromAdress = ({
@@ -22,7 +23,7 @@ const dataFDP = () => {
     });
 
     const parcel = ({
-        length: dataPanier.length,
+        length: dataPanier.lenght,
         width: dataPanier.width,
         height: dataPanier.height,
         weight: dataPanier.weight,
@@ -36,7 +37,7 @@ const dataFDP = () => {
 
     useEffect(() => {
         const callAPI = () => {
-            axios.get('/user/role')
+            axios.get('/api/user/role')
             .then(res => {
                 setdataUser(res.data);
             })
@@ -44,21 +45,26 @@ const dataFDP = () => {
             console.log(err);
             });
         }
-        callAPI;
+        callAPI();
     }, []);
 
     useEffect(() => {
         const callAPI = () => {
             axios.get('/api/panier')
             .then(res => {
-                setdataPanier(res.data);
+                setdataAllPanier(res.data);
+                setdataPanier(dataAllPanier.map((item) => item.total))
             })
             .catch(err => {
             console.log(err);
             });
         }
-        callAPI;
+        callAPI();
     }, []);
+    // console.log(shipment);
+    // console.log(dataUser, 'dataUser')
+    console.log(dataAllPanier, 'dataAllPanier')
+    console.log(dataPanier, 'dataPanier')
 }
 
-export default dataFDP;
+export default DataFDP;
