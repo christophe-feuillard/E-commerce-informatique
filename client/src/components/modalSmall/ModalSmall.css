@@ -49,3 +49,25 @@
     font-size: 0.7em;
     margin-left: 10px;
 }
+
+.buttonBuy{
+    width: 35%;
+    height: 30px;
+    font-weight: 900;
+    cursor: pointer;
+    border: none;
+    background-color: #eb4f29;
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 28px;
+}
+
+.buttonModalSmall{
+    margin-bottom: 4vh;
+    padding-top: 3vh;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+}

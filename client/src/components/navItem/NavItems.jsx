@@ -35,6 +35,8 @@ const NavItems = ({storeClick,number}) => {
     else{
         return(
             <div className='login'>
+            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
+            <span>{number}</span>
             <h3 onClick={()=>navigate('/register')}>Inscription</h3>
             <h3 onClick={()=>navigate('/login')}>Connexion</h3>
         </div>
