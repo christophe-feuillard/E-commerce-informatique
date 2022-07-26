@@ -1,6 +1,5 @@
 import React, {useEffect,useState}from 'react';
 import './ModalSmall.css';
-import Button from '../../components/button/Button';
 
 const ModalSmall = ({open,onclose,store,total}) => {
 

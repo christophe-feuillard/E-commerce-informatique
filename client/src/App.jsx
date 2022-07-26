@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Account from './pages/account/Account';
+import Categories from './pages/categories/Categories';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<Landing/>}/>
       <Route path='/account' element={<Account/>}/>
+      <Route path='/categories/:id' element={<Categories/>}/>
     </Routes>
   );
 }

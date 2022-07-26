@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../../components/button/Button';
 
 function OutOfStock({stock}) {
 
@@ -28,7 +27,7 @@ function OutOfStock({stock}) {
                   stock === 0 || stock === null ? (
                   <p className="rupture">Rupture de stock</p>
                   ) : (
-                  <Button value={"Ajouter au panier"} handelclick={()=>{alert("Vous avez acheté un article")}}/>
+                  <button onClick="">Ajouter au panier</button>
                   )
             ))}
     </div>
