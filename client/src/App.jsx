@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Account from './pages/account/Account';
+import Data from './components/fdp/frais';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<Landing/>}/>
       <Route path='/account' element={<Account/>}/>
+      <Route path='/frais' element={<Data/>}/>
     </Routes>
   );
 }

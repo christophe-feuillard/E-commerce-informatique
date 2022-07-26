@@ -29,11 +29,11 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
                 </table>
                     {log ? 
                         <div className='buttonModalSmall'>
-                            <button className='buttonBuy'>Achater</button>
+                            <button className='buttonBuy' onClick={()=>navigate("/frais")} >Achater</button>
                         </div>
                         :
                         <div className='buttonModalSmall'>
-                            <button className='buttonBuy'>Continuez pour l'achat</button>
+                            <button className='buttonBuy'  onClick={()=>navigate("/frais")}>Continuez pour l'achat</button>
                             <button className='buttonBuy' onClick={()=>navigate("/login")}>se connecter pour l'achat</button>
                         </div>
                     }

@@ -1,7 +1,9 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
+const Token = localStorage.getItem("token");
 
-const dataFDP = () => {
+
+const Data = () => {
     const [dataUser, setdataUser] = useState([]);
     const [dataPanier, setdataPanier] = useState([]);
 
@@ -35,30 +37,39 @@ const dataFDP = () => {
       }); 
 
     useEffect(() => {
-        const callAPI = () => {
-            axios.get('/user/role')
-            .then(res => {
-                setdataUser(res.data);
-            })
-            .catch(err => {
-            console.log(err);
-            });
-        }
-        callAPI;
-    }, []);
+            var config = {
+                method: 'get',
+                url: '/api/user/role',
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${Token}`
+                },
+
+                data : fromAdress
+              };
+              axios(config)
+              .then((response) => {
+                setdataUser(response.data);
+                console.log(dataUser)
+              })
+              .catch((error) => {
+                    console.log(error);
+              });
+        }, []);
 
     useEffect(() => {
         const callAPI = () => {
             axios.get('/api/panier')
             .then(res => {
                 setdataPanier(res.data);
+                console.log(dataPanier)
             })
             .catch(err => {
             console.log(err);
             });
         }
-        callAPI;
+        callAPI();
     }, []);
 }
 
-export default dataFDP;
+export default Data;
