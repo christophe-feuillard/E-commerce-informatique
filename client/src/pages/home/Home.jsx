@@ -21,7 +21,8 @@ const Home = () => {
   const [total,setTotal] = useState(0);
   const [articleNumber,setArticleNumber] = useState(0);
   const [isLoading,setIsLoading] = useState(false);
-
+  const [categorie,setCategorie] = useState(0);
+ 
   useEffect(() => {
     const callAPI = () => {
       axios.get('/api/articles')
@@ -75,9 +76,28 @@ const Home = () => {
     return false;
   }
 
+  const searchCategorie = () => {
+
+    if(categorie !== 0){
+
+      let config = {
+        method: 'get',
+        url: `http://localhost:8000/api/categories/${categorie}`,
+        headers: { 'Content-Type': 'application/json' },
+      };
+      
+      axios(config)
+        .then(res => {
+          setData(res.data.articles);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }
 return (
   <>
-    <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber}/>
+    <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
     <div className='homeContainer'>
       {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
         <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
