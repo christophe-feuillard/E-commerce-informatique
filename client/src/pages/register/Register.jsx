@@ -15,6 +15,7 @@ const Register = () => {
     const [ville, setVille] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [codePostal, setCodePostal] = useState('');
     const [error, setError] = useState('');
     const [islogin, setIslogin] = useState(false);
 
@@ -29,6 +30,9 @@ const Register = () => {
     },
     {
         type: 'text',placeholder: 'Ville',value: ville,change: (e) => setVille(e.target.value)
+    },
+    {
+        type: 'text',placeholder: 'Code Postal',value: codePostal,change: (e) => setCodePostal(e.target.value)
     },
     {
         type: 'text',placeholder: 'Numero de telephone',value: phone,change: (e) => setPhone(e.target.value)
@@ -67,6 +71,7 @@ const Register = () => {
             "email": email,
             "password": password,
             "ville": ville,
+            "codepostal": codePostal,
             "phone": phone
         });
           
@@ -102,7 +107,7 @@ const Register = () => {
                     <Input type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
                 ))}
                 <Button value={"S'inscrire"} handelclick={()=>verifyValue()}/>
-                <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")} >Connectez-vous</span></p>
+                <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")}>Connectez-vous</span></p>
             </div>
         </div>
     </div>

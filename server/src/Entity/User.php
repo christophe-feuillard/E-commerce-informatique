@@ -51,6 +51,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'users')]
     private Collection $favoris;
 
+    #[ORM\Column(length: 255)]
+    private ?string $CodePostal = null;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
@@ -209,6 +212,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->CodePostal;
+    }
+
+    public function setCodePostal(string $CodePostal): self
+    {
+        $this->CodePostal = $CodePostal;
+
+        return $this;
+    }
+
 
  
 }
