@@ -10,7 +10,7 @@ const Container2 = ({setEdit, setElementUpdate, edit}) => {
     useEffect(() => {
      getItem(setData);
         
-     },[]);
+     },[edit]);
 
      console.log(data)
      

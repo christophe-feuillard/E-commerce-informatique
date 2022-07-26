@@ -1,8 +1,9 @@
-import React, {useEffect,useState}from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ModalSmall.css';
-import Button from '../../components/button/Button';
 
-const ModalSmall = ({open,onclose,store,total}) => {
+const ModalSmall = ({open,onclose,store,total,log}) => {
+    const navigate = useNavigate();
 
     if(!open) return null;
     else return (
@@ -26,6 +27,16 @@ const ModalSmall = ({open,onclose,store,total}) => {
                         <p className='total'>Total {total}€</p>
                     </tbody>
                 </table>
+                    {log ? 
+                        <div className='buttonModalSmall'>
+                            <button className='buttonBuy'>Achater</button>
+                        </div>
+                        :
+                        <div className='buttonModalSmall'>
+                            <button className='buttonBuy'>Continuez pour l'achat</button>
+                            <button className='buttonBuy' onClick={()=>navigate("/login")}>se connecter pour l'achat</button>
+                        </div>
+                    }
             </div>
         </div>
     );

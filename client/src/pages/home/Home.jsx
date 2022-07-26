@@ -20,7 +20,9 @@ const Home = () => {
   const [store,setStore] = useState([]);
   const [total,setTotal] = useState(0);
   const [articleNumber,setArticleNumber] = useState(0);
-
+  const [isLoading,setIsLoading] = useState(false);
+  const [categorie,setCategorie] = useState(0);
+ 
   useEffect(() => {
     const callAPI = () => {
       axios.get('/api/articles')
@@ -34,8 +36,14 @@ const Home = () => {
         setStore(JSON.parse(localStorage.getItem("store")));
         setArticleNumber(store.length);
     }
-    callAPI();
 
+    const VerifyUser = () => {
+    if(localStorage.getItem("token") != null) setIsLoading(true);
+    else setIsLoading(false);
+    }
+
+    callAPI();
+    VerifyUser();
   }, []);
 
   useEffect(() => {
@@ -57,7 +65,6 @@ const Home = () => {
     });
 
     const exist = verifyIfExistInStore(item.id);
-    console.log(exist);
     if(!exist) setStore((store) => [...store, item]);
     else setStore((store) => store.slice(0,store.indexOf(item)).concat(store.slice(store.indexOf(item)+1)));
   }
@@ -69,9 +76,28 @@ const Home = () => {
     return false;
   }
 
+  const searchCategorie = () => {
+
+    if(categorie !== 0){
+
+      let config = {
+        method: 'get',
+        url: `http://localhost:8000/api/categories/${categorie}`,
+        headers: { 'Content-Type': 'application/json' },
+      };
+      
+      axios(config)
+        .then(res => {
+          setData(res.data.articles);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }
 return (
   <>
-    <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber}/>
+    <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
     <div className='homeContainer'>
       {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
         <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
@@ -84,7 +110,7 @@ return (
        buyclick={()=>{alert("Vous avez acheté un article")} }
       smallModal={false}
     />
-    <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total}/>
+    <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
     </div>
   </>
 )
