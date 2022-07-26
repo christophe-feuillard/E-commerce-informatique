@@ -20,6 +20,7 @@ const Home = () => {
   const [store,setStore] = useState([]);
   const [total,setTotal] = useState(0);
   const [articleNumber,setArticleNumber] = useState(0);
+  const [isLoading,setIsLoading] = useState(false);
 
   useEffect(() => {
     const callAPI = () => {
@@ -34,8 +35,14 @@ const Home = () => {
         setStore(JSON.parse(localStorage.getItem("store")));
         setArticleNumber(store.length);
     }
+
+    const VerifyUser = () => {
+    if(localStorage.getItem("token") != null) setIsLoading(true);
+    else setIsLoading(false);
+    }
+
     callAPI();
-    
+    VerifyUser();
   }, []);
 
   useEffect(() => {
@@ -57,7 +64,6 @@ const Home = () => {
     });
 
     const exist = verifyIfExistInStore(item.id);
-    console.log(exist);
     if(!exist) setStore((store) => [...store, item]);
     else setStore((store) => store.slice(0,store.indexOf(item)).concat(store.slice(store.indexOf(item)+1)));
   }
@@ -84,7 +90,7 @@ return (
        buyclick={()=>{alert("Vous avez acheté un article")} }
       smallModal={false}
     />
-    <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total}/>
+    <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
     </div>
   </>
 )
