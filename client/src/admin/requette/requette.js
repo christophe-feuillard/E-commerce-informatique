@@ -80,7 +80,7 @@ export const getItem = (setData) => {
         }
       };
       
-      axios(config)
+    axios(config)
       .then(response => setData(response.data))
       .catch(error => {
         console.log(error);
