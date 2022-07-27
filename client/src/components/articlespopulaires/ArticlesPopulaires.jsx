@@ -35,8 +35,8 @@ const Card = () => {
     <h2>Articles les plus populaires</h2>
     <Swiper
     modules={[Navigation, Pagination, Scrollbar, A11y]}
-    spaceBetween={50}
-    slidesPerView={2}
+    spaceBetween={20}
+    slidesPerView={3}
     navigation
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true }}
