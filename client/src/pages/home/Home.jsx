@@ -100,7 +100,7 @@ return (
     <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
     <div className='homeContainer'>
       {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
-        <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
+        <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique} size={item.weight + ' ' + item.height+ ' ' + item.length + ' ' + item.width}
           handleckick={()=>{showMore(item)}}
           colorStore={colorStore[key]}
           clickStore={()=>{addStore(item,key)}}

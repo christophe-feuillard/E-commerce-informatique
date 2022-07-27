@@ -5,6 +5,7 @@ const Token = localStorage.getItem("token");
 
 const Data = () => {
     const [dataUser, setdataUser] = useState([]);
+    const [dataAllPanier, setdataAllPanier] = useState([]);
     const [dataPanier, setdataPanier] = useState([]);
 
     const fromAdress = ({
@@ -24,7 +25,7 @@ const Data = () => {
     });
 
     const parcel = ({
-        length: dataPanier.length,
+        length: dataPanier.lenght,
         width: dataPanier.width,
         height: dataPanier.height,
         weight: dataPanier.weight,
@@ -50,7 +51,7 @@ const Data = () => {
               axios(config)
               .then((response) => {
                 setdataUser(response.data);
-                console.log(dataUser)
+                console.log(response)
               })
               .catch((error) => {
                     console.log(error);
@@ -58,18 +59,12 @@ const Data = () => {
         }, []);
 
     useEffect(() => {
-        const callAPI = () => {
-            axios.get('/api/panier')
-            .then(res => {
-                setdataPanier(res.data);
-                console.log(dataPanier)
-            })
-            .catch(err => {
-            console.log(err);
-            });
-        }
-        callAPI();
+       console.log( JSON.parse(localStorage.getItem("store")))
     }, []);
+    // console.log(shipment);
+    // console.log(dataUser, 'dataUser')
+    console.log(dataAllPanier, 'dataAllPanier')
+    console.log(dataPanier, 'dataPanier')
 }
 
 export default Data;

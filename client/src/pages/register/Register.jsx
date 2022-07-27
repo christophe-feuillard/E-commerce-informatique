@@ -104,9 +104,9 @@ const Register = () => {
             {error && <p className='error'>{error}</p>}
             <div className='registerFormulaire'>
                 {inputData.map((input) => (
-                    <Input type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
+                    <Input className='inputRegister' type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
                 ))}
-                <Button value={"S'inscrire"} handelclick={()=>verifyValue()}/>
+                <Button className='buttonRegister' value={"S'inscrire"} handelclick={()=>verifyValue()}/>
                 <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")}>Connectez-vous</span></p>
             </div>
         </div>

@@ -12,13 +12,13 @@ const Header = ({search,change,storeClick,articleNumber,categorie,searchClick}) 
         <Logo/>
 
         <div className='search'>
-            <Input placeholder={"Etrez votre recherche ici"} type={"text"} value={search} change={change}/>
-            <select name="pets" id="pet-select" onChange={(e)=>{categorie(parseInt(e.target.value))}}>
+            <Input placeholder={"Entrez votre recherche ici"} type={"text"} value={search} change={change}/>
+            <Button value={"chercher"} handelclick={searchClick}/>
+            {/* <select name="pets" id="pet-select" onChange={(e)=>{categorie(parseInt(e.target.value))}}>
               <option value="">Selectionnez une catégorie</option>
               <option value="3">Ordinateur Portabl</option>
               <option value="4">Carte Graphique</option>
-            </select>
-            <Button value={"chercher"} handelclick={searchClick}/>
+            </select> */}
         </div>
         <NavItems storeClick={storeClick} number={articleNumber}/>
 

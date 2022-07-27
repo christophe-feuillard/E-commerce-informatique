@@ -1,19 +1,23 @@
+
+*{
+    box-sizing: border-box;
+}
+
 .mainDiv{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 40px;
+
 }
 
-.mainDiv input{
-    margin-top: 5px;
-    margin-bottom: 15px;
-}
+
 
 .search{
     align-items: center;
-    margin-left: -10vw;
-    padding-top: 1vh;
     display: flex;
-    flex-direction: column;
-    width: 30%;
+    flex-direction: row;
+    width: 50%;
+    margin-right: 50px
+    ;
 }

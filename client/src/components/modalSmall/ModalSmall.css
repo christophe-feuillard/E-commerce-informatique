@@ -5,16 +5,14 @@
     position: fixed;
     margin-top: -15vh;
 }
-
+.grandContainer{
+     display: flex;
+     justify-content: center;
+   margin-top: 200px;
+}
 .modelContainerSmall{
-    border: 2px solid #eb4f29;
     background-color: white;
-    position: fixed;
     width: 60%;
-    /* height: 70%; */
-    top: 15%;
-    left: 25%;
-    border-radius: 10px;
 }
 .modelContainerSmall table{
     color: black;

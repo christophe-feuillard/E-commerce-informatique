@@ -1,10 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+
 input{
-    width: 25vw;
-    height: 3vh;
-    padding: 5px;
-    border-radius: 6px;
-    border: 1px solid #eb4f29;
-    background-color: black;
+    width: 100%;
+    height: 7vh;
+    padding: 10px;
+    margin: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid rgb(196, 196, 196);
+    background-color: rgb(196, 196, 196);
     color: white;
     font-size: large;
     font-weight: bold;
