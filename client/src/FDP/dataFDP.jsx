@@ -4,7 +4,6 @@ import axios from 'axios';
 const DataFDP = () => {
     const [dataUser, setdataUser] = useState([]);
     const [dataAllPanier, setdataAllPanier] = useState([]);
-    const dataPanier = dataAllPanier.item[0].article;
 
     const fromAdress = ({
         company : 'Ecommerce',
@@ -23,10 +22,10 @@ const DataFDP = () => {
     });
 
     const parcel = ({
-        length: dataPanier.lenght,
-        width: dataPanier.width,
-        height: dataPanier.height,
-        weight: dataPanier.weight,
+        length: dataAllPanier.lenght,
+        width: dataAllPanier.width,
+        height: dataAllPanier.height,
+        weight: dataAllPanier.weight,
     });
 
     const shipment = ({
@@ -60,10 +59,11 @@ const DataFDP = () => {
         }
         callAPI();
     }, []);
+
     console.log(shipment);
     // console.log(dataUser, 'dataUser')
     // console.log(dataAllPanier, 'dataAllPanier')
-    console.log(dataPanier, 'dataPanier')
+    // console.log(dataPanier, 'dataPanier')
 }
 
 export default DataFDP;
