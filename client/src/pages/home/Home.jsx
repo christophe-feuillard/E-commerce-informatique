@@ -97,7 +97,11 @@ const Home = () => {
     <>
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
       <div className='homeContainer'>
-           <ArticlesPopulaires/>   
+            <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
+           <ArticlesPopulaires/>  
+           <div className='hr'>
+           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
+            </div> 
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
           <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique} size={item.weight + ' ' + item.height+ ' ' + item.length + ' ' + item.width}
           handleckick={()=> navigate("/article_details/"+item.id)} 
@@ -109,7 +113,6 @@ const Home = () => {
          buyclick={()=>{alert("Vous avez acheté un article")} }
         smallModal={false}
       /> */}
-      <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
       </div>
       
   </>

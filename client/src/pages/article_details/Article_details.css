@@ -73,6 +73,7 @@ h3 {
 	padding: 20px;
 	display: flex;
 	align-self: center;
+	align-items: center;
 }
 .details_article > div:first-child  {
   height: 90%;

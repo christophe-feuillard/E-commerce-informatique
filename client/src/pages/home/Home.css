@@ -1,5 +1,5 @@
 .homeContainer{
-    background-color: rgba(194, 175, 175, 0.636);
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -8,6 +8,13 @@
 .div_articlepopulaire {
     display: flex;
     flex-direction: row;
+}
+
+.hr{
+    background-color: black;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
 }
 /* .div_toutlesarticles {
     display: flex;

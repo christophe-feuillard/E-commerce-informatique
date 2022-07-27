@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './ArticlesPopulaires.css';
 import {useNavigate} from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import {Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+import {RiMedalLine} from "react-icons/ri"
 import axios from 'axios';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -33,12 +34,17 @@ const Card = () => {
   
   return (
   <div className='div_articlepopulaires'>
-    <h2 className='titreArticles'>Articles les plus populaires</h2>
+    <p className='titreArticles'>Nos articles les plus populaires <RiMedalLine/></p>
+    <div className='swipe'>
     <Swiper
-    modules={[Navigation, Pagination, Scrollbar, A11y]}
-    spaceBetween={20}
-    slidesPerView={3}
-    navigation
+    modules={[ Pagination, Scrollbar, A11y, Autoplay]}
+    spaceBetween={0}
+    slidesPerView={2}
+    loop={true}
+    autoplay={{
+        delay: 5000,
+        disableOnInteraction: false
+    }}
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true }}
     onSwiper={(swiper) => console.log(swiper)}
@@ -48,6 +54,7 @@ const Card = () => {
       <SwiperSlide> 
         <div onClick={() => navigate("/article_details/"+item.id)} className='cardCarou'>
           <img src={item.photo} alt="image du produit"/>
+          <p className='prixCard'>{item.prix} €</p>
           <div>
             <span className="spanCarou">{item.titre}</span>  
           </div>
@@ -55,6 +62,8 @@ const Card = () => {
       </SwiperSlide>
     ))}
     </Swiper>
+    </div>
+
   </div>
 
   )

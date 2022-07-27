@@ -70,13 +70,15 @@ const ArticleDetails = (props) => {
                 <li> Largeur : {articles.width} "</li>
                 <li> Hauteur : {articles.height} cm</li>
               </ul>
+              <p>Il reste {articles.stock} en stock</p>
               <p>
-                <p>{articles.caracteristique}</p>
                 {articles.description}
               </p>
+                <p>{articles.caracteristique}</p>
+
+            <Buy articlesPrix={articles.prix + '€'} onAdd={addItem}/>
             </div>
 
-            <Buy articlesPrix={articles.prix} onAdd={addItem}/>
           </div>
 
         </div>
