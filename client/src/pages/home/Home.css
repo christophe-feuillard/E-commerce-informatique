@@ -1,5 +1,5 @@
 .homeContainer{
-    background-color: rgb(191, 191, 191);
+    background-color: rgba(194, 175, 175, 0.636);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
