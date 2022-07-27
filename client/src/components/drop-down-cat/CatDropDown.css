@@ -1,0 +1,11 @@
+.select_container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.select_content {
+    background-color: black;
+    color: white;
+    border-radius: 2px;
+}

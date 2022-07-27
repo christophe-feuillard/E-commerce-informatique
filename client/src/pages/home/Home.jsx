@@ -5,7 +5,7 @@ import Modal from '../../components/modal/Modal';
 import ModalSmall from '../../components/modalSmall/ModalSmall';
 import axios from 'axios';
 import "./Home.css";
-// import OutOfStock from '../../components/out_of_stock/OutOfStock';
+import OutOfStock from '../../components/out_of_stock/OutOfStock';
 import CatDropDown from '../../components/drop-down-cat/CatDropDown';
 
 const Home = () => {
@@ -15,9 +15,7 @@ const Home = () => {
   const [openModalSmall, setOpenModalSmall] = useState(false);
   const [dataModal, setDataModal] = useState({});
   const [search,setSearch] = useState("");
-  const [stock, setStock] = useState([]); // pour le out of stock
-  const [disableModal, setDisableModal] = useState(0); // pour le out of stock
-  
+  // const [disableModal, setDisableModal] = useState(0); // pour le out of stock
   const [colorStore,setColorStore] = useState([]);
   const [store,setStore] = useState([]);
   const [total,setTotal] = useState(0);
@@ -30,11 +28,11 @@ const Home = () => {
 
           setData(res.data);
 
-          for (let i = 0; i < res.data.length; i ++) // pour le out of stock
-          {
-            setStock(stock => [...stock, res.data[i].stock])
-            // setDisableModal(disableModal => [...disableModal, res.data[i].stock])  
-          } 
+          // for (let i = 0; i < res.data.length; i ++) // pour le out of stock
+          // {
+          //   setStock(stock => [...stock, res.data[i].stock])
+          //   // setDisableModal(disableModal => [...disableModal, res.data[i].stock])  
+          // } 
           setColorStore(Array(res.data.length).fill(false))
         })
         .catch(err => {
@@ -81,18 +79,19 @@ const Home = () => {
 return (
   <>
     <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber}/>
+    <CatDropDown/>
     <div className='homeContainer'>
 
-      {/* Pour le out of stock */}
-
-      {/* {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item) => (
+      {/* Gestion rupture de stock */}
+{/* 
+      {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item) => (
         <Card key={item.id} imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
           handleckick={() => { showMore(item);}}/>
-      ))}
+      ))} */}
         
-        <OutOfStock stock={stock}/>
+        {/* <OutOfStock/> */}
 
-      {disableModal === 0 ? (
+      {/* {disableModal === 0 ? (
       <Modal onclose={()=>setOpenModal(false)} />
       ) : (
       <Modal open={openModal} data={dataModal} onclose={()=>setOpenModal(false)} 
@@ -112,7 +111,6 @@ return (
     />
     <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total}/>
 
-      <CatDropDown />
     </div>
   </>
 )

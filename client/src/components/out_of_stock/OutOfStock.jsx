@@ -1,25 +1,31 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
-function OutOfStock({stock}) {
+function OutOfStock() {
 
-//     const [stock, setStock] = useState([]); // la logique a faire dans home ici que l'affichage du component
+    const [stock, setStock] = useState([]);
 
-//     useEffect(() => {
+    //console.log(stock, 'whats in the stock');
+
+    useEffect(() => {
     
-//     const callAPI = () => {
-//       axios.get('/api/articles')
-//       .then(res => {
-//         for (let i = 0; i < res.data.length; i ++) setStock(stock => [...stock, res.data[i].stock])
-//         })
-//         .catch(err => {
-//         console.log(err);
-//         });
-//         }
-//         callAPI();
+    const callAPI = () => {
+      axios.get('/api/articles')
+      .then(res => {
+        for (let i = 0; i < res.data.length; i ++) 
+        {
+          setStock(stock => [...stock, res.data[i].stock])
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+        callAPI();
 
-//     }, []);
+    }, []);
   
-//   console.log(stock);
+  console.log(stock);
 
   return (
     <div>

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './CatDropDown.css'
 
 export default function CatDropDown() {
 
     const [catData, setCatData] = useState([])
     const navigate = useNavigate()
 
-    console.log(catData, 'Les cats');
+    //console.log(catData, 'Les cats');
 
     useEffect(() => {
         const callAPI = () => {
@@ -25,8 +26,7 @@ export default function CatDropDown() {
     }, []);
 
     const changePage = (e) => {
-        const id = e.target.value
-        console.log(id, 'est-ce id ?');
+        const id = e.target.value // recuperer l'id de la cat
        navigate('/categories/' + id)
     }
 
