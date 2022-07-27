@@ -25,7 +25,7 @@ const Home = () => {
  
   useEffect(() => {
     const callAPI = () => {
-      axios.get('/api/articles')
+      axios.get('https://localhost:8000/api/articles')
         .then(res => {
           setData(res.data);
           setColorStore(Array(res.data.length).fill(false))
