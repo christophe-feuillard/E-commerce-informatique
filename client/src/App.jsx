@@ -5,7 +5,7 @@ import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Account from './pages/account/Account';
-import Data from './components/fdp/frais';
+import ArticleDetails from "./pages/article_details/Article_details";
 
 function App() {
   return (
@@ -16,7 +16,8 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<Landing/>}/>
       <Route path='/account' element={<Account/>}/>
-      <Route path='/frais' element={<Data/>}/>
+      <Route path="/article_details" element={<ArticleDetails/>}/>
+      <Route path="/article_details/:articlesParams" element={<ArticleDetails srcImage=""/>}/>
     </Routes>
   );
 }

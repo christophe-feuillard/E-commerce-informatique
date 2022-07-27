@@ -49,6 +49,7 @@ img{
     color: black;
     width: 70%;
     text-align: center;
+    cursor: pointer;
    
 }
 
@@ -68,7 +69,8 @@ color: #eb4f29;
 transition: all 1s ease-in-out;
 }
 .addPanier:hover{
-    transition: all 1s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    background-color: #eb4f29;
 }
 .iconCard{
     font-size: 25px;

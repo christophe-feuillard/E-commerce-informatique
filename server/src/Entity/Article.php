@@ -41,10 +41,6 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
-    #[Groups("groupe:get")]
-    #[ORM\Column(nullable: true)]
-    private $stock;
-
     #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
     private ?int $visit = null;
@@ -53,15 +49,19 @@ class Article
     private Collection $users;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
     private ?int $weight = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
     private ?int $length = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
     private ?int $height = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
     private ?int $width = null;
 
     public function __construct()
@@ -156,18 +156,6 @@ class Article
     public function removeCategorie(Categorie $categorie): self
     {
         $this->categorie->removeElement($categorie);
-
-        return $this;
-    }
-
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(?int $stock): self
-    {
-        $this->stock = $stock;
 
         return $this;
     }

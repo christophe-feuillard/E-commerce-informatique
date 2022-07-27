@@ -1,0 +1,54 @@
+.div_articlepopulaires {
+    width: 100%;
+    /* height: 700px; */
+}
+.div_articlepopulaires > h2 {
+    text-align: center;
+}
+
+.titreArticles{
+    font-family: 'Raleway', sans-serif;
+}
+
+.cardCarou {
+    /* border: 1px solid white; */
+    height: 400px;
+    width: 450px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+.cardCarou img {
+    border-radius: 10px;
+    cursor: pointer;
+    clip-path: polygon(100% 0, 100% 82%, 0 82%, 0 60%, 0 0);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.spanCarou {
+    text-align: end;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    color: #000000;
+    font-size: 2rem;
+    font-weight: bold;
+    align-self: center;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    margin-right: 15px;
+    /* border: 1px solid white; */
+}
+.cardCarou > div {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2; 
+    top: -14%;
+    height: 50px;
+    width: 100%;
+    /* background-color: rgb(0, 0, 0); */
+}
