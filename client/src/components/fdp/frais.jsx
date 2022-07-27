@@ -6,7 +6,7 @@ const Token = localStorage.getItem("token");
 const Data = () => {
     const [dataUser, setdataUser] = useState([]);
     const [dataAllPanier, setdataAllPanier] = useState([]);
-    const [dataPanier, setdataPanier] = useState([]);
+    const Token = localStorage.getItem("token");
 
     const fromAdress = ({
         company : 'Ecommerce',
@@ -25,10 +25,10 @@ const Data = () => {
     });
 
     const parcel = ({
-        length: dataPanier.lenght,
-        width: dataPanier.width,
-        height: dataPanier.height,
-        weight: dataPanier.weight,
+        length: dataAllPanier.lenght,
+        width: dataAllPanier.width,
+        height: dataAllPanier.height,
+        weight: dataAllPanier.weight,
     });
 
     const shipment = ({
@@ -38,33 +38,40 @@ const Data = () => {
       }); 
 
     useEffect(() => {
-            var config = {
-                method: 'get',
-                url: '/api/user/role',
-                headers: { 
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${Token}`
-                },
-
-                data : fromAdress
-              };
-              axios(config)
-              .then((response) => {
-                setdataUser(response.data);
-                console.log(response)
-              })
-              .catch((error) => {
-                    console.log(error);
-              });
-        }, []);
+        const callAPI = () => {
+            axios.get('/api/user/role', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Token}`
+                }
+            })
+            .then(res => {
+                setdataUser(res.data);
+            })
+            .catch(err => {
+            console.log(err);
+            });
+        }
+        callAPI();
+    }, []);
 
     useEffect(() => {
-       console.log( JSON.parse(localStorage.getItem("store")))
+        const callAPI = () => {
+            axios.get('/api/panier')
+            .then(res => {
+                setdataAllPanier(res.data);
+            })
+            .catch(err => {
+            console.log(err);
+            });
+        }
+        callAPI();
     }, []);
-    // console.log(shipment);
-    // console.log(dataUser, 'dataUser')
-    console.log(dataAllPanier, 'dataAllPanier')
-    console.log(dataPanier, 'dataPanier')
+
+    console.log(shipment);
+    console.log(dataUser, 'dataUser')
+    // console.log(dataAllPanier, 'dataAllPanier')
+    // console.log(dataPanier, 'dataPanier')
 }
 
 export default Data;
