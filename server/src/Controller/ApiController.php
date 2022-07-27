@@ -48,19 +48,8 @@ class ApiController extends AbstractController
         #[Route('/api/panier', name: 'app_api_panier')]  // ALL PANIER / AFFICHAGE
         public function allPanier(SessionInterface $session, ArticleRepository $articleRepository) {
             $panier = $session->get('panier', []);      // Recupere le panier de la sessiona actuel
-            // $parcel = $session->get('parcel', []); 
 
             $panierData = [];
-            // $parcelData = [];
-
-            // foreach($parcel as $key => $value) {
-            //     $parcelData[] = [
-            //         'width' => $articleRepository->getWidth(),
-            //         'lenght' => $articleRepository->getLenght(),
-            //         'height' => $articleRepository->getHeight(),
-            //         'weight' => $articleRepository->getWeight()
-            //     ];
-            // }
 
             foreach($panier as $id => $quantity) {
                 $panierData[] = [
@@ -100,7 +89,6 @@ class ApiController extends AbstractController
         public function addPanier($id, SessionInterface $session) {
 
             $panier = $session->get('panier', []);      // Recup le panier ou le creez 
-            // $parcel = $session->get('parcel', []);
 
             if(!empty($panier[$id])) {      // Si j'ai déja cet article dans mon panier
                 $panier[$id]++;             // Alors incremente le 
@@ -109,7 +97,6 @@ class ApiController extends AbstractController
             }
 
             $session->set('panier', $panier);   // Update le panier / Save le panier
-            // $session->set('parcel', $parcel);
             // dd($session->get('panier'));    
             return $this->json($panier, 200,[],['groups' => 'groupe:get']);
         }

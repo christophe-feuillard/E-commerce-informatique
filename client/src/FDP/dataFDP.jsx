@@ -4,6 +4,7 @@ import axios from 'axios';
 const DataFDP = () => {
     const [dataUser, setdataUser] = useState([]);
     const [dataAllPanier, setdataAllPanier] = useState([]);
+    const Token = localStorage.getItem("token");
 
     const fromAdress = ({
         company : 'Ecommerce',
@@ -36,7 +37,12 @@ const DataFDP = () => {
 
     useEffect(() => {
         const callAPI = () => {
-            axios.get('/api/user/role')
+            axios.get('/api/user/role', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer' + Token
+                }
+            })
             .then(res => {
                 setdataUser(res.data);
             })
@@ -61,7 +67,7 @@ const DataFDP = () => {
     }, []);
 
     console.log(shipment);
-    // console.log(dataUser, 'dataUser')
+    console.log(dataUser, 'dataUser')
     // console.log(dataAllPanier, 'dataAllPanier')
     // console.log(dataPanier, 'dataPanier')
 }
