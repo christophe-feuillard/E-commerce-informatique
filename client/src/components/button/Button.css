@@ -1,53 +1,47 @@
+body {
+  color: white;
+}
 
-  body {
-    color: white;
-  }
-  
-  a {
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    
-  }
-  
-  .cta {
-    position: relative;
-        display: flex;
-        justify-content: center;
-    padding: 19px 0;
-    transition: all 0.2s ease;
-  }
-  .cta:before {
-    content: "";
-    position: absolute;
-    top: 0;
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
 
-    display: block;
-    border-radius: 28px;
-    background: #eb4f29;
-    width: 56px;
-    height: 56px;
-    transition: all 0.3s ease;
-  }
-  .cta span {
-    cursor: pointer;
-    position: relative;
-    font-size: 10px;
-    line-height: 18px;
-    font-weight: 900;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    vertical-align: middle;
-    font-family: 'Press Start 2P', cursive;
-  }
-  .cta:hover:before {
-    width: 100%;
-    background: #eb4f29;
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 19px 22px;
+  transition: all 0.2s ease;
+}
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 28px;
+  background: #eb4f29;
+  width: 56px;
+  height: 56px;
+  transition: all 0.3s ease;
+}
+.cta span {
+  cursor: pointer;
+  position: relative;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-family: 'Press Start 2P', cursive;
+}
+.cta:hover:before {
+  width: 100%;
+  background: #eb4f29;
 }
 
 .cta:active {
-    transform: scale(0.96);
-  }
-
-
-
+  transform: scale(0.96);
+}

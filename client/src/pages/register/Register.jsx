@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {useNavigate,Navigate} from 'react-router-dom';
-import Input from '../../components/input/Input';
+import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
 import axios from 'axios';
 import './Register.css';
@@ -104,7 +104,7 @@ const Register = () => {
             {error && <p className='error'>{error}</p>}
             <div className='registerFormulaire'>
                 {inputData.map((input) => (
-                    <Input className='inputRegister' type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
+                    <InputLogin className='inputRegister' type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                 ))}
                 <Button className='buttonRegister' value={"S'inscrire"} handelclick={()=>verifyValue()}/>
                 <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")}>Connectez-vous</span></p>

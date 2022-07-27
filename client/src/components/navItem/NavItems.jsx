@@ -30,6 +30,7 @@ const NavItems = ({storeClick,number}) => {
             <span>{number}</span>
             </div>
             </div>
+   
         )
     }
     else{
