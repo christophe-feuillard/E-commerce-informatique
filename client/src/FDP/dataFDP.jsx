@@ -1,7 +1,11 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
+// import '@easypost/api/src/easypost';
 
 const DataFDP = () => {
+    // const Easypost = require('@easypost/api');
+    // const api = new Easypost(process.env.EASYPOST_API_KEY);
+
     const [dataUser, setdataUser] = useState([]);
     const [dataAllPanier, setdataAllPanier] = useState([]);
     const Token = localStorage.getItem("token");
@@ -17,7 +21,7 @@ const DataFDP = () => {
     const toAdress = ({
         name: dataUser.name,
         street1 : dataUser.adresse,
-        city : dataUser.city,
+        city : dataUser.ville,
         zip : dataUser.code_postal,
         phone : dataUser.phone
     });
@@ -36,11 +40,11 @@ const DataFDP = () => {
       }); 
 
     useEffect(() => {
-        const callAPI = () => {
-            axios.get('/api/user/role', {
+        const callAPI = async () => {
+            await axios.get('/api/user/role', {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer' + Token
+                    Authorization: 'Bearer ' + Token
                 }
             })
             .then(res => {
