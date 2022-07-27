@@ -47,6 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $apiToken;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups("groupe:get")]
     private $CodePostal;
 
     public function getId(): ?int

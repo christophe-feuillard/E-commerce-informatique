@@ -46,15 +46,19 @@ class Article
     private $stock;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("groupe:get")]
     private $width;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("groupe:get")]
     private $lenght;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("groupe:get")]
     private $height;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("groupe:get")]
     private $weight;
 
     public function __construct()
