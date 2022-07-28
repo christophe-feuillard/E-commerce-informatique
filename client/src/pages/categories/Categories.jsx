@@ -13,9 +13,6 @@ function Categories() {
     // console.log(catId, 'retrieved id');
     // console.log(catData, 'product from the cat');
 
-    // fonction recuperer l'id from url ou autre par, stock ca dans une var id ensuite fonction qui recup les articles en fonction de l'id passer en params 
-
-    
     useEffect(() => {
 
         const getIdFromUrl = () => {
@@ -28,7 +25,6 @@ function Categories() {
         const callAPI = (id) => {
             axios.get(`/api/categories/${id}`)
             .then(res => {
-    
                 setCatData(res.data.articles);
             })
             .catch(err => {
