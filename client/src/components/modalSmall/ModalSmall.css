@@ -1,20 +1,21 @@
-.overlaySmall{
-    background-color: rgba(0,0,0,0.9);
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    margin-top: -15vh;
-}
 
+.overlaySmall{
+    width: 100%;
+    z-index: 10;
+}
+.grandContainer{
+   position: relative;
+}
 .modelContainerSmall{
-    border: 2px solid #eb4f29;
-    background-color: white;
-    position: fixed;
-    width: 60%;
-    /* height: 70%; */
-    top: 15%;
-    left: 25%;
-    border-radius: 10px;
+    border-top: 1px solid white ;
+    background-color: rgba(194, 175, 175, 0.636);
+    width: 50%;
+    position: absolute;
+    top: 0;
+    right: 0%;
+} 
+.tdImage img{
+    width: 100%;
 }
 .modelContainerSmall table{
     color: black;
@@ -23,29 +24,51 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    color: white;
 }
 
 .modelContainerSmall tbody{
     width: 100%;
+    color: white;
 }
 
 .modelContainerSmall td{
     padding: 10px;
     text-align: center;
+    color: white;
+    border-bottom: 1px solid black;
 }
 .tdImage{
     width: 100px;
     height: 100px;
 }
 
-.tdImage img{
-    width: 100%;
-    height: 100%;
-}
-
 .total{
     color: #eb4f29;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.7em;
-    margin-left: 10px;
+    font-size: 0.9em;
+    margin-right: 40px;
+    float: right;
+    color: black;
+    font-weight: 600;
 }
+
+.buttonBuy{
+    width: 35%;
+ padding: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+
+}
+
+.buttonModalSmall{
+    margin-bottom: 4vh;
+    padding-top: 3vh;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-evenly;
+} 

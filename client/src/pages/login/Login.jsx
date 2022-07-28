@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {useNavigate,Navigate} from 'react-router-dom';
-import Input from '../../components/input/Input';
+import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
 import axios from "axios";
 import './Login.css';
@@ -46,7 +46,7 @@ const Login = () => {
       
       var config = {
         method: 'post',
-        url: '/api/login_check',
+        url: 'https://127.0.0.1:8000/api/login_check',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -72,7 +72,7 @@ const Login = () => {
             {error && <p className='error'>{error}</p>}
             <div className='loginFormulaire'>
                 {inputData.map((input) => (
-                    <Input key={input.name} type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
+                    <InputLogin className='inputLogin' type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
                 ))}
                 <Button value={"Se connecter"} handelclick={()=>verifyValue()}/>
                 <p>Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>

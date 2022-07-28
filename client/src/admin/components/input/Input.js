@@ -4,7 +4,7 @@ import { APIupdate, APIadd } from "../../requette/requette";
 
 
 
-const Input = ({dataTochange, isCreated, setEdit}) => {
+const Input = ({dataTochange, isCreated, setEdit, edit}) => {
 
     const initialValues = {
         titre: dataTochange.titre,
@@ -32,16 +32,14 @@ const Input = ({dataTochange, isCreated, setEdit}) => {
                 if(key != 'id'){
                   return (
                     <div className="containerinput">
-                        <label for={key}>
-                            {key}
-                        </label>
-                        <input type="text" name={key} value={values[key]} onChange={handleInputChange}/>
+                      {edit === 'update'  &&  <label for={key}>{key}</label>}
+                        <input type="text" name={key} value={values[key]} placeholder={key} onChange={handleInputChange}/>
                     </div> )  
                 }
                
             })}
             {isCreated ? <h2 className="buttonclikc" onClick={() => {APIadd(`/api/admin/add`,values); setEdit('home');}}>Créer l'article</h2> : <h2 className="buttonclikc" onClick={() => { APIupdate(`/api/admin/update/${dataTochange.id}`,values); setEdit('home');}}>Enregistrer les changements</h2>}
-             <h2 className="buttonclikc" onClick={() => setEdit('home')}>retour</h2>
+             <h2  onClick={() => setEdit('home')}>retour</h2>
         </div>
         
     )

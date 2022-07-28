@@ -30,7 +30,8 @@ class UserFixtures extends Fixture
                 // ->setRoles($this->faker->bool)
                 ->setVille($this->faker->city)
                 ->setPhone($this->faker->phoneNumber)
-                ->setAdresse($this->faker->address);
+                ->setAdresse($this->faker->streetAddress)
+                ->setCodePostal($this->faker->postcode);
             $manager->persist($user);
 
         $manager->flush();

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -45,6 +47,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
     private $apiToken;
+
+    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'users')]
+    private Collection $favoris;
+
+    #[ORM\Column(length: 255)]
+    private ?string $CodePostal = null;
+
+    public function __construct()
+    {
+        $this->favoris = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -175,4 +188,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Article $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Article $favori): self
+    {
+        $this->favoris->removeElement($favori);
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->CodePostal;
+    }
+
+    public function setCodePostal(string $CodePostal): self
+    {
+        $this->CodePostal = $CodePostal;
+
+        return $this;
+    }
+
+
+ 
 }

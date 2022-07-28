@@ -41,13 +41,34 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
-    private $stock;
+    private ?int $visit = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
+    private Collection $users;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $weight = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $length = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $height = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $width = null;
 
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
+        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,14 +160,89 @@ class Article
         return $this;
     }
 
-    public function getStock(): ?int
+    public function getVisit(): ?int
     {
-        return $this->stock;
+        return $this->visit;
     }
 
-    public function setStock(?int $stock): self
+    public function setVisit(?int $visit): self
     {
-        $this->stock = $stock;
+        $this->visit = $visit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?int $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getLength(): ?int
+    {
+        return $this->length;
+    }
+
+    public function setLength(?int $length): self
+    {
+        $this->length = $length;
+
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->height;
+    }
+
+    public function setHeight(?int $height): self
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getWidth(): ?int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(?int $width): self
+    {
+        $this->width = $width;
 
         return $this;
     }

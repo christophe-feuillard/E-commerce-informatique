@@ -1,0 +1,12 @@
+
+
+@keyframes animation1 {
+	from {
+		border: 0px solid white;
+		background-image: linear-gradient(to right bottom, #eb4f29, #b23532, #77242d, #3d171f, #000000);
+	}
+	to {
+		border: 3px solid white;
+		background-image: linear-gradient(to right bottom, #eb4f29, #b23532, #77242d, #3d171f, #000000);
+	}
+}
