@@ -45,6 +45,18 @@ class Article
     #[Groups("groupe:get")]
     private $stock;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $width;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $lenght;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $height;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $weight;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -147,6 +159,54 @@ class Article
     public function setStock(?int $stock): self
     {
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getWidth(): ?int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(?int $width): self
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    public function getLenght(): ?int
+    {
+        return $this->lenght;
+    }
+
+    public function setLenght(?int $lenght): self
+    {
+        $this->lenght = $lenght;
+
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->height;
+    }
+
+    public function setHeight(?int $height): self
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?int $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }

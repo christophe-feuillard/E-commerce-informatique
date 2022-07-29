@@ -16,7 +16,6 @@ const ContainerCart = ({role, edit, setEdit}) => {
         if(edit === 'create'){
             return (
             <div className='titlecontainerhome'>
-                <p className='titlecontaint'>Créer un article</p>
                 <Input dataTochange={created} isCreated={true} setEdit={setEdit}/>
             </div>
             
@@ -26,7 +25,6 @@ const ContainerCart = ({role, edit, setEdit}) => {
         if(edit === 'update'){
             return (
                 <div className='titlecontainerhome'>
-                    <p className='titlecontaint'>mettre a jour un article</p>
                     <Input dataTochange={elementUpdate} isCreated={false} setEdit={setEdit} edit={edit}/>
                 </div>
             
@@ -36,8 +34,7 @@ const ContainerCart = ({role, edit, setEdit}) => {
         if(edit === 'home'){
             return (
                 <div className='titlecontainerhome'>
-                    <p className='titlecontaint'>Article</p>
-                    <Container2 setEdit={setEdit} setElementUpdate={setElementUpdate}  />
+                    <Container2 setEdit={setEdit} setElementUpdate={setElementUpdate} edit={edit}  />
                 </div>
             
             )
@@ -45,7 +42,6 @@ const ContainerCart = ({role, edit, setEdit}) => {
         if(edit === 'stock'){
             return (
                 <div className='titlecontainerhome'>
-                    <p className='titlecontaint'>Gestion du stock</p>
                     <Rowstock setEdit={setEdit} setElementUpdate={setElementUpdate}/>
                 </div>
                 

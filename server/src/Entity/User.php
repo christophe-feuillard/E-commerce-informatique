@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
     private $apiToken;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $CodePostal;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -172,6 +175,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setApiToken(?string $apiToken): self
     {
         $this->apiToken = $apiToken;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->CodePostal;
+    }
+
+    public function setCodePostal(?string $CodePostal): self
+    {
+        $this->CodePostal = $CodePostal;
 
         return $this;
     }

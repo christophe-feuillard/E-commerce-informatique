@@ -28,6 +28,8 @@ class ArticleFixtures extends Fixture
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100));
 
+       
+
         $manager->persist($article1);
 
         $article2 = new Article();
@@ -36,6 +38,7 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3285552/20210910082316/ordinateur-portable-classique-inspiron-15-3510-1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article2);
 
@@ -47,6 +50,7 @@ class ArticleFixtures extends Fixture
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100));
 
+
         $manager->persist($article3);
 
         $article4 = new Article();
@@ -55,6 +59,7 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3258783/20210601142016/geforce_rtx_3080_ti_ventus_3x_12g_oc_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article4);
 
@@ -65,6 +70,7 @@ class ArticleFixtures extends Fixture
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100));
 
+
         $manager->persist($article5);
 
         $article6 = new Article();
@@ -73,6 +79,7 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3263410/20210604060616/gv-n307taorus_m-8gd_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100));
+
 
         $manager->persist($article6);
 

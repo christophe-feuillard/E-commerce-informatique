@@ -16,10 +16,9 @@ const Container2 = ({setEdit, setElementUpdate, edit}) => {
      
     return (
         <div className='Container'>
-            <div className='Containercart'>
+            <div className='flex flex-wrap justify-center '>
                 {data.map(v =>{ return <Cart values={v} setEdit={setEdit} setElementUpdate={setElementUpdate} edit={edit} />})}
             </div>
-            
         </div>
       );
 }

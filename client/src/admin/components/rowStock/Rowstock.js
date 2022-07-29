@@ -14,6 +14,14 @@ const Rowstock = ({setEdit, setElementUpdate}) => {
 
         return (
             <div>
+              <table class="table-auto w-full">
+              <thead>
+                  <tr>
+                    <th class="text-center">titre</th>
+                    <th class="text-center">photo</th>
+                    <th class="text-center">stock</th>
+                  </tr>
+               </thead>
         {isLoading && "chargement"}
         {error && error}
         {!isLoading && datastock.length === 0 && "pas d'articles"}
@@ -21,6 +29,7 @@ const Rowstock = ({setEdit, setElementUpdate}) => {
           datastock.map((v) => (
             <Stockcontainer data={v} setEdit={setEdit} setElementUpdate={setElementUpdate} />
           ))}
+            </table>
             </div>
         
         )     
@@ -29,4 +38,4 @@ const Rowstock = ({setEdit, setElementUpdate}) => {
 
     
 }
-export default Rowstock;
+export default Rowstock;  
