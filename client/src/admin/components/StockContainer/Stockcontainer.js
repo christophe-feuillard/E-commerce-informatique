@@ -9,7 +9,6 @@ export default function Stockcontainer({data, setEdit, setElementUpdate}) {
                   Titre :  {data.titre}
                 </p>
             </div>
-            
             <div className='stockelement'>
                 <img className="imgadmin" src={data.photo} alt="image du produit"/>
             </div>
@@ -22,10 +21,10 @@ export default function Stockcontainer({data, setEdit, setElementUpdate}) {
 
             <div className='stockelement'>
                 {/* {data.stock === 0 &&  <p className='redstock'>Rupture de stock</p>} */}
+                {data.stock <= 0  && <p className='redstock'>stock épuisé</p>}
                 {data.stock <= 100  && <p className='yellowstock'>stock faible</p>}
-                {data.stock >= 100 && <p className='greenstock'>stock suffisant</p>}
+                {data.stock > 100 && <p className='greenstock'>stock suffisant</p>}
             </div>
-
              <div>
                 <p onClick={()=>{setEdit('update'); setElementUpdate(data);}}>modifier le stock</p>
              </div>

@@ -45,6 +45,10 @@ class Article
     #[Groups("groupe:get")]
     private ?int $visit = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("groupe:get")]
+    private $stock;
+
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
     private Collection $users;
 
@@ -168,6 +172,18 @@ class Article
     public function setVisit(?int $visit): self
     {
         $this->visit = $visit;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }

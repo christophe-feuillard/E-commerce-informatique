@@ -37,7 +37,7 @@ const ContainerCart = ({role, edit, setEdit}) => {
             return (
                 <div className='titlecontainerhome'>
                     <p className='titlecontaint'>Article</p>
-                    <Container2 setEdit={setEdit} setElementUpdate={setElementUpdate}  />
+                    <Container2 setEdit={setEdit} setElementUpdate={setElementUpdate} edit={edit}  />
                 </div>
             
             )
