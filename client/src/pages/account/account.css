@@ -1,17 +1,19 @@
 
-
-.accountcontainer{
+/* 
+ .accountcontainer{
    display: flex;
-   flex-direction: row;
-}  
+   flex-direction: flex;
+}   */
+
+
 /* checker la taille */
- .navbarcontaineraccount{
+ /* .navbarcontaineraccount{
     width: 300px;
     padding-top: 150px;
     font-size: 30px;
-}
+} */
 
-.navbarcontainercartaccount{
+/* .navbarcontainercartaccount{
     width: 100%;
     
-} 
+}   */

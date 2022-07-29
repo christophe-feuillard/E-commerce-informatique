@@ -17,6 +17,8 @@ const Account = () =>{
         
     }, [role]);
 
+    console.log(infoPerso)
+
     if(role === 'ROLE_USER'){
         return (
             <div>
@@ -30,18 +32,18 @@ const Account = () =>{
     if(role === 'ROLE_ADMIN'){
         
         return (
-        <div className="homecontainer">
-            <div className="accountcontainer">
-                <div className="navbarcontaineraccount">
+
+            <div class='flex  min-h-screen bg-gray-50 rounded dark:bg-gray-800'>
+                <div class="w-64 min-h-screen w-2/12" aria-label="Sidebar">
                     <NavBAr title={info} setEdit={setEdit}/> 
                 </div>
-                <div className="navbarcontainercartaccount">
+                <div class="bg-gray-900 w-full" >
                     <ContainerCart role={role} edit={edit} setEdit={setEdit}/>
                 </div>
                 
             </div>
             
-        </div>
+
         )
     }
     
