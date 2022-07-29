@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 // require_once("/path/to/vendor/easypost/autoload.php");
 
 // \EasyPost\EasyPost::setApiKey(getenv('EASYPOST_API_KEY'));
+\EasyPost\EasyPost::setApiKey("EZTKe22861fa1589471986d05cf6d4cb7fd7bUySLyh5tew8xtl0C79PRw");
 
 class FDPController extends AbstractController {
     
@@ -48,7 +49,30 @@ class FDPController extends AbstractController {
                 }
             }
 
-        // $shipment = \EasyPost\Shipment::create([
+            $shipment = \EasyPost\Shipment::create([
+                "from_address" => [
+                    "company" => "Ecommerce",
+                    "street1" => "55 avenue de la Grande Armée",
+                    "city" => "Paris",
+                    "zip" => "75116",
+                    "phone" => "0155312897"
+                ],
+                "to_address" => [
+                    "name" => $userData->getName(),
+                    "street1" => $userData->getAdresse(),
+                    "city " => $userData->getVille(),
+                    "zip" => $userData->getCodePostal(),
+                    "phone " => $userData->getPhone()
+                ],
+                "parcel" => [
+                    "length" => $lenght,
+                    "width"  => $width,
+                    "height" => $height,
+                    "weight" => $weight
+                ],
+            ]);
+
+        // $shipment = ([
         //     "from_address" => [
         //         "company" => "Ecommerce",
         //         "street1" => "55 avenue de la Grande Armée",
@@ -57,11 +81,11 @@ class FDPController extends AbstractController {
         //         "phone" => "0155312897"
         //     ],
         //     "to_address" => [
-        //             "name" => $userData['name'],
-        //             "street1" => $userData['adresse'],
-        //             "city " => $userData['ville'],
-        //             "zip" => $userData['code_postal'],
-        //             "phone " => $userData['phone']
+        //             "name" => $userData->getName(),
+        //             "street1" => $userData->getAdresse(),
+        //             "city " => $userData->getVille(),
+        //             "zip" => $userData->getCodePostal(),
+        //             "phone " => $userData->getPhone()
         //     ],
         //     "parcel" => [
         //         "length" => $lenght,
@@ -70,29 +94,9 @@ class FDPController extends AbstractController {
         //         "weight" => $weight
         //     ],
         // ]);
+        // $shipment->buy($shipment->lowest_rate());
+        // $shipment->buy($shipment->lowest_rate(array('USPS'), array('First')));
 
-        $shipment = ([
-            "from_address" => [
-                "company" => "Ecommerce",
-                "street1" => "55 avenue de la Grande Armée",
-                "city" => "Paris",
-                "zip" => "75116",
-                "phone" => "0155312897"
-            ],
-            "to_address" => [
-                    "name" => $userData->getName(),
-                    "street1" => $userData->getAdresse(),
-                    "city " => $userData->getVille(),
-                    "zip" => $userData->getCodePostal(),
-                    "phone " => $userData->getPhone()
-            ],
-            "parcel" => [
-                "length" => $lenght,
-                "width"  => $width,
-                "height" => $height,
-                "weight" => $weight
-            ],
-        ]);
         return $this->json($shipment, 200,[],['groups' => 'groupe:get']);
 }
 }
