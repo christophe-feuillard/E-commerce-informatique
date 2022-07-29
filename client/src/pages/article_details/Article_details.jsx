@@ -14,7 +14,7 @@ const ArticleDetails = (props) => {
     console.log(articles);
 
     const fetchData = () => {
-      axios.get(`https://127.0.0.1:8000/api/article/${articlesParams}`)
+      axios.get(`http://127.0.0.1:8000/api/article/${articlesParams}`)
       .then ((res) => {
         // console.log(res.data)
         setArticles(res.data)

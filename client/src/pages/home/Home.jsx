@@ -26,7 +26,7 @@ const Home = () => {
 
     useEffect(() => {
       const callAPI = () => {
-        axios.get('https://127.0.0.1:8000/api/articles')
+        axios.get('http://127.0.0.1:8000/api/articles')
           .then(res => {
             setData(res.data);
           })
@@ -80,7 +80,7 @@ const Home = () => {
   
         let config = {
           method: 'get',
-          url: `https://localhost:8000/api/categories/${categorie}`,
+          url: `http://localhost:8000/api/categories/${categorie}`,
           headers: { 'Content-Type': 'application/json' },
         };
         
