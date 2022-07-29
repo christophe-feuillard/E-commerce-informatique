@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router'
 import Button from '../../components/button/Button'
 import '../../components/card/Card.css'
+import '../../components/card/Card.css'
 
 function Categories() {
    
@@ -10,8 +11,8 @@ function Categories() {
     const [catData, setCatData] = useState([])
     const navigate = useNavigate()
 
-    // console.log(catId, 'retrieved id');
-    // console.log(catData, 'product from the cat');
+    console.log(catId, 'retrieved id');
+    console.log(catData, 'product from the cat');
 
     useEffect(() => {
 
@@ -23,7 +24,7 @@ function Categories() {
         getIdFromUrl();
 
         const callAPI = (id) => {
-            axios.get(`/api/categories/${id}`)
+            axios.get(`http://127.0.0.1:8000/api/categories/${id}`)
             .then(res => {
                 setCatData(res.data.articles);
             })
@@ -59,18 +60,16 @@ function CatCard(props) {
     return(
         <div className="main">
             <div className="picture">
-                <img src={props.image} alt="produit" />
+                <img className='imgCard' src={props.image} alt="produit" />
             </div>
 
             <div className="contentCard">
-                <h3>{props.title}</h3>
-                <div className="divCharacteristic">
-                    <p>{props.caracteristic}</p>
+                <p className='titleCard'>{props.title}</p>
+                <div className='divCharacteristic'>
+                    <p className='characteristic'>{props.caracteristic}</p>
+                    <p className='size'>{props.size}</p>
                 </div>
                 <p className="price">{props.price}</p>
-                <div className='divIconsCard'>
-                    <Button value={'Ajouter au panier'} handelclick={''}/>
-                </div>
             </div>
         </div>
     )

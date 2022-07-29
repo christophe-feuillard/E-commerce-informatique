@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './Card.css';
-import {MdOutlineLocalGroceryStore} from "react-icons/md";
 import {AiOutlineHeart} from "react-icons/ai";
 
 const Card = ({imgSrc,title,characteristic,price,size,handleckick,colorStore,clickStore}) => {
@@ -25,7 +24,6 @@ const Card = ({imgSrc,title,characteristic,price,size,handleckick,colorStore,cli
             </div>
             <p className='price'>{price}</p>
             <div className='divIconsCard'>
-                {/* <MdOutlineLocalGroceryStore className='iconCard' color={color} onClick={clickStore}/> */}
                 <p className='addPanier' onClick={clickStore}>Ajouter au panier</p>
                 <div className='fav'>
                 <AiOutlineHeart className='iconCard'/>

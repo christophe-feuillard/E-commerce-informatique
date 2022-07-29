@@ -12,7 +12,7 @@ export default function CatDropDown() {
 
     useEffect(() => {
         const callAPI = () => {
-          axios.get('/api/categories')
+          axios.get('http://127.0.0.1:8000/api/categories')
           .then(res => {
     
               setCatData(res.data);

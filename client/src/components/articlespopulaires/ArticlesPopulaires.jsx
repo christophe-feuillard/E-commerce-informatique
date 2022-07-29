@@ -17,7 +17,7 @@ const Card = () => {
 
   useEffect(() => {
     const callAPI = () => {
-      axios.get('https://127.0.0.1:8000/api/articles')
+      axios.get('http://127.0.0.1:8000/api/articles')
         .then(res => {
           setData(res.data);
         })

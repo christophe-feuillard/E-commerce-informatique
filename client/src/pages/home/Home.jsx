@@ -1,4 +1,5 @@
 import React, {useEffect,useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import Header from "../../components/header/Header";
 import Card from '../../components/card/Card';
 import Modal from '../../components/modal/Modal';
@@ -11,6 +12,8 @@ import CatDropDown from '../../components/drop-down-cat/CatDropDown';
 
 const Home = () => {
 
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalSmall, setOpenModalSmall] = useState(false);
@@ -22,11 +25,10 @@ const Home = () => {
   const [total,setTotal] = useState(0);
   const [articleNumber,setArticleNumber] = useState(0);
   const [isLoading,setIsLoading] = useState(false);
-  const [categorie,setCategorie] = useState(0);
 
     useEffect(() => {
       const callAPI = () => {
-        axios.get('https://127.0.0.1:8000/api/articles')
+        axios.get('http://127.0.0.1:8000/api/articles')
           .then(res => {
             setData(res.data);
           })
@@ -76,7 +78,7 @@ const Home = () => {
   
   return (
     <>
-      <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} searchClick={ ()=> searchCategorie()}/>
+      <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} />
       <CatDropDown/>
       <div className='homeContainer'>
             <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
