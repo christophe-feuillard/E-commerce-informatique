@@ -19,26 +19,31 @@ const NavItems = ({storeClick,number}) => {
     }
     if(isLogged === true){
         return(
-            <div className='login'>
-            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
-            <span>{number}</span>
+            <div className='login1'>
             <div class="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
                 <div class="dropdown-content">
                     <a onClick={()=> navigate("/account")}>Mon Compte</a>
                     <a onClick={()=>Deconnexion()}>Deconnexion</a>
                 </div>
+            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
+            <span>{number}</span>
             </div>
             </div>
+   
         )
     }
     else{
         return(
             <div className='login'>
+            <div className='register'>
+            <p className='inscription' onClick={()=>navigate('/register')}>Inscription</p>
+            <p className='connexion' onClick={()=>navigate('/login')}>Connexion</p>
+            </div>
+            <div className='card'>
             <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
             <span>{number}</span>
-            <h3 onClick={()=>navigate('/register')}>Inscription</h3>
-            <h3 onClick={()=>navigate('/login')}>Connexion</h3>
+            </div>
         </div>
         )
     }

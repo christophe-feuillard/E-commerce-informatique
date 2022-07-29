@@ -3,7 +3,7 @@ import './Card.css';
 import {MdOutlineLocalGroceryStore} from "react-icons/md";
 import {AiOutlineHeart} from "react-icons/ai";
 
-const Card = ({imgSrc,title,characteristic,price,handleckick,colorStore,clickStore}) => {
+const Card = ({imgSrc,title,characteristic,price,size,handleckick,colorStore,clickStore}) => {
   const [color,setColor] = useState("white");
 
   useEffect(() => {
@@ -13,19 +13,25 @@ const Card = ({imgSrc,title,characteristic,price,handleckick,colorStore,clickSto
   
   return (
     <div className='main'>
+
         <div className="picture" onClick={handleckick}>
-            <img src={imgSrc} alt="image du produit"/>
+            <img className='imgCard' src={imgSrc} alt="image du produit"/>
         </div>
         <div className="contentCard">
-            <h3 onClick={handleckick}>{title}</h3>
+            <p className='titleCard' onClick={handleckick}>{title}</p>
             <div className='divCharacteristic'>
               <p className='characteristic'>{characteristic}</p>
+              <p className='size'>{size}</p>
             </div>
             <p className='price'>{price}</p>
             <div className='divIconsCard'>
-                <MdOutlineLocalGroceryStore className='iconCard' color={color} onClick={clickStore}/>
+                {/* <MdOutlineLocalGroceryStore className='iconCard' color={color} onClick={clickStore}/> */}
+                <p className='addPanier' onClick={clickStore}>Ajouter au panier</p>
+                <div className='fav'>
                 <AiOutlineHeart className='iconCard'/>
+                </div>
             </div>
+
         </div>
     </div>
   )

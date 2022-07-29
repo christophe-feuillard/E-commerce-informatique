@@ -1,10 +1,11 @@
-.loginMain{
+ .loginMain{
     background-image: url('../../asset/pc.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
 }
+
 .loginContainer{
     position: fixed;
     top: 10%;
@@ -25,10 +26,10 @@
     flex-direction: column;
     align-items: center;
 }
-.loginFormulaire input{
+ .loginFormulaire input{
     margin-top: 3vh;
     margin-bottom: 2vh;
-}
+} 
 .loginFormulaire .connect{
     cursor: pointer;
     color: #eb4f29;

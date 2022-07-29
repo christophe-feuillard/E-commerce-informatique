@@ -1,7 +1,35 @@
 .homeContainer{
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+}   
+.div_articlepopulaire {
+    display: flex;
+    flex-direction: row;
 }
 
+.hr{
+    background-color: black;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+}
+/* .div_toutlesarticles {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-top: 1px solid white;
+    width: 100%;
+} */
+
+.div_toutlesarticles {
+    /* display: flex; */
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    border-top: 1px solid white;
+    width: 100%;
+}

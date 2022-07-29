@@ -1,8 +1,11 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 
-const DataFDP = () => {
+const Key = 'EZAK43459e0123eb4be6b9f321fa4acb658f2IWUOgc56Vzsd0I3EVb2Gg'
+const Token = localStorage.getItem("token");
 
+
+const Data = () => {
     const [dataUser, setdataUser] = useState([]);
     const [dataAllPanier, setdataAllPanier] = useState([]);
     const Token = localStorage.getItem("token");
@@ -41,11 +44,12 @@ const DataFDP = () => {
             await axios.get('/api/user/role', {
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + Token
+                    'Authorization': `Bearer ${Token}`
                 }
             })
             .then(res => {
                 setdataUser(res.data);
+                console.log(res.data)
             })
             .catch(err => {
             console.log(err);
@@ -66,11 +70,6 @@ const DataFDP = () => {
         }
         callAPI();
     }, []);
-
-    console.log(shipment);
-    // console.log(dataUser, 'dataUser')
-    // console.log(dataAllPanier, 'dataAllPanier')
-    // console.log(dataPanier, 'dataPanier')
 }
 
-export default DataFDP;
+export default Data;

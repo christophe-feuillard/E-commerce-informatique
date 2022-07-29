@@ -8,6 +8,7 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
     if(!open) return null;
     else return (
         <div className="overlaySmall" onClick={onclose}>
+            <div className='grandContainer' >
             <div className="modelContainerSmall">
                 <table>
                     <tbody>
@@ -24,20 +25,21 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
                                 <td>{item.prix} €</td>
                             </tr>
                         ))}
-                        <p className='total'>Total {total}€</p>
                     </tbody>
                 </table>
+                        <p className='total'>Cela vous fera un total de {total}€</p>
                     {log ? 
                         <div className='buttonModalSmall'>
-                            <button className='buttonBuy'>Achater</button>
+                            <button className='buttonBuy' onClick={()=>navigate("/frais")} >Acheter</button>
                         </div>
                         :
                         <div className='buttonModalSmall'>
-                            <button className='buttonBuy'>Continuez pour l'achat</button>
-                            <button className='buttonBuy' onClick={()=>navigate("/login")}>se connecter pour l'achat</button>
+                            <button className='buttonBuy'  onClick={()=>navigate("/frais")}>Continuez pour l'achat</button>
+                            <button className='buttonBuy' onClick={()=>navigate("/login")}>Se connecter pour l'achat</button>
                         </div>
                     }
             </div>
+                    </div>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {useNavigate,Navigate} from 'react-router-dom';
-import Input from '../../components/input/Input';
+import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
 import axios from 'axios';
 import './Register.css';
@@ -15,6 +15,7 @@ const Register = () => {
     const [ville, setVille] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [codePostal, setCodePostal] = useState('');
     const [error, setError] = useState('');
     const [islogin, setIslogin] = useState(false);
 
@@ -29,6 +30,9 @@ const Register = () => {
     },
     {
         type: 'text',placeholder: 'Ville',value: ville,change: (e) => setVille(e.target.value)
+    },
+    {
+        type: 'text',placeholder: 'Code Postal',value: codePostal,change: (e) => setCodePostal(e.target.value)
     },
     {
         type: 'text',placeholder: 'Numero de telephone',value: phone,change: (e) => setPhone(e.target.value)
@@ -67,12 +71,13 @@ const Register = () => {
             "email": email,
             "password": password,
             "ville": ville,
+            "codepostal": codePostal,
             "phone": phone
         });
           
           var config = {
             method: 'post',
-            url: '/account/register',
+            url: 'https://127.0.0.1:8000/account/register',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -99,10 +104,10 @@ const Register = () => {
             {error && <p className='error'>{error}</p>}
             <div className='registerFormulaire'>
                 {inputData.map((input) => (
-                    <Input type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
+                    <InputLogin className='inputRegister' type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                 ))}
-                <Button value={"S'inscrire"} handelclick={()=>verifyValue()}/>
-                <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")} >Connectez-vous</span></p>
+                <Button className='buttonRegister' value={"S'inscrire"} handelclick={()=>verifyValue()}/>
+                <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")}>Connectez-vous</span></p>
             </div>
         </div>
     </div>

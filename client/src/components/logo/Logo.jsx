@@ -6,7 +6,7 @@ const Logo = () => {
     <div className='logo'>
         <h2>Setup Dream</h2>
         <GiComputerFan className="icon" />
-  </div>
+    </div>
   )
 }
 

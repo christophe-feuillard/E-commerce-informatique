@@ -41,29 +41,34 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
-    private $stock;
+    private ?int $visit = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    #[Groups("groupe:get")]
-    private $width;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
+    private Collection $users;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
-    private $lenght;
+    private ?int $weight = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
-    private $height;
+    private ?int $length = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
-    private $weight;
+    private ?int $height = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $width = null;
 
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
+        $this->user = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,38 +160,65 @@ class Article
         return $this;
     }
 
-    public function getStock(): ?int
+    public function getVisit(): ?int
     {
-        return $this->stock;
+        return $this->visit;
     }
 
-    public function setStock(?int $stock): self
+    public function setVisit(?int $visit): self
     {
-        $this->stock = $stock;
+        $this->visit = $visit;
 
         return $this;
     }
 
-    public function getWidth(): ?int
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
     {
-        return $this->width;
+        return $this->users;
     }
 
-    public function setWidth(?int $width): self
+    public function addUser(User $user): self
     {
-        $this->width = $width;
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addFavori($this);
+        }
 
         return $this;
     }
 
-    public function getLenght(): ?int
+    public function removeUser(User $user): self
     {
-        return $this->lenght;
+        if ($this->users->removeElement($user)) {
+            $user->removeFavori($this);
+        }
+
+        return $this;
     }
 
-    public function setLenght(?int $lenght): self
+    public function getWeight(): ?int
     {
-        $this->lenght = $lenght;
+        return $this->weight;
+    }
+
+    public function setWeight(?int $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getLength(): ?int
+    {
+        return $this->length;
+    }
+
+    public function setLength(?int $length): self
+    {
+        $this->length = $length;
 
         return $this;
     }
@@ -203,14 +235,14 @@ class Article
         return $this;
     }
 
-    public function getWeight(): ?int
+    public function getWidth(): ?int
     {
-        return $this->weight;
+        return $this->width;
     }
 
-    public function setWeight(?int $weight): self
+    public function setWidth(?int $width): self
     {
-        $this->weight = $weight;
+        $this->width = $width;
 
         return $this;
     }
