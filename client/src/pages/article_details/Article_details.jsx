@@ -71,6 +71,7 @@ const ArticleDetails = (props) => {
                 <li> Hauteur : {articles.height} cm</li>
               </ul>
               <p>Il reste {articles.stock} en stock</p>
+
               <p>
                 {articles.description}
               </p>

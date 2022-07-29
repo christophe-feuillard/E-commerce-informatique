@@ -45,6 +45,10 @@ class Article
     #[Groups("groupe:get")]
     private ?int $visit = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups("groupe:get")]
+    private $stock;
+
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
     private Collection $users;
 
@@ -64,8 +68,6 @@ class Article
     #[Groups("groupe:get")]
     private ?int $width = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $stock = null;
 
     public function __construct()
     {

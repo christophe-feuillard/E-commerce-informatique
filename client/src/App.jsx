@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import Account from './pages/account/Account';
 import Categories from './pages/categories/Categories';
 import Frais from "./components/fdp/frais"
+import Favoris from './pages/favoris/Favoris';
 import ArticleDetails from "./pages/article_details/Article_details";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route path="*" element={<Landing/>}/>
       <Route path='/account' element={<Account/>}/>
       <Route path='/categories/:id' element={<Categories/>}/>
+      <Route path='/favoris' element={<Favoris/>}/>
       <Route path='/frais' element={<Frais/>}/>
       <Route path="/article_details" element={<ArticleDetails/>}/>
       <Route path="/article_details/:articlesParams" element={<ArticleDetails srcImage=""/>}/>

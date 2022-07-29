@@ -2,13 +2,16 @@
 .overlaySmall{
     width: 100%;
     z-index: 10;
+   
 }
 .grandContainer{
    position: relative;
 }
 .modelContainerSmall{
     border-top: 1px solid white ;
-    background-color: rgba(194, 175, 175, 0.636);
+    background-color: rgb(220, 208, 208);
+    max-height: 500px;
+    overflow:auto;
     width: 50%;
     position: absolute;
     top: 0;

@@ -16,7 +16,11 @@
     left: 25%;
     width: 50%;
 }
+.firstLine{
+    display: flex;
+    width: 20%;
 
+}
 .registerContainer h2{
     text-align: center;
     color: white;

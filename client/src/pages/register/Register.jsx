@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {useNavigate,Navigate} from 'react-router-dom';
 import InputLogin from '../../components/input/InputLogin';
+import InputRegister from '../../components/input/InputRegister';
 import Button from "../../components/button/Button";
 import axios from 'axios';
 import './Register.css';
@@ -19,12 +20,15 @@ const Register = () => {
     const [error, setError] = useState('');
     const [islogin, setIslogin] = useState(false);
 
-    const inputData = [{
+
+    const inputTop = [{
         type: 'text',placeholder: 'Name',value: name,change: (e) => setName(e.target.value)
     },
     {
         type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
-    },
+    }
+    ]
+    const inputData = [
     {
         type: 'text',placeholder: 'Address',value: address,change: (e) => setAddress(e.target.value)
     },
@@ -103,6 +107,13 @@ const Register = () => {
             <h2>S'inscrire</h2>
             {error && <p className='error'>{error}</p>}
             <div className='registerFormulaire'>
+
+          <div className='firstLine' >
+            {inputTop.map((input) => (
+                <InputRegister className='inputRegister' type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+                ))}
+                </div>
+
                 {inputData.map((input) => (
                     <InputLogin className='inputRegister' type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                 ))}
