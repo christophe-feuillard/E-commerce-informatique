@@ -40,10 +40,10 @@ const Card = () => {
     spaceBetween={0}
     slidesPerView={2}
     loop={true}
-    autoplay={{
-        delay: 5000,
-        disableOnInteraction: false
-    }}
+    // autoplay={{
+    //     delay: 5000,
+    //     disableOnInteraction: false
+    // }}
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true }}
     >

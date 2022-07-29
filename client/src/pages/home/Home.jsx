@@ -73,7 +73,10 @@ const Home = () => {
     }
 
     const favoris = (item) => {
-     
+      // localStorage.key
+     if (item.id ) {
+
+     }
       setFav((fav) => [...fav, item])
     }
   
@@ -104,12 +107,12 @@ const Home = () => {
       }
      }
      useEffect(()=> localStorage.setItem("favoris", JSON.stringify(fav)),[fav])
+
   return (
     <>
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
       <div className='homeContainer'>
             <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
-            {/* <Favoris  /> */}
            <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
