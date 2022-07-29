@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FDPController extends AbstractController {
     
-    #[Route('/api/FDP', name: 'app_api_FDP')]
+    #[Route('/api/user/FDP', name: 'app_api_FDP')]
         public function dataFDP(SessionInterface $session, ArticleRepository $articleRepository) {
-            $userData[] = $this->getUser();
+            $userData = $this->getUser();
 
             $panier = $session->get('panier', []);      // Recupere le panier de la sessiona actuel
             $panierData = [];
@@ -47,9 +47,6 @@ class FDPController extends AbstractController {
                     $weight+= $totalWeight;
                 }
             }
-        // var_dump($panierData, 'parcel');
-        // var_dump($panier);
-        // var_dump($userData, 'userData');
 
         // $shipment = \EasyPost\Shipment::create([
         //     "from_address" => [
@@ -82,13 +79,13 @@ class FDPController extends AbstractController {
                 "zip" => "75116",
                 "phone" => "0155312897"
             ],
-            // "to_address" => [
-            //         "name" => $userData['name'],
-            //         "street1" => $userData['adresse'],
-            //         "city " => $userData['ville'],
-            //         "zip" => $userData['code_postal'],
-            //         "phone " => $userData['phone']
-            // ],
+            "to_address" => [
+                    "name" => $userData->getName(),
+                    "street1" => $userData->getAdresse(),
+                    "city " => $userData->getVille(),
+                    "zip" => $userData->getCodePostal(),
+                    "phone " => $userData->getPhone()
+            ],
             "parcel" => [
                 "length" => $lenght,
                 "width"  => $width,
@@ -96,9 +93,6 @@ class FDPController extends AbstractController {
                 "weight" => $weight
             ],
         ]);
-        var_dump($shipment);
-        // return $this->json($userData, 200,[],['groups' => 'groupe:get']);
-        return $this->json(['item' => $panierData, 'width' => $width, 'lenght' => $lenght, 'height' => $height, 'weight' => $weight], 200,[],['groups' => 'groupe:get']);
-    // }
+        return $this->json($shipment, 200,[],['groups' => 'groupe:get']);
 }
 }
