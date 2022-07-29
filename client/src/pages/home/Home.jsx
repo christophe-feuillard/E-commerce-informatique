@@ -2,12 +2,10 @@ import React, {useEffect,useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Header from "../../components/header/Header";
 import Card from '../../components/card/Card';
-import Modal from '../../components/modal/Modal';
 import ModalSmall from '../../components/modalSmall/ModalSmall';
 import axios from 'axios';
 import ArticlesPopulaires from '../../components/articlespopulaires/ArticlesPopulaires'
 import "./Home.css";
-import OutOfStock from '../../components/out_of_stock/OutOfStock';
 import CatDropDown from '../../components/drop-down-cat/CatDropDown';
 
 const Home = () => {
@@ -15,11 +13,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
   const [openModalSmall, setOpenModalSmall] = useState(false);
-  const [dataModal, setDataModal] = useState({});
   const [search,setSearch] = useState("");
-  // const [disableModal, setDisableModal] = useState(0); // pour le out of stock
   const [colorStore,setColorStore] = useState([]);
   const [store,setStore] = useState([]);
   const [total,setTotal] = useState(0);
@@ -52,10 +47,6 @@ const Home = () => {
       setArticleNumber(store.length);
     },[store]);
   
-    const showMore = (item) => {
-      setDataModal(item);
-      setOpenModal(true);
-    }
   
     const addStore = (item,key) => {
   
@@ -85,23 +76,7 @@ const Home = () => {
            <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
-            </div> 
-
-            {/* Gestion rupture de stock */}
-{/* 
-      {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item) => (
-        <Card key={item.id} imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
-          handleckick={() => { showMore(item);}}/>
-      ))} */}
-        
-        {/* <OutOfStock/> */}
-
-      {/* {disableModal === 0 ? (
-      <Modal onclose={()=>setOpenModal(false)} />
-      ) : (
-      <Modal open={openModal} data={dataModal} onclose={()=>setOpenModal(false)} 
-        buyclick={()=>{alert("Vous avez acheté un article")} }/>
-      )} */}
+      </div> 
 
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
           <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique} size={item.weight + ' ' + item.height+ ' ' + item.length + ' ' + item.width}
@@ -110,35 +85,8 @@ const Home = () => {
             clickStore={()=>{addStore(item,key)}}
           />
         ))}
-      {/* <Modal open={openModal} data={dataModal} onclose={()=>setOpenModal(false)} 
-         buyclick={()=>{alert("Vous avez acheté un article")} }
-        smallModal={false}
-      /> */}
       </div>
   </>
-  )}
-  
-    
-  {/* // return (
-  //   <>
-  //     <Header search={search} change={(e)=>setSearch(e.target.value)}/>
-  
-  //     <div className='homeContainer'>
-  
-  //      <ArticlesPopulaires/>    
-  
-  //       <div className='div_toutlesarticles'>
-  //       {data.map((item,key) => (
-  //         <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique}
-  //           handleckick={()=> navigate("/article_details/"+item.id)} 
-  //           // handleckick={()=> countItem(item.id)}
-  //         />
-  //       ))}
-  //       </div>
-  
-  //     </div>
-  //   </>
-  // ) */}
-  
-  
-  export default Home;
+)}
+
+export default Home;
