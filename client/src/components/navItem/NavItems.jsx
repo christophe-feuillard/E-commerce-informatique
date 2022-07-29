@@ -1,10 +1,11 @@
 import React, {useEffect,useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AiOutlineUser} from "react-icons/ai";
-import {MdOutlineLocalGroceryStore} from "react-icons/md";
+import {MdOutlineLocalGroceryStore,MdOutlineFavorite} from "react-icons/md";
+
 import './NavItems.css';
 
-const NavItems = ({storeClick,number}) => {
+const NavItems = ({storeClick,number,  }) => {
     const navigate = useNavigate();
     const [isLogged, setIsLogged] = useState(false);
     
@@ -19,6 +20,8 @@ const NavItems = ({storeClick,number}) => {
     }
     if(isLogged === true){
         return(
+            <div>
+
             <div className='login1'>
             <div class="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
@@ -26,24 +29,31 @@ const NavItems = ({storeClick,number}) => {
                     <a onClick={()=> navigate("/account")}>Mon Compte</a>
                     <a onClick={()=>Deconnexion()}>Deconnexion</a>
                 </div>
+            </div>
+            </div>
+            <MdOutlineFavorite onClick={() => navigate("/favoris")}/>
             <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
             <span>{number}</span>
-            </div>
             </div>
    
         )
     }
     else{
         return(
+            <div>
             <div className='login'>
             <div className='register'>
             <p className='inscription' onClick={()=>navigate('/register')}>Inscription</p>
             <p className='connexion' onClick={()=>navigate('/login')}>Connexion</p>
             </div>
             <div className='card'>
+            </div>
+        </div>
+                <div className='divFav'>
+            <MdOutlineFavorite className='Favoris' onClick={() => navigate("/favoris")}/>
+                </div>
             <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
             <span>{number}</span>
-            </div>
         </div>
         )
     }

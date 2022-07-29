@@ -14,7 +14,7 @@ const ArticleDetails = (props) => {
     console.log(articles);
 
     const fetchData = () => {
-      axios.get(`http://127.0.0.1:8000/api/article/${articlesParams}`)
+      axios.get(`/api/article/${articlesParams}`)
       .then ((res) => {
         // console.log(res.data)
         setArticles(res.data)
@@ -71,6 +71,7 @@ const ArticleDetails = (props) => {
                 <li> Hauteur : {articles.height} cm</li>
               </ul>
               <p>Il reste {articles.stock} en stock</p>
+
               <p>
                 {articles.description}
               </p>

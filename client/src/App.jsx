@@ -6,6 +6,7 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Account from './pages/account/Account';
 import Frais from "./components/fdp/frais"
+import Favoris from './pages/favoris/Favoris';
 import ArticleDetails from "./pages/article_details/Article_details";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<Landing/>}/>
       <Route path='/account' element={<Account/>}/>
+      <Route path='/favoris' element={<Favoris/>}/>
       <Route path='/frais' element={<Frais/>}/>
       <Route path="/article_details" element={<ArticleDetails/>}/>
       <Route path="/article_details/:articlesParams" element={<ArticleDetails srcImage=""/>}/>
