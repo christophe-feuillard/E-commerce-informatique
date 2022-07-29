@@ -1,10 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
-// import '@easypost/api/src/easypost';
 
 const DataFDP = () => {
-    // const Easypost = require('@easypost/api');
-    // const api = new Easypost(process.env.EASYPOST_API_KEY);
 
     const [dataUser, setdataUser] = useState([]);
     const [dataAllPanier, setdataAllPanier] = useState([]);
@@ -12,7 +9,7 @@ const DataFDP = () => {
 
     const fromAdress = ({
         company : 'Ecommerce',
-        street1 : '55 avenue de la Grande Armée ',
+        street1 : '55 avenue de la Grande Armée',
         city : 'Paris',
         zip : '75116',
         phone : '0155312897'
@@ -71,7 +68,7 @@ const DataFDP = () => {
     }, []);
 
     console.log(shipment);
-    console.log(dataUser, 'dataUser')
+    // console.log(dataUser, 'dataUser')
     // console.log(dataAllPanier, 'dataAllPanier')
     // console.log(dataPanier, 'dataPanier')
 }
