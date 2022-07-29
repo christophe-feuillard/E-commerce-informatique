@@ -64,6 +64,9 @@ class Article
     #[Groups("groupe:get")]
     private ?int $width = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $stock = null;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -243,6 +246,18 @@ class Article
     public function setWidth(?int $width): self
     {
         $this->width = $width;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }
