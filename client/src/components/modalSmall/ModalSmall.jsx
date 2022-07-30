@@ -6,8 +6,27 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
     const navigate = useNavigate();
 
     if(!open) return null;
-    else return (
-        <div className="overlaySmall" onClick={onclose}>
+    else 
+    if (total == 0) {
+        return(
+            <div className="overlaySmall" onClick={onclose}>
+        <div className='grandContainer'>
+            <div className='modelContainerSmallArticle'>
+               <p className='PasArticle'>Vous n'avez aucun article dans votre panier</p>
+                <div className='voirArticles'>
+                    <a className='LinkVoirArticles' href="#voirArticles">
+                    Voire les articles
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    
+        )
+    }else {
+        
+        return (
+            <div className="overlaySmall" onClick={onclose}>
             <div className='grandContainer' >
             <div className="modelContainerSmall">
                 <table>
@@ -30,11 +49,11 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
                         <p className='total'>Cela vous fera un total de {total}€</p>
                     {log ? 
                         <div className='buttonModalSmall'>
-                            <button className='buttonBuy' onClick={()=>navigate("/frais")} >Acheter</button>
+                            <button className='buttonBuy' onClick={()=>navigate("/frais")}>Acheter</button>
                         </div>
                         :
                         <div className='buttonModalSmall'>
-                            <button className='buttonBuy'  onClick={()=>navigate("/frais")}>Continuez pour l'achat</button>
+                            <button className='buttonBuy'  onClick={()=>navigate("/commande")}>Continuez pour l'achat</button>
                             <button className='buttonBuy' onClick={()=>navigate("/login")}>Se connecter pour l'achat</button>
                         </div>
                     }
@@ -42,5 +61,6 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
                     </div>
         </div>
     );
+}
 }
 export default ModalSmall

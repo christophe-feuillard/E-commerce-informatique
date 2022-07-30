@@ -32,7 +32,7 @@ import {useNavigate} from 'react-router-dom';
 if (Favoris.length == 0) {
   return(
     <div>
-         <p className='TextFavoris' >Mes articles favoris</p>
+         <p className='TextFavoris'>Mes articles favoris</p>
          <div className='containerNoArticle'>
       <p className='NoArticle'>Vous avez 0 article en favoris</p>
       <div className='ShowArticleHome' onClick={()=> navigate("/home")}>

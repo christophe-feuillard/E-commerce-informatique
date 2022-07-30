@@ -2,8 +2,10 @@ import React, {useState,useEffect} from 'react';
 import {useNavigate,Navigate} from 'react-router-dom';
 import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
+
 import axios from "axios";
 import './Login.css';
+import { AiFillWarning } from 'react-icons/ai';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -68,15 +70,18 @@ const Login = () => {
   return (
     <div className='loginMain'>
         <div className='loginContainer'>
-            <h2>Se connecter</h2>
-            {error && <p className='error'>{error}</p>}
+          <div className='DivTextLogin'>
+            <p className='TextLogin'>Se connecter</p>
+          </div>
+       
             <div className='loginFormulaire'>
                 {inputData.map((input) => (
                     <InputLogin className='inputLogin' type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
                 ))}
                 <Button value={"Se connecter"} handelclick={()=>verifyValue()}/>
-                <p>Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>
+                <p className='Already' >Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>
             </div>
+        {error && <p className='error'> {error}</p>}
         </div>
     </div>
   )

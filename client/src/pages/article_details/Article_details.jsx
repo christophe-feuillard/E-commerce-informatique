@@ -56,7 +56,7 @@ const ArticleDetails = (props) => {
     <main>
       <div className="container">
         <div>
-
+          
           <div className="img_article_container">
            <img className="img_article" src={articles.photo} alt="photo" />
           </div>

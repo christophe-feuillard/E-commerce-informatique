@@ -40,15 +40,15 @@ const Card = () => {
     spaceBetween={0}
     slidesPerView={2}
     loop={true}
-    // autoplay={{
-    //     delay: 5000,
-    //     disableOnInteraction: false
-    // }}
+    autoplay={{
+        delay: 5000,
+        disableOnInteraction: false
+    }}
     pagination={{ clickable: true }}
     scrollbar={{ draggable: true }}
     >
     {sorted.map((item,key) => ( key < 5 &&
-      <SwiperSlide>
+      <SwiperSlide >
         <div onClick={() => navigate("/article_details/"+item.id)} className='cardCarou'>
           <img src={item.photo} alt="image du produit"/>
           <p className='prixCard'>{item.prix} €</p>
@@ -65,5 +65,4 @@ const Card = () => {
 
   )
 }
-
 export default Card

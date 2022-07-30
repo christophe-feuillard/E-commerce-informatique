@@ -13,7 +13,7 @@ const Header = ({search,change,storeClick,articleNumber,categorie,searchClick}) 
 
         <div className='search'>
             <InputSearch placeholder={"Entrez votre recherche ici"} type={"text"} value={search} change={change}/>
-            <Button value={"chercher"} handelclick={searchClick}/>
+            {/* <Button value={"chercher"} handelclick={searchClick}/> */}
 
         </div>
         <NavItems storeClick={storeClick} number={articleNumber}/>

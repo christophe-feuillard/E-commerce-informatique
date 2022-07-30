@@ -20,18 +20,18 @@ const NavItems = ({storeClick,number,  }) => {
     }
     if(isLogged === true){
         return(
-            <div>
-
+            <div className='loginFlex'>
             <div className='login1'>
             <div class="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
                 <div class="dropdown-content">
-                    <a onClick={()=> navigate("/account")}>Mon Compte</a>
-                    <a onClick={()=>Deconnexion()}>Deconnexion</a>
+                    <a className='textLogin' onClick={()=> navigate("/account")}>Mon Compte</a>
+                    &#124;
+                    <a className='textLogin' onClick={()=>Deconnexion()}>Deconnexion</a>
                 </div>
             </div>
             </div>
-            <MdOutlineFavorite onClick={() => navigate("/favoris")}/>
+            <MdOutlineFavorite className='Favoris' onClick={() => navigate("/favoris")}/>
             <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
             <span>{number}</span>
             </div>
@@ -40,18 +40,19 @@ const NavItems = ({storeClick,number,  }) => {
     }
     else{
         return(
-            <div>
+            <div className='loginFlex'>
             <div className='login'>
-            <div className='register'>
-            <p className='inscription' onClick={()=>navigate('/register')}>Inscription</p>
-            <p className='connexion' onClick={()=>navigate('/login')}>Connexion</p>
-            </div>
-            <div className='card'>
+            <div className='dropdown'>
+             <div>
+            <a className='textLogin' onClick={()=>navigate('/register')}>Inscription</a>
+            &#124;
+            <a className='textLogin' onClick={()=>navigate('/login')}>Connexion</a>
+                </div>   
             </div>
         </div>
-                <div className='divFav'>
+          
             <MdOutlineFavorite className='Favoris' onClick={() => navigate("/favoris")}/>
-                </div>
+        
             <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
             <span>{number}</span>
         </div>
