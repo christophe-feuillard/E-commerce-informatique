@@ -6,6 +6,8 @@ import Button from "../../components/button/Button";
 import axios from 'axios';
 import Image from '../../asset/pc.jpg'
 import './Register.css';
+import { AiFillAmazonSquare } from 'react-icons/ai';
+
 
 const Register = () => {
 
