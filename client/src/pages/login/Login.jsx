@@ -19,7 +19,7 @@ const Login = () => {
         type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
     },
     {
-        type: 'password',placeholder: 'Mots de passe',value: password,change: (e) => setPassword(e.target.value)
+        type: 'password',placeholder: 'Mot de passe',value: password,change: (e) => setPassword(e.target.value)
     }];
 
     useEffect(() => {

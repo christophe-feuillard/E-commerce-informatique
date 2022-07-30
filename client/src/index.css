@@ -9,7 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 input::placeholder{
-  color: black;
+  color: rgba(255, 255, 255, 0.529);
 }
 
 code {
