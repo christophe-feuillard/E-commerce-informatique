@@ -50,6 +50,7 @@ class Article
     private $stock;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
+      #[Groups("groupe:get")]
     private Collection $users;
 
     #[ORM\Column(nullable: true)]

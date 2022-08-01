@@ -48,10 +48,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
     private $apiToken;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'users', fetch: 'EAGER')]
+    #[Groups("groupe:get")]
     private Collection $favoris;
 
     #[ORM\Column(length: 255)]
+      #[Groups("groupe:get")]
     private ?string $CodePostal = null;
 
     public function __construct()

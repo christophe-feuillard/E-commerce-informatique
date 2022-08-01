@@ -16,7 +16,7 @@ class Categorie
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', lenght: 255)]
     #[Groups("groupe:get")]
     private $titre;
 

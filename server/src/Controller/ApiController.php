@@ -132,4 +132,19 @@ class ApiController extends AbstractController
 
             return $this->redirectToRoute("app_api_panier");
         }
+
+        // #[Route('/api/user', name: 'app_user', methods:('GET'))]
+        // public function user(UserRepository $user)
+        // {
+        //     // dd($user);
+        //         return $this->json($user->findAll(), 200,[],['groups' => 'groupe:get']);
+        // }
+
+
+        // #[Route('/api/user/{id}', name: 'app_user', methods:('GET'))]
+        // public function userById(UserRepository $user, $id)
+        // {
+          
+        //         return $this->json($user->find($id), 200,[],['groups' => 'groupe:get']);
+        // }
 }
