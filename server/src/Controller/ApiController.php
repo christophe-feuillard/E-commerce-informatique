@@ -65,6 +65,8 @@ class ApiController extends AbstractController
         #[Route('/api/panier', name: 'app_api_panier')]  // ALL PANIER / AFFICHAGE
         public function allPanier(SessionInterface $session, ArticleRepository $articleRepository) {
             $panier = $session->get('panier', []);      // Recupere le panier de la sessiona actuel
+            // dd($session);
+     
 
             $panierData = [];
 
@@ -99,7 +101,7 @@ class ApiController extends AbstractController
                 }
             }
             return $this->json(['item' => $panierData, 'total' => $total, 'width' => $width, 'lenght' => $lenght, 'height' => $height, 'weight' => $weight], 200,[],['groups' => 'groupe:get']);
-            // dd($panierData);
+            dd($panierData);
         }
 
         #[Route('/api/panier/add/{id}', name: 'app_api_panier_add')]  // Route pour ajouter article dans le panier via Button Ajouter Panier

@@ -16,6 +16,7 @@ class FDPController extends AbstractController {
     #[Route('/api/user/FDP', name: 'app_api_FDP')]
         public function dataFDP(SessionInterface $session, ArticleRepository $articleRepository) {
             $userData = $this->getUser();
+            dd($userData);
 
             $panier = $session->get('panier', []);      //Récupère le panier de la session actuel
             $panierData = [];
