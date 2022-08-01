@@ -14,7 +14,7 @@
 }
 .inputLogin{
        
-    padding: 20px;
+    padding: 10px;
         border-radius: 4px;
         background-color: rgb(196, 196, 196);
         color: black;
@@ -22,28 +22,22 @@
         font-weight: bold;
         font-family: 'Raleway', sans-serif;
         outline: none;
-        margin: 10px 0;
+        margin-top: 10px;        
         border: none;
     }
 
 .inputRegister{
-    margin: 10px 0;
     color: black;
     border: none;
     font-size: large;
     font-weight: bold;
-    padding: 20px;
+    padding: 10px;
     width: 45%;
     border-radius: 4px;
     flex-direction: row;
     background-color: rgb(196, 196, 196);
     outline: none;
 }
-
-.inputLogin:last-child{
-    margin-bottom: 30px;
-}
-
 
 .inputCard::placeholder{
 color: black;
