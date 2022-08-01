@@ -7,6 +7,32 @@
 .grandContainer{
    position: relative;
 }
+
+.PasArticle{
+    padding: 50px 0;
+    color: black;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.LinkVoirArticles{
+    text-align: center;
+}
+
+
+.modelContainerSmallArticle{
+
+    border-top: 1px solid white ;
+    background-color: rgb(220, 208, 208);
+    overflow:auto;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    right: 0%;
+}
+
+
 .modelContainerSmall{
     border-top: 1px solid white ;
     background-color: rgb(220, 208, 208);
@@ -62,6 +88,7 @@
     cursor: pointer;
     border: none;
     background-color: white;
+    color: black;
 
 }
 
@@ -75,3 +102,16 @@
     margin-right: auto;
     justify-content: space-evenly;
 } 
+
+.voirArticles{
+    background-color: whitesmoke;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    width: 20%;
+    margin: 0 auto 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}

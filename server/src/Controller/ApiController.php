@@ -73,7 +73,7 @@ class ApiController extends AbstractController
                     'article' => $articleRepository->find($id),
                     'quantity' => $quantity
                 ];
-
+ 
                 $total = 0;     // Init le total du panier
                 
                 $width = 0;

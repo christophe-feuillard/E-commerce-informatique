@@ -6,12 +6,20 @@
 .dropdown{
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .dropdown > div > a, .dropdown > div > :nth-child(2){
-margin-right: 10px;
+margin:0 10px;
 }
 
+.divFav{
+  width: 20%;
+}
+.loginFlex{
+  display: flex;
+  align-items: center;
+}
 .card{
 display: flex;
 align-items: center;
@@ -19,12 +27,18 @@ margin: 0 10px ;
 font-size: 20px;
 }
 .Favoris{
-  font-size: 20px;
+  font-size: 30px;
+  margin: 0 10px;
+  color: brown;
+  cursor: pointer;
 }
 .login1{
   display: flex;
   align-items: center;
   flex-direction: row;
+}
+.textLogin, .iconNavItems{
+font-size: 20px;
 }
 
 .login{
@@ -33,6 +47,11 @@ font-size: 20px;
   align-items: center;
 }
 
+.storeNavItems{
+  font-size: 30px;
+  cursor: pointer;
+
+}
 .inscription{
   margin-right: 20px;
   cursor: pointer;

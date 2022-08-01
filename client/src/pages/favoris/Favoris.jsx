@@ -7,29 +7,32 @@ import {useNavigate} from 'react-router-dom';
  const Favoris = () => {
   const navigate = useNavigate();
   const [Favoris, setFavoris] = useState(JSON.parse(localStorage.getItem("favoris")));
+  
 
   const Trash = (id) => {
-    console.log("id cible",id)
- 
-    const filtered = Favoris.filter(item => {
-      if (item.id != id) {
-        return item.id 
-      }
-    });
-    localStorage.setItem('favoris2', JSON.stringify(filtered));
-    setFavoris(filtered)
-    
-    console.log(filtered)
+      console.log("id cible",id)
+   
+      const filtered = Favoris.filter(item => {
+        if (item.id != id) {
+          return item.id 
+        }
+      });
+      localStorage.setItem('favoris', JSON.stringify(filtered));
+      setFavoris(filtered)
+      
+      console.log(filtered)
   }
+  
 
-useEffect(() => {
-  console.log(Favoris.length)
-},[]);
+// useEffect(() => {
+//   console.log(Favoris.length)
+// }
+//   ,[]);
 
 if (Favoris.length == 0) {
   return(
     <div>
-         <p className='TextFavoris' >Mes articles favoris</p>
+         <p className='TextFavoris'>Mes articles favoris</p>
          <div className='containerNoArticle'>
       <p className='NoArticle'>Vous avez 0 article en favoris</p>
       <div className='ShowArticleHome' onClick={()=> navigate("/home")}>

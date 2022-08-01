@@ -4,7 +4,10 @@ import InputLogin from '../../components/input/InputLogin';
 import InputRegister from '../../components/input/InputRegister';
 import Button from "../../components/button/Button";
 import axios from 'axios';
+import Image from '../../asset/pc.jpg'
 import './Register.css';
+import { AiFillAmazonSquare } from 'react-icons/ai';
+
 
 const Register = () => {
 
@@ -103,23 +106,36 @@ const Register = () => {
     if(islogin) return <Navigate to="/home"/> ;
     return (
     <div className='registerMain'>
+        <div className='DivRegisterText'>
+            <p className='RegisterText' >Création d'un compte</p>
+        </div>
         <div className='registerContainer'>
-            <h2>S'inscrire</h2>
-            {error && <p className='error'>{error}</p>}
+          
+            <div className='displayFlexRegister'>
+                
+            <div className='ImgDivSide'>
+                <img className='ImgSide' src={Image} alt="" />
+            </div>
             <div className='registerFormulaire'>
-
-          <div className='firstLine' >
+                <div className='insideBackgroundWhite'>
+                <div className='inputDivRegister'>
             {inputTop.map((input) => (
-                <InputRegister className='inputRegister' type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+                <InputRegister type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                 ))}
                 </div>
-
+                <div className='inputDivLogin'>
                 {inputData.map((input) => (
-                    <InputLogin className='inputRegister' type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
-                ))}
-                <Button className='buttonRegister' value={"S'inscrire"} handelclick={()=>verifyValue()}/>
-                <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")}>Connectez-vous</span></p>
+                    <InputLogin type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+                    ))}
+                    </div>
+                    </div>
+             
+                <Button className='buu'  value={"S'inscrire"} handelclick={()=>verifyValue()}/>
+                <p className='Already'>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")}>Connectez-vous</span></p>
+                 
             </div>
+            </div>
+            {error && <p className='error'>{error}</p>}
         </div>
     </div>
   )

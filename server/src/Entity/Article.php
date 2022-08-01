@@ -58,7 +58,7 @@ class Article
 
     #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
-    private ?int $length = null;
+    private ?int $lenght = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
@@ -216,14 +216,14 @@ class Article
         return $this;
     }
 
-    public function getLength(): ?int
+    public function getLenght(): ?int
     {
-        return $this->length;
+        return $this->lenght;
     }
 
-    public function setLength(?int $length): self
+    public function setLenght(?int $lenght): self
     {
-        $this->length = $length;
+        $this->lenght = $lenght;
 
         return $this;
     }

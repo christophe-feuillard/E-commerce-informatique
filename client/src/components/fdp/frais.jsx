@@ -1,24 +1,18 @@
 import React, {useEffect,useState} from 'react';
 import axios from 'axios';
-// require('dotenv').config();
-// require('babel-polyfill');
-// import '@easypost/api/src/easypost';
+
 const Key = 'EZAK43459e0123eb4be6b9f321fa4acb658f2IWUOgc56Vzsd0I3EVb2Gg'
 const Token = localStorage.getItem("token");
 
 
 const Data = () => {
-console.log(Key)
-    // const Easypost = require('@easypost/api');
-    // const api = new Easypost(process.env.EASYPOST_API_KEY);
-
     const [dataUser, setdataUser] = useState([]);
     const [dataAllPanier, setdataAllPanier] = useState([]);
     const Token = localStorage.getItem("token");
 
     const fromAdress = ({
         company : 'Ecommerce',
-        street1 : '55 avenue de la Grande Armée ',
+        street1 : '55 avenue de la Grande Armée',
         city : 'Paris',
         zip : '75116',
         phone : '0155312897'
@@ -76,11 +70,6 @@ console.log(Key)
         }
         callAPI();
     }, []);
-
-    console.log(shipment);
-    console.log(dataUser, 'dataUser')
-    // console.log(dataAllPanier, 'dataAllPanier')
-    // console.log(dataPanier, 'dataPanier')
 }
 
 export default Data;
