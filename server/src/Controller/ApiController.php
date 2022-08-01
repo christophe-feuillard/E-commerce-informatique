@@ -114,7 +114,7 @@ class ApiController extends AbstractController
             }
 
             $session->set('panier', $panier);   // Update le panier / Save le panier
-            // dd($session->get('panier'));    
+    
             return $this->json($panier, 200,[],['groups' => 'groupe:get']);
         }
 
