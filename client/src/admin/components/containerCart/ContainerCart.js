@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react'
-import Cart from '../cart/Cart'
+import {useState,} from 'react'
 import './ContainerCart.css'
 import Input from '../input/Input'
-import { getItem } from "../../requette/requette";
 import Container2 from '../container2/Container2';
 import Rowstock from '../rowStock/Rowstock';
+import Discount from '../discount/Discount';
+
 
 const ContainerCart = ({role, edit, setEdit}) => {
 
@@ -43,6 +43,15 @@ const ContainerCart = ({role, edit, setEdit}) => {
             return (
                 <div className='titlecontainerhome'>
                     <Rowstock setEdit={setEdit} setElementUpdate={setElementUpdate}/>
+                </div>
+                
+            )
+        }
+
+        if(edit === 'discount'){
+            return (
+                <div className='titlecontainerhome'>
+                    <Discount setEdit={setEdit} elementUpdate={elementUpdate} setElementUpdate={setElementUpdate}/>
                 </div>
                 
             )

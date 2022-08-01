@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 const Token = localStorage.getItem("token");
 
-export const APIdelete = (id) => {
+export const APIdelete = (id, setEdit) => {
 
     var config = {
         method: 'get',
@@ -14,9 +14,7 @@ export const APIdelete = (id) => {
       }
 
       axios(config)
-          .then(response => {
-          return response.data;
-          })
+          .then(response => console.log(response))
           .catch(error => {
           console.log(error);
           });
@@ -45,7 +43,7 @@ export const APIadd = (url, data) => {
 }
 
 
-export const APIupdate = (url, data) => {
+export const APIupdate = (url, data, setEdit) => {
 
     var config = {
         method: 'post',
@@ -58,10 +56,7 @@ export const APIupdate = (url, data) => {
       }
 
       axios(config)
-          .then(response => {
-          return response.data;
-          
-          })
+          .then(response => setEdit('home'))
           .catch(error => {
             console.log(error);
           });
@@ -125,5 +120,46 @@ export const getItem = (setData) => {
           });
     
         }      
+
+
+        export const setDiscount = (id, data, setEdit) => {
+          const Token = localStorage.getItem("token");
+          var config = {
+              method: 'post',
+              url: `/api/admin/setdiscount/${id}`,
+              headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Token}`
+              },
+              data : data
+            };
+            
+            axios(config)
+            .then(response => setEdit('home'))
+            .catch(error => {
+              console.log(error);
+            });
+      
+          } 
+
+
+          export const removeDiscount = (elementUpdate, setEdit, setElementUpdate) => {
+            const Token = localStorage.getItem("token");
+            var config = {
+                method: 'get',
+                url: `/api/admin/removeDicount/${elementUpdate.id}`,
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${Token}`
+                }
+              };
+              
+              axios(config)
+              .then(response => {setEdit('home')})
+              .catch(error => {
+                console.log(error);
+              });
+        
+            } 
 
 

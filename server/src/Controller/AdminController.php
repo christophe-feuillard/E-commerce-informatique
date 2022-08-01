@@ -89,6 +89,7 @@ class AdminController extends AbstractController
         $entityManager = $doctrine->getManager();
         $product = $entityManager->getRepository(Article::class)->find($id);
         
+        
         if ($request->isMethod('POST')) {
             $data = json_decode($request->getContent(), true);
 
@@ -129,6 +130,74 @@ class AdminController extends AbstractController
         return $this->json($articleRepository->findBy(array(), array('stock' => 'ASC')), 200,[],['groups' => 'groupe:get']);
     }
 
+
+    #[Route('/admin/setdiscount/{id}',  methods:('POST'))]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
+    public function setDiscount(Request $request,ManagerRegistry $doctrine, $id, ArticleRepository $articleRepository): JsonResponse
+    {
+        $entityManager = $doctrine->getManager();
+        $product = $entityManager->getRepository(Article::class)->find($id);
+        $initialPrice = $product->getPrix();
+        
+        if ($request->isMethod('POST')) {
+            $data = json_decode($request->getContent(), true);
+
+             if($product === null){
+                return $this->json('aucune article correspond a l\'id');
+             }
+
+             if (json_last_error() !== JSON_ERROR_NONE) {
+            return $this->json('erreur');
+            }
+
+            if ($data === null) {
+            return $this->json('rien a ete envoyé');
+            }   
+
+            $request->request->replace($data);
+            $entityManager = $doctrine->getManager();
+            
+        
+    }else{
+        return $this->json('problem mon ami');
+    }
+
+    try{
+        $discounted =  $initialPrice - ($initialPrice * ($request->request->get('persentDiscount')/100));
+        $product->setDiscount($request->request->get('persentDiscount'));
+        $product->setOldPrice($initialPrice);
+        $product->setPrix($discounted);
+        $entityManager->flush();
+        return $this->json('ok discount effectué');
+    } catch (e) {
+        return $this->json(e);
+    }
+      
+
+
+    }
+
+
+    #[Route('/admin/removeDicount/{id}')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
+    public function removeDiscount(ManagerRegistry $doctrine, $id, ArticleRepository $articleRepository): JsonResponse
+    {
+        try{
+            $entityManager = $doctrine->getManager();
+            $product = $entityManager->getRepository(Article::class)->find($id);
+            $oldPrice = $product->getOldPrice();
+
+            $product->setDiscount(null);
+            $product->setOldPrice(null);
+            $product->setPrix($oldPrice);
+            $entityManager->flush();
+        return $this->json('ok discount enlever');
+        } catch (e) {
+            return $this->json(e);
+        }
+        
+
+    }
 
 
 

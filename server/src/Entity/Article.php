@@ -57,6 +57,14 @@ class Article
     #[ORM\Column(type: 'integer', nullable: true)]
     private $weight;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?float $discount = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?float $old_price = null;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -207,6 +215,30 @@ class Article
     public function setWeight(?int $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?float
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?float $discount): self
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    public function getOldPrice(): ?float
+    {
+        return $this->old_price;
+    }
+
+    public function setOldPrice(?float $old_price): self
+    {
+        $this->old_price = $old_price;
 
         return $this;
     }
