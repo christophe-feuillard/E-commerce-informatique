@@ -4,8 +4,14 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 1em;
     padding: 0px 25px;
-    height: 100vh;
+    display: flex;
+    justify-content: center;
   }
+  
+.infoPanier{
+  width: 30%;
+}
+
   .body a {
     color: #28333b;
     text-decoration: none;
@@ -54,7 +60,7 @@
   }
   .cardCommand {
     padding: 50px;
-    margin: 50px auto;
+    /* margin: 50px auto; */
     max-width: 850px;
     background: #fff;
     border-radius: 6px;

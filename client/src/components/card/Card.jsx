@@ -3,14 +3,21 @@ import './Card.css';
 import {MdOutlineFavorite} from "react-icons/md";
 
 
-const Card = ({imgSrc,title,characteristic,price,stock,size,handleckick,colorStore,clickStore,clickFavoris}) => {
+const Card = ({imgSrc,title,characteristic,price,stock,size,handleckick,colorFavoris,clickStore,clickFavoris, textStore}) => {
   const [color,setColor] = useState("black");
+  const [text,setText] = useState("Ajouter dans le panier");
 
   useEffect(() => {
-    if(colorStore) setColor("#eb4f29");
+    if(colorFavoris) setColor("#eb4f29");
     else setColor('black');
 
-  }, [colorStore]);
+  }, [colorFavoris]);
+
+  useEffect(() => {
+    if(textStore) setText("Retirer du panier");
+    else setText('Ajouter dans le panier');
+
+  },[textStore]);
   // console.log(colorStore)
   
 
@@ -30,12 +37,13 @@ const Card = ({imgSrc,title,characteristic,price,stock,size,handleckick,colorSto
             <p className='price'>{price}</p>
             <div className='divIconsCard'>
                 {/* <MdOutlineLocalGroceryStore className='iconCard' color={color} onClick={clickStore}/> */}
-                {stock > 0 && 
-                <p className='addPanier' onClick={clickStore}>Ajouter au panier</p>
-                }
+                
+                  {stock > 0 && 
+                    <p className='addPanier' onClick={clickStore}>{text}</p>
+                  }
                 {stock <= 0 && 
                 <p className='addPanierDisabled'>Indisponible</p>
-                }
+                } 
                 <div onClick={clickFavoris} className='fav'>
                 <MdOutlineFavorite color={color} className='iconCard'/>
                 </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import InputCard from '../../components/input/InputCard';
+
 import './commande.css'
 
 
@@ -21,7 +22,12 @@ export const Commande = () => {
   const [cardCvc, setCvc] = useState('');
 
   const navigate = useNavigate()
+  const states = useLocation();
+  console.log(states)
+  console.log(states.total, 'TOTALE')
 
+  
+  const GetArticlesInPanier =  JSON.parse(localStorage.getItem('store'))
 
 
   const inputName = [
@@ -86,13 +92,30 @@ export const Commande = () => {
   ]
 
 
-
-
-
-
-
   return (
     <div className='body'>
+      <div className='infoPanier'>
+        <table>
+          <tbody>
+        {GetArticlesInPanier.map((item) => (
+          <div>
+            <tr>
+
+                <td>
+          <img className='tdImage' src={item.photo} alt="" />
+                </td>
+                <td>
+          {item.titre}
+                </td>
+            </tr>
+                {/* <td>
+                  {states.totale}
+                </td> */}
+          </div>
+        ))}
+              </tbody>
+        </table>
+      </div>
       <article className="cardCommand">
         <div className="containerCard">
           <div className="card-title">
@@ -166,7 +189,7 @@ export const Commande = () => {
               <div className="column shipping">
                 <div className="title">
                   <div className="num">2</div>
-                  <h4>Entrez les de votre carte</h4>
+                  <h4>Entrez les informations de votre carte</h4>
                 </div>
                 <div className='field full'>
                   {inputNameCard.map((input) => (

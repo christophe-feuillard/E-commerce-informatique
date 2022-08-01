@@ -84,7 +84,7 @@ const Register = () => {
           
           var config = {
             method: 'post',
-            url: '/account/register',
+            url: 'https://localhost:8000/account/register',
             headers: { 
               'Content-Type': 'application/json'
             },
