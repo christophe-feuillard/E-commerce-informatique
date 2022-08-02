@@ -7,6 +7,7 @@ import axios from 'axios';
 import Image from '../../asset/pc.jpg'
 import './Register.css';
 import { AiFillAmazonSquare } from 'react-icons/ai';
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 
 const Register = () => {
@@ -78,7 +79,7 @@ const Register = () => {
             "email": email,
             "password": password,
             "ville": ville,
-            "codepostal": codePostal,
+            "code_postal": codePostal,
             "phone": phone
         });
           

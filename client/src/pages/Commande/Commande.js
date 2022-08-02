@@ -32,13 +32,17 @@ export const Commande = () => {
 
   const inputName = [
     {
+
       type: 'text', id: 'name', for: 'name', placeholder: 'name', value: name, change: (e) => setName(e.target.value)
+
     },
   ]
 
   const inputAdress = [
     {
+
       type: 'text', id: 'adress', for: 'adress', placeholder: 'adress', value: adress, change: (e) => setAdress(e.target.value)
+
     }
   ]
 

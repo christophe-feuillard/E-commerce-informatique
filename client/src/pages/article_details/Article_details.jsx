@@ -14,7 +14,7 @@ const ArticleDetails = (props) => {
     console.log(articles);
 
     const fetchData = () => {
-      axios.get(`/api/article/${articlesParams}`)
+      axios.get(`https://localhost:8000/api/article/${articlesParams}`)
       .then ((res) => {
         // console.log(res.data)
         setArticles(res.data)

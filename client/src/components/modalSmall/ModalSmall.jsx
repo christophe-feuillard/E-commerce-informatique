@@ -2,10 +2,25 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ModalSmall.css';
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
-const ModalSmall = ({open,onclose,store,total,log}) => {
+const ModalSmall = ({open,onclose,log}) => {
+    const {contextStore, contextTotal} = GetGlobalData();
+    const [store, setStore] = contextStore;
+    const [total] = contextTotal;
+
+    
+  
+    const Trash = (id) => {
+        
+        const filtered = store.filter(item => 
+        item.id != id
+        );
+        setStore(filtered)
+    }
+    
+
     const navigate = useNavigate();
-
 
 
     const PriceTotale =(props)=>{
@@ -31,8 +46,7 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
         </div>
     
         )
-    }else {
-        
+    }else { 
         return (
             <div className="overlaySmall" onClick={onclose}>
             <div className='grandContainer' >
@@ -43,12 +57,15 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
                             <th>Image</th>
                             <th>Nom</th>
                             <th>Prix</th>
+                            <th>Quantité</th>
                         </tr>
                         {store.map((item,index) => (
                             <tr key={index}>
                                <td className='tdImage'><img src={item.photo} alt="image de l'article"/></td>
                                 <td>{item.titre}</td>
-                                <td>{item.prix} €</td>
+                                <td>{item.prix * item.quantity} €</td>
+                                <td>{item.quantity}</td>
+                                <td onClick={(e)=> {e.preventDefault(); Trash(item.id)}}>poubelle</td>
                             </tr>
                         ))}
                     </tbody>
@@ -56,7 +73,7 @@ const ModalSmall = ({open,onclose,store,total,log}) => {
                         <p className='total'>Cela vous fera un total de {total}€</p>
                     {log ? 
                         <div className='buttonModalSmall'>
-                            <button className='buttonBuy' onClick={()=>navigate("/commande", {total})}>Acheter</button>
+                            <button className='buttonBuy' onClick={()=>navigate("/", {total})}>Acheter</button>
                         </div>
                         :
                         <div className='buttonModalSmall'>

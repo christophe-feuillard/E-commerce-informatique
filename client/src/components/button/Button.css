@@ -10,7 +10,7 @@ a {
 
 .cta {
   position: relative;
-  margin: auto;
+  margin: 20px auto;
   padding: 19px 22px;
   transition: all 0.2s ease;
 }

@@ -2,10 +2,14 @@ import React, {useEffect,useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AiOutlineUser} from "react-icons/ai";
 import {MdOutlineLocalGroceryStore,MdOutlineFavorite} from "react-icons/md";
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 import './NavItems.css';
 
-const NavItems = ({storeClick,number,  }) => {
+const NavItems = ({storeClick}) => {
+    const {contextStore} = GetGlobalData();
+    const [store] = contextStore;
+
     const navigate = useNavigate();
     const [isLogged, setIsLogged] = useState(false);
     
@@ -32,8 +36,8 @@ const NavItems = ({storeClick,number,  }) => {
             </div>
             </div>
             <MdOutlineFavorite className='Favoris' onClick={() => navigate("/favoris")}/>
-            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
-            <span>{number}</span>
+            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={() => navigate("/panier")} />
+            <span>{store.length}</span>
             </div>
    
         )
@@ -53,8 +57,8 @@ const NavItems = ({storeClick,number,  }) => {
           
             <MdOutlineFavorite className='Favoris' onClick={() => navigate("/favoris")}/>
         
-            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
-            <span>{number}</span>
+            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={() => navigate("/panier")} />
+            <span>{store.length}</span>
         </div>
         )
     }
