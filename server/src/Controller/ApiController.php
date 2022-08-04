@@ -30,7 +30,7 @@ class ApiController extends AbstractController
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
         }
 
-
+    
         #[Route('/api/article/{id}', name: 'app_api_id')]
         public function getArticleById(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em, $id)
         {

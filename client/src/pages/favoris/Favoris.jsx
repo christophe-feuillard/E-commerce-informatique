@@ -46,8 +46,8 @@ if (Favoris.length == 0) {
   return (
     <div>
       <p className='TextFavoris' >Mes articles favoris</p>
-         {Favoris.map((item) => (
-          <div className='margin'>
+         {Favoris.map((item, key) => (
+          <div key={key} className='margin'>
             <div className='GrdContainerFav'>
             <div className='containerFav'>
             <p>{item.id}</p>        

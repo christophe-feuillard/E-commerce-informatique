@@ -14,12 +14,12 @@ const Rowstock = ({setEdit, setElementUpdate}) => {
 
         return (
             <div>
-              <table class="table-auto w-full">
+              <table className="table-auto w-full">
               <thead>
                   <tr>
-                    <th class="text-center">titre</th>
-                    <th class="text-center">photo</th>
-                    <th class="text-center">stock</th>
+                    <th className="text-center">titre</th>
+                    <th className="text-center">photo</th>
+                    <th className="text-center">stock</th>
                   </tr>
                </thead>
         {isLoading && "chargement"}

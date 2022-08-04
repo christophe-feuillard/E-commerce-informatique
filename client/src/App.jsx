@@ -11,6 +11,9 @@ import ArticleDetails from "./pages/article_details/Article_details";
 import { Commande } from './pages/Commande/Commande';
 import { AuthProviders } from './useContext/AuthProviders';
 import Panier from './components/panier/Panier';
+import PersonalInfo from './admin/components/PersonalInfo/PersonalInfo';
+import { PaymentMethode } from './admin/components/PersonalInfo/Link/paymentMethode';
+import { MyInfo } from './admin/components/PersonalInfo/Link/myInfo';
 
 function App() {
   return (
@@ -22,9 +25,12 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="*" element={<Landing/>}/>
       <Route path='/account' element={<Account/>}/>
+      <Route path='/profil' element={<PersonalInfo/>}/>
       <Route path='/favoris' element={<Favoris/>}/>
       <Route path='/frais' element={<Frais/>}/>
       <Route path='/commande' element={<Commande/>}/>
+      <Route path='/payment' element={<PaymentMethode/>}/>
+      <Route path='/info' element={<MyInfo/>}/>
       <Route path='/panier' element={<Panier/>}/>
       <Route path="/article_details" element={<ArticleDetails/>}/>
       <Route path="/article_details/:articlesParams" element={<ArticleDetails srcImage=""/>}/>

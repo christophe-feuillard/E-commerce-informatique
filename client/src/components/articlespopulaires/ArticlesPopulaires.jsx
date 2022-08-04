@@ -42,7 +42,7 @@ const Card = ({store}) => {
     modules={[ Pagination, Scrollbar, A11y, Autoplay]}
     spaceBetween={0}
     slidesPerView={2}
-    loop={true}
+    // loop={true}
     // autoplay={{
     //     delay: 5000,
     //     disableOnInteraction: false

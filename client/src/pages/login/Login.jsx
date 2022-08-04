@@ -79,8 +79,8 @@ const Login = () => {
           </div>
        
             <div className='loginFormulaire'>
-                {inputData.map((input) => (
-                    <InputLogin type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
+                {inputData.map((input, key) => (
+                    <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
                 ))}
                 <Button value={"Se connecter"} handelclick={()=>verifyValue()}/>
                 <p className='Already' >Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>

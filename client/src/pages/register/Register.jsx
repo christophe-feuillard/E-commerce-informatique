@@ -120,13 +120,13 @@ const Register = () => {
             <div className='registerFormulaire'>
                 <div className='insideBackgroundWhite'>
                 <div className='inputDivRegister'>
-            {inputTop.map((input) => (
-                <InputRegister type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+            {inputTop.map((input, key) => (
+                <InputRegister key={key} type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                 ))}
                 </div>
                 <div className='inputDivLogin'>
-                {inputData.map((input) => (
-                    <InputLogin type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+                {inputData.map((input, key) => (
+                    <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                     ))}
                     </div>
                     </div>

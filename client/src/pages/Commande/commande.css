@@ -50,7 +50,7 @@
   .field .input:placeholder {
     color: #e8ebed !important;
   }
-  .flex {
+  .flexin {
     display: flex;
     flex-direction: row wrap;
     align-items: center;

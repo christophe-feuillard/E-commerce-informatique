@@ -6,6 +6,8 @@ const Data = () => {
     const [dataAllPanier, setdataAllPanier] = useState([]);
     const Token = localStorage.getItem("token");
 
+
+
     useEffect(() => {
         const callAPI = async () => {
             await axios.get('https://localhost:8000/api/user/role', {

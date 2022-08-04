@@ -38,14 +38,7 @@ const Home = () => {
             console.log(err);
           });
       }
-  
-      const VerifyUser = () => {
-      if(localStorage.getItem("token") != null) setIsLoading(true);
-      else setIsLoading(false);
-      }
-  
       callAPI();
-      VerifyUser();
     }, []);
   
 
@@ -120,7 +113,6 @@ const Home = () => {
     const searchCategorie = () => {
   
       if(categorie !== 0){
-  
         let config = {
           method: 'get',
           url: `https://localhost:8000/api/categories/${categorie}`,
@@ -142,12 +134,11 @@ const Home = () => {
     <>
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
       <div className='homeContainer'>
-            <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)}log={isLoading}/>
+            <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} log={isLoading}/>
            <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
             </div>
-            
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
 
           <Card key={key} articles={item} size={item.weight+ 'kg' + ' ' + item.height+ 'cm'+ ' ' + item.lenght+ 'cm' + ' ' + item.width+ '"'}

@@ -28,7 +28,7 @@ const NavItems = ({storeClick}) => {
             <div className='login1'>
             <div class="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
-                <div class="dropdown-content">
+                <div className="dropdown-content">
                     <a className='textLogin' onClick={()=> navigate("/account")}>Mon Compte</a>
                     &#124;
                     <a className='textLogin' onClick={()=>Deconnexion()}>Deconnexion</a>

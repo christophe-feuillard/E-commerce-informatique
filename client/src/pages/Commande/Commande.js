@@ -1,14 +1,23 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import InputCard from '../../components/input/InputCard';
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 import './commande.css'
 
 
 
 
+
 export const Commande = () => {
+  
+  
+      const {contextStore, contextTotal, contextLog} = GetGlobalData();
+      const [store] = contextStore;
+      const [total] = contextTotal;
+      const [login] = contextLog;
 
   const [name, setName] = useState('');
   const [adress, setAdress] = useState('');
@@ -20,14 +29,13 @@ export const Commande = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [cardCvc, setCvc] = useState('');
+  const [isSave, setIsSave] = useState(false);
 
   const navigate = useNavigate()
   const states = useLocation();
-  console.log(states)
-  console.log(states.total, 'TOTALE')
 
-  
-  const GetArticlesInPanier =  JSON.parse(localStorage.getItem('store'))
+ const token =  localStorage.getItem("token")
+  const GetArticlesInPanier =  store
 
 
   const inputName = [
@@ -49,7 +57,7 @@ export const Commande = () => {
 
   const inputZip = [
     {
-      type: 'number', id: 'zip', for: 'zip', placeholder: 'zip', value: zip, change: (e) => setZip(e.target.value)
+      type: 'text', id: 'zip', for: 'zip', placeholder: 'zip', value: zip, change: (e) => setZip(e.target.value)
     },
   ]
 
@@ -63,13 +71,13 @@ export const Commande = () => {
   const InputCvc = [
 
     {
-      type: 'number', id: 'cvc', for: 'cvc', placeholder: 'cvc', value: cardCvc, change: (e) => setCvc(e.target.value)
+      type: 'text', id: 'cvc', for: 'cvc', placeholder: 'cvc', value: cardCvc, change: (e) => setCvc(e.target.value)
     }
   ]
   const InputCardNumber = [
 
     {
-      type: 'number', id: 'number', for: 'number', placeholder: 'number', value: cardNumber, change: (e) => setCardNumber(e.target.value)
+      type: 'text', id: 'number', for: 'number', placeholder: 'number', value: cardNumber, change: (e) => setCardNumber(e.target.value)
     }
   ]
 
@@ -86,25 +94,70 @@ export const Commande = () => {
   ]
   const InputMonth = [
     {
-      type: 'number', id: 'month', for: 'month', placeholder: 'month', value: month, change: (e) => setMonth(e.target.value)
+      type: 'text', id: 'month', for: 'month', placeholder: 'month', value: month, change: (e) => setMonth(e.target.value)
     },
   ]
   const InputYear = [
     {
-      type: 'number', id: 'year', for: 'year', placeholder: 'year', value: year, change: (e) => setYear(e.target.value)
+      type: 'text', id: 'year', for: 'year', placeholder: 'year', value: year, change: (e) => setYear(e.target.value)
     }
   ]
 
+
+  const handleChange = event => {
+    if (event.target.checked) {
+      console.log('Checkbox is checked');
+    } else {
+      console.log('Checkbox is NOT checked');
+    }
+    setIsSave(current => !current);
+  };
+  
+
+    const callAPI = () => {
+      if(isSave){
+        var data = JSON.stringify({
+          "name": cardName,
+          "number": cardNumber,
+          "month": month,
+          "year": year,
+        "cvc": cardCvc
+      });
+      
+      var config = {
+        method: 'post',
+        url: 'https://localhost:8000/api/payment',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+          console.log(error)
+        });
+      } else {
+        console.log("Vous n'avez pas acceptez")
+        
+      }
+      }
+      
+      
+  
 
   return (
     <div className='body'>
       <div className='infoPanier'>
         <table>
           <tbody>
-        {GetArticlesInPanier.map((item) => (
-          <div>
+        {GetArticlesInPanier.map((item, key) => (
+          <div key={key}>
             <tr>
-
                 <td>
           <img className='tdImage' src={item.photo} alt="" />
                 </td>
@@ -128,7 +181,7 @@ export const Commande = () => {
           <div className="card-body">
             <div className="payment-type">
               <h4>Choisissez votre méthode de paiement</h4>
-              <div className="types flex justify-space-between">
+              <div className="types flexin justify-space-between">
                 <div className="type selected">
                   <div className="logoCard">
                     <i><RiBankCardFill/></i>
@@ -155,7 +208,7 @@ export const Commande = () => {
                 </div>
               </div>
             </div>
-            <div className="payment-info flex justify-space-between">
+            <div className="payment-info flexin justify-space-between">
               <div className="column billing">
                 <div className="title">
                   <div className="num">1</div>
@@ -172,7 +225,7 @@ export const Commande = () => {
                     <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
-                <div className="flex justify-space-between">
+                <div className="flexin justify-space-between">
                   <div className="field half">
                     {InputCity.map((input) => (
                       <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
@@ -205,7 +258,7 @@ export const Commande = () => {
                     <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
-                <div className="flex justify-space-between">
+                <div className="flexin justify-space-between">
                   <div className='field half'>
                     {InputMonth.map((input) => (
                       <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
@@ -226,13 +279,18 @@ export const Commande = () => {
             </div>
           </div>
 
-          <div className="card-actions flex justify-space-between">
+          <div className="card-actions flexin justify-space-between">
             <div className="flex-start">
               <p onClick={()=> navigate("/home") } className="button button-secondary">Retourner sur le store</p>
             </div>
             <div className="flex-end">
+              <div>
+              <input type="checkbox" id="save" name="save" value={isSave} onChange={handleChange}/>
+              <label for="save">Souhaitez-vous enregistrez vos données ?</label>
+              </div>
+              
               {/* <button className="button button-link">Back to Shipping</button> */}
-              <button className="button button-primary">Proceder au paiement</button>
+              <button onClick={()=>callAPI()} className="button button-primary">Proceder au paiement</button>
             </div>
           </div>
         </div>

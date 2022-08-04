@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import {BsTrashFill} from "react-icons/bs"
 import './Panier.css'
 
- const Panier = ({log}) => {
-    const {contextStore, contextTotal} = GetGlobalData();
-    const [store, setStore] = contextStore;
-    const [total] = contextTotal;
-
+ const Panier = () => {
+  const {contextStore, contextTotal, contextLog} = GetGlobalData();
+  const [store, setStore] = contextStore;
+  const [total] = contextTotal;
+  const [login] = contextLog;
     
     const Trash = (id) => {
         
@@ -80,15 +80,12 @@ import './Panier.css'
                     <BsTrashFill  onClick={()=>Trash(item.id)} /> 
                     </div>
                     {/* </div> */}
-
-
-
                   </div>
               ))}
               </div>
               </div>
                         <p className='total'>Cela vous fera un total de {total}€</p>
-                    {log ? 
+                    {login ? 
                         <div className='buttonModalSmall'>
                             <button className='buttonBuy' onClick={()=>navigate("/commande", {total})}>Acheter</button>
                         </div>

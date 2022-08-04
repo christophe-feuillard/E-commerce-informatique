@@ -12,16 +12,21 @@ export const GetGlobalData = () => {
 export const AuthProviders = ({children}) => {
     const [store, setStore] = useState([])
     const [total, setTotal] = useState(0)
+    const [login,setlogin] = useState(false);
     
-
 
     useEffect(() => {
      const getItemInStore  = JSON.parse(localStorage.getItem("store"))
+
+     if( localStorage.getItem("token") != null) setlogin(true);
+     else setlogin(false);
 
      if (getItemInStore) {
        setStore(getItemInStore);
      }
     }, [])
+
+
 
     useEffect(() => {
         console.log(store,'store')
@@ -33,6 +38,7 @@ export const AuthProviders = ({children}) => {
 
       const data = {contextStore: [store, setStore], 
         contextTotal:[total, setTotal],
+        contextLog:[login,setlogin]
     }
     
   return (
