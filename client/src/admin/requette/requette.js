@@ -6,7 +6,7 @@ export const APIdelete = (id) => {
 
     var config = {
         method: 'get',
-        url: `/api/admin/delete/${id}`,
+        url: `http://localhost:8000/api/admin/delete/${id}`,
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${Token}`
@@ -73,7 +73,7 @@ export const getItem = (setData) => {
     const Token = localStorage.getItem("token");
     var config = {
         method: 'get',
-        url: '/api/admin/show',
+        url: 'http://localhost:8000/api/admin/show',
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${Token}`
@@ -92,7 +92,7 @@ export const getItem = (setData) => {
       const Token = localStorage.getItem("token");
       var config = {
           method: 'get',
-          url: '/api/user/role',
+          url: 'http://localhost:8000/api/user/role',
           headers: { 
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${Token}`
@@ -111,7 +111,7 @@ export const getItem = (setData) => {
         const Token = localStorage.getItem("token");
         var config = {
             method: 'get',
-            url: '/api/admin/showStock',
+            url: 'http://localhost:8000/api/admin/showStock',
             headers: { 
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${Token}`
@@ -125,7 +125,3 @@ export const getItem = (setData) => {
           });
     
         }      
-
-        
-
-

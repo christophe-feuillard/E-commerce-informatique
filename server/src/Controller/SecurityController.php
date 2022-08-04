@@ -49,8 +49,6 @@ throw new \Exception('Will be intercepted before getting here');
             }
 
             
-            
-            
 
             $entityManager = $doctrine->getManager();
             $user = new User();
@@ -59,6 +57,7 @@ throw new \Exception('Will be intercepted before getting here');
             $user->setPhone($request->request->get('phone'));
             $user->setAdresse($request->request->get('adresse'));
             $user->setVille($request->request->get('ville'));
+            $user->setCodePostal($request->request->get('code_postal'));
 
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,

@@ -14,10 +14,10 @@
 
 .ShowArticleHome{
     background-color: whitesmoke ;
-    padding: 0 20px;
+    padding: 10px 20px;
     cursor: pointer;
     border-radius: 3px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 .containerNoArticle{
     display: flex;
@@ -26,6 +26,7 @@
     align-items: center;
     border-radius: 4px;
     justify-content: center;
+    margin-top: 20px;
 }
 .margin{
     margin-bottom:  20px;
@@ -35,12 +36,12 @@
 .NoArticle{
 color: black;
 font-weight: 500;
+margin: 10px 0;
 
 }
 
 .GrdContainerFav{
     display: flex;
- 
     width: 80%;
     margin: auto;
  align-items: center;
