@@ -3,6 +3,7 @@ import Header from '../header/Header'
 import { GetGlobalData } from '../../useContext/AuthProviders';
 import { useNavigate } from 'react-router-dom';
 import {BsTrashFill} from "react-icons/bs"
+import { Trash } from './trash';
 import './Panier.css'
 
  const Panier = () => {
@@ -11,27 +12,17 @@ import './Panier.css'
   const [total] = contextTotal;
   const [login] = contextLog;
     
-    const Trash = (id) => {
-        
-        const filtered = store.filter(item => 
-        item.id != id
-        );
-        setStore(filtered)
-    }
-    
+
 
     const navigate = useNavigate();
-
 
     const PriceTotale =(props)=>{
         console.log(total)
         navigate('/commande',{totale : 'total'});
-          }
+    }
 
-  
     if (total == 0) {
       return(
-        
         <div>
             <Header />
         <div className='grandContainer'>
@@ -77,7 +68,7 @@ import './Panier.css'
                       {item.prix * item.quantity + '€'}
                     </div>
                     <div className='trash'>
-                    <BsTrashFill  onClick={()=>Trash(item.id)} /> 
+                    <BsTrashFill onClick={()=>Trash(item.id,setStore, store)} /> 
                     </div>
                     {/* </div> */}
                   </div>

@@ -85,6 +85,7 @@ class UserController extends AbstractController
         $entityManager->persist($card);
         $entityManager->flush($card);
 
+
       return $this->json($json, 200,[],['groups' => 'groupe:get']);
     }
 

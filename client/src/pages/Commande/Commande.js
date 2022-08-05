@@ -4,6 +4,7 @@ import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import InputCard from '../../components/input/InputCard';
 import { GetGlobalData } from '../../useContext/AuthProviders';
+import { Trash } from '../../components/panier/trash';
 import jwt_decode from 'jwt-decode';
 
 import './commande.css'
@@ -11,7 +12,7 @@ export const Commande = () => {
   
   
       const {contextStore, contextTotal, contextLog, contextUser} = GetGlobalData();
-      const [store] = contextStore;
+      const [store, setStore] = contextStore;
       const [total] = contextTotal;
       const [login] = contextLog;
       const [user] = contextUser;
@@ -135,11 +136,14 @@ const token = localStorage.getItem("token");
       axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+        alert('Merci pour votre commande')
       })
       .catch((error) => {
           console.log(error)
+          alert('Merci pour votre commande')
         });
       } else {
+
         console.log("Vous n'avez pas acceptez")
         
       }
@@ -149,7 +153,7 @@ const token = localStorage.getItem("token");
   return (
     <div className='body mt-7'>
     <div >
-   <div className="flow-root scrollY max-h-96">
+   <div className="flow-root scrollY ">
               <ul role="list" className="-my-6 divide-y divide-gray-200">
                 {store.map((product, key) => (
                   <li key={key} className="py-6 flex space-x-6">
@@ -173,7 +177,7 @@ const token = localStorage.getItem("token");
                             Edit
                           </button>
                           <div className="flex border-l border-gray-300 pl-4">
-                            <button type="button" className="text-sm font-medium  hover:text-indigo-500">
+                            <button onClick={() => Trash(product.id, setStore, store)} type="button" className="text-sm font-medium  hover:text-indigo-500">
                                 Remove
                             </button>
                           </div>
@@ -188,15 +192,11 @@ const token = localStorage.getItem("token");
             <dl className="text-sm font-medium text-gray-500 mt-10 space-y-6 pr-5">
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
-                <dd className="text-gray-900">$104.00</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt>Taxes</dt>
-                <dd className="text-gray-900">$8.32</dd>
+                <dd className="text-gray-900">{total}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Shipping</dt>
-                <dd className="text-gray-900">$14.00</dd>
+                <dd className="text-gray-900">{Math.floor(Math.random() * 10)}</dd>
               </div>
               <div className="flex justify-between border-t border-gray-200 text-gray-900 pt-6">
                 <dt className="text-base">Total</dt>
@@ -320,7 +320,6 @@ const token = localStorage.getItem("token");
               <input type="checkbox" id="save" name="save" value={isSave} onChange={handleChange}/>
               <label htmlFor="save">Souhaitez-vous enregistrez vos données ?</label>
               </div>
-              
               {/* <button className="button button-link">Back to Shipping</button> */}
               <button onClick={()=>callAPI()} className="button button-primary">Proceder au paiement</button>
             </div>
