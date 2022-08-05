@@ -3,15 +3,15 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\ArticleRepository;
 
 \EasyPost\EasyPost::setApiKey("EZTKe22861fa1589471986d05cf6d4cb7fd7bUySLyh5tew8xtl0C79PRw");
 
 class FDPController extends AbstractController {
     #[Route('/api/FDP', name: 'app_api_FDP')] 
-    public function dataFDP(Request $request, ArticleRepository $articleRepository) {
+    public function dataFDP(Request $request) {
         $userData = $this->getUser();
 
         if ($request->isMethod('POST')) {
@@ -62,7 +62,8 @@ class FDPController extends AbstractController {
                 "to_address" => [
                     "name" => $userData->getName(),
                     "street1" => $userData->getAdresse(),
-                    "city " => $userData->getVille(),
+                    // "city " => $userData->getVille(),
+                    "city" => "New York",
                     "zip" => $userData->getCodePostal(),
                     "phone " => $userData->getPhone(),
                     "state" => "New York"
@@ -72,9 +73,13 @@ class FDPController extends AbstractController {
                     "width"  => $width,
                     "height" => $height,
                     "weight" => $weight,
-                    // "predefined_package" => 'MediumExpressBox'
+                    "predefined_package" => 'MediumExpressBox'
                 ],
             ]);
-         
-        return $this->json($shipment, 200,[],['groups' => 'groupe:get']);
+        
+            $shipment->buy($shipment->lowest_rate());
+            $label = $shipment->postage_label->label_url;  // LABEL
+            $track = $shipment->tracker->public_url;  // SUIVIS DE COMMANDE
+  
+        return $this->json([$shipment,$label, $track], 200,[],['groups' => 'groupe:get']);
 }}
