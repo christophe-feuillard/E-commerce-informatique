@@ -28,7 +28,7 @@ const Home = () => {
 
     useEffect(() => {
       const callAPI = () => {
-        axios.get('https://localhost:8000/api/articles')
+        axios.get('http://127.0.0.1:8000/api/articles')
           .then(res => {
             setData(res.data);
             setColorFavoris(Array(res.data.length).fill(false))
@@ -106,7 +106,7 @@ const Home = () => {
   
         let config = {
           method: 'get',
-          url: `https://localhost:8000/api/categories/${categorie}`,
+          url: `http://localhost:8000/api/categories/${categorie}`,
           headers: { 'Content-Type': 'application/json' },
         };
         
@@ -120,16 +120,15 @@ const Home = () => {
       }
      }
      useEffect(()=> localStorage.setItem("favoris", JSON.stringify(fav)),[fav])
-
   return (
     <>
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
       <div className='homeContainer'>
-            <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
+           <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
            <ArticlesPopulaires store={store}/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
-            </div>
+           </div>
             
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
 

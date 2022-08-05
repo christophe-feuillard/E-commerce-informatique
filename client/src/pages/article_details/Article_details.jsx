@@ -1,20 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Article_details.css';
 import Header from "../../components/header/Header";
 import Buy from '../../components/buy/Buy';
 import axios from 'axios';
+import Comments from "../../components/commentaires/Comments";
+import Comment from "../../components/commentaires/Comment";
 
 const ArticleDetails = (props) => {
 
-  const navigate = useNavigate();
-
+    const navigate = useNavigate();
     const [articles,setArticles] = useState([]);
+    const [dataUser, setdataUser] = useState([]);
+    const Token = localStorage.getItem("token");
     let { articlesParams } = useParams();
+    let [cart, setCart] = useState([])
+    let localCart = localStorage.getItem("cart");
     console.log(articles);
 
+    useEffect(() => {
+      const callAPI = async () => {
+          await axios.get('http://localhost:8000/api/user/role', {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Token}`
+              },
+          })
+          .then(res => {
+              setdataUser(res.data);
+              console.log(res.data);
+          })
+          .catch(err => {
+          console.log(err);
+          });
+      }
+      callAPI();
+    }, []);
+
     const fetchData = () => {
-      axios.get(`/api/article/${articlesParams}`)
+      axios.get(`http://127.0.0.1:8000/api/article/${articlesParams}`)
       .then ((res) => {
         // console.log(res.data)
         setArticles(res.data)
@@ -27,8 +51,6 @@ const ArticleDetails = (props) => {
       fetchData()
     }, [])
 
-    let [cart, setCart] = useState([])
-    let localCart = localStorage.getItem("cart");
     
     const addItem = (item) => {
       // create a copy of our cart state, avoiarticlesd overwritting existing state
@@ -56,7 +78,6 @@ const ArticleDetails = (props) => {
     <main>
       <div className="container">
         <div>
-          
           <div className="img_article_container">
            <img className="img_article" src={articles.photo} alt="photo" />
           </div>
@@ -84,6 +105,11 @@ const ArticleDetails = (props) => {
 
         </div>
       </div>
+
+      <div>
+        <Comments commentsUrl="http://localhost:3000/comments" currentUserId={dataUser.email} />
+      </div>
+      
     </main>      
     </>
   )

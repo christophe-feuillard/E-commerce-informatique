@@ -57,7 +57,7 @@ throw new \Exception('Will be intercepted before getting here');
             $user->setPhone($request->request->get('phone'));
             $user->setAdresse($request->request->get('adresse'));
             $user->setVille($request->request->get('ville'));
-            $user->setCodePostal($request->request->get('code_postal'));
+            $user->setCodePostal($request->request->get('codepostal'));
 
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
