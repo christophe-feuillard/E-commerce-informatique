@@ -14,6 +14,7 @@ import Panier from './components/panier/Panier';
 import PersonalInfo from './admin/components/PersonalInfo/PersonalInfo';
 import { PaymentMethode } from './admin/components/PersonalInfo/Link/paymentMethode';
 import { MyInfo } from './admin/components/PersonalInfo/Link/myInfo';
+import ModalSmall from './components/modalSmall/ModalSmall';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Route path='/frais' element={<Frais/>}/>
       <Route path='/commande' element={<Commande/>}/>
       <Route path='/payment' element={<PaymentMethode/>}/>
+      <Route path='/modal' element={<ModalSmall/>}/>
       <Route path='/info' element={<MyInfo/>}/>
       <Route path='/panier' element={<Panier/>}/>
       <Route path="/article_details" element={<ArticleDetails/>}/>

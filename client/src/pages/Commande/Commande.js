@@ -4,20 +4,20 @@ import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import InputCard from '../../components/input/InputCard';
 import { GetGlobalData } from '../../useContext/AuthProviders';
+import jwt_decode from 'jwt-decode';
 
 import './commande.css'
-
-
-
-
-
 export const Commande = () => {
   
   
-      const {contextStore, contextTotal, contextLog} = GetGlobalData();
+      const {contextStore, contextTotal, contextLog, contextUser} = GetGlobalData();
       const [store] = contextStore;
       const [total] = contextTotal;
       const [login] = contextLog;
+      const [user] = contextUser;
+   
+console.log(user.name)
+const token = localStorage.getItem("token");
 
   const [name, setName] = useState('');
   const [adress, setAdress] = useState('');
@@ -32,11 +32,8 @@ export const Commande = () => {
   const [isSave, setIsSave] = useState(false);
 
   const navigate = useNavigate()
-  const states = useLocation();
 
- const token =  localStorage.getItem("token")
   const GetArticlesInPanier =  store
-
 
   const inputName = [
     {
@@ -54,7 +51,6 @@ export const Commande = () => {
     }
   ]
 
-
   const inputZip = [
     {
       type: 'text', id: 'zip', for: 'zip', placeholder: 'zip', value: zip, change: (e) => setZip(e.target.value)
@@ -64,7 +60,7 @@ export const Commande = () => {
   const inputNameCard = [
 
     {
-      type: 'text', id: 'nameCard', for: 'nameCard', placeholder: 'name card', value: cardName, change: (e) => setCardName(e.target.value)
+      type: 'text', id: 'nameCard', for: 'nameCard', placeholder: 'name card', value: user.card.name, change: (e) => setCardName(e.target.value)
     }
   ]
 
@@ -77,7 +73,7 @@ export const Commande = () => {
   const InputCardNumber = [
 
     {
-      type: 'text', id: 'number', for: 'number', placeholder: 'number', value: cardNumber, change: (e) => setCardNumber(e.target.value)
+      type: 'text', id: 'number', for: 'number', placeholder: 'number', value: user.card.number, change: (e) => setCardNumber(e.target.value)
     }
   ]
 
@@ -104,9 +100,11 @@ export const Commande = () => {
   ]
 
 
+
   const handleChange = event => {
     if (event.target.checked) {
       console.log('Checkbox is checked');
+      console.log(name)
     } else {
       console.log('Checkbox is NOT checked');
     }
@@ -146,33 +144,67 @@ export const Commande = () => {
         
       }
       }
-      
-      
-  
+
 
   return (
-    <div className='body'>
-      <div className='infoPanier'>
-        <table>
-          <tbody>
-        {GetArticlesInPanier.map((item, key) => (
-          <div key={key}>
-            <tr>
-                <td>
-          <img className='tdImage' src={item.photo} alt="" />
-                </td>
-                <td>
-          {item.titre}
-                </td>
-            </tr>
-                {/* <td>
-                  {states.totale}
-                </td> */}
+    <div className='body mt-7'>
+    <div >
+   <div className="flow-root scrollY max-h-96">
+              <ul role="list" className="-my-6 divide-y divide-gray-200">
+                {store.map((product, key) => (
+                  <li key={key} className="py-6 flex space-x-6">
+                    <img
+                      src={product.photo}
+                      alt='image du produit'
+                      className="flex-none w-24 h-24 object-center object-cover bg-gray-100 rounded-md"
+                    />
+                    <div className="flex-auto">
+                      <div className="space-y-1 sm:flex sm:items-start sm:justify-between sm:space-x-6">
+                        <div className="flex-auto text-sm font-medium space-y-1">
+                          <div className="text-gray-900">
+                            <p>{product.titre}</p>
+                          </div>
+                          <p className="text-gray-900">{product.prix + "€"}</p>
+                         
+                          <p className="hidden text-gray-500 sm:block">{product.quantity}</p>
+                        </div>
+                        <div className="flex-none flex space-x-4">
+                          <button type="button" className="text-sm font-medium  hover:text-indigo-500">
+                            Edit
+                          </button>
+                          <div className="flex border-l border-gray-300 pl-4">
+                            <button type="button" className="text-sm font-medium  hover:text-indigo-500">
+                                Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <dl className="text-sm font-medium text-gray-500 mt-10 space-y-6 pr-5">
+              <div className="flex justify-between">
+                <dt>Subtotal</dt>
+                <dd className="text-gray-900">$104.00</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt>Taxes</dt>
+                <dd className="text-gray-900">$8.32</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt>Shipping</dt>
+                <dd className="text-gray-900">$14.00</dd>
+              </div>
+              <div className="flex justify-between border-t border-gray-200 text-gray-900 pt-6">
+                <dt className="text-base">Total</dt>
+                <dd className="text-base">{total}</dd>
+              </div>
+            </dl>
           </div>
-        ))}
-              </tbody>
-        </table>
-      </div>
+
       <article className="cardCommand">
         <div className="containerCard">
           <div className="card-title">
@@ -216,30 +248,30 @@ export const Commande = () => {
                 </div>
 
                 <div className='field full'>
-                  {inputAdress.map((input) => (
-                    <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  {inputAdress.map((input, key) => (
+                    <InputCard key={key} className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
                 <div className='field full'>
-                  {inputName.map((input) => (
-                    <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  {inputName.map((input, key) => (
+                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
                 <div className="flexin justify-space-between">
                   <div className="field half">
-                    {InputCity.map((input) => (
-                      <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                    {InputCity.map((input, key) => (
+                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                     ))}
                   </div>
                   <div className="field half">
-                    {InputVille.map((input) => (
-                      <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                    {InputVille.map((input, key) => (
+                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                     ))}
                   </div>
                 </div>
                 <div className='field full'>
-                  {inputZip.map((input) => (
-                    <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  {inputZip.map((input, key) => (
+                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
               </div>
@@ -249,30 +281,30 @@ export const Commande = () => {
                   <h4>Entrez les informations de votre carte</h4>
                 </div>
                 <div className='field full'>
-                  {inputNameCard.map((input) => (
-                    <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  {inputNameCard.map((input, key) => (
+                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
                 <div className='field full'>
-                  {InputCardNumber.map((input) => (
-                    <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  {InputCardNumber.map((input, key) => (
+                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
                 <div className="flexin justify-space-between">
                   <div className='field half'>
-                    {InputMonth.map((input) => (
-                      <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                    {InputMonth.map((input, key) => (
+                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                     ))}
                   </div>
                   <div className='field half'>
-                    {InputYear.map((input) => (
-                      <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                    {InputYear.map((input, key) => (
+                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                     ))}
                   </div>
                 </div>
                 <div className='field full'>
-                  {InputCvc.map((input) => (
-                    <InputCard className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  {InputCvc.map((input, key) => (
+                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
                 </div>
               </div>
@@ -286,7 +318,7 @@ export const Commande = () => {
             <div className="flex-end">
               <div>
               <input type="checkbox" id="save" name="save" value={isSave} onChange={handleChange}/>
-              <label for="save">Souhaitez-vous enregistrez vos données ?</label>
+              <label htmlFor="save">Souhaitez-vous enregistrez vos données ?</label>
               </div>
               
               {/* <button className="button button-link">Back to Shipping</button> */}

@@ -134,7 +134,7 @@ const Home = () => {
     <>
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
       <div className='homeContainer'>
-            <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} log={isLoading}/>
+            {/* <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} log={isLoading}/> */}
            <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?

@@ -22,7 +22,7 @@ const Account = () =>{
     if(role === 'ROLE_USER'){
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <div className="Userhome"><PersonalInfo data={infoPerso}/></div>
             </div>
             

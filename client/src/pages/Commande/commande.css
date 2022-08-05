@@ -6,8 +6,28 @@
     padding: 0px 25px;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
-  
+  .scrollY{
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    padding-right: 20px;
+  }
+
+  .scrollY::-webkit-scrollbar {
+    width: 3px;
+    height: 8px;
+}
+ 
+.scrollY::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+ 
+.scrollY::-webkit-scrollbar-thumb {
+    background-color: #89898c6f;
+    border-radius: 100px;
+}
 .infoPanier{
   width: 30%;
 }
@@ -54,6 +74,7 @@
     display: flex;
     flex-direction: row wrap;
     align-items: center;
+    justify-content: space-around;
   }
   .flex.justify-space-between {
     justify-content: space-between;

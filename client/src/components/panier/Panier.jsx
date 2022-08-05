@@ -63,7 +63,7 @@ import './Panier.css'
               <div className='divArticles'>
               <div className='mapProduit'>
               {store.map((item, key) => (
-                  <div className='flexItem'>
+                  <div key={key} className='flexItem'>
                     <div className='DivItemProduit'>
                      <img className='imgWidth' src={item.photo} alt="" />
                     <p className='textUppercase'>{item.titre}</p>

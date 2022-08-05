@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {createContext, useContext, useState} from 'react'
 import { useEffect } from 'react';
 
@@ -12,6 +13,7 @@ export const GetGlobalData = () => {
 export const AuthProviders = ({children}) => {
     const [store, setStore] = useState([])
     const [total, setTotal] = useState(0)
+    const [user, setInfoUser] = useState([])
     const [login,setlogin] = useState(false);
     
 
@@ -26,6 +28,26 @@ export const AuthProviders = ({children}) => {
      }
     }, [])
 
+    const Token = localStorage.getItem("token");
+    var config = {
+      method: 'get',
+      url: 'https://localhost:8000/api/user/role',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Token}`
+        }
+      };  
+
+           useEffect(() => {
+      axios(config)
+        .then(response => {
+          console.log(response.data)
+        setInfoUser(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+       }, [])
 
 
     useEffect(() => {
@@ -38,9 +60,15 @@ export const AuthProviders = ({children}) => {
 
       const data = {contextStore: [store, setStore], 
         contextTotal:[total, setTotal],
-        contextLog:[login,setlogin]
+        contextLog:[login,setlogin],
+        contextUser:[user, setInfoUser]
     }
-    
+
+
+
+
+
+  
   return (
     <globalData.Provider value={data}>
         {children}
