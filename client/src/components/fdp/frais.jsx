@@ -20,6 +20,7 @@ const Data = () => {
              axios(config)
             .then(res => {
                 console.log(res.data);
+                console.log(dataStorage);
             })
             .catch(err => {
             console.log(err);
