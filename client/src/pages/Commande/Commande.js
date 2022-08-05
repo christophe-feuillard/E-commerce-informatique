@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
 import { useLocation, useNavigate } from 'react-router-dom';
 import InputCard from '../../components/input/InputCard';
-
 import './commande.css'
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 
 
@@ -20,6 +20,9 @@ export const Commande = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [cardCvc, setCvc] = useState('');
+  const [orderID, setOrderID] = useState(false);
+  const [success, setSuccess] = useState(false);
+ const  [ErrorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate()
   const states = useLocation();
@@ -91,6 +94,14 @@ export const Commande = () => {
     }
   ]
 
+  const initialOptions = {
+    "client-id": "AYyffC2_n1tabYrTG_TtICCkqinchuyrhIm076HuTJjQ6-jDId6WjnD0uC4DkeDwWizSNDrrxa3Ebh7t",
+    // currency: "EUR",
+    // "data-client-token": "abc123xyz==",
+  };
+
+  const amount = "1209";
+  const currency = "USD";
 
   return (
     <div className='body'>
@@ -133,20 +144,42 @@ export const Commande = () => {
                     <p>Payer avec votre Carte</p>
                   </div>
                 </div>
+                
+                {/* Paypal */}
                 <div className="type">
-                  <div className="logoCard">
-                    <i ><RiPaypalFill/></i>
-                  </div>
                   <div className="text">
-                    <p>Payer avec PayPal</p>
+                      <p>Payer plus vite</p>
                   </div>
-                </div>
-                <div className="type">
                   <div className="logoCard">
-                    <i></i>
-                  </div>
-                  <div className="text">
-                    <p>///</p>
+                    <PayPalScriptProvider options={initialOptions}>
+                          <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
+                            createOrder={async (data, actions) => {
+                              const orderId = await actions.order
+                                .create({
+                                  purchase_units: [
+                                    {
+                                      amount: {
+                                        currency_code: currency,
+                                        value: amount,
+                                      },
+                                    },
+                                  ],
+                                });
+                              setOrderID(orderID);
+                              return orderId;
+                            }}
+                            onApprove={async (data, actions) => {
+                              const details = await actions.order.capture();
+                              const { payer } = details;
+                              setSuccess(true);
+                              navigate("/home");
+                              alert("La commande a bien été réglée par " + details.payer.name.given_name);
+                            }}
+                            onError={(data, actions) => {
+                              setErrorMessage("An Error occured with your payment ");
+                            }}
+                          />
+                    </PayPalScriptProvider>
                   </div>
                 </div>
               </div>
