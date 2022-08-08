@@ -1,18 +1,24 @@
-/* .infoperso{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.MonProfil{
+    width: 100%;
 }
-
-.Userhome{
-    padding-top: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.backhome{
+.MonProfil > p {
     text-align: center;
-} */
+    font-size: 30px;
+    font-weight: 700;
+}
+.s{
+    width: 10%;
+}
+.flexCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.i{
+    color: black;
+}
+.sizeNav{
+    width: 80%;
+    margin: auto;
+}

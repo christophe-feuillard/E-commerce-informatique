@@ -30,7 +30,7 @@ class ApiController extends AbstractController
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
         }
 
-
+    
         #[Route('/api/article/{id}', name: 'app_api_id')]
         public function getArticleById(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em, $id)
         {
@@ -63,11 +63,11 @@ class ApiController extends AbstractController
         }   
         
         #[Route('/api/panier', name: 'app_api_panier')]  // ALL PANIER / AFFICHAGE
-        public function allPanier(SessionInterface $session, ArticleRepository $articleRepository) {
+        public function allPanier(Request $request,  SessionInterface $session, ArticleRepository $articleRepository) {
+// dd($request);
             $panier = $session->get('panier', []);      // Recupere le panier de la sessiona actuel
-
             $panierData = [];
-
+            
             foreach($panier as $id => $quantity) {
                 $panierData[] = [
                     'article' => $articleRepository->find($id),
@@ -82,31 +82,32 @@ class ApiController extends AbstractController
                 $weight = 0;
 
                 foreach($panierData as $item) {
-                    $totalItem = $item['article']->getPrix() * $item['quantity'];    // Multiplie le prix de l'article par sa quantity
-                    $total += $totalItem;
-
+                    
                     $totalWidth = $item['article']->getWidth();
                     $width+= $totalWidth;
-
+                    
                     $totalLenght = $item['article']->getLenght();
                     $lenght+= $totalLenght;
-
+                    
                     $totalHeight = $item['article']->getHeight();
                     $height+= $totalHeight;
-
+                    
                     $totalWeight = $item['article']->getWeight();
                     $weight+= $totalWeight;
+                    $totalItem = $item['article']->getPrix() * $item['quantity'];    // Multiplie le prix de l'article par sa quantity
+                    $total += $totalItem;
                 }
             }
+            // dd($total);
             return $this->json(['item' => $panierData, 'total' => $total, 'width' => $width, 'lenght' => $lenght, 'height' => $height, 'weight' => $weight], 200,[],['groups' => 'groupe:get']);
             // dd($panierData);
         }
 
         #[Route('/api/panier/add/{id}', name: 'app_api_panier_add')]  // Route pour ajouter article dans le panier via Button Ajouter Panier
-        public function addPanier($id, SessionInterface $session) {
-
+        public function addPanier(Request $request, $id, SessionInterface $session) {
+            // dd($request);
             $panier = $session->get('panier', []);      // Recup le panier ou le creez 
-
+            // dd($session);
             if(!empty($panier[$id])) {      // Si j'ai déja cet article dans mon panier
                 $panier[$id]++;             // Alors incremente le 
             }else {
@@ -114,6 +115,7 @@ class ApiController extends AbstractController
             }
 
             $session->set('panier', $panier);   // Update le panier / Save le panier
+            dd($session);
             // dd($session->get('panier'));    
             return $this->json($panier, 200,[],['groups' => 'groupe:get']);
         }

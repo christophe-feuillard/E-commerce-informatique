@@ -17,9 +17,7 @@ const Home = () => {
   const [search,setSearch] = useState("");
   const [colorFavoris,setColorFavoris] = useState([]);
   const [textStore,setTextStore] = useState([]);
-  const [store,setStore] = useState([]);
-  const [total,setTotal] = useState(0);
-  const [fav,setFav] = useState([]);
+  const [fav,setFav] = useState( JSON.parse(localStorage.getItem("favoris")) || []);
   const [articleNumber,setArticleNumber] = useState(0);
   const [isLoading,setIsLoading] = useState(false);
 
@@ -35,34 +33,12 @@ const Home = () => {
             console.log(err);
           });
       }
-  
-      const VerifyUser = () => {
-      if(localStorage.getItem("token") != null) setIsLoading(true);
-      else setIsLoading(false);
-      }
-  
       callAPI();
-      VerifyUser();
     }, []);
   
-    useEffect(() => {
-      setTotal(store.reduce((acc,item) => acc + item.prix,0));
-      localStorage.setItem("store", JSON.stringify(store));
-      setArticleNumber(store.length);
-    },[store]);
   
-  
-    const addStore = (item, key) => {
-  
-      const exist = verifyIfExistInStore(item.id);
-      if(!exist) setStore((store) => [...store, item]);
-      else setStore((store) => store.slice(0,store.indexOf(item)).concat(store.slice(store.indexOf(item)+1)));
-
-      setTextStore((prev) => {
-        const res = Object.assign([], prev, { [key]: !prev[key] });
-        return res;
-      });
-    }
+    useEffect(()=> localStorage.setItem("favoris", JSON.stringify(fav)),[fav])
+    
 
     const favoris = (item, key) => {
      
@@ -79,13 +55,6 @@ const Home = () => {
 
     }
   
-    const verifyIfExistInStore = (id) => {
-      for(let i = 0; i < store.length; i++){
-        if(store[i].id === id) return true; 
-      }
-      return false;
-    }
-  
     const verifyIfExistInFav = (id) => {
       for(let i = 0; i < fav.length; i++){
         if(fav[i].id === id) return true; 
@@ -99,19 +68,17 @@ const Home = () => {
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} />
       <CatDropDown/>
       <div className='homeContainer'>
-            <ModalSmall open={openModalSmall} onclose={()=>setOpenModalSmall(false)} store={store} total={total} log={isLoading}/>
-           <ArticlesPopulaires store={store}/>  
+           <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
       </div> 
 
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
 
-          <Card imgSrc={item.photo} title={item.titre} price={item.prix + "€"} characteristic={item.caracteristique} stock={item.stock} size={item.weight+ 'kg' + ' ' + item.height+ 'cm'+ ' ' + item.length+ 'cm' + ' ' + item.width+ '"'}
+          <Card key={key} articles={item} size={item.weight+ 'kg' + ' ' + item.height+ 'cm'+ ' ' + item.lenght+ 'cm' + ' ' + item.width+ '"'}
           handleckick={()=> navigate("/article_details/"+item.id)} 
             colorFavoris={colorFavoris[key]}
             textStore={textStore[key]}
-            clickStore={()=>{addStore(item, key)}}
             clickFavoris={()=>{favoris(item, key)}}
           />
         ))}

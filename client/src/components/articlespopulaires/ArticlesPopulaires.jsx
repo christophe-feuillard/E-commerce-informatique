@@ -32,7 +32,7 @@ const Card = ({store}) => {
   const sorted = data.map(d => ({id: d.id, titre: d.titre, length: d.lenght ,prix: d.prix, photo: d.photo, description: d.description, visit: d.visit, caracteristique: d.caracteristique})).sort((el1, el2) => el2.visit - el1.visit)
 
   // console.log(store)
-  console.log(JSON.parse(localStorage.getItem("store")))
+  // console.log(JSON.parse(localStorage.getItem("store")))
 
   return (
   <div className='div_articlepopulaires'>
@@ -42,7 +42,7 @@ const Card = ({store}) => {
     modules={[ Pagination, Scrollbar, A11y, Autoplay]}
     spaceBetween={0}
     slidesPerView={2}
-    loop={true}
+    // loop={true}
     // autoplay={{
     //     delay: 5000,
     //     disableOnInteraction: false

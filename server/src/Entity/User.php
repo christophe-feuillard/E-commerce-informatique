@@ -16,6 +16,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("groupe:get")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
@@ -52,7 +53,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $favoris;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $CodePostal = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    #[Groups("groupe:get")]
+    private ?Card $card = null;
 
     public function __construct()
     {
@@ -221,6 +227,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCodePostal(string $CodePostal): self
     {
         $this->CodePostal = $CodePostal;
+
+        return $this;
+    }
+
+    public function getCard(): ?Card
+    {
+        return $this->card;
+    }
+
+    public function setCard(?Card $card): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($card === null && $this->card !== null) {
+            $this->card->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($card !== null && $card->getUser() !== $this) {
+            $card->setUser($this);
+        }
+
+        $this->card = $card;
 
         return $this;
     }

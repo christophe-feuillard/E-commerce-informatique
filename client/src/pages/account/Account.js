@@ -22,7 +22,7 @@ const Account = () =>{
     if(role === 'ROLE_USER'){
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <div className="Userhome"><PersonalInfo data={infoPerso}/></div>
             </div>
             
@@ -33,11 +33,11 @@ const Account = () =>{
         
         return (
 
-            <div class='flex  min-h-screen bg-gray-50 rounded dark:bg-gray-800'>
-                <div class="w-64 min-h-screen w-2/12" aria-label="Sidebar">
+            <div className='flex min-h-screen bg-gray-50 rounded dark:bg-gray-800'>
+                <div className="w-64 min-h-screen w-2/12" aria-label="Sidebar">
                     <NavBAr title={info} setEdit={setEdit}/> 
                 </div>
-                <div class="bg-gray-900 w-full" >
+                <div className="bg-gray-900 w-full" >
                     <ContainerCart role={role} edit={edit} setEdit={setEdit}/>
                 </div>
                 

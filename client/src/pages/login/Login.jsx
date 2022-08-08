@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {useNavigate,Navigate} from 'react-router-dom';
 import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 import axios from "axios";
 import './Login.css';
@@ -9,7 +10,10 @@ import { AiFillWarning } from 'react-icons/ai';
 
 const Login = () => {
     const navigate = useNavigate();
-
+    
+    const {contextStore} = GetGlobalData();
+    const [store, setStore] = contextStore
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -54,10 +58,10 @@ const Login = () => {
         },
         data : data
       };
-      
       axios(config)
       .then((response) => {
         localStorage.setItem("token",response.data.token);
+        // setStore([])
         navigate('/home');
       })
       .catch((error) => {
@@ -75,8 +79,8 @@ const Login = () => {
           </div>
        
             <div className='loginFormulaire'>
-                {inputData.map((input) => (
-                    <InputLogin className='inputLogin' type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
+                {inputData.map((input, key) => (
+                    <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
                 ))}
                 <Button value={"Se connecter"} handelclick={()=>verifyValue()}/>
                 <p className='Already' >Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>
