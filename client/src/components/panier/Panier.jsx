@@ -7,10 +7,11 @@ import { Trash } from './trash';
 import './Panier.css'
 
  const Panier = () => {
-  const {contextStore, contextTotal, contextLog} = GetGlobalData();
+  const {contextStore, contextTotal, contextUser} = GetGlobalData();
   const [store, setStore] = contextStore;
   const [total] = contextTotal;
-  const [login] = contextLog;
+  const [user] = contextUser;
+  
     
 
 
@@ -76,7 +77,7 @@ import './Panier.css'
               </div>
               </div>
                         <p className='total'>Cela vous fera un total de {total}€</p>
-                    {login ? 
+                    {user ? 
                         <div className='buttonModalSmall'>
                             <button className='buttonBuy' onClick={()=>navigate("/commande", {total})}>Acheter</button>
                         </div>

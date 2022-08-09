@@ -11,8 +11,10 @@ import { AiFillWarning } from 'react-icons/ai';
 const Login = () => {
     const navigate = useNavigate();
     
-    const {contextStore} = GetGlobalData();
+    const {contextStore, contextUser, contextToken} = GetGlobalData();
     const [store, setStore] = contextStore
+    const [user, setUser] = contextUser
+    const [token, setToken] = contextToken
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -60,8 +62,8 @@ const Login = () => {
       };
       axios(config)
       .then((response) => {
-        localStorage.setItem("token",response.data.token);
-        // setStore([])
+        setToken(response.data.token)
+        localStorage.setItem("token",JSON.stringify(response.data.token));
         navigate('/home');
       })
       .catch((error) => {
@@ -82,7 +84,7 @@ const Login = () => {
                 {inputData.map((input, key) => (
                     <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
                 ))}
-                <Button value={"Se connecter"} handelclick={()=>verifyValue()}/>
+                <Button value={"Se connecter"} handelclick={verifyValue}/>
                 <p className='Already' >Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>
             </div>
         {error && <p className='error'> {error}</p>}

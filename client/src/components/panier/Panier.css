@@ -32,6 +32,7 @@
     border-top: 1px solid white ;
     background-color: rgb(220, 208, 208);
 
+
 }
 
 
@@ -39,32 +40,20 @@
     border-top: 1px solid white ;
     width: 90%;
     margin: auto;
+ 
+
 } 
 .tdImage img{
     width: 100%;
 }
-.modelContainerSmall table{
-    color: black;
-    font-size: 1.2em;
-    font-family: 'Roboto', sans-serif;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    /* color: white; */
-}
+
 
 .modelContainerSmall{
     width: 100%;
     /* color: white; */
 }
 
-.modelContainerSmall td{
-    padding: 10px;
-    text-align: center;
-    /* color: white; */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.17);
-    border-top: 1px solid rgba(0, 0, 0, 0.17);
-}
+
 .itemProduit{
     width: 60%;
 }
@@ -110,13 +99,6 @@ margin-bottom: 20px;
 .trash{
     color: black;
     font-size: 20px;
-}
-th{
-    margin-bottom: 20px;
-}
-.tdImage{
-    width: 100px;
-    height: 100px;
 }
 
 .total{

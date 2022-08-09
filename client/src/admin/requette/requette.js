@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { GetGlobalData } from "../../useContext/AuthProviders";
 const Token = localStorage.getItem("token");
 
 export const APIdelete = (id) => {
@@ -89,6 +90,7 @@ export const getItem = (setData) => {
     }
 
     export const getRole = (setRole, setInfoPerso) => {
+
       const Token = localStorage.getItem("token");
       var config = {
           method: 'get',
@@ -100,7 +102,7 @@ export const getItem = (setData) => {
         };
         
         axios(config)
-        .then(response => {setInfoPerso(response.data); setRole(response.data.roles[0]);})
+        .then(response => {setInfoPerso(response.data);setRole(response.data.roles[0]);})
         .catch(error => {
           console.log(error);
         });
@@ -125,3 +127,20 @@ export const getItem = (setData) => {
           });
     
         }      
+
+        export const getUser= (token) => {
+
+          var config = {
+              method: 'get',
+              url: 'https://localhost:8000/api/user/role',
+              headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              }
+            };
+            
+                 axios(config)
+            
+      
+          }
+         

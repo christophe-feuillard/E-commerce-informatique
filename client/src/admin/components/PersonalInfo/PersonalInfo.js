@@ -3,12 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Tab } from '@headlessui/react'
 import { useEffect } from "react";
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 
 
-const PersonalInfo = ({ data }) => {
+const PersonalInfo = () => {
+
+  const {contextStore, contextTotal,contextUser} = GetGlobalData();
+  const [store, setStore] = contextStore;
+  const [total] = contextTotal;
+  const [user] = contextUser;
   const navigate = useNavigate();
   const [modeCard, setModeCard] = useState('')
-  console.log(data)
+
+
+  console.log(user, 'User connecté')  
+
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -33,19 +42,19 @@ const PersonalInfo = ({ data }) => {
 
 
   const carteBancaire = firstNumber.filter((item) => {
-    if (data.card.number.charAt(0) == item.number) {
+    if (user.card.number.charAt(0) == item.number) {
       return item
     }
 
   })
-
+// console.log( modeCard )
   useEffect(() => (
 
     setModeCard(carteBancaire)
 
   ), [])
 
-  console.log(modeCard, 'gfchgfhf')
+  // console.log(modeCard, 'gfchgfhf')
 
   // console.log(modeCard)
 
@@ -63,18 +72,18 @@ const PersonalInfo = ({ data }) => {
   const info = [
     {
       titre: "PRENOM",
-      ref: data.name
+      ref: user.name
     },
     {
       titre: "ADRESSE EMAIL",
-      ref: data.email
+      ref: user.email
     },
     {
       titre: "NUMERO DE TELEPHONE",
-      ref: data.phone
+      ref: user.phone
     }
   ]
-
+  console.log(user, 'User connecté')
   return (
     <div className="sizeNav">
       <div className="MonProfil">
@@ -115,7 +124,7 @@ const PersonalInfo = ({ data }) => {
             ))}
             <div className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
               <p>ADRESSE : </p>
-              <p className="capitalize">{data.adresse} {data.ville} {data.CodePostal}</p>
+              <p className="capitalize">{user.adresse} {user.ville} {user.CodePostal}</p>
             </div>
           </Tab.Panel>
           <Tab.Panel
@@ -141,9 +150,9 @@ const PersonalInfo = ({ data }) => {
                 <li className="i">
                   <div >
                     <ul>
-                      <li>{modeCard[0]?.card} ({data.card.number.substring(0, 4)})</li>
-                      <li>Exp: {data.card.date}</li>
-                      <li>{data.card.name}</li>
+                      <li>{modeCard[0]?.card} ({user.card.number.substring(0, 4)})</li>
+                      <li>Exp: {user.card.date}</li>
+                      <li>{user.card.name}</li>
                     </ul>
                   </div>
                 </li>

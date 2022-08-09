@@ -1,23 +1,19 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import InputCard from '../../components/input/InputCard';
 import { GetGlobalData } from '../../useContext/AuthProviders';
 import { Trash } from '../../components/panier/trash';
-import jwt_decode from 'jwt-decode';
 
 import './commande.css'
 export const Commande = () => {
-  
-  
-      const {contextStore, contextTotal, contextLog, contextUser} = GetGlobalData();
+      const {contextStore, contextTotal,contextUser} = GetGlobalData();
       const [store, setStore] = contextStore;
       const [total] = contextTotal;
-      const [login] = contextLog;
-      const [user] = contextUser;
+      const [user] = contextUser
+
    
-console.log(user.name)
 const token = localStorage.getItem("token");
 
   const [name, setName] = useState('');
@@ -34,7 +30,6 @@ const token = localStorage.getItem("token");
 
   const navigate = useNavigate()
 
-  const GetArticlesInPanier =  store
 
   const inputName = [
     {
@@ -59,22 +54,19 @@ const token = localStorage.getItem("token");
   ]
 
   const inputNameCard = [
-
     {
-      type: 'text', id: 'nameCard', for: 'nameCard', placeholder: 'name card', value: user.card.name, change: (e) => setCardName(e.target.value)
-    }
+      type: 'text', id: 'nameCard', for: 'nameCard', placeholder: 'name card', value: user?.card?.name , change: (e) => setCardName(e.target.value)
+        }
   ]
 
   const InputCvc = [
-
     {
       type: 'text', id: 'cvc', for: 'cvc', placeholder: 'cvc', value: cardCvc, change: (e) => setCvc(e.target.value)
     }
   ]
   const InputCardNumber = [
-
     {
-      type: 'text', id: 'number', for: 'number', placeholder: 'number', value: user.card.number, change: (e) => setCardNumber(e.target.value)
+      type: 'text', id: 'number', for: 'number', placeholder: 'number', value: user?.card?.number, change: (e) => setCardNumber(e.target.value)
     }
   ]
 
@@ -113,7 +105,7 @@ const token = localStorage.getItem("token");
   };
   
 
-    const callAPI = () => {
+    const callAPI = () => { 
       if(isSave){
         var data = JSON.stringify({
           "name": cardName,
@@ -151,8 +143,9 @@ const token = localStorage.getItem("token");
 
 
   return (
+
     <div className='body mt-7'>
-    <div >
+    <div>
    <div className="flow-root scrollY ">
               <ul role="list" className="-my-6 divide-y divide-gray-200">
                 {store.map((product, key) => (
@@ -196,7 +189,7 @@ const token = localStorage.getItem("token");
               </div>
               <div className="flex justify-between">
                 <dt>Shipping</dt>
-                <dd className="text-gray-900">{Math.floor(Math.random() * 10)}</dd>
+                <dd className="text-gray-900">{user?.card?.number}</dd>
               </div>
               <div className="flex justify-between border-t border-gray-200 text-gray-900 pt-6">
                 <dt className="text-base">Total</dt>
@@ -260,7 +253,7 @@ const token = localStorage.getItem("token");
                 <div className="flexin justify-space-between">
                   <div className="field half">
                     {InputCity.map((input, key) => (
-                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                      <InputCard key={key}  className='input' type={input.tycommandepe} value={input.value} placeholder={input.placeholder} change={input.change} />
                     ))}
                   </div>
                   <div className="field half">
@@ -321,7 +314,7 @@ const token = localStorage.getItem("token");
               <label htmlFor="save">Souhaitez-vous enregistrez vos données ?</label>
               </div>
               {/* <button className="button button-link">Back to Shipping</button> */}
-              <button onClick={()=>callAPI()} className="button button-primary">Proceder au paiement</button>
+              <button onClick={callAPI} className="button button-primary">Proceder au paiement</button>
             </div>
           </div>
         </div>

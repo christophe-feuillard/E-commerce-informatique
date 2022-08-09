@@ -32,7 +32,7 @@ const Card = ({articles,handleckick,colorFavoris,clickFavoris, textStore, size})
    if (foundArticleInLocalStorage ) {
   
     setStore(
-      store.map((item, key) => item.id == articles.id ? {...articles, quantity:foundArticleInLocalStorage.quantity + 1}: item)
+      store.map((item) => item.id == articles.id ? {...articles, quantity:foundArticleInLocalStorage.quantity + 1}: item)
      )
    } else {
     setStore([...store, {...articles, quantity: 1}])

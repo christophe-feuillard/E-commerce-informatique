@@ -5,31 +5,32 @@ import {useState, useEffect} from 'react';
 import Header from "../../components/header/Header";
 import PersonalInfo from "../../admin/components/PersonalInfo/PersonalInfo";
 import NavBAr from "../../admin/components/Navbar/NavBar";
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 const Account = () =>{
+  const {contextUser} = GetGlobalData();
+  const [user] = contextUser;
+
+
     const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}];
     const [role, setRole] = useState('')
-    const [infoPerso, setInfoPerso] = useState({})
     const [edit, setEdit] = useState('home')
 
-    useEffect(() => {
-        getRole(setRole, setInfoPerso);
-        
-    }, [role]);
+   
 
-    console.log(infoPerso)
+    // console.log(infoPerso)
 
-    if(role === 'ROLE_USER'){
+    if(user?.roles[0] === 'ROLE_USER'){
         return (
             <div>
                 {/* <Header /> */}
-                <div className="Userhome"><PersonalInfo data={infoPerso}/></div>
+                <div className="Userhome"><PersonalInfo/></div>
             </div>
             
         )
     }
 
-    if(role === 'ROLE_ADMIN'){
+    if(user?.roles[0] === 'ROLE_ADMIN'){
         
         return (
 
