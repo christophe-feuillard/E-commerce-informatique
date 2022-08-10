@@ -69,11 +69,15 @@ class Article
     #[Groups("groupe:get")]
     private ?int $width = null;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Avis::class, orphanRemoval: true)]
+    private Collection $avis;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
         $this->user = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -260,6 +264,36 @@ class Article
     public function setWidth(?int $width): self
     {
         $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getArticle() === $this) {
+                $avi->setArticle(null);
+            }
+        }
 
         return $this;
     }

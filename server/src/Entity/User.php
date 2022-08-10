@@ -16,6 +16,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("groupe:get")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
@@ -56,9 +57,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
       #[Groups("groupe:get")]
     private ?string $CodePostal = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class, orphanRemoval: true)]
+    private Collection $avis;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,6 +228,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCodePostal(string $CodePostal): self
     {
         $this->CodePostal = $CodePostal;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getUser() === $this) {
+                $avi->setUser(null);
+            }
+        }
 
         return $this;
     }

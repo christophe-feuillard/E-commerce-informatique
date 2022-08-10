@@ -4,38 +4,16 @@ import './Article_details.css';
 import Header from "../../components/header/Header";
 import Buy from '../../components/buy/Buy';
 import axios from 'axios';
-import Comments from "../../components/commentaires/Comments";
-import Comment from "../../components/commentaires/Comment";
+import Commentaires from "../../components/commentaires/Commentaires";
 
 const ArticleDetails = (props) => {
 
     const navigate = useNavigate();
     const [articles,setArticles] = useState([]);
-    const [dataUser, setdataUser] = useState([]);
-    const Token = localStorage.getItem("token");
     let { articlesParams } = useParams();
     let [cart, setCart] = useState([])
     let localCart = localStorage.getItem("cart");
     console.log(articles);
-
-    useEffect(() => {
-      const callAPI = async () => {
-          await axios.get('http://localhost:8000/api/user/role', {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${Token}`
-              },
-          })
-          .then(res => {
-              setdataUser(res.data);
-              console.log(res.data);
-          })
-          .catch(err => {
-          console.log(err);
-          });
-      }
-      callAPI();
-    }, []);
 
     const fetchData = () => {
       axios.get(`http://127.0.0.1:8000/api/article/${articlesParams}`)
@@ -105,12 +83,8 @@ const ArticleDetails = (props) => {
 
         </div>
       </div>
-
-      <div>
-        <Comments commentsUrl="http://localhost:3000/comments" currentUserId={dataUser.email} />
-      </div>
-      
-    </main>      
+      <Commentaires articleId={articles.id}/>   
+    </main>   
     </>
   )
 }
