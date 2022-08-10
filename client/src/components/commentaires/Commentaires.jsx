@@ -53,17 +53,34 @@ const Commentaires = ({articleId}) => {
     newdata[e.target.id] = e.target.value;
     setFormdata(newdata);
   }
+
+
+
   const onSubmit = (event) => {
     event.preventDefault(); 
     setComment("");
     console.log(formdata);
-    axios.post("http://127.0.0.1:8000/api/avis/save", {
+
+    const data = {
       userid: parseInt(formdata.userid),  
       message: formdata.message,
       articleid: parseInt(formdata.articleid)
-    }).then(res => {
-       console.log(res.data)
+    }
+
+    var config = {
+      method: 'post',
+      url: "http://127.0.0.1:8000/api/avis/save",
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Token}`
+      }, 
+      data : data
+    }
+
+    axios(config).then(res => {
+       console.log(res.data + "donnees envoye")
     })
+    
   };
 
   return (

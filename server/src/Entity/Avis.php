@@ -25,8 +25,21 @@ class Avis
     #[ORM\JoinColumn(nullable: false)]
     private ?Article $article = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    #[ORM\Column(type: 'datetime_immutable' , options:['default'=>'CURRENT_TIMESTAMP'])]
+    private $created_at;
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
@@ -69,15 +82,4 @@ class Avis
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
 }
