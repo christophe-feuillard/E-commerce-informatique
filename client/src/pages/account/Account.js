@@ -7,7 +7,7 @@ import PersonalInfo from "../../admin/components/PersonalInfo/PersonalInfo";
 import NavBAr from "../../admin/components/Navbar/NavBar";
 
 const Account = () =>{
-    const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}];
+    const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}, {title:"Utlisateurs", url:"users"}];
     const [role, setRole] = useState('')
     const [infoPerso, setInfoPerso] = useState({})
     const [edit, setEdit] = useState('home')
@@ -16,8 +16,6 @@ const Account = () =>{
         getRole(setRole, setInfoPerso);
         
     }, [role]);
-
-    console.log(infoPerso)
 
     if(role === 'ROLE_USER'){
         return (

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -14,6 +16,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups("groupe:get")]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
@@ -49,6 +52,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $CodePostal;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[Groups("groupe:get")]
+    private ?Emballage $emballage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private $Country = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Payment::class)]
+    private Collection $payments;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?PhysicalAdresses $physicalAdresses = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $BanMethode = null;
+
+    public function __construct()
+    {
+        $this->payments = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,7 +85,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -187,6 +213,104 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCodePostal(?string $CodePostal): self
     {
         $this->CodePostal = $CodePostal;
+
+        return $this;
+    }
+
+    public function getEmballage(): ?Emballage
+    {
+        return $this->emballage;
+    }
+
+    public function setEmballage(?Emballage $emballage): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($emballage === null && $this->emballage !== null) {
+            $this->emballage->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($emballage !== null && $emballage->getUser() !== $this) {
+            $emballage->setUser($this);
+        }
+
+        $this->emballage = $emballage;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->Country;
+    }
+
+    public function setCountry(string $Country): self
+    {
+        $this->Country = $Country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Payment>
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->removeElement($payment)) {
+            // set the owning side to null (unless already changed)
+            if ($payment->getUser() === $this) {
+                $payment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPhysicalAdresses(): ?PhysicalAdresses
+    {
+        return $this->physicalAdresses;
+    }
+
+    public function setPhysicalAdresses(?PhysicalAdresses $physicalAdresses): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($physicalAdresses === null && $this->physicalAdresses !== null) {
+            $this->physicalAdresses->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($physicalAdresses !== null && $physicalAdresses->getUser() !== $this) {
+            $physicalAdresses->setUser($this);
+        }
+
+        $this->physicalAdresses = $physicalAdresses;
+
+        return $this;
+    }
+
+    public function getBanMethode(): ?string
+    {
+        return $this->BanMethode;
+    }
+
+    public function setBanMethode(?string $BanMethode): self
+    {
+        $this->BanMethode = $BanMethode;
 
         return $this;
     }

@@ -163,3 +163,126 @@ export const getItem = (setData) => {
             } 
 
 
+            export const getUsers = (setUserData) => {
+              const Token = localStorage.getItem("token");
+              var config = {
+                  method: 'get',
+                  url: `/api/admin/user`,
+                  headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Token}`
+                  }
+                };
+                
+                axios(config)
+                .then(response => {setUserData(response.data)})
+                .catch(error => {
+                  console.log(error);
+                });
+          
+              } 
+
+              export const updateUser = (id, data, setEdit) => {
+                const Token = localStorage.getItem("token");
+                var config = {
+                    method: 'post',
+                    url: `/api/admin/user/update/${id}`,
+                    headers: { 
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${Token}`
+                    },
+                    data : data
+                  };
+                  
+                  axios(config)
+                  .then(response => setEdit('users'))
+                  .catch(error => {
+                    console.log(error);
+                  });
+            
+                } 
+
+
+                export const getCountry = (setCountry) => {
+                  const Token = localStorage.getItem("token");
+                  var config = {
+                      method: 'get',
+                      url: `/api/admin/country`,
+                      headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${Token}`
+                      }
+                    };
+                    
+                    axios(config)
+                    .then(response => {setCountry(response.data)})
+                    .catch(error => {
+                      console.log(error);
+                    });
+              
+                  }
+                  
+                  export const BanCountry = (data) => {
+                    const Token = localStorage.getItem("token");
+                    var config = {
+                        method: 'post',
+                        url: `/api/admin/ban/country`,
+                        headers: { 
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${Token}`
+                        },
+                        data : data
+                      };
+                      
+                      axios(config)
+                      .then(response => console.log(response))
+                      .catch(error => {
+                        console.log(error);
+                      });
+                
+                    } 
+
+
+                    export const getCountryBan = (setCountryBan) => {
+                      const Token = localStorage.getItem("token");
+                      var config = {
+                          method: 'get',
+                          url: `/api/admin/countryban`,
+                          headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${Token}`
+                          }
+                        };
+                        
+                        axios(config)
+                        .then(response => {setCountryBan(response.data)})
+                        .catch(error => {
+                          console.log(error);
+                        });
+                  
+                      }
+
+                      export const RemoveBan = (data) => {
+                        const test = {
+                          "country" : data
+                        }
+                        const Token = localStorage.getItem("token");
+                        var config = {
+                            method: 'post',
+                            url: `/api/admin/ban/remove`,
+                            headers: { 
+                              'Content-Type': 'application/json',
+                              'Authorization': `Bearer ${Token}`
+                            },
+                            data : test
+                          };
+                          
+                          axios(config)
+                          .then(response => console.log(response))
+                          .catch(error => {
+                            console.log(error);
+                          });
+                    
+                        } 
+
+

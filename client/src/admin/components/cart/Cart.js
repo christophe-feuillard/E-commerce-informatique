@@ -20,7 +20,7 @@ const Cart = ({values, setEdit, setElementUpdate, edit}) => {
                     
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix : {values.prix} euros</p>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">stock : {values.stock} unités</p>
-                    {values.discount !== null && <p class="mb-3 font-normal text-gray-700 dark:text-red-400">soldé a hauteur de {values.discount}%</p>}
+                    {values.discount !== null && <p class="mb-3 font-normal text-gray-700 dark:text-red-400">soldé a hauteur de {values.discount}%, Début {values.startDicount} et fin {values.endDiscount} </p>}
 
                 <div className="flex flex-row justify-center">
                     <div className="mx-8" onClick={() => {

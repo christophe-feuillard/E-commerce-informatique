@@ -163,10 +163,12 @@ class AdminController extends AbstractController
     }
 
     try{
-        $discounted =  $initialPrice - ($initialPrice * ($request->request->get('persentDiscount')/100));
+        // $discounted =  $initialPrice - ($initialPrice * ($request->request->get('persentDiscount')/100));
+        $product->setStartDicount($request->request->get('start'));
+        $product->setEndDiscount($request->request->get('end'));
         $product->setDiscount($request->request->get('persentDiscount'));
-        $product->setOldPrice($initialPrice);
-        $product->setPrix($discounted);
+        // $product->setOldPrice($initialPrice);
+        // $product->setPrix($discounted);
         $entityManager->flush();
         return $this->json('ok discount effectué');
     } catch (e) {
@@ -186,18 +188,26 @@ class AdminController extends AbstractController
             $entityManager = $doctrine->getManager();
             $product = $entityManager->getRepository(Article::class)->find($id);
             $oldPrice = $product->getOldPrice();
-
+           
+            if($oldPrice !== null){
+                 $product->setPrix($oldPrice);
+            }
             $product->setDiscount(null);
             $product->setOldPrice(null);
-            $product->setPrix($oldPrice);
+            $product->setStartDicount(null);
+            $product->setEndDiscount(null);
+            
             $entityManager->flush();
-        return $this->json('ok discount enlever');
+
+            return $this->json('ok discount enlever');
         } catch (e) {
             return $this->json(e);
         }
         
 
     }
+
+
 
 
 

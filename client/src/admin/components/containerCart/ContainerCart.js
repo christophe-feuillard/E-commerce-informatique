@@ -4,6 +4,9 @@ import Input from '../input/Input'
 import Container2 from '../container2/Container2';
 import Rowstock from '../rowStock/Rowstock';
 import Discount from '../discount/Discount';
+import Userform from '../Userform/Userform';
+import Usercontainer from '../usercontainer/Usercontainer';
+import Banmethode from '../BanMethode/Banmethode';
 
 
 const ContainerCart = ({role, edit, setEdit}) => {
@@ -11,6 +14,7 @@ const ContainerCart = ({role, edit, setEdit}) => {
     const [elementUpdate, setElementUpdate] = useState({})
     const [created, setCreated] = useState({titre:'', prix:'', description:'', caracteristique:'', photo:'', stock:''})
 
+    console.log(elementUpdate)
 
     if(role === 'ROLE_ADMIN'){
         if(edit === 'create'){
@@ -56,6 +60,26 @@ const ContainerCart = ({role, edit, setEdit}) => {
                 
             )
         }
+
+        if(edit === 'users'){
+            return (
+                <div className='flex overflow-auto'>
+                    <Usercontainer setEdit={setEdit} setElementUpdate={setElementUpdate}/>
+                    <Banmethode />
+                </div>
+                
+            )
+        }
+
+        if(edit === 'userform'){
+            return (
+                <div className='titlecontainerhome'>
+                    <Userform setEdit={setEdit} elementUpdate={elementUpdate}/>
+                </div>
+                
+            )
+        }
+
     }else{
         return <Input dataTochange={elementUpdate} />
     }  

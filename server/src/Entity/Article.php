@@ -65,6 +65,14 @@ class Article
     #[Groups("groupe:get")]
     private ?float $old_price = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $startDicount = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $endDiscount = null;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -239,6 +247,30 @@ class Article
     public function setOldPrice(?float $old_price): self
     {
         $this->old_price = $old_price;
+
+        return $this;
+    }
+
+    public function getStartDicount(): ?string
+    {
+        return $this->startDicount;
+    }
+
+    public function setStartDicount(?string $startDicount): self
+    {
+        $this->startDicount = $startDicount;
+
+        return $this;
+    }
+
+    public function getEndDiscount(): ?string
+    {
+        return $this->endDiscount;
+    }
+
+    public function setEndDiscount(?string $endDiscount): self
+    {
+        $this->endDiscount = $endDiscount;
 
         return $this;
     }
