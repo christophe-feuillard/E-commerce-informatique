@@ -14,6 +14,7 @@ const Commentaires = ({articleId}) => {
   const Token = localStorage.getItem("token");
   const isToken = localStorage.getItem("token") === null;
   const navigate = useNavigate();
+  console.log(dataUser);
 
   const [databasecomment,setDatabasecomment] = useState([]);
 
@@ -21,6 +22,7 @@ const Commentaires = ({articleId}) => {
     userid: "",
     message: "",
     articleid: "",
+    username: "",
   });
 
   useEffect(() => {
@@ -66,6 +68,7 @@ const Commentaires = ({articleId}) => {
     newdata["articleid"] = articleId
     newdata["userid"] = dataUser.id
     newdata[e.target.id] = e.target.value;
+    newdata["username"] = dataUser.name
     setFormdata(newdata);
   }
 
@@ -76,7 +79,8 @@ const Commentaires = ({articleId}) => {
     const data = {
       message: formdata.message,
       user: parseInt(formdata.userid),  
-      article: parseInt(formdata.articleid)
+      article: parseInt(formdata.articleid),
+      username: formdata.username
     }
     var config = {
       method: 'post',
@@ -88,7 +92,7 @@ const Commentaires = ({articleId}) => {
       data : data
     }
     axios(config).then(res => {
-      // console.log(res.data)
+      console.log(res.data)
     })
   };
 
@@ -113,9 +117,9 @@ const Commentaires = ({articleId}) => {
         </button>
       </form>
 
-      {/* {comments.map((text) => (
+      {comments.map((text) => (
       <div className="container_com_div">
-
+        
         <div className="commentaire_div"> 
 
           <div>
@@ -125,7 +129,7 @@ const Commentaires = ({articleId}) => {
           <div>
             <div>
              <span className="username_com">{dataUser.name}</span> 
-             <span className="time_com"> {moment().fromNow()}  </span> 
+             <span className="time_com"> {moment().format("MMM Do YY")}  </span> 
             </div>
             <div>
               <p>
@@ -136,7 +140,7 @@ const Commentaires = ({articleId}) => {
 
         </div>  
       </div>        
-      ))} */}
+      ))}
 
      {databasecomment.map((text) => ( text.article === articleId &&
       <div className="container_com_div">
@@ -149,7 +153,7 @@ const Commentaires = ({articleId}) => {
 
           <div>
             <div>
-             <span className="username_com">{text.user}</span> 
+             <span className="username_com">{text.username}</span> 
              <span className="time_com"> {moment().fromNow()}  </span> 
             </div>
             <div>
