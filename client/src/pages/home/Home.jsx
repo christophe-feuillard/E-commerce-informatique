@@ -19,13 +19,13 @@ const Home = () => {
   const [colorFavoris,setColorFavoris] = useState([]);
   const [textStore,setTextStore] = useState([]);
   const [fav,setFav] = useState( JSON.parse(localStorage.getItem("favoris")) || []);
-  const [articleNumber,setArticleNumber] = useState(0);
-  const [isLoading,setIsLoading] = useState(false);
+  // const [articleNumber,setArticleNumber] = useState(0);
+  // const [isLoading,setIsLoading] = useState(false);
   const [categorie,setCategorie] = useState(0);
 
     useEffect(() => {
       const callAPI = () => {
-        axios.get('https://localhost:8000/api/articles')
+        axios.get('http://localhost:8000/api/articles')
           .then(res => {
             setData(res.data);
             setColorFavoris(Array(res.data.length).fill(false))
@@ -66,8 +66,11 @@ const Home = () => {
       if(categorie !== 0){
         let config = {
           method: 'get',
-          url: `https://localhost:8000/api/categories/${categorie}`,
-          headers: { 'Content-Type': 'application/json' },
+          url: `http://localhost:8000/api/categories/${categorie}`,
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : "*"
+          },
         };
         
         axios(config)

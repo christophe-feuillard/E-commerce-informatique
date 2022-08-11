@@ -54,7 +54,7 @@ const Login = () => {
       
       var config = {
         method: 'post',
-        url: 'https://localhost:8000/api/login_check',
+        url: 'http://localhost:8000/api/login_check',
         headers: { 
           'Content-Type': 'application/json'
         },

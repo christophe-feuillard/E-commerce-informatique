@@ -37,7 +37,7 @@ useEffect(() => {
 
   const userData = async () => {
       try {
-        const response = await axios.get("https://localhost:8000/api/user/role", {headers: { 
+        const response = await axios.get("http://localhost:8000/api/user/role", {headers: { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }})
@@ -54,8 +54,6 @@ useEffect(() => {
   }
 
 }, [token])
-
-
 
 
 

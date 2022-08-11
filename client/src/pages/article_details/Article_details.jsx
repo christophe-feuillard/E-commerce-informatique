@@ -14,7 +14,7 @@ const ArticleDetails = (props) => {
     console.log(articles);
 
     const fetchData = () => {
-      axios.get(`https://localhost:8000/api/article/${articlesParams}`)
+      axios.get(`http://localhost:8000/api/article/${articlesParams}`)
       .then ((res) => {
         // console.log(res.data)
         setArticles(res.data)
@@ -56,7 +56,6 @@ const ArticleDetails = (props) => {
     <main>
       <div className="container">
         <div>
-          
           <div className="img_article_container">
            <img className="img_article" src={articles.photo} alt="photo" />
           </div>
@@ -66,7 +65,7 @@ const ArticleDetails = (props) => {
               <h3>{articles.titre}</h3>
               <ul>
                 <li> Poids : {articles.weight} g </li>
-                <li>Longueur : {articles.length} cm</li>
+                <li>Longueur : {articles.lenght} cm</li>
                 <li> Largeur : {articles.width} "</li>
                 <li> Hauteur : {articles.height} cm</li>
               </ul>

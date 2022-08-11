@@ -13,8 +13,6 @@ import './Panier.css'
   const [user] = contextUser;
   
     
-
-
     const navigate = useNavigate();
 
     const PriceTotale =(props)=>{

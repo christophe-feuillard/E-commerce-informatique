@@ -8,8 +8,7 @@ import { GetGlobalData } from '../../../useContext/AuthProviders';
 
 const PersonalInfo = () => {
 
-  const {contextStore, contextTotal,contextUser} = GetGlobalData();
-  const [store, setStore] = contextStore;
+  const {contextTotal,contextUser} = GetGlobalData();
   const [total] = contextTotal;
   const [user] = contextUser;
   const navigate = useNavigate();

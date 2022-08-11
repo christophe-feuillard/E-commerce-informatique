@@ -16,8 +16,9 @@ const Card = ({store}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+
     const callAPI = () => {
-      axios.get('https://localhost:8000/api/articles')
+      axios.get('http://localhost:8000/api/articles')
         .then(res => {
           setData(res.data);
         })
@@ -25,6 +26,7 @@ const Card = ({store}) => {
           console.log(err);
         });
     }
+
     callAPI();
 
   }, []);
@@ -39,7 +41,7 @@ const Card = ({store}) => {
     <p className='titreArticles'>Nos articles les plus populaires <RiMedalLine/></p>
     <div className='swipe'>
     <Swiper
-    modules={[ Pagination, Scrollbar, A11y, Autoplay]}
+    modules={[Pagination, Scrollbar, A11y, Autoplay]}
     spaceBetween={0}
     slidesPerView={2}
     // loop={true}
