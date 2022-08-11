@@ -17,12 +17,14 @@ const Commentaires = ({articleId}) => {
   console.log(dataUser);
 
   const [databasecomment,setDatabasecomment] = useState([]);
+  // console.log(moment().format("MMM Do YY"));
 
   const [formdata,setFormdata] = useState({
     userid: "",
     message: "",
     articleid: "",
     username: "",
+    date: moment().format("MMM Do YY")
   });
 
   useEffect(() => {
@@ -69,6 +71,7 @@ const Commentaires = ({articleId}) => {
     newdata["userid"] = dataUser.id
     newdata[e.target.id] = e.target.value;
     newdata["username"] = dataUser.name
+    newdata["date"] = moment().format("MMM Do YY")
     setFormdata(newdata);
   }
 
@@ -80,7 +83,8 @@ const Commentaires = ({articleId}) => {
       message: formdata.message,
       user: parseInt(formdata.userid),  
       article: parseInt(formdata.articleid),
-      username: formdata.username
+      username: formdata.username,
+      date: moment().format("MMM Do YY")
     }
     var config = {
       method: 'post',
@@ -98,13 +102,21 @@ const Commentaires = ({articleId}) => {
 
   return (
     <>
-      <h4 className="h4" style={{ display: isToken === true ? "block" : "none" }}>Connecte-toi pour voir les avis laissés</h4>
+    <section className="section_com">
+      <div className="separation"></div>
+
+      <h4 className="h4" style={{ display: isToken === true ? "block" : "none" }}> <a onClick={()=> navigate("/login")} className="cotoi">Connecte-toi</a> pour pouvoir accéder aux avis</h4>
       <a onClick={()=> navigate("/register")} className="h4_p" style={{ display: isToken === true ? "block" : "none" }}>Pas encore inscrit ?</a>
+  
+      <div className="container_com_div">
       <form onSubmit={onSubmit} style={{ display: isToken === true ? "none" : "flex" }} className="formCom">   
         <input id="articleid" type="hidden" value={articleId}/>
         <input id="username" type="hidden" value={dataUser.name}/>
         <input id="userid" type="hidden" value={dataUser.id}/>
-        <img className="img_profil_com" src={imgProfil} alt="profil"/>            
+        <div className="img_profil_form">
+          <img className="img_profil_com" src={imgProfil} alt="profil"/>
+        </div>
+
         <textarea
          placeholder="Laisser un avis"
          id="message" 
@@ -116,9 +128,10 @@ const Commentaires = ({articleId}) => {
           Ajouter un avis
         </button>
       </form>
+      </div>
 
       {comments.map((text) => (
-      <div className="container_com_div">
+      <div className="container_com_div ccd2">
         
         <div className="commentaire_div"> 
 
@@ -143,7 +156,7 @@ const Commentaires = ({articleId}) => {
       ))}
 
      {databasecomment.map((text) => ( text.article === articleId &&
-      <div className="container_com_div">
+      <div className="container_com_div ccd2">
 
         <div className="commentaire_div"> 
 
@@ -154,7 +167,7 @@ const Commentaires = ({articleId}) => {
           <div>
             <div>
              <span className="username_com">{text.username}</span> 
-             <span className="time_com"> {moment().fromNow()}  </span> 
+             <span className="time_com"> {text.date}  </span> 
             </div>
             <div>
               <p>
@@ -166,6 +179,7 @@ const Commentaires = ({articleId}) => {
         </div>  
       </div>        
       ))} 
+    </section>
     </>
   )
     

@@ -5,6 +5,7 @@ import Header from "../../components/header/Header";
 import Buy from '../../components/buy/Buy';
 import axios from 'axios';
 import Commentaires from "../../components/commentaires/Commentaires";
+import returnArrow from "../../asset/return.png"
 
 const ArticleDetails = (props) => {
 
@@ -54,6 +55,9 @@ const ArticleDetails = (props) => {
     <>
     <Header register={()=> navigate("/register")} />
     <main>
+      <a href="/home" className='retour_en_a'>
+       <img src={returnArrow} alt="return" />
+      </a>
       <div className="container">
         <div>
           <div className="img_article_container">
@@ -83,8 +87,8 @@ const ArticleDetails = (props) => {
 
         </div>
       </div>
-      <Commentaires articleId={articles.id}/>   
     </main>   
+    <Commentaires articleId={articles.id}/>   
     </>
   )
 }

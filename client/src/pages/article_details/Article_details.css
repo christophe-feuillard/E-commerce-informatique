@@ -2,9 +2,23 @@ body {
 	font-family: 'Raleway', sans-serif;
 
 }
+* {
+	/* border: 1px solid white; */
+}
 main {
 	width: 100%;
 	background-color: rgba(194, 175, 175, 0.636);
+}
+.retour_en_a {
+	cursor: pointer;
+	/* border: 1px solid white; */
+	position: absolute;
+	top: 25%;
+	left: 12%;
+	width: 40px;
+}
+.retour_en_a > img {
+	cursor: pointer;
 }
 .container {
 	display: flex;

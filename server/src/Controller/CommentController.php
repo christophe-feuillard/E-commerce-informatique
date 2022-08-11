@@ -44,6 +44,7 @@ class CommentController extends AbstractController
             $comment->setUser($request->request->get('user')); // userid
             $comment->setArticle($request->request->get('article')); // articleid
             $comment->setUsername($request->request->get('username')); // username
+            $comment->setDate($request->request->get('date')); // username
         
             $entityManager = $doctrine->getManager();
             $entityManager->persist($comment); // prepare la requete
