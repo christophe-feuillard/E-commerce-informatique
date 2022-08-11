@@ -29,7 +29,7 @@ const Input = ({dataTochange, isCreated, setEdit, edit}) => {
     return (
         <div className="relative z-0 mb-6 w-full group px-96">
             {Object.keys(dataTochange).map(function(key, value) {
-                if(key !== 'id'){
+                if(key !== 'id' && key !== 'old_price' && key !== 'discount'){
                   return (
                     <div className="containerinput">
                       {edit === 'update'  &&  <label for={key}>{key}</label>}

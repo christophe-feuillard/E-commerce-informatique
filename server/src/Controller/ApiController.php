@@ -16,17 +16,71 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+
+use Doctrine\Persistence\ManagerRegistry;
 
 
 
 class ApiController extends AbstractController
 {
     #[Route('/api/articles', name: 'app_api')]
-        public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface)
+        public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, ManagerRegistry $doctrine, SerializerInterface $serializerInterface)
         {
+
+
+            // $article = $articleRepository->findAll();                                                  //RECUPERATION DANS LA BDD
+
+            // $articleRepository = $normalize->normalize($article, null, ['groups' => 'groupe:get']);    //CONVERTIT EN TABLEAU ASSOCIATIF
+            // $json = json_encode($articleRepository);                                                   //L'ENCODE EN JSON
+
+            //////////////////////////////////OU//////////////////////////
+
+            // $json = $serializerInterface->serialize($articleRepository, 'json', ['groups' => 'groupe:get']);    // CONVERIT ET ENCODE 
+
+
+            // $resonse = new Response($json, 200, [
+            //     "Content-Type" => "application/json"
+            // ]);
+
+            // return $resonse;
+
+            
+
+            $date = date('Y-m-d');
+           
+            $entityManager = $doctrine->getManager();
+            $product = $entityManager->getRepository(Article::class)->findAll();
+            foreach($product as $pro){
+                if($date === $pro->getStartDicount()){
+                    if($pro->getOldPrice() === null){
+
+                        $discounted =  $pro->getPrix() - ($pro->getPrix() * ($pro->getDiscount()/100));
+                        $pro->setOldPrice($pro->getPrix());
+                        $pro->setPrix($discounted);
+                        $entityManager->flush();
+                    }
+                    
+                }
+
+                
+                if($date === $pro->getEndDiscount()){
+
+                    if($pro->getOldPrice() === null){
+                        $pro->setPrix($pro->getOldPrice());
+                        $pro->setDiscount(null);
+                        $pro->setOldPrice(null);
+                        $pro->setStartDiscount(null);
+                        $pro->setEndDiscount(null);
+                        $entityManager->flush();
+                }
+            }
+            }
+            
+
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
         }
 

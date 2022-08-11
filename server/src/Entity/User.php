@@ -49,21 +49,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
     private $apiToken;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'users')]
-    private Collection $favoris;
-
-    #[ORM\Column(length: 255)]
-    #[Groups("groupe:get")]
-    private ?string $CodePostal = null;
-
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], fetch: 'EAGER')]
-    #[Groups("groupe:get")]
-    private ?Card $card = null;
-
-    public function __construct()
-    {
-        $this->favoris = new ArrayCollection();
-    }
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $CodePostal;
 
     public function getId(): ?int
     {
@@ -75,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -230,29 +217,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getCard(): ?Card
-    {
-        return $this->card;
-    }
-
-    public function setCard(?Card $card): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($card === null && $this->card !== null) {
-            $this->card->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($card !== null && $card->getUser() !== $this) {
-            $card->setUser($this);
-        }
-
-        $this->card = $card;
-
-        return $this;
-    }
-
-
- 
 }

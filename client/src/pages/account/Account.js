@@ -8,19 +8,15 @@ import NavBAr from "../../admin/components/Navbar/NavBar";
 import { GetGlobalData } from '../../useContext/AuthProviders';
 
 const Account = () =>{
-  const {contextUser} = GetGlobalData();
-  const [user] = contextUser;
-
-
     const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}];
     const [role, setRole] = useState('')
     const [edit, setEdit] = useState('home')
 
    
 
-    // console.log(infoPerso)
+    console.log(infoPerso)
 
-    if(user?.roles[0] === 'ROLE_USER'){
+    if(role === 'ROLE_USER'){
         return (
             <div>
                 {/* <Header /> */}
