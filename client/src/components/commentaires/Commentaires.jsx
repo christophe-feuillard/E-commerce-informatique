@@ -15,11 +15,12 @@ const Commentaires = ({articleId}) => {
   const isToken = localStorage.getItem("token") === null;
   const navigate = useNavigate();
 
+  const [databasecomment,setDatabasecomment] = useState([]);
+
   const [formdata,setFormdata] = useState({
     userid: "",
     message: "",
     articleid: "",
-
   });
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Commentaires = ({articleId}) => {
         })
         .then(res => {
             setdataUser(res.data);
-            console.log(res.data);
+            // console.log(res.data);
         })
         .catch(err => {
         console.log(err);
@@ -41,9 +42,23 @@ const Commentaires = ({articleId}) => {
     callAPI();
   }, []);
 
+  useEffect(() => {
+    const callAPI = () => {
+      axios.get('http://127.0.0.1:8000/api/comments')
+        .then(res => {
+          setDatabasecomment(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+    callAPI();
+  }, []);
+
   const onClickHandler = () => {
     setComments((comments) => [...comments, comment]);
   }
+
   const onChangeHandler = (e) => {
     setComment(e.target.value);
 
@@ -54,19 +69,15 @@ const Commentaires = ({articleId}) => {
     setFormdata(newdata);
   }
 
-
-
   const onSubmit = (event) => {
     event.preventDefault(); 
     setComment("");
-    console.log(formdata);
 
     const data = {
-      userid: parseInt(formdata.userid),  
       message: formdata.message,
-      articleid: parseInt(formdata.articleid)
+      user: parseInt(formdata.userid),  
+      article: parseInt(formdata.articleid)
     }
-
     var config = {
       method: 'post',
       url: "http://127.0.0.1:8000/api/avis/save",
@@ -76,11 +87,9 @@ const Commentaires = ({articleId}) => {
       }, 
       data : data
     }
-
     axios(config).then(res => {
-       console.log(res.data + "donnees envoye")
+      // console.log(res.data)
     })
-    
   };
 
   return (
@@ -104,7 +113,7 @@ const Commentaires = ({articleId}) => {
         </button>
       </form>
 
-      {comments.map((text) => (
+      {/* {comments.map((text) => (
       <div className="container_com_div">
 
         <div className="commentaire_div"> 
@@ -119,13 +128,40 @@ const Commentaires = ({articleId}) => {
              <span className="time_com"> {moment().fromNow()}  </span> 
             </div>
             <div>
-              {text}
+              <p>
+               {text}
+              </p>             
             </div>
           </div>
 
         </div>  
       </div>        
-      ))}
+      ))} */}
+
+     {databasecomment.map((text) => ( text.article === articleId &&
+      <div className="container_com_div">
+
+        <div className="commentaire_div"> 
+
+          <div>
+           <img className="img_profil_com" src={imgProfil} alt="profil"/>
+          </div>
+
+          <div>
+            <div>
+             <span className="username_com">{text.user}</span> 
+             <span className="time_com"> {moment().fromNow()}  </span> 
+            </div>
+            <div>
+              <p>
+               {text.message}
+              </p>             
+            </div>
+          </div>
+
+        </div>  
+      </div>        
+      ))} 
     </>
   )
     

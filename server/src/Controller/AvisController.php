@@ -12,10 +12,10 @@ use App\Entity\Avis;
 use App\Entity\User;
 use App\Entity\Article;
 
-#[Route('/api')]
+// #[Route('/api')]
 class AvisController extends AbstractController
 {
-    #[Route('/avis/save', name: 'app_avis')]
+    // #[Route('/avis/save', name: 'app_avis')]
     public function save(ManagerRegistry $doctrine, Request $request): JsonResponse
     {
         if ($request->isMethod('POST')) {
@@ -52,7 +52,7 @@ class AvisController extends AbstractController
     $entityManager->flush(); // execute et sauvegarde la requete
 
     return new JsonResponse("C SAUVEGARDER POTO");
- 
-        return $this->json($request->request->get('message'));
+    return $this->json($request->request->get('message'));
+    
     }
 }

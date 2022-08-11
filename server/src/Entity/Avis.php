@@ -17,13 +17,13 @@ class Avis
     #[ORM\Column(length: 255)]
     private ?string $message = null;
 
-    #[ORM\ManyToOne(inversedBy: 'avis')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    // #[ORM\ManyToOne(inversedBy: 'avis')]
+    // #[ORM\JoinColumn(nullable: false)]
+    private ?int $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'avis')]
+    // #[ORM\ManyToOne(inversedBy: 'avis')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Article $article = null;
+    private ?int $article = null;
 
     #[ORM\Column(type: 'datetime_immutable' , options:['default'=>'CURRENT_TIMESTAMP'])]
     private $created_at;

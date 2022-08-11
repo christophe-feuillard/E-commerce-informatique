@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api/articles', name: 'app_api')]
+        #[Route('/api/articles', name: 'app_api')]
         public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface)
         {
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
