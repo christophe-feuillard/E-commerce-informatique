@@ -5,7 +5,7 @@ import { GetGlobalData } from '../../useContext/AuthProviders';
 
 
 
-const Card = ({articles,handleckick,colorFavoris,clickFavoris, textStore, size}) => {
+const Card = ({articles,handleckick,colorFavoris,clickFavoris, textStore}) => {
   const {contextStore} = GetGlobalData();
   const [store, setStore] = contextStore;
   const [color,setColor] = useState("black");
@@ -19,11 +19,11 @@ const Card = ({articles,handleckick,colorFavoris,clickFavoris, textStore, size})
 
   const handleStore = () => {
 
-   const foundArticleInLocalStorage = store.find(element => element.id == articles.id);
+   const foundArticleInLocalStorage = store.find(element => element.id === articles.id);
    if (foundArticleInLocalStorage ) {
   
     setStore(
-      store.map((item, key) => item.id == articles.id ? {...articles, quantity:foundArticleInLocalStorage.quantity + 1}: item)
+      store.map((item) => item.id === articles.id ? {...articles, quantity:foundArticleInLocalStorage.quantity + 1}: item)
      )
    } else {
     setStore([...store, {...articles, quantity: 1}])
@@ -35,13 +35,13 @@ const Card = ({articles,handleckick,colorFavoris,clickFavoris, textStore, size})
     
     <div id="voirArticles" className='main'>
         <div className="picture" onClick={handleckick}>
-            <img className='imgCard' src={articles.photo} alt="image du produit"/>
+            <img className='imgCard' src={articles.photo} alt="produit"/>
         </div>
         <div className="contentCard">
             <p className='titleCard' onClick={handleckick}>{articles.titre}</p>
             <div className='divCharacteristic'>
               <p className='characteristic'>{articles.caracteristique}</p>
-              <p className='size'>{size}</p>
+              <p className='size'>{articles.weight+ 'kg' + ' ' + articles.height+ 'cm'+ ' ' + articles.lenght+ 'cm' + ' ' + articles.width+ '"'}</p>
             </div>
             <p className='price'>{articles.prix + "€"}</p>
             <div className='divIconsCard'>                

@@ -9,6 +9,7 @@ import './NavItems.css';
 const NavItems = ({storeClick}) => {
     const {contextStore} = GetGlobalData();
     const [store] = contextStore;
+    // console.log(store.length, 'length');
 
     const navigate = useNavigate();
     const [isLogged, setIsLogged] = useState(false);
@@ -31,7 +32,7 @@ const NavItems = ({storeClick}) => {
                 <div className="dropdown-content">
                     <a className='textLogin' onClick={()=> navigate("/account")}>Mon Compte</a>
                     &#124;
-                    <a className='textLogin' onClick={()=>Deconnexion()}>Deconnexion</a>
+                    <a className='textLogin' onClick={Deconnexion}>Deconnexion</a>
                 </div>
             </div>
             </div>

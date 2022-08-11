@@ -75,7 +75,7 @@ const Home = () => {
 
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
 
-          <Card key={key} articles={item} size={item.weight+ 'kg' + ' ' + item.height+ 'cm'+ ' ' + item.lenght+ 'cm' + ' ' + item.width+ '"'}
+          <Card key={item.id} articles={item}
           handleckick={()=> navigate("/article_details/"+item.id)} 
             colorFavoris={colorFavoris[key]}
             textStore={textStore[key]}

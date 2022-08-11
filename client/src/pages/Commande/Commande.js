@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { RiBankCardFill} from 'react-icons/ri';
 import InputCard from '../../components/input/InputCard';
 import './commande.css'
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GetGlobalData } from '../../useContext/AuthProviders';
@@ -10,10 +10,9 @@ import { GetGlobalData } from '../../useContext/AuthProviders';
 export const Commande = () => {
   
 
-const {contextStore, contextTotal, contextLog, contextUser} = GetGlobalData();
-const [store, setStore] = contextStore;
+const {contextStore, contextTotal, contextUser} = GetGlobalData();
+const [store] = contextStore;
 const [total] = contextTotal;
-const [login] = contextLog;
 const [user] = contextUser;
    
 console.log(user.name)
@@ -29,12 +28,14 @@ const token = localStorage.getItem("token");
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [cardCvc, setCvc] = useState('');
-  const [orderID, setOrderID] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const  [ErrorMessage, setErrorMessage] = useState("");
+  const [orderId, setOrderId] = useState(false);
+  const  [errorMessage, setErrorMessage] = useState("");
   const [isSave, setIsSave] = useState(false);
 
   const navigate = useNavigate()
+
+  console.log(orderId);
+  console.log(errorMessage);
 
   const inputName = [
     {
@@ -100,13 +101,9 @@ const token = localStorage.getItem("token");
     }
   ]
 
-  const initialOptions = {
-    "client-id": "AYyffC2_n1tabYrTG_TtICCkqinchuyrhIm076HuTJjQ6-jDId6WjnD0uC4DkeDwWizSNDrrxa3Ebh7t"
-  };
-
-  const amount = "1209";
-  const currency = "USD";
-
+ const product = {
+   amount : total
+ }
 
   const handleChange = event => {
     if (event.target.checked) {
@@ -152,17 +149,16 @@ const token = localStorage.getItem("token");
     }
   }
 
-
   return (
     <div className='body mt-7'>
     <div >
    <div className="flow-root scrollY max-h-96">
-              <ul role="list" className="-my-6 divide-y divide-gray-200">
+              <ul className="-my-6 divide-y divide-gray-200">
                 {store.map((product, key) => (
                   <li key={key} className="py-6 flex space-x-6">
                     <img
                       src={product.photo}
-                      alt='image du produit'
+                      alt='produit'
                       className="flex-none w-24 h-24 object-center object-cover bg-gray-100 rounded-md"
                     />
                     <div className="flex-auto">
@@ -236,36 +232,31 @@ const token = localStorage.getItem("token");
                       <p>Payer plus vite</p>
                   </div>
                   <div className="logoCard">
-                    <PayPalScriptProvider options={initialOptions}>
+                    
                           <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
                             createOrder={async (data, actions) => {
-                              const orderId = await actions.order
+                              const orderID = await actions.order
                                 .create({
                                   purchase_units: [
                                     {
                                       amount: {
-                                        currency_code: currency,
-                                        value: amount,
+                                        value: product.amount
                                       },
                                     },
                                   ],
                                 });
-                              setOrderID(orderID);
-                              return orderId;
+                              setOrderId(orderID);
+                              return orderID;
                             }}
                             onApprove={async (data, actions) => {
                               const details = await actions.order.capture();
                               const { payer } = details;
-                              setSuccess(true);
-                              setStore(localStorage.removeItem('store'))
-                              navigate("/home"); // redirecte to home for now
-                              alert("La commande a bien été réglée par " + details.payer.name.given_name);
+                              navigate("/payment_confirmation");
                             }}
                             onError={(data, actions) => {
                               setErrorMessage("An Error occured with your payment ");
                             }}
                           />
-                    </PayPalScriptProvider>
                   </div>
                 </div>
               </div>
