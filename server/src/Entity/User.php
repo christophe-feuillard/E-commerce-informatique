@@ -60,12 +60,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private $Country = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Payment::class)]
-    private Collection $payments;
-
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?PhysicalAdresses $physicalAdresses = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups("groupe:get")]
     private ?string $BanMethode = null;
