@@ -1,15 +1,20 @@
 import React, {useState} from 'react'
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 import {updateUser} from "../../requette/requette";
 
 function Userform({setEdit,elementUpdate }) {
 
+    const {contextToken} = GetGlobalData();
+    const [token] = contextToken;
+  console.log(elementUpdate)
     const initialValues = {
         BanMethode: elementUpdate.BanMethode,
         country: elementUpdate.Country,
         adresse: elementUpdate.adresse,
-         emballage : elementUpdate.emballage ? elementUpdate.emballage.titre : elementUpdate.emballage,
+        emballage : elementUpdate.emballage ? elementUpdate.emballage.titre : elementUpdate.emballage,
         ville: elementUpdate.ville,
         email: elementUpdate.email,
+        codeP: elementUpdate.CodePostal,
         // emballage: elementUpdate.emballage,
         name: elementUpdate.name,
         phone: elementUpdate.phone,
@@ -26,7 +31,7 @@ function Userform({setEdit,elementUpdate }) {
         });
       };  
 
-      console.log(values)
+      console.log(elementUpdate.CodePostal)
   return (
     <div class="relative z-0 mb-6 w-full group px-96">
         <div className='py-4'>
@@ -100,8 +105,13 @@ function Userform({setEdit,elementUpdate }) {
             <input onChange={handleInputChange} class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" type='text' value={values.adresse} name='adresse'></input>
         </div>
 
+        <div className='py-4'>
+            <label for="adresse">Code postal</label>
+            <input onChange={handleInputChange} class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" type='text' value={values.codeP} name='codeP'></input>
+        </div>
+
         <div>
-        <button onClick={() =>updateUser(elementUpdate.id, values, setEdit,)}  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enregistrer les changements</button>
+        <button onClick={() =>updateUser(elementUpdate.id, values, setEdit,token )}  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enregistrer les changements</button>
     </div>
 
     </div>

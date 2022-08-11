@@ -49,8 +49,7 @@ class Article
     #[Groups("groupe:get")]
     private $stock;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
-    private Collection $users;
+
 
     #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]

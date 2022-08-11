@@ -50,7 +50,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $apiToken;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups("groupe:get")]
     private $CodePostal;
+
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Emballage $emballage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private $Country = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $BanMethode = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    #[Groups("groupe:get")]
+    private ?Card $card = null;
+
 
     public function getId(): ?int
     {
@@ -217,4 +235,70 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function setEmballage(?Emballage $emballage): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($emballage === null && $this->emballage !== null) {
+            $this->emballage->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($emballage !== null && $emballage->getUser() !== $this) {
+            $emballage->setUser($this);
+        }
+
+        $this->emballage = $emballage;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->Country;
+    }
+
+    public function setCountry(string $Country): self
+    {
+        $this->Country = $Country;
+
+        return $this;
+    }
+
+ 
+
+    public function getBanMethode(): ?string
+    {
+        return $this->BanMethode;
+    }
+
+    public function setBanMethode(?string $BanMethode): self
+    {
+        $this->BanMethode = $BanMethode;
+
+        return $this;
+    }
+
+    public function getCard(): ?Card
+    {
+        return $this->card;
+    }
+
+    public function setCard(?Card $card): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($card === null && $this->card !== null) {
+            $this->card->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($card !== null && $card->getUser() !== $this) {
+            $card->setUser($this);
+        }
+
+        $this->card = $card;
+
+        return $this;
+    }
+
 }

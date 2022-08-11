@@ -1,10 +1,13 @@
 import {useEffect, useState} from "react";
 import './input.css'
 import { APIupdate, APIadd } from "../../requette/requette";
+import { GetGlobalData } from "../../../useContext/AuthProviders";
 
 
 
 const Input = ({dataTochange, isCreated, setEdit, edit}) => {
+  const {contextToken} = GetGlobalData();
+  const [token] = contextToken;
 
     const initialValues = {
         titre: dataTochange.titre,
@@ -39,7 +42,7 @@ const Input = ({dataTochange, isCreated, setEdit, edit}) => {
                
             })}
             <div className="flex justify-center">
-              {isCreated ? <button  onClick={() => {APIadd(`/api/admin/add`,values); setEdit('home');}} className="mx-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Créer l'article</button> : <button  onClick={() => { APIupdate(`/api/admin/update/${dataTochange.id}`,values); setEdit('home');}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enregistrer les changements</button>}
+              {isCreated ? <button  onClick={() => {APIadd(`http://localhost:8000/api/admin/add`,values, setEdit, token)}} className="mx-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Créer l'article</button> : <button  onClick={() => { APIupdate(`http://localhost:8000/api/admin/update/${dataTochange.id}`,values,setEdit,token)}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enregistrer les changements</button>}
 
              <button onClick={() => setEdit('home')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  mx-4 rounded">Retour</button>
             </div>

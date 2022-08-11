@@ -1,14 +1,16 @@
 import {useState, useEffect} from 'react'
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 import { getStock } from "../../requette/requette";
 import Stockcontainer from '../StockContainer/Stockcontainer';
 
 const Rowstock = ({setEdit, setElementUpdate}) => {
-
+  const {contextToken} = GetGlobalData();
+  const [token] = contextToken;
     const [datastock, setDatastock] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
     useEffect(() => {
-        getStock(setDatastock, setIsLoading);
+        getStock(setDatastock, setIsLoading, token);
            
         },[]);
 

@@ -7,16 +7,19 @@ import Discount from '../discount/Discount';
 import Userform from '../Userform/Userform';
 import Usercontainer from '../usercontainer/Usercontainer';
 import Banmethode from '../BanMethode/Banmethode';
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 
 
-const ContainerCart = ({role, edit, setEdit}) => {
-
+const ContainerCart = ({ edit, setEdit}) => {
+    const {contextUser} = GetGlobalData();
+    const [user] = contextUser;
+    
     const [elementUpdate, setElementUpdate] = useState({})
     const [created, setCreated] = useState({titre:'', prix:'', description:'', caracteristique:'', photo:'', stock:''})
 
     console.log(elementUpdate)
 
-    if(role === 'ROLE_ADMIN'){
+    if(user.roles[0] === 'ROLE_ADMIN'){
         if(edit === 'create'){
             return (
             <div className='titlecontainerhome'>

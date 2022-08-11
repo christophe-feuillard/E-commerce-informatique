@@ -8,15 +8,22 @@ import NavBAr from "../../admin/components/Navbar/NavBar";
 import { GetGlobalData } from '../../useContext/AuthProviders';
 
 const Account = () =>{
-    const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}];
+
+  const {contextUser} = GetGlobalData();
+  const [user] = contextUser;
+
+
+  const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}, {title:"Utlisateurs", url:"users"}];
+
     const [role, setRole] = useState('')
     const [edit, setEdit] = useState('home')
 
    
 
-    console.log(infoPerso)
+    // console.log(infoPerso)
 
-    if(role === 'ROLE_USER'){
+    if(user?.roles[0] === 'ROLE_USER'){
+
         return (
             <div>
                 {/* <Header /> */}
@@ -35,7 +42,7 @@ const Account = () =>{
                     <NavBAr title={info} setEdit={setEdit}/> 
                 </div>
                 <div className="bg-gray-900 w-full" >
-                    <ContainerCart role={role} edit={edit} setEdit={setEdit}/>
+                    <ContainerCart edit={edit} setEdit={setEdit}/>
                 </div>
                 
             </div>

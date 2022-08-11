@@ -1,35 +1,35 @@
 import React from "react";
 import axios from "axios";
 import { GetGlobalData } from "../../useContext/AuthProviders";
-const Token = localStorage.getItem("token");
+// const Token = localStorage.getItem("token");
 
-export const APIdelete = (id, setEdit) => {
+export const APIdelete = (id, setEdit, token) => {
 
     var config = {
         method: 'get',
-        url: `https://localhost:8000/api/admin/delete/${id}`,
+        url: `http://localhost:8000/api/admin/delete/${id}`,
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${Token}`
+          'Authorization': `Bearer ${token}`
         }
       }
 
       axios(config)
-          .then(response => console.log(response))
+          .then(response => setEdit('home'))
           .catch(error => {
           console.log(error);
           });
 }
 
 
-export const APIadd = (url, data) => {
+export const APIadd = (url, data, token) => {
 
     var config = {
         method: 'post',
         url: url,
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${Token}`
+          'Authorization': `Bearer ${token}`
         }, 
         data : data
       }
@@ -44,14 +44,14 @@ export const APIadd = (url, data) => {
 }
 
 
-export const APIupdate = (url, data, setEdit) => {
+export const APIupdate = (url, data, setEdit, token) => {
 
     var config = {
         method: 'post',
         url: url,
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${Token}`
+          'Authorization': `Bearer ${token}`
         }, 
         data : data
       }
@@ -65,14 +65,17 @@ export const APIupdate = (url, data, setEdit) => {
 }
 
 
-export const getItem = (setData) => {
+export const getItem = (setData, token) => {
     const Token = localStorage.getItem("token");
+
+
+    console.log(Token)
     var config = {
         method: 'get',
-        url: 'https://localhost:8000/api/admin/show',
+        url: 'http://localhost:8000/api/admin/show',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${Token}`
+          'Authorization': `Bearer ${token}`
         }
       };
       
@@ -89,7 +92,7 @@ export const getItem = (setData) => {
       const Token = localStorage.getItem("token");
       var config = {
           method: 'get',
-          url: 'https://localhost:8000/api/user/role',
+          url: 'http://localhost:8000/api/user/role',
           headers: { 
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${Token}`
@@ -104,14 +107,14 @@ export const getItem = (setData) => {
   
       }
      
-      export const getStock = (setData, setIsLoading) => {
-        const Token = localStorage.getItem("token");
+      export const getStock = (setData, setIsLoading, token) => {
+        // const Token = localStorage.getItem("token");
         var config = {
             method: 'get',
-            url: 'https://localhost:8000/api/admin/showStock',
+            url: 'http://localhost:8000/api/admin/showStock',
             headers: { 
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${Token}`
+              'Authorization': `Bearer ${token}`
             }
           };
           
@@ -124,32 +127,30 @@ export const getItem = (setData) => {
         }      
 
 
-        export const getUser= (token) => {
+        // export const getUser= (token) => {
 
-          var config = {
-              method: 'get',
-              url: 'https://localhost:8000/api/user/role',
-              headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              }
-            };
+        //   var config = {
+        //       method: 'get',
+        //       url: 'http://localhost:8000/api/user/role',
+        //       headers: { 
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${token}`
+        //       }
+        //     };
             
-                 axios(config)
-            
-      
-          }
+        //          axios(config)
+        //   }
          
 
 
-        export const setDiscount = (id, data, setEdit) => {
-          const Token = localStorage.getItem("token");
+        export const setDiscount = (id, data, setEdit, token) => {
+          // const Token = localStorage.getItem("token");
           var config = {
               method: 'post',
-              url: `/api/admin/setdiscount/${id}`,
+              url: `http://localhost:8000/api/admin/setdiscount/${id}`,
               headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${Token}`
+                'Authorization': `Bearer ${token}`
               },
               data : data
             };
@@ -163,14 +164,14 @@ export const getItem = (setData) => {
           } 
 
 
-          export const removeDiscount = (elementUpdate, setEdit, setElementUpdate) => {
+          export const removeDiscount = (elementUpdate, setEdit, setElementUpdate, token) => {
             const Token = localStorage.getItem("token");
             var config = {
                 method: 'get',
-                url: `/api/admin/removeDicount/${elementUpdate.id}`,
+                url: `http://localhost:8000/api/admin/removeDicount/${elementUpdate.id}`,
                 headers: { 
                   'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${Token}`
+                  'Authorization': `Bearer ${token}`
                 }
               };
               
@@ -183,14 +184,14 @@ export const getItem = (setData) => {
             } 
 
 
-            export const getUsers = (setUserData) => {
-              const Token = localStorage.getItem("token");
+            export const getUsers = (setUserData, token) => {
+              // const Token = localStorage.getItem("token");
               var config = {
                   method: 'get',
-                  url: `/api/admin/user`,
+                  url: `http://localhost:8000/api/admin/user`,
                   headers: { 
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Token}`
+                    'Authorization': `Bearer ${token}`
                   }
                 };
                 
@@ -202,14 +203,14 @@ export const getItem = (setData) => {
           
               } 
 
-              export const updateUser = (id, data, setEdit) => {
-                const Token = localStorage.getItem("token");
+              export const updateUser = (id, data, setEdit, token) => {
+                // const Token = localStorage.getItem("token");
                 var config = {
                     method: 'post',
-                    url: `/api/admin/user/update/${id}`,
+                    url: `http://localhost:8000/api/admin/user/update/${id}`,
                     headers: { 
                       'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${Token}`
+                      'Authorization': `Bearer ${token}`
                     },
                     data : data
                   };
@@ -223,14 +224,14 @@ export const getItem = (setData) => {
                 } 
 
 
-                export const getCountry = (setCountry) => {
-                  const Token = localStorage.getItem("token");
+                export const getCountry = (setCountry, token) => {
+                  // const Token = localStorage.getItem("token");
                   var config = {
                       method: 'get',
-                      url: `/api/admin/country`,
+                      url: `http://localhost:8000/api/admin/country`,
                       headers: { 
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${Token}`
+                        'Authorization': `Bearer ${token}`
                       }
                     };
                     
@@ -242,14 +243,14 @@ export const getItem = (setData) => {
               
                   }
                   
-                  export const BanCountry = (data) => {
-                    const Token = localStorage.getItem("token");
+                  export const BanCountry = (data, token) => {
+        
                     var config = {
                         method: 'post',
-                        url: `/api/admin/ban/country`,
+                        url: `http://localhost:8000/api/admin/ban/country`,
                         headers: { 
                           'Content-Type': 'application/json',
-                          'Authorization': `Bearer ${Token}`
+                          'Authorization': `Bearer ${token}`
                         },
                         data : data
                       };
@@ -263,14 +264,14 @@ export const getItem = (setData) => {
                     } 
 
 
-                    export const getCountryBan = (setCountryBan) => {
+                    export const getCountryBan = (setCountryBan, token) => {
                       const Token = localStorage.getItem("token");
                       var config = {
                           method: 'get',
-                          url: `/api/admin/countryban`,
+                          url: `http://localhost:8000/api/admin/countryban`,
                           headers: { 
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${Token}`
+                            'Authorization': `Bearer ${token}`
                           }
                         };
                         
@@ -282,17 +283,17 @@ export const getItem = (setData) => {
                   
                       }
 
-                      export const RemoveBan = (data) => {
+                      export const RemoveBan = (data, token) => {
                         const test = {
                           "country" : data
                         }
-                        const Token = localStorage.getItem("token");
+                        // const Token = localStorage.getItem("token");
                         var config = {
                             method: 'post',
-                            url: `/api/admin/ban/remove`,
+                            url: `http://localhost:8000/api/admin/ban/remove`,
                             headers: { 
                               'Content-Type': 'application/json',
-                              'Authorization': `Bearer ${Token}`
+                              'Authorization': `Bearer ${token}`
                             },
                             data : test
                           };

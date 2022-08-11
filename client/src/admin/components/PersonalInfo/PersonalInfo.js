@@ -41,7 +41,7 @@ const PersonalInfo = () => {
 
 
   const carteBancaire = firstNumber.filter((item) => {
-    if (user.card.number.charAt(0) == item.number) {
+    if (user?.card?.number.charAt(0) == item.number) {
       return item
     }
 
@@ -149,9 +149,9 @@ const PersonalInfo = () => {
                 <li className="i">
                   <div >
                     <ul>
-                      <li>{modeCard[0]?.card} ({user.card.number.substring(0, 4)})</li>
-                      <li>Exp: {user.card.date}</li>
-                      <li>{user.card.name}</li>
+                      <li>{modeCard[0]?.card} ({user?.card?.number.substring(0, 4)})</li>
+                      <li>Exp: {user?.card?.date}</li>
+                      <li>{user?.card?.name}</li>
                     </ul>
                   </div>
                 </li>

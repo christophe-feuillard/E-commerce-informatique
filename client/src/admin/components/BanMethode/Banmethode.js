@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { getCountry } from '../../requette/requette'
 import Banlist from './Banlist'
 import { BanCountry } from '../../requette/requette'
+import { GetGlobalData } from '../../../useContext/AuthProviders'
+
 function Banmethode() {
     const [country, setCountry] = useState([])
-
-useEffect(()=> getCountry(setCountry),[])
+    const {contextToken} = GetGlobalData();
+    const [token] = contextToken;
+  
+useEffect(()=> getCountry(setCountry, token),[])
 
 const initialValues = {
     country: "",
@@ -49,7 +53,7 @@ console.log(values)
         
 
         <div className="flex justify-center">
-             <button onClick={()=> BanCountry(values)}  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  mx-4 rounded">Ajouter une restriction</button>
+             <button onClick={()=> BanCountry(values, token)}  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  mx-4 rounded">Ajouter une restriction</button>
         </div>
         <Banlist/>
     </div>

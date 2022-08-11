@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 import { getCountryBan } from '../../requette/requette'
 import { RemoveBan } from '../../requette/requette';
-function Banlist() {
 
+function Banlist() {
+    const {contextToken} = GetGlobalData();
+    const [token] = contextToken;
+  
      const [countryBan, setCountryBan] = useState([]);
-    useEffect(()=> getCountryBan(setCountryBan), [])
+    useEffect(()=> getCountryBan(setCountryBan, token), [])
 
 if(countryBan === undefined){
     <p>chargment</p>
@@ -17,7 +21,7 @@ if(countryBan === undefined){
             return (
                 <div className='flex flex-row justify-between'>
                     <p>{v}</p>
-                    <button onClick={()=> RemoveBan(v)}  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4  mx-4 rounded">supprimer la restiction</button>
+                    <button onClick={()=> RemoveBan(v,token)}  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4  mx-4 rounded">supprimer la restiction</button>
                 </div>
                 )
         })}
@@ -29,7 +33,7 @@ if(countryBan === undefined){
             return (
             <div className='flex flex-row justify-between'>
                 <p>{v}</p>
-                <button onClick={()=> RemoveBan(v)}  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4  mx-4 rounded">supprimer la restiction</button>
+                <button onClick={()=> RemoveBan(v,token)}  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4  mx-4 rounded">supprimer la restiction</button>
             </div>
             )
         })}

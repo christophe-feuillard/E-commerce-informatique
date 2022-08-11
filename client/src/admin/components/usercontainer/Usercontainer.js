@@ -1,12 +1,16 @@
 import React,{useEffect, useState} from 'react'
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 import { getUsers } from "../../requette/requette";
 import User from "../user/User"
 
+
 function Usercontainer({setEdit, setElementUpdate}) {
 const [userData, setUserData] = useState([])
+const {contextToken} = GetGlobalData();
+const [token] = contextToken;
 
 useEffect(() => {
-    getUsers(setUserData);
+    getUsers(setUserData, token);
     },[]);
 
   return(
@@ -15,7 +19,7 @@ useEffect(() => {
         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Utilisateurs</h5>
         </div>
    <div class="flow-root ">
-        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700 ">
+        <ul role="list" class=" ">
         {userData.map(v => {return <User data={v}  setEdit={setEdit} setElementUpdate={setElementUpdate}/>} )}
         </ul>
    </div>
