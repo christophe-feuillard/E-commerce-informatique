@@ -26,14 +26,6 @@ security:
             stateless: true
             jwt: ~
 
-
-
-
-
-
-
-
-
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -47,6 +39,7 @@ security:
         - { path: ^/api/user,     roles: IS_AUTHENTICATED_FULLY } 
         - { path: ^/api/admin,     roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/FDP,     roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/api/Invoice,     roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api,       roles: PUBLIC_ACCESS}
        
          

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -49,37 +48,37 @@ class FDPController extends AbstractController {
             $weight+= $totalWeight;
         }
     
-            $shipment = \EasyPost\Shipment::create([
-                "from_address" => [
-                    "company" => "Ecommerce",
-                    "street1" => "55 avenue de la Grande Armée",
-                    "city" => "New York",
-                    "zip" => "10001",
-                    "phone" => "0651276143",
-                    "country" => "US",
-                    "state" => "New York"
-                ],
-                "to_address" => [
-                    "name" => $userData->getName(),
-                    "street1" => $userData->getAdresse(),
-                    // "city " => $userData->getVille(),
-                    "city" => "New York",
-                    "zip" => $userData->getCodePostal(),
-                    "phone " => $userData->getPhone(),
-                    "state" => "New York"
-                ],
-                "parcel" => [
-                    "length" => $lenght,
-                    "width"  => $width,
-                    "height" => $height,
-                    "weight" => $weight,
-                    "predefined_package" => 'MediumExpressBox'
-                ],
-            ]);
+        $shipment = \EasyPost\Shipment::create([
+            "from_address" => [
+                "company" => "Ecommerce",
+                "street1" => "55 avenue de la Grande Armée",
+                "city" => "New York",
+                "zip" => "10001",
+                "phone" => "0651276143",
+                "country" => "US",
+                "state" => "New York"
+            ],
+            "to_address" => [
+                "name" => $userData->getName(),
+                "street1" => $userData->getAdresse(),
+                // "city " => $userData->getVille(),
+                "city" => "New York",
+                "zip" => $userData->getCodePostal(),
+                "phone " => $userData->getPhone(),
+                "state" => "New York"
+            ],
+            "parcel" => [
+                "length" => $lenght,
+                "width"  => $width,
+                "height" => $height,
+                "weight" => $weight,
+                "predefined_package" => 'MediumExpressBox'
+            ],
+        ]);
         
-            $shipment->buy($shipment->lowest_rate());
-            $label = $shipment->postage_label->label_url;  // LABEL
-            $track = $shipment->tracker->public_url;  // SUIVIS DE COMMANDE
-  
-        return $this->json([$shipment,$label, $track], 200,[],['groups' => 'groupe:get']);
-}}
+        $shipment->buy($shipment->lowest_rate());
+        $label = $shipment->postage_label->label_url;  // LABEL
+        $track = $shipment->tracker->public_url;  // SUIVIS DE COMMANDE.
+
+    return $this->json([$shipment,$label, $track], 200,[],['groups' => 'groupe:get']);
+}};
