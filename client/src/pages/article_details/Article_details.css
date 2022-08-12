@@ -11,14 +11,15 @@ main {
 }
 .retour_en_a {
 	cursor: pointer;
-	/* border: 1px solid white; */
-	position: absolute;
-	top: 25%;
-	left: 12%;
-	width: 40px;
+	border: 1px solid white;
+	/* padding: 15px; */
 }
 .retour_en_a > img {
+	/* border: 1px solid white; */
+	margin-left: 15px;
 	cursor: pointer;
+	width: 40px;
+	height: 40px;
 }
 .container {
 	display: flex;
@@ -137,14 +138,6 @@ h3 {
 		color: white;
 		padding-left: 20px;
 	}
-	.retour_en_a {
-		cursor: pointer;
-		/* border: 1px solid white; */
-		position: absolute;
-		top: 25%;
-		left: 2%;
-		width: 40px;
-	}
 }
 @media screen and (max-width: 650px) {
 	.img_article_container {
@@ -160,18 +153,5 @@ h3 {
 	}
 }
 @media screen and (max-width: 370px) {
-	.retour_en_a {
-		cursor: pointer;
-		/* border: 1px solid white; */
-		position: relative;
-		top: 25%;
-		left: 12%;
-		width: 50px;
-		height: 50px;
-	}
-	.retour_en_a > img {
-		width: 50px;
-		height: 50px;
 
-	}
 }
