@@ -3,17 +3,13 @@ import {useNavigate,Navigate} from 'react-router-dom';
 import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
 import { GetGlobalData } from '../../useContext/AuthProviders';
-
 import axios from "axios";
 import './Login.css';
-import { AiFillWarning } from 'react-icons/ai';
 
 const Login = () => {
     const navigate = useNavigate();
     
     const {contextStore, contextUser, contextToken} = GetGlobalData();
-    const [store, setStore] = contextStore
-    const [user, setUser] = contextUser
     const [token, setToken] = contextToken
     
     const [email, setEmail] = useState('');
@@ -22,7 +18,7 @@ const Login = () => {
     const [islogin, setIslogin] = useState(false);
 
     const inputData = [{
-        type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
+        name : 'email', type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
     },
     {
         type: 'password',placeholder: 'Mot de passe',value: password,change: (e) => setPassword(e.target.value)
@@ -30,6 +26,7 @@ const Login = () => {
 
     useEffect(() => {
         if(localStorage.getItem('token')) setIslogin(true);
+        console.log(islogin)
     },[]);
 
     const verifyValue = () => {
@@ -63,7 +60,9 @@ const Login = () => {
       axios(config)
       .then((response) => {
         setToken(response.data.token)
-        localStorage.setItem("token",JSON.stringify(response.data.token));
+        console.log(token, 'TOKEN')
+        console.log(response.data.token)
+        // localStorage.setItem("token",JSON.stringify(response.data.token));
         navigate('/home');
       })
       .catch((error) => {

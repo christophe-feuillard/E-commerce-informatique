@@ -8,9 +8,10 @@ import './NavItems.css';
 // import Link from '../../admin/components/link/Link';
 
 const NavItems = () => {
-    const {contextStore, contextUser} = GetGlobalData();
+    const {contextStore, contextUser, contextToken} = GetGlobalData();
     const [store] = contextStore;
     const [user, setUser] = contextUser;
+    const [token, setToken] = contextToken;
 
     const navigate = useNavigate();
     // const [isLogged, setIsLogged] = useState(false);
@@ -23,14 +24,15 @@ const NavItems = () => {
 
 
     const Deconnexion = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('token')
+        setToken(null)
         setUser(null)
         navigate('/');
     }
 
-    const handleClick = () => {
-        navigate('/login')
-    }
+    // const handleClick = () => {
+    //     navigate('/login')
+    // }
 
     if(user){
         return(
@@ -62,7 +64,7 @@ const NavItems = () => {
             <Link className='textLogin' to="/register">Register</Link>
             &#124;
             
-            <a className='textLogin' onClick={handleClick}>Login</a>
+            <Link className='textLogin' to={"/login"}>Login</Link>
                 </div>   
             </div>
         </div>

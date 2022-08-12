@@ -1,12 +1,14 @@
-import axios from 'axios';
 import React, { useState } from 'react'
 import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import InputCard from '../../components/input/InputCard';
+import './commande.css'
+import { PayPalButtons } from "@paypal/react-paypal-js";
+import axios from 'axios';
+
 import { GetGlobalData } from '../../useContext/AuthProviders';
 import { Trash } from '../../components/panier/trash';
 
-import './commande.css'
 export const Commande = () => {
       const {contextStore, contextTotal,contextUser} = GetGlobalData();
       const [store, setStore] = contextStore;
@@ -26,6 +28,8 @@ const token = localStorage.getItem("token");
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [cardCvc, setCvc] = useState('');
+  const [orderId, setOrderId] = useState(false);
+  const  [errorMessage, setErrorMessage] = useState("");
   const [isSave, setIsSave] = useState(false);
 
   const navigate = useNavigate()
@@ -92,7 +96,9 @@ const token = localStorage.getItem("token");
     }
   ]
 
-
+ const product = {
+   amount : total
+ }
 
   const handleChange = event => {
     if (event.target.checked) {
@@ -152,7 +158,7 @@ const token = localStorage.getItem("token");
                   <li key={key} className="py-6 flex space-x-6">
                     <img
                       src={product.photo}
-                      alt='image du produit'
+                      alt='produit'
                       className="flex-none w-24 h-24 object-center object-cover bg-gray-100 rounded-md"
                     />
                     <div className="flex-auto">
@@ -215,20 +221,38 @@ const token = localStorage.getItem("token");
                     <p>Payer avec votre Carte</p>
                   </div>
                 </div>
+                
+                {/* Paypal */}
                 <div className="type">
-                  <div className="logoCard">
-                    <i ><RiPaypalFill/></i>
-                  </div>
                   <div className="text">
-                    <p>Payer avec PayPal</p>
+                      <p>Payer plus vite</p>
                   </div>
-                </div>
-                <div className="type">
                   <div className="logoCard">
-                    <i></i>
-                  </div>
-                  <div className="text">
-                    <p>///</p>
+                    
+                          <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
+                            createOrder={async (data, actions) => {
+                              const orderID = await actions.order
+                                .create({
+                                  purchase_units: [
+                                    {
+                                      amount: {
+                                        value: product.amount
+                                      },
+                                    },
+                                  ],
+                                });
+                              setOrderId(orderID);
+                              return orderID;
+                            }}
+                            onApprove={async (data, actions) => {
+                              const details = await actions.order.capture();
+                              const { payer } = details;
+                              navigate("/payment_confirmation");
+                            }}
+                            onError={(data, actions) => {
+                              setErrorMessage("An Error occured with your payment ");
+                            }}
+                          />
                   </div>
                 </div>
               </div>

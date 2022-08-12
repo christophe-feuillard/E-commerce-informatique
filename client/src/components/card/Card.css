@@ -10,6 +10,11 @@
     padding: 30px;
 }
 
+.oldPrice{
+    text-decoration:line-through;
+    color: black;
+}
+
 .main{
     width: 20%;
     margin: 50px 50px 0;
@@ -27,8 +32,12 @@
     color: black;
     margin: 10px 0;
 }
+.discount{
+	color: red;
+    text-align: center;
+}
 
-.price{
+.price, .oldPrice{
  color: black;
  font-size: 25px;
  margin: 10px 0;
@@ -46,7 +55,7 @@
 .addPanier{
  border: 0.5px solid black;
  padding: 15px;
- font-size: 15px;
+ font-size: 11px;
  color: black;
  width: 70%;
  text-align: center;

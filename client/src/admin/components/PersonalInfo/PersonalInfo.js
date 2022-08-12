@@ -15,7 +15,7 @@ const PersonalInfo = () => {
   const [modeCard, setModeCard] = useState('')
 
 
-  console.log(user, 'User connecté')  
+  // console.log(user, 'User connecté')
 
 
   function classNames(...classes) {
@@ -82,7 +82,7 @@ const PersonalInfo = () => {
       ref: user.phone
     }
   ]
-  console.log(user, 'User connecté')
+  // console.log(user, 'User connecté')
   return (
     <div className="sizeNav">
       <div className="MonProfil">

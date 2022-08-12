@@ -18,7 +18,9 @@ const Card = ({store}) => {
   useEffect(() => {
 
     const callAPI = () => {
+
       axios.get('http://localhost:8000/api/articles')
+
         .then(res => {
           setData(res.data);
         })
@@ -30,8 +32,8 @@ const Card = ({store}) => {
     callAPI();
 
   }, []);
-
-  const sorted = data.map(d => ({id: d.id, titre: d.titre, length: d.lenght ,prix: d.prix, photo: d.photo, description: d.description, visit: d.visit, caracteristique: d.caracteristique})).sort((el1, el2) => el2.visit - el1.visit)
+  const sorted = data.sort((el1, el2) => el2.visit - el1.visit)
+  // console.log(sorted, 'ufuf')
 
   // console.log(store)
   // console.log(JSON.parse(localStorage.getItem("store")))
@@ -58,8 +60,21 @@ const Card = ({store}) => {
         {item.id == localStorage.getItem("store") &&
           <p>Deja dans le panier</p>
         } 
+         
+      {
+        item.discount !== null && 
+        <div className='discount'>
+             -{item.discount}%
+          </div>
+      }
           <img src={item.photo} alt="image du produit"/>
           <p className='prixCard'>{item.prix} €</p>
+          {
+        item.discount !== null && 
+        <div className='oldPrice'>
+             {item.old_price}
+          </div>
+      }
           <div>
             <span className="spanCarou">{item.titre}</span>  
           </div>

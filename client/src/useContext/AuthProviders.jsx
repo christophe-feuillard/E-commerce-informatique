@@ -1,13 +1,18 @@
 import axios from 'axios';
 import React, { createContext, useContext, useState } from 'react'
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getRole, getUser } from '../admin/requette/requette';
+
+
+const navigate = useNavigate
 
 const globalData = createContext(null);
 
 
 export const GetGlobalData = () => {
   return useContext(globalData);
+  
 }
 
 
@@ -19,7 +24,7 @@ export const AuthProviders = ({ children }) => {
   const [role,setRole] = useState();
   const [token,setToken] = useState(null);
 
-  
+ 
   useEffect(() => {
     const getItemInStore = JSON.parse(localStorage.getItem("store"))
     const getTokenLocalStorage = JSON.parse(localStorage.getItem("token"))  
@@ -31,7 +36,10 @@ export const AuthProviders = ({ children }) => {
     if (getItemInStore) {
       setStore(getItemInStore);
     }
+    
   }, [])
+
+
 
 useEffect(() => {
 
@@ -43,15 +51,28 @@ useEffect(() => {
         }})
         
         console.log(response.data, 'response data')
+
         setUser(response.data)
       } catch (error) {
-        console.log(error)
+     console.log(error)
+        if(error.data.code === 401){
+          console.log('VOUS AVEZ ETE DECONNECTER CAR VOTRE TOKEN A EXPIRER')
+          localStorage.removeItem('token')
+          setUser(null)
+          navigate('/login')
+        }
       }
   }
 
+
   if(token) {
- userData()
+    userData()
   }
+
+    if (token !== null) {
+      localStorage.setItem("token", token && JSON.stringify(token))
+    }
+
 
 }, [token])
 

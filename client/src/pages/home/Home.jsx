@@ -2,12 +2,11 @@ import React, {useEffect,useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Header from "../../components/header/Header";
 import Card from '../../components/card/Card';
-import Modal from '../../components/modal/Modal';
 import ModalSmall from '../../components/modalSmall/ModalSmall';
 import axios from 'axios';
 import ArticlesPopulaires from '../../components/articlespopulaires/ArticlesPopulaires'
-import Favoris from '../favoris/Favoris'
 import "./Home.css";
+import CatDropDown from '../../components/drop-down-cat/CatDropDown';
 
 const Home = () => {
 
@@ -19,7 +18,7 @@ const Home = () => {
   const [colorFavoris,setColorFavoris] = useState([]);
   const [textStore,setTextStore] = useState([]);
   const [fav,setFav] = useState( JSON.parse(localStorage.getItem("favoris")) || []);
-  // const [articleNumber,setArticleNumber] = useState(0);
+  const [articleNumber,setArticleNumber] = useState(0);
   // const [isLoading,setIsLoading] = useState(false);
   const [categorie,setCategorie] = useState(0);
 
@@ -85,24 +84,24 @@ const Home = () => {
     
   return (
     <>
-      <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} categorie={setCategorie} searchClick={ ()=> searchCategorie()}/>
+      <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} />
+      <CatDropDown/>
       <div className='homeContainer'>
            <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
-            </div>
+      </div> 
+
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
 
-          <Card key={key} articles={item} size={item.weight+ 'kg' + ' ' + item.height+ 'cm'+ ' ' + item.lenght+ 'cm' + ' ' + item.width+ '"'}
+          <Card key={item.id} articles={item}
           handleckick={()=> navigate("/article_details/"+item.id)} 
             colorFavoris={colorFavoris[key]}
             textStore={textStore[key]}
-            // clickStore={()=>{addStore(item, key)}}
             clickFavoris={()=>{favoris(item, key)}}
           />
         ))}
       </div>
-      
   </>
   )}
   
