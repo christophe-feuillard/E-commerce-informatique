@@ -14,10 +14,7 @@ const Commentaires = ({articleId}) => {
   const Token = localStorage.getItem("token");
   const isToken = localStorage.getItem("token") === null;
   const navigate = useNavigate();
-  console.log(dataUser);
-
   const [databasecomment,setDatabasecomment] = useState([]);
-  // console.log(moment().format("MMM Do YY"));
 
   const [formdata,setFormdata] = useState({
     userid: "",
@@ -37,7 +34,6 @@ const Commentaires = ({articleId}) => {
         })
         .then(res => {
             setdataUser(res.data);
-            // console.log(res.data);
         })
         .catch(err => {
         console.log(err);
@@ -103,31 +99,30 @@ const Commentaires = ({articleId}) => {
   return (
     <>
     <section className="section_com">
-      <div className="separation"></div>
 
+      <div className="separation"></div>
       <h4 className="h4" style={{ display: isToken === true ? "block" : "none" }}> <a onClick={()=> navigate("/login")} className="cotoi">Connecte-toi</a> pour pouvoir accéder aux avis</h4>
       <a onClick={()=> navigate("/register")} className="h4_p" style={{ display: isToken === true ? "block" : "none" }}>Pas encore inscrit ?</a>
-  
-      <div className="container_com_div">
-      <form onSubmit={onSubmit} style={{ display: isToken === true ? "none" : "flex" }} className="formCom">   
-        <input id="articleid" type="hidden" value={articleId}/>
-        <input id="username" type="hidden" value={dataUser.name}/>
-        <input id="userid" type="hidden" value={dataUser.id}/>
-        <div className="img_profil_form">
-          <img className="img_profil_com" src={imgProfil} alt="profil"/>
-        </div>
 
-        <textarea
-         placeholder="Laisser un avis"
-         id="message" 
-         className="textarea"
-         value={comment} 
-         onChange={(e) => onChangeHandler(e)}
-        />
-        <button className="btn_avis" onClick={onClickHandler} disabled={isBtnDisabled}>
-          Ajouter un avis
-        </button>
-      </form>
+      <div className="container_com_div">
+
+        <form onSubmit={onSubmit} style={{ display: isToken === true ? "none" : "flex" }} className="formCom">   
+          <input id="articleid" type="hidden" value={articleId}/>
+          <input id="username" type="hidden" value={dataUser.name}/>
+          <input id="userid" type="hidden" value={dataUser.id}/>
+          <div className="img_profil_form">
+            <img className="img_profil_com" src={imgProfil} alt="profil"/>
+          </div>
+          <textarea
+            placeholder="Laisser un avis"
+            id="message" 
+            className="textarea"
+            value={comment} 
+            onChange={(e) => onChangeHandler(e)}
+          />
+          <button className="btn_avis" onClick={onClickHandler} disabled={isBtnDisabled}>Ajouter un avis</button>         
+        </form>
+        
       </div>
 
       {comments.map((text) => (
@@ -153,9 +148,9 @@ const Commentaires = ({articleId}) => {
 
         </div>  
       </div>        
-      ))}
+      ))} 
 
-     {databasecomment.map((text) => ( text.article === articleId &&
+      {databasecomment.map((text) => ( text.article === articleId &&
       <div className="container_com_div ccd2">
 
         <div className="commentaire_div"> 
@@ -178,7 +173,8 @@ const Commentaires = ({articleId}) => {
 
         </div>  
       </div>        
-      ))} 
+      ))}   
+
     </section>
     </>
   )

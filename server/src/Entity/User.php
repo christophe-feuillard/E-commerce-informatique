@@ -57,8 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
       #[Groups("groupe:get")]
     private ?string $CodePostal = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class, orphanRemoval: true)]
-    private Collection $avis;
+  
 
     public function __construct()
     {
@@ -232,36 +231,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Avis>
-     */
-    public function getAvis(): Collection
-    {
-        return $this->avis;
-    }
-
-    public function addAvi(Avis $avi): self
-    {
-        if (!$this->avis->contains($avi)) {
-            $this->avis[] = $avi;
-            $avi->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAvi(Avis $avi): self
-    {
-        if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
-            if ($avi->getUser() === $this) {
-                $avi->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
 
  
 }
