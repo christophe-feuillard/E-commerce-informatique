@@ -34,6 +34,8 @@ const Card = ({store}) => {
   // console.log(store)
   console.log(JSON.parse(localStorage.getItem("store")))
 
+  let windowWidth = window.innerWidth
+
   return (
   <div className='div_articlepopulaires'>
     <p className='titreArticles'>Nos articles les plus populaires <RiMedalLine/></p>
@@ -41,7 +43,7 @@ const Card = ({store}) => {
     <Swiper
     modules={[ Pagination, Scrollbar, A11y, Autoplay]}
     spaceBetween={0}
-    slidesPerView={2}
+    slidesPerView={windowWidth > 900 ? 2 : 1 }
     loop={true}
     // autoplay={{
     //     delay: 5000,

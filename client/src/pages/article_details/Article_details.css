@@ -24,18 +24,10 @@ main {
 	display: flex;
 	justify-content: center;
 	height: 100vh;
-    /* border-left: 1px solid #eb4f29; */
-	/* border-right: 1px solid #eb4f29; */
 	width: 80%;
 	min-width: 800px;
 	margin: 0 auto;
 	box-sizing: border-box;
-   /* background:-moz-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%); 
-   background:-webkit-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%);
-   background:-o-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%);
-   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FF6A00', endColorstr='#FF6A00', GradientType=1 );
-   background:-ms-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%);
-   background:linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%); */
 }
 .img_article {
 	width: 100%;
@@ -105,5 +97,81 @@ h3 {
 	to {
 		border: 3px solid white;
 		background-image: linear-gradient(to right bottom, #eb4f29, #b23532, #77242d, #3d171f, #000000);
+	}
+}
+
+@media screen and (max-width: 860px) {
+	body {
+		overflow-x: hidden;
+	}
+	* {
+		min-width: none;
+	}
+	.container > div:first-child {
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		align-self: center;
+		align-items: center;
+	}
+	.container {
+		display: flex;
+		justify-content: center;
+		height: auto;
+		width: 80%;
+		min-width: 300px;
+		margin: 0 auto;
+		box-sizing: border-box;
+	}
+	.img_article_container {
+		height: 500px;
+		position: relative;
+		width: 100%;
+	}
+	.details_article {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 100%;
+		color: white;
+		padding-left: 20px;
+	}
+	.retour_en_a {
+		cursor: pointer;
+		/* border: 1px solid white; */
+		position: absolute;
+		top: 25%;
+		left: 2%;
+		width: 40px;
+	}
+}
+@media screen and (max-width: 650px) {
+	.img_article_container {
+		height: 300px;
+		position: relative;
+		width: 100%;
+	}
+	.img_article {
+		width: 100%;
+		object-fit: cover;
+		height: 300px;
+		border-radius: 20px;
+	}
+}
+@media screen and (max-width: 370px) {
+	.retour_en_a {
+		cursor: pointer;
+		/* border: 1px solid white; */
+		position: relative;
+		top: 25%;
+		left: 12%;
+		width: 50px;
+		height: 50px;
+	}
+	.retour_en_a > img {
+		width: 50px;
+		height: 50px;
+
 	}
 }
