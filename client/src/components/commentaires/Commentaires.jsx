@@ -4,6 +4,7 @@ import { useState,useEffect } from "react";
 import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Comment from "./Comment";
 
 const Commentaires = ({articleId}) => {
   
@@ -122,57 +123,25 @@ const Commentaires = ({articleId}) => {
           />
           <button className="btn_avis" onClick={onClickHandler} disabled={isBtnDisabled}>Ajouter un avis</button>         
         </form>
-        
+
       </div>
 
       {comments.map((text) => (
-      <div className="container_com_div ccd2">
-        
-        <div className="commentaire_div"> 
-
-          <div>
-           <img className="img_profil_com" src={imgProfil} alt="profil"/>
-          </div>
-
-          <div>
-            <div>
-             <span className="username_com">{dataUser.name}</span> 
-             <span className="time_com"> {moment().format("MMM Do YY")}  </span> 
-            </div>
-            <div>
-              <p>
-               {text}
-              </p>             
-            </div>
-          </div>
-
-        </div>  
-      </div>        
+        <Comment 
+         imgProfil={imgProfil} 
+         username={dataUser.name} 
+         date={moment().format("MMM Do YY")} 
+         text={text}
+        />    
       ))} 
 
       {databasecomment.map((text) => ( text.article === articleId &&
-      <div className="container_com_div ccd2">
-
-        <div className="commentaire_div"> 
-
-          <div>
-           <img className="img_profil_com" src={imgProfil} alt="profil"/>
-          </div>
-
-          <div>
-            <div>
-             <span className="username_com">{text.username}</span> 
-             <span className="time_com"> {text.date}  </span> 
-            </div>
-            <div>
-              <p>
-               {text.message}
-              </p>             
-            </div>
-          </div>
-
-        </div>  
-      </div>        
+        <Comment 
+         imgProfil={imgProfil} 
+         username={text.username} 
+         date={text.date} 
+         text={text.message}
+        />         
       ))}   
 
     </section>
