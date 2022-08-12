@@ -17,7 +17,7 @@ class FDPController extends AbstractController {
         public function dataFDP(SessionInterface $session, ArticleRepository $articleRepository) {
             $userData = $this->getUser();
 
-            $panier = $session->get('panier', []);      //Récupère le panier de la session actuel
+            $panier = $session->get('panier', []);      // Recupere le panier de la sessiona actuel
             $panierData = [];
 
             foreach($panier as $id => $quantity) {
@@ -27,22 +27,22 @@ class FDPController extends AbstractController {
                 ];
                 
                 $width = 10;
-                $lenght = 20;
+                $lenght = 20;    // Parcel
                 $height = 10;
                 $weight = 20;
 
                 foreach($panierData as $item) {
                     $totalWidth = $item['article']->getWidth();
-                    $width += $totalWidth;
+                    $width+= $totalWidth;
 
                     $totalLenght = $item['article']->getLenght();
-                    $lenght += $totalLenght;
+                    $lenght+= $totalLenght;
 
                     $totalHeight = $item['article']->getHeight();
-                    $height += $totalHeight;
+                    $height+= $totalHeight;
 
                     $totalWeight = $item['article']->getWeight();
-                    $weight += $totalWeight;
+                    $weight+= $totalWeight;
                 }
             }
 

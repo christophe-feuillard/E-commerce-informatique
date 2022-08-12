@@ -154,7 +154,7 @@ class ApiController extends AbstractController
             }
             // dd($total);
             return $this->json(['item' => $panierData, 'total' => $total, 'width' => $width, 'lenght' => $lenght, 'height' => $height, 'weight' => $weight], 200,[],['groups' => 'groupe:get']);
-            // dd($panierData);
+            dd($panierData);
         }
 
         #[Route('/api/panier/add/{id}', name: 'app_api_panier_add')]  // Route pour ajouter article dans le panier via Button Ajouter Panier
@@ -186,4 +186,19 @@ class ApiController extends AbstractController
 
             return $this->redirectToRoute("app_api_panier");
         }
+
+        // #[Route('/api/user', name: 'app_user', methods:('GET'))]
+        // public function user(UserRepository $user)
+        // {
+        //     // dd($user);
+        //         return $this->json($user->findAll(), 200,[],['groups' => 'groupe:get']);
+        // }
+
+
+        // #[Route('/api/user/{id}', name: 'app_user', methods:('GET'))]
+        // public function userById(UserRepository $user, $id)
+        // {
+          
+        //         return $this->json($user->find($id), 200,[],['groups' => 'groupe:get']);
+        // }
 }

@@ -88,6 +88,7 @@ class Article
         $this->categorie = new ArrayCollection();
         $this->user = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int

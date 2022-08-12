@@ -57,6 +57,7 @@ const Card = ({store}) => {
     {sorted.map((item,key) => ( key < 5 &&
       <SwiperSlide>
         <div onClick={() => navigate("/article_details/"+item.id)} className='cardCarou'>
+          {/* <span class="key_articles">{key}</span> */}
         {item.id == localStorage.getItem("store") &&
           <p>Deja dans le panier</p>
         } 

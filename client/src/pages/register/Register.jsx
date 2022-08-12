@@ -104,7 +104,7 @@ const Register = () => {
           });
           
     }
-    if(islogin) return <Navigate to="/home"/> ;
+    // if(islogin) return <Navigate to="/home"/> ;
     return (
     <div className='registerMain'>
         <div className='DivRegisterText'>

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Article_details.css';
 import Header from "../../components/header/Header";
 import Buy from '../../components/buy/Buy';
 import axios from 'axios';
+import Commentaires from "../../components/commentaires/Commentaires";
+import returnArrow from "../../asset/return.png"
 
 const ArticleDetails = (props) => {
 
-  const navigate = useNavigate();
-
+    const navigate = useNavigate();
     const [articles,setArticles] = useState([]);
     let { articlesParams } = useParams();
+    let [cart, setCart] = useState([])
+    let localCart = localStorage.getItem("cart");
     console.log(articles);
 
     const fetchData = () => {
@@ -27,8 +30,6 @@ const ArticleDetails = (props) => {
       fetchData()
     }, [])
 
-    let [cart, setCart] = useState([])
-    let localCart = localStorage.getItem("cart");
     
     const addItem = (item) => {
       // create a copy of our cart state, avoiarticlesd overwritting existing state
@@ -54,6 +55,9 @@ const ArticleDetails = (props) => {
     <>
     <Header register={()=> navigate("/register")} />
     <main>
+      <a href="/home" className='retour_en_a'>
+       <img className='arrow' src={returnArrow} alt="return" />
+      </a>
       <div className="container">
         <div>
           <div className="img_article_container">
@@ -83,7 +87,8 @@ const ArticleDetails = (props) => {
 
         </div>
       </div>
-    </main>      
+    </main>   
+    <Commentaires articleId={articles.id}/>   
     </>
   )
 }

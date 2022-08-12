@@ -54,8 +54,8 @@ useEffect(() => {
 
         setUser(response.data)
       } catch (error) {
-     console.log(error)
-        if(error.data.code === 401){
+        console.log(error)
+        if(error.response.data.code === 401){
           console.log('VOUS AVEZ ETE DECONNECTER CAR VOTRE TOKEN A EXPIRER')
           localStorage.removeItem('token')
           setUser(null)
@@ -72,8 +72,6 @@ useEffect(() => {
     if (token !== null) {
       localStorage.setItem("token", token && JSON.stringify(token))
     }
-
-
 }, [token])
 
 

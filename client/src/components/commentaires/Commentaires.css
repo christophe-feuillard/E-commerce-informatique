@@ -1,0 +1,117 @@
+* {
+  /* border: 1px solid black; */
+}
+.h4,.h4_p {
+  text-align: center;
+}
+.h4_p {
+  text-decoration: underline;
+  color: brown;
+  font-style: italic;
+}
+.separation {
+  /* margin-top: 20px; */
+  /* margin-bottom: 20px; */
+  width: 100%;
+  /* background-color: rgb(0, 0, 0); */
+  height: 5px;
+}
+.cotoi {
+  /* font-weight: bold; */
+  font-style: italic;
+  text-decoration: underline;
+}
+.section_com {
+  background-color: rgba(194, 175, 175, 0.636);
+}
+.formCom {
+  height: 50px;
+  display: flex;
+  /* border: 1px solid rgb(0, 0, 0); */
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 50%;
+  min-width: 800px;
+  align-self: center;
+}
+.img_profil_form {
+  width: 50px;
+  height: 50px;
+}
+
+.commentaire_div {
+  /* border: 1px solid black; */
+  width: 50%;
+  min-width: 800px;
+  display: flex;
+  align-self: center;
+  overflow: hidden;
+}
+.textarea {
+  min-width: 600px;
+  box-sizing: border-box;
+  align-self: center;
+  color: black;
+  resize: none;
+  outline: none;
+  height: 50px;
+  padding: 10px;
+  background-color: rgba(240, 248, 255, 0);
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.btn_avis {
+  align-self: center;
+  box-sizing: border-box;
+  background-color: rgb(0, 0, 0);
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid black;
+  transition: 0.2s ease;
+}
+.btn_avis:hover {
+  color: brown;
+  transition: 0.2s ease;
+}
+.btn_avis:disabled {
+  opacity: 0.5;
+}
+.btn_avis:disabled:hover {
+  color: rgb(255, 255, 255);
+}
+
+.img_profil_com {
+  border-radius: 50%;
+}
+
+.container_com_div {
+  margin-top: 15px;
+  /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.ccd2 {
+  margin-top: 25px;
+ }
+.commentaire_div > div:first-child {
+  width: auto;
+  height: 50px;
+  /* border: 1px solid black; */
+}
+.commentaire_div > div:nth-child(2) {
+  margin-left: 15px;
+  
+}
+.time_com {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+.username_com {
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 1.2px;
+  color: black;
+}
+

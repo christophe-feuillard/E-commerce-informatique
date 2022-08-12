@@ -71,7 +71,7 @@ const Login = () => {
       });
       
     }
-    if(islogin) return <Navigate to="/home"/> ;
+    // if(islogin) return <Navigate to="/home"/> ;
   return (
     <div className='loginMain'>
         <div className='loginContainer'>
