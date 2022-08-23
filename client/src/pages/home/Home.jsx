@@ -85,7 +85,7 @@ const Home = () => {
   return (
     <>
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} />
-      <CatDropDown/>
+      {/* <CatDropDown/> */}
       <div className='homeContainer'>
            <ArticlesPopulaires/>  
            <div className='hr'>
@@ -95,7 +95,7 @@ const Home = () => {
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
 
           <Card key={item.id} articles={item}
-          handleckick={()=> navigate("/article_details/"+item.id)} 
+            handleckick={()=> navigate("/article_details/"+item.id)} 
             colorFavoris={colorFavoris[key]}
             textStore={textStore[key]}
             clickFavoris={()=>{favoris(item, key)}}

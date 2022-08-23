@@ -34,6 +34,10 @@ class Card
     #[ORM\OneToOne(inversedBy: 'card', cascade: ['persist', 'remove'], fetch: 'EAGER')]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
+    private ?string $firstname = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,6 +99,18 @@ class Card
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
 
         return $this;
     }

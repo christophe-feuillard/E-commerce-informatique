@@ -34,7 +34,7 @@ const token = localStorage.getItem("token");
 
   const navigate = useNavigate()
 
-
+console.log(user)
   const inputName = [
     {
 
@@ -172,9 +172,6 @@ const token = localStorage.getItem("token");
                           <p className="hidden text-gray-500 sm:block">{product.quantity}</p>
                         </div>
                         <div className="flex-none flex space-x-4">
-                          <button type="button" className="text-sm font-medium  hover:text-indigo-500">
-                            Edit
-                          </button>
                           <div className="flex border-l border-gray-300 pl-4">
                             <button onClick={() => Trash(product.id, setStore, store)} type="button" className="text-sm font-medium  hover:text-indigo-500">
                                 Remove
@@ -206,9 +203,7 @@ const token = localStorage.getItem("token");
 
       <article className="cardCommand">
         <div className="containerCard">
-          <div className="card-title">
-            <h2>Payment</h2>
-          </div>
+ 
           <div className="card-body">
             <div className="payment-type">
               <h4>Choisissez votre méthode de paiement</h4>

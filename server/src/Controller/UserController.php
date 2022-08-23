@@ -67,16 +67,17 @@ class UserController extends AbstractController
     {
         $json = json_decode($request->getContent(), true);
         $request->request->replace($json);
-        //  dd($json);
+      
         $entityManager = $doctrine->getManager();
         $card = new Card();
         $month = $request->request->get('month');
         $year = $request->request->get('year');
         $carNumber = $request->request->get('number');
         $newMonth = $month.'/'. substr($year, -2);
-        // $hashedCard = hash('sha1',$carNumber);
+      
      
         $card->setName($request->request->get('name'));
+        $card->setFirstname($request->request->get('firstname'));
         $card->setCvc($request->request->get('cvc'));
         $card->setDate($newMonth);
         $card->setUser($this->getUser());

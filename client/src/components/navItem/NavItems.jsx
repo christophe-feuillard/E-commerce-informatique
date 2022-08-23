@@ -43,7 +43,7 @@ const NavItems = () => {
                 <div className="dropdown-content">
                     <a className='textLogin' onClick={()=> navigate("/account")}>Mon Compte</a>
                     &#124;
-                    <a className='textLogin' onClick={()=>Deconnexion()}>Logout</a>
+                    <a className='textLogin' onClick={()=>Deconnexion()}>Déconnexion</a>
                 </div>
             </div>
             </div>
@@ -61,10 +61,10 @@ const NavItems = () => {
             <div className='dropdown'>
              <div>
             {/* <a className='textLogin' onClick={()=>navigate('/register')}>Inscription</a> */}
-            <Link className='textLogin' to="/register">Register</Link>
+            <Link className='textLogin' to="/register">S'inscrire</Link>
             &#124;
             
-            <Link className='textLogin' to={"/login"}>Login</Link>
+            <Link className='textLogin' to={"/login"}>Se connecter</Link>
                 </div>   
             </div>
         </div>

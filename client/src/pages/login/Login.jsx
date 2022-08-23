@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import {useNavigate,Navigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
 import { GetGlobalData } from '../../useContext/AuthProviders';

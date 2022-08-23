@@ -56,6 +56,7 @@ const PersonalInfo = () => {
   // console.log(modeCard, 'gfchgfhf')
 
   // console.log(modeCard)
+  const date = user.adresse + ' ' + user.ville + ' ' +  user.CodePostal
 
   const titre = [{
     title: 'Mes Informations'
@@ -66,22 +67,35 @@ const PersonalInfo = () => {
   {
     title: 'Mes méthodes de paiement'
   }]
-
-
+  
   const info = [
     {
-      titre: "PRENOM",
+      titre: "Prénom",
+      ref: user.Firstname
+    },
+    {
+      titre: "Nom",
       ref: user.name
     },
     {
-      titre: "ADRESSE EMAIL",
+      titre: "Adresse email",
       ref: user.email
     },
     {
-      titre: "NUMERO DE TELEPHONE",
+      titre: "Date de naissance",
+      ref: user.Birthdate
+    },
+    {
+      titre: "Numéro de téléphone",
       ref: user.phone
     }
+    ,
+    {
+      titre: "Adresse postale",
+      ref: date
+    }
   ]
+  console.log(user)
   // console.log(user, 'User connecté')
   return (
     <div className="sizeNav">
@@ -109,22 +123,31 @@ const PersonalInfo = () => {
         </Tab.List>
         <Tab.Panels className="mt-2">
           <Tab.Panel
+            // {articles.stock ? }
             className={classNames(
               'rounded-xl p-3',
               'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400  '
             )}
           >
-            {info.map((item, index) => (
+            
+                <div className="bg-white p-3 shadow-sm rounded-sm">
+                    
+             {info.map((item, index) => (
+                    <div key={index} className="text-gray-700">
+               <div className="grid md:grid-cols-2 text-sm">
+                            <div className="grid grid-cols-2">
+                                <div className="px-4 py-2 font-semibold">{item.titre}</div>
+                                <div className="px-4 py-2">{item.ref}</div>
+                            </div>
+                            {/* <div className="grid grid-cols-2" >
+                                <div className="px-4 py-2 font-semibold">Adresse postale</div>
+                                <div className="px-4 py-2">{user.adresse} {user.ville} {user.CodePostal}</div>
+                            </div> */}
+                        </div>
+                    </div>
 
-              <div key={index} className="mt-1 flex space-x-1 text-xs  font-normal leading-4 text-gray-500">
-                <p>{item.titre} : </p>
-                <p className="capitalize">{item.ref}</p>
-              </div>
-            ))}
-            <div className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-              <p>ADRESSE : </p>
-              <p className="capitalize">{user.adresse} {user.ville} {user.CodePostal}</p>
-            </div>
+                            ))}
+                </div>
           </Tab.Panel>
           <Tab.Panel
             className={classNames(
@@ -142,9 +165,9 @@ const PersonalInfo = () => {
               'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400  '
             )}
           >
-            <div className="flexCard hover:bg-white/[0.12]">
+            <div className="flexCard">
 
-              <img className="s" src={modeCard[0]?.url} alt="" />
+              {/* <img className="s" src={modeCard[0]?.url} alt="" />
               <ul>
                 <li className="i">
                   <div >
@@ -155,7 +178,68 @@ const PersonalInfo = () => {
                     </ul>
                   </div>
                 </li>
-              </ul>
+              </ul> */}
+              <div>
+
+  <div id="card" className="relative w-96 h-60 rounded-2xl font-mono text-white overflow-hidden cursor-pointer transition-all duration-500">
+
+
+    <div id='cardRotate' className="absolute top-0 left-0 w-full h-full flex flex-col justify-center gap-6 p-6 bg-gradient-to-tr from-gray-900 to-gray-700 transition-all duration-100 delay-200 z-20">
+
+      <div className="flex justify-between items-center">
+        {/* <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" alt='Smart card' className="w-12"/> */}
+
+        <img src={modeCard[0]?.url} alt="Visa image" className="w-12"/>
+      </div>
+
+  
+      <div className="">
+        <label for="" class="hidden">Numéro de carte</label>
+        <input type="text" id="" value={user?.card?.number} readonly
+               className="outline-none w-full bg-transparent text-center text-2xl"/>
+      </div>
+
+      <div className="w-full flex flex-row justify-between">
+
+        <div className="w-full flex flex-col">
+          <label for="">Nom</label>
+          <input type="text" id="" value={user?.card?.firstname + ' ' + user?.card?.name }  readonly
+                 className="outline-none bg-transparent"/>
+        </div>
+
+        <div className="w-1/4 flex flex-col">
+          <label for="">Exp</label>
+          <input type="text" id="" value={user?.card?.date} readonly className="outline-none bg-transparent"/>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id='backContent' className="absolute top-0 left-0 w-full h-full flex flex-col gap-3 justify-center bg-gradient-to-tr from-gray-900 to-gray-700 transition-all z-10"
+>
+
+      <div className="w-full h-12 bg-black"></div>
+
+      <div className="px-6 flex flex-col gap-6 justify-center">
+        <div className="flex flex-col items-end">
+          <label for="">cvv</label>
+          <input type="text" id="inputcvv" value={user?.card?.cvc} readonly
+                 className="outline-none rounded text-black w-full h-8 text-right"
+              />
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </div>
+        {/* <div className="flex justify-center items-center text-gray-700 ">
+        <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2  ">Supprimer ma carte</button>
+        </div> */}
+ </div>
+
             </div>
           </Tab.Panel>
         </Tab.Panels>

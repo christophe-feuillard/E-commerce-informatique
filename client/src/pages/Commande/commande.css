@@ -142,7 +142,7 @@
   .cardCommand .card-body .payment-type .types .type.selected p {
     color: #28333b;
   }
-  .cardCommand .card-body .payment-type .types .type.selected::after {
+  /* .cardCommand .card-body .payment-type .types .type.selected::after {
     content: '\f00c';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -157,7 +157,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
   .cardCommand .card-body .payment-type .types .type .logoCard,
   .cardCommand .card-body .payment-type .types .type p {
     transition: all 0.5s ease;

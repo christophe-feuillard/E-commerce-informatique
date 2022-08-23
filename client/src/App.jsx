@@ -17,21 +17,24 @@ import { MyInfo } from './admin/components/PersonalInfo/Link/myInfo';
 import ModalSmall from './components/modalSmall/ModalSmall';
 import PaymentConfirmation from './pages/payment_confirmation/PaymentConfirmation';
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
+import { Error } from './components/error/error';
+import Example from './pages/Commande/livraisonDetail/livraisonDetail';
 
 function App() {
   return (
     <PayPalScriptProvider options={{"client-id": "AYnNt36sxMGoExbhgbXaaVTz1QYCdi16TOedUbCRJxO4WDKsoitKKiQWBBFhcNBNWb5HnNTCcnV-r8C4"}}>
     <AuthProviders>
     <Routes>
-      <Route path="/" element={<Landing/>}/>
+      {/* <Route path="/" element={<Landing/>}/> */}
       <Route path="/home" element={<Home/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="*" element={<Landing/>}/>
+      <Route path="*" element={<Error/>}/>
       <Route path='/account' element={<Account/>}/>
       <Route path='/categories/:id' element={<Categories/>}/>
       <Route path='/favoris' element={<Favoris/>}/>
       <Route path='/frais' element={<Frais/>}/>
+      <Route path='/example' element={<Example/>}/>
       <Route path='/commande' element={<Commande/>}/>
       <Route path='/payment' element={<PaymentMethode/>}/>
       <Route path='/modal' element={<ModalSmall/>}/>

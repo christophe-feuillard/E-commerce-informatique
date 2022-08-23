@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -68,6 +69,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], fetch: 'EAGER')]
     #[Groups("groupe:get")]
     private ?Card $card = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
+    private ?string $Firstname = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("groupe:get")]
+    private ?\DateTimeInterface $Birthdate = null;
 
 
     public function getId(): ?int
@@ -297,6 +306,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->card = $card;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->Firstname;
+    }
+
+    public function setFirstname(string $Firstname): self
+    {
+        $this->Firstname = $Firstname;
+
+        return $this;
+    }
+
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->Birthdate;
+    }
+
+    public function setBirthdate(\DateTimeInterface $Birthdate): self
+    {
+        $this->Birthdate = $Birthdate;
 
         return $this;
     }

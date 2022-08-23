@@ -14,7 +14,6 @@ const Commentaires = ({articleId}) => {
   const [comments,setComments] = useState([]);
   const isBtnDisabled = comment.length === 0; 
   const [dataUser, setdataUser] = useState([]);
-  // const Token = localStorage.getItem("token");
   const isToken = token === null;
   const navigate = useNavigate();
   const [databasecomment,setDatabasecomment] = useState([]);
@@ -126,7 +125,6 @@ const Commentaires = ({articleId}) => {
           />
           <button className="btn_avis" onClick={onClickHandler} disabled={isBtnDisabled}>Ajouter un avis</button>         
         </form>
-
       </div>
 
       {comments.map((text) => (
@@ -145,12 +143,10 @@ const Commentaires = ({articleId}) => {
          date={text.date} 
          text={text.message}
         />         
-      ))}   
-
+      ))}
     </section>
     </>
   )
-    
 };
 
 export default Commentaires;
