@@ -7,15 +7,14 @@ body {
 }
 main {
 	width: 100%;
-	background-color: rgba(194, 175, 175, 0.636);
+	background-color: rgb(67, 67, 67);
+	padding-top: 15px;
 }
 .retour_en_a {
 	cursor: pointer;
-	border: 1px solid white;
-	/* padding: 15px; */
+	box-sizing: border-box;
 }
 .retour_en_a > img {
-	/* border: 1px solid white; */
 	margin-left: 15px;
 	cursor: pointer;
 	width: 40px;
