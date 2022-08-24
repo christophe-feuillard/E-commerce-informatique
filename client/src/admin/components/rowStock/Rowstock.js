@@ -1,25 +1,27 @@
 import {useState, useEffect} from 'react'
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 import { getStock } from "../../requette/requette";
 import Stockcontainer from '../StockContainer/Stockcontainer';
 
 const Rowstock = ({setEdit, setElementUpdate}) => {
-
+  const {contextToken} = GetGlobalData();
+  const [token] = contextToken;
     const [datastock, setDatastock] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
     useEffect(() => {
-        getStock(setDatastock, setIsLoading);
+        getStock(setDatastock, setIsLoading, token);
            
         },[]);
 
         return (
             <div>
-              <table class="table-auto w-full">
+              <table className="table-auto w-full">
               <thead>
                   <tr>
-                    <th class="text-center">titre</th>
-                    <th class="text-center">photo</th>
-                    <th class="text-center">stock</th>
+                    <th className="text-center">titre</th>
+                    <th className="text-center">photo</th>
+                    <th className="text-center">stock</th>
                   </tr>
                </thead>
         {isLoading && "chargement"}

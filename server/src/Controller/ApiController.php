@@ -16,21 +16,75 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
+
+use Doctrine\Persistence\ManagerRegistry;
 
 
 
 class ApiController extends AbstractController
 {
-        #[Route('/api/articles', name: 'app_api')]
-        public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, SerializerInterface $serializerInterface)
+    #[Route('/api/articles', name: 'app_api')]
+        public function getArticles(ArticleRepository $articleRepository, NormalizerInterface $normalize, ManagerRegistry $doctrine, SerializerInterface $serializerInterface)
         {
+
+
+            // $article = $articleRepository->findAll();                                                  //RECUPERATION DANS LA BDD
+
+            // $articleRepository = $normalize->normalize($article, null, ['groups' => 'groupe:get']);    //CONVERTIT EN TABLEAU ASSOCIATIF
+            // $json = json_encode($articleRepository);                                                   //L'ENCODE EN JSON
+
+            //////////////////////////////////OU//////////////////////////
+
+            // $json = $serializerInterface->serialize($articleRepository, 'json', ['groups' => 'groupe:get']);    // CONVERIT ET ENCODE 
+
+
+            // $resonse = new Response($json, 200, [
+            //     "Content-Type" => "application/json"
+            // ]);
+
+            // return $resonse;
+
+            
+
+            $date = date('Y-m-d');
+           
+            $entityManager = $doctrine->getManager();
+            $product = $entityManager->getRepository(Article::class)->findAll();
+            foreach($product as $pro){
+                if($date === $pro->getStartDicount()){
+                    if($pro->getOldPrice() === null){
+
+                        $discounted =  $pro->getPrix() - ($pro->getPrix() * ($pro->getDiscount()/100));
+                        $pro->setOldPrice($pro->getPrix());
+                        $pro->setPrix($discounted);
+                        $entityManager->flush();
+                    }
+                    
+                }
+
+                
+                if($date === $pro->getEndDiscount()){
+
+                    if($pro->getOldPrice() === null){
+                        $pro->setPrix($pro->getOldPrice());
+                        $pro->setDiscount(null);
+                        $pro->setOldPrice(null);
+                        $pro->setStartDiscount(null);
+                        $pro->setEndDiscount(null);
+                        $entityManager->flush();
+                }
+            }
+            }
+            
+
             return $this->json($articleRepository->findAll(), 200,[],['groups' => 'groupe:get']);
         }
 
-
+    
         #[Route('/api/article/{id}', name: 'app_api_id')]
         public function getArticleById(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em, $id)
         {
@@ -63,13 +117,11 @@ class ApiController extends AbstractController
         }   
         
         #[Route('/api/panier', name: 'app_api_panier')]  // ALL PANIER / AFFICHAGE
-        public function allPanier(SessionInterface $session, ArticleRepository $articleRepository) {
+        public function allPanier(Request $request,  SessionInterface $session, ArticleRepository $articleRepository) {
+// dd($request);
             $panier = $session->get('panier', []);      // Recupere le panier de la sessiona actuel
-            // dd($session);
-     
-
             $panierData = [];
-
+            
             foreach($panier as $id => $quantity) {
                 $panierData[] = [
                     'article' => $articleRepository->find($id),
@@ -84,31 +136,32 @@ class ApiController extends AbstractController
                 $weight = 0;
 
                 foreach($panierData as $item) {
-                    $totalItem = $item['article']->getPrix() * $item['quantity'];    // Multiplie le prix de l'article par sa quantity
-                    $total += $totalItem;
-
+                    
                     $totalWidth = $item['article']->getWidth();
                     $width+= $totalWidth;
-
+                    
                     $totalLenght = $item['article']->getLenght();
                     $lenght+= $totalLenght;
-
+                    
                     $totalHeight = $item['article']->getHeight();
                     $height+= $totalHeight;
-
+                    
                     $totalWeight = $item['article']->getWeight();
                     $weight+= $totalWeight;
+                    $totalItem = $item['article']->getPrix() * $item['quantity'];    // Multiplie le prix de l'article par sa quantity
+                    $total += $totalItem;
                 }
             }
+            // dd($total);
             return $this->json(['item' => $panierData, 'total' => $total, 'width' => $width, 'lenght' => $lenght, 'height' => $height, 'weight' => $weight], 200,[],['groups' => 'groupe:get']);
             dd($panierData);
         }
 
         #[Route('/api/panier/add/{id}', name: 'app_api_panier_add')]  // Route pour ajouter article dans le panier via Button Ajouter Panier
-        public function addPanier($id, SessionInterface $session) {
-
+        public function addPanier(Request $request, $id, SessionInterface $session) {
+            // dd($request);
             $panier = $session->get('panier', []);      // Recup le panier ou le creez 
-
+            // dd($session);
             if(!empty($panier[$id])) {      // Si j'ai déja cet article dans mon panier
                 $panier[$id]++;             // Alors incremente le 
             }else {
@@ -116,6 +169,7 @@ class ApiController extends AbstractController
             }
 
             $session->set('panier', $panier);   // Update le panier / Save le panier
+            dd($session);
             // dd($session->get('panier'));    
             return $this->json($panier, 200,[],['groups' => 'groupe:get']);
         }

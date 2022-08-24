@@ -49,9 +49,7 @@ class Article
     #[Groups("groupe:get")]
     private $stock;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris', fetch:'EAGER' )]
-      #[Groups("groupe:get")]
-    private Collection $users;
+
 
     #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
@@ -69,7 +67,21 @@ class Article
     #[Groups("groupe:get")]
     private ?int $width = null;
 
-  
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?float $discount = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?float $old_price = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $startDicount = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $endDiscount = null;
 
     public function __construct()
     {
@@ -267,4 +279,51 @@ class Article
         return $this;
     }
 
+    public function getDiscount(): ?float
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?float $discount): self
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    public function getOldPrice(): ?float
+    {
+        return $this->old_price;
+    }
+
+    public function setOldPrice(?float $old_price): self
+    {
+        $this->old_price = $old_price;
+
+        return $this;
+    }
+
+    public function getStartDicount(): ?string
+    {
+        return $this->startDicount;
+    }
+
+    public function setStartDicount(?string $startDicount): self
+    {
+        $this->startDicount = $startDicount;
+
+        return $this;
+    }
+
+    public function getEndDiscount(): ?string
+    {
+        return $this->endDiscount;
+    }
+
+    public function setEndDiscount(?string $endDiscount): self
+    {
+        $this->endDiscount = $endDiscount;
+
+        return $this;
+    }
 }

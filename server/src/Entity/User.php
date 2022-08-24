@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -49,21 +50,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 500, nullable: true)]
     private $apiToken;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'users', fetch: 'EAGER')]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups("groupe:get")]
-    private Collection $favoris;
+    private $CodePostal;
+
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Emballage $emballage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private $Country = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $BanMethode = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    #[Groups("groupe:get")]
+    private ?Card $card = null;
 
     #[ORM\Column(length: 255)]
-      #[Groups("groupe:get")]
-    private ?string $CodePostal = null;
+    #[Groups("groupe:get")]
+    private ?string $Firstname = null;
 
-  
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("groupe:get")]
+    private ?\DateTimeInterface $Birthdate = null;
 
-    public function __construct()
-    {
-        $this->favoris = new ArrayCollection();
-        $this->avis = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -75,7 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -231,7 +245,93 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    
+    public function setEmballage(?Emballage $emballage): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($emballage === null && $this->emballage !== null) {
+            $this->emballage->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($emballage !== null && $emballage->getUser() !== $this) {
+            $emballage->setUser($this);
+        }
+
+        $this->emballage = $emballage;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->Country;
+    }
+
+    public function setCountry(string $Country): self
+    {
+        $this->Country = $Country;
+
+        return $this;
+    }
 
  
+
+    public function getBanMethode(): ?string
+    {
+        return $this->BanMethode;
+    }
+
+    public function setBanMethode(?string $BanMethode): self
+    {
+        $this->BanMethode = $BanMethode;
+
+        return $this;
+    }
+
+    public function getCard(): ?Card
+    {
+        return $this->card;
+    }
+
+    public function setCard(?Card $card): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($card === null && $this->card !== null) {
+            $this->card->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($card !== null && $card->getUser() !== $this) {
+            $card->setUser($this);
+        }
+
+        $this->card = $card;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->Firstname;
+    }
+
+    public function setFirstname(string $Firstname): self
+    {
+        $this->Firstname = $Firstname;
+
+        return $this;
+    }
+
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->Birthdate;
+    }
+
+    public function setBirthdate(\DateTimeInterface $Birthdate): self
+    {
+        $this->Birthdate = $Birthdate;
+
+        return $this;
+    }
+
 }

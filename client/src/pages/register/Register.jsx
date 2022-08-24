@@ -7,6 +7,7 @@ import axios from 'axios';
 import Image from '../../asset/pc.jpg'
 import './Register.css';
 import { AiFillAmazonSquare } from 'react-icons/ai';
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 
 const Register = () => {
@@ -78,13 +79,13 @@ const Register = () => {
             "email": email,
             "password": password,
             "ville": ville,
-            "codepostal": codePostal,
+            "code_postal": codePostal,
             "phone": phone
         });
           
           var config = {
             method: 'post',
-            url: 'http://127.0.0.1:8000/account/register',
+            url: 'http://localhost:8000/account/register',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -103,7 +104,7 @@ const Register = () => {
           });
           
     }
-    if(islogin) return <Navigate to="/home"/> ;
+    // if(islogin) return <Navigate to="/home"/> ;
     return (
     <div className='registerMain'>
         <div className='DivRegisterText'>
@@ -119,13 +120,13 @@ const Register = () => {
             <div className='registerFormulaire'>
                 <div className='insideBackgroundWhite'>
                 <div className='inputDivRegister'>
-            {inputTop.map((input) => (
-                <InputRegister type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+            {inputTop.map((input, key) => (
+                <InputRegister key={key} type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                 ))}
                 </div>
                 <div className='inputDivLogin'>
-                {inputData.map((input) => (
-                    <InputLogin type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+                {inputData.map((input, key) => (
+                    <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
                     ))}
                     </div>
                     </div>

@@ -16,8 +16,11 @@ const Card = ({store}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+
     const callAPI = () => {
+
       axios.get('http://localhost:8000/api/articles')
+
         .then(res => {
           setData(res.data);
         })
@@ -25,11 +28,12 @@ const Card = ({store}) => {
           console.log(err);
         });
     }
+
     callAPI();
 
   }, []);
-
-  const sorted = data.map(d => ({id: d.id, titre: d.titre, length: d.lenght ,prix: d.prix, photo: d.photo, description: d.description, visit: d.visit, caracteristique: d.caracteristique})).sort((el1, el2) => el2.visit - el1.visit)
+  const sorted = data.sort((el1, el2) => el2.visit - el1.visit)
+  // console.log(sorted, 'ufuf')
 
   // console.log(store)
   console.log(JSON.parse(localStorage.getItem("store")))
@@ -41,7 +45,7 @@ const Card = ({store}) => {
     <p className='titreArticles'>Nos articles les plus populaires <RiMedalLine/></p>
     <div className='swipe'>
     <Swiper
-    modules={[ Pagination, Scrollbar, A11y, Autoplay]}
+    modules={[Pagination, Scrollbar, A11y, Autoplay]}
     spaceBetween={0}
     slidesPerView={windowWidth > 900 ? 2 : 1 }
     loop={true}
@@ -55,12 +59,25 @@ const Card = ({store}) => {
     {sorted.map((item,key) => ( key < 5 &&
       <SwiperSlide>
         <div onClick={() => navigate("/article_details/"+item.id)} className='cardCarou'>
-          <span class="key_articles">{key}</span>
+          {/* <span class="key_articles">{key}</span> */}
         {item.id == localStorage.getItem("store") &&
           <p>Deja dans le panier</p>
         } 
+         
+      {
+        item.discount !== null && 
+        <div className='discount'>
+             -{item.discount}%
+          </div>
+      }
           <img src={item.photo} alt="image du produit"/>
           <p className='prixCard'>{item.prix} €</p>
+          {
+        item.discount !== null && 
+        <div className='oldPrice'>
+             {item.old_price}
+          </div>
+      }
           <div>
             <span className="spanCarou">{item.titre}</span>  
           </div>

@@ -1,39 +1,55 @@
 import React, {useEffect,useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import {AiOutlineUser} from "react-icons/ai";
 import {MdOutlineLocalGroceryStore,MdOutlineFavorite} from "react-icons/md";
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 import './NavItems.css';
+// import Link from '../../admin/components/link/Link';
 
-const NavItems = ({storeClick,number,  }) => {
+const NavItems = () => {
+    const {contextStore, contextUser, contextToken} = GetGlobalData();
+    const [store] = contextStore;
+    const [user, setUser] = contextUser;
+    const [token, setToken] = contextToken;
+
     const navigate = useNavigate();
-    const [isLogged, setIsLogged] = useState(false);
+    // const [isLogged, setIsLogged] = useState(false);
     
-    useEffect(() => {
-        const Token = localStorage.getItem("token");
-        if(Token) setIsLogged(true);
-    },[]);
+    // useEffect(() => {
+    //     const Token = localStorage.getItem("token");
+    //     if(Token) setIsLogged(true);
+    //     console.log(login)
+    // },[]);
+
 
     const Deconnexion = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('token')
+        setToken(null)
+        setUser(null)
         navigate('/');
     }
-    if(isLogged === true){
+
+    // const handleClick = () => {
+    //     navigate('/login')
+    // }
+
+    if(user){
         return(
             <div className='loginFlex'>
             <div className='login1'>
-            <div class="dropdown">
+            <div className="dropdown">
                 <AiOutlineUser className='iconNavItems'/>
-                <div class="dropdown-content">
+                <div className="dropdown-content">
                     <a className='textLogin' onClick={()=> navigate("/account")}>Mon Compte</a>
                     &#124;
-                    <a className='textLogin' onClick={()=>Deconnexion()}>Deconnexion</a>
+                    <a className='textLogin' onClick={()=>Deconnexion()}>Déconnexion</a>
                 </div>
             </div>
             </div>
             <MdOutlineFavorite className='Favoris' onClick={() => navigate("/favoris")}/>
-            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
-            <span>{number}</span>
+            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={() => navigate("/panier")} />
+            <span>{store.length}</span>
             </div>
    
         )
@@ -44,17 +60,19 @@ const NavItems = ({storeClick,number,  }) => {
             <div className='login'>
             <div className='dropdown'>
              <div>
-            <a className='textLogin' onClick={()=>navigate('/register')}>Inscription</a>
+            {/* <a className='textLogin' onClick={()=>navigate('/register')}>Inscription</a> */}
+            <Link className='textLogin' to="/register">S'inscrire</Link>
             &#124;
-            <a className='textLogin' onClick={()=>navigate('/login')}>Connexion</a>
+            
+            <Link className='textLogin' to={"/login"}>Se connecter</Link>
                 </div>   
             </div>
         </div>
           
             <MdOutlineFavorite className='Favoris' onClick={() => navigate("/favoris")}/>
         
-            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={storeClick} />
-            <span>{number}</span>
+            <MdOutlineLocalGroceryStore className='storeNavItems' onClick={() => navigate("/panier")} />
+            <span>{store.length}</span>
         </div>
         )
     }

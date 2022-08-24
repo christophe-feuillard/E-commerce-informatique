@@ -5,15 +5,16 @@ import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Comment from "./Comment";
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 const Commentaires = ({articleId}) => {
-  
+  const {contextToken} = GetGlobalData();
+  const [token, setToken] = contextToken;
   const [comment,setComment] = useState("");
   const [comments,setComments] = useState([]);
   const isBtnDisabled = comment.length === 0; 
   const [dataUser, setdataUser] = useState([]);
-  const Token = localStorage.getItem("token");
-  const isToken = localStorage.getItem("token") === null;
+  const isToken = token === null;
   const navigate = useNavigate();
   const [databasecomment,setDatabasecomment] = useState([]);
 
@@ -22,7 +23,8 @@ const Commentaires = ({articleId}) => {
     message: "",
     articleid: "",
     username: "",
-    date: moment().format("MMM Do YY")
+    date: moment().format("MMM Do YY"),
+    // comment_title: "",
   });
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const Commentaires = ({articleId}) => {
         await axios.get('http://localhost:8000/api/user/role', {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${Token}`
+                'Authorization': `Bearer ${token}`
             },
         })
         .then(res => {
@@ -38,6 +40,7 @@ const Commentaires = ({articleId}) => {
         })
         .catch(err => {
         console.log(err);
+   
         });
     }
     callAPI();
@@ -45,7 +48,7 @@ const Commentaires = ({articleId}) => {
 
   useEffect(() => {
     const callAPI = () => {
-      axios.get('http://127.0.0.1:8000/api/comments')
+      axios.get('http://localhost:8000/api/comments')
         .then(res => {
           setDatabasecomment(res.data);
         })
@@ -69,6 +72,7 @@ const Commentaires = ({articleId}) => {
     newdata[e.target.id] = e.target.value;
     newdata["username"] = dataUser.name
     newdata["date"] = moment().format("MMM Do YY")
+    // newdata["comment_title"] = dataUser.comment_title
     setFormdata(newdata);
   }
 
@@ -81,14 +85,15 @@ const Commentaires = ({articleId}) => {
       user: parseInt(formdata.userid),  
       article: parseInt(formdata.articleid),
       username: formdata.username,
-      date: moment().format("MMM Do YY")
+      date: moment().format("MMM Do YY"),
+      // comment_title: formdata.comment_title
     }
     var config = {
       method: 'post',
       url: "http://127.0.0.1:8000/api/avis/save",
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${Token}`
+        'Authorization': `Bearer ${token}`
       }, 
       data : data
     }
@@ -96,7 +101,7 @@ const Commentaires = ({articleId}) => {
       console.log(res.data)
     })
   };
-
+  console.log(token, 'token')
   return (
     <>
     <section className="section_com">
@@ -123,31 +128,28 @@ const Commentaires = ({articleId}) => {
           />
           <button className="btn_avis" onClick={onClickHandler} disabled={isBtnDisabled}>Ajouter un avis</button>         
         </form>
-
       </div>
 
       {comments.map((text) => (
         <Comment 
-         imgProfil={imgProfil} 
          username={dataUser.name} 
          date={moment().format("MMM Do YY")} 
          text={text}
+        //  commentTitle={dataUser.comment_title}
         />    
       ))} 
 
-      {databasecomment.map((text) => ( text.article === articleId &&
+      {databasecomment.map((text) => (text.article === articleId &&
         <Comment 
-         imgProfil={imgProfil} 
          username={text.username} 
          date={text.date} 
          text={text.message}
+        //  commentTitle={text.comment_title}
         />         
-      ))}   
-
+      ))}
     </section>
     </>
   )
-    
 };
 
 export default Commentaires;

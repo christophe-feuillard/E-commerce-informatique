@@ -2,10 +2,12 @@ import React from "react";
 import Ptag from "../ptag/Ptag";
 import './Cart.css'
 import { APIdelete } from "../../requette/requette";
+import { GetGlobalData } from "../../../useContext/AuthProviders";
 
 const Cart = ({values, setEdit, setElementUpdate, edit}) => {
 
-   
+    const {contextToken} = GetGlobalData();
+    const [token] = contextToken;
     return (
         <div>
             <article class="mx-5 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -20,6 +22,7 @@ const Cart = ({values, setEdit, setElementUpdate, edit}) => {
                     
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Prix : {values.prix} euros</p>
                     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">stock : {values.stock} unités</p>
+                    {values.discount !== null && <p class="mb-3 font-normal text-gray-700 dark:text-red-400">soldé a hauteur de {values.discount}%, Début {values.startDicount} et fin {values.endDiscount} </p>}
 
                 <div className="flex flex-row justify-center">
                     <div className="mx-8" onClick={() => {
@@ -32,11 +35,19 @@ const Cart = ({values, setEdit, setElementUpdate, edit}) => {
                     </div>
 
                     <div className="mx-8" onClick={() => {
-                        setEdit('home') 
-                        APIdelete(values.id)
+                        APIdelete(values.id, setEdit, token)
                 
                     }} class="mx-3 inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                         supprimé
+                        <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </div>
+
+                    <div className="mx-8" onClick={() => {
+                        setEdit('discount') 
+                        setElementUpdate(values)
+                
+                    }} class="mx-3 inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        reduction
                         <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </div>
                 </div>

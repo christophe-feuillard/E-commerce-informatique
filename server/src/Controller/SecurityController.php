@@ -68,13 +68,11 @@ throw new \Exception('Will be intercepted before getting here');
             try{
                $entityManager->persist($user);
                $entityManager->flush($user);
-               return $this->json('inscription effectué avec succées ');
+               return $this->json('inscription effectué avec succées');
             }
             catch(\Exception $e){
                 return $this->json('impossible d\'inscrire');
-            }
-            
-            
+            }  
         }else{
             return $this->json('utilise une requette post');
         }

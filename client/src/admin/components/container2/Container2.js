@@ -2,13 +2,16 @@ import {useState, useEffect} from 'react'
 import Cart from '../cart/Cart'
 import '../containerCart/ContainerCart.css'
 import { getItem } from "../../requette/requette";
-
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 
 const Container2 = ({setEdit, setElementUpdate, edit}) => {
     const [data, setData] = useState([])
 
+    const {contextToken} = GetGlobalData();
+    const [token] = contextToken;
+
     useEffect(() => {
-     getItem(setData);
+     getItem(setData, token);
         
      },[edit]);
 

@@ -1,6 +1,4 @@
-* {
-  /* border: 1px solid black; */
-}
+
 .h4,.h4_p {
   text-align: center;
 }
@@ -22,7 +20,7 @@
   text-decoration: underline;
 }
 .section_com {
-  background-color: rgb(67, 67, 67);
+  /* background-color: rgb(67, 67, 67); */
 }
 .formCom {
   height: 50px;

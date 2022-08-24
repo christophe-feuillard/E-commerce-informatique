@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Persistence\ManagerRegistry;
-use App\Repository\CommentRepository;
 use App\Entity\Comment;
+use App\Repository\CommentRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/api')]
 class CommentController extends AbstractController
@@ -45,6 +46,7 @@ class CommentController extends AbstractController
             $comment->setArticle($request->request->get('article')); // articleid
             $comment->setUsername($request->request->get('username')); // username
             $comment->setDate($request->request->get('date')); // username
+            $comment->setCommentTitle($request->request->get('comment_title')); // username
         
             $entityManager = $doctrine->getManager();
             $entityManager->persist($comment); // prepare la requete

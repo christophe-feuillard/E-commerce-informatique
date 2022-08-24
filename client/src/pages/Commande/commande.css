@@ -6,8 +6,31 @@
     padding: 0px 25px;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
-  
+  .scrollY{
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    padding-right: 20px;
+    min-width:600px;
+ 
+    transition: all 1s ease;
+  }
+
+  .scrollY::-webkit-scrollbar {
+    width: 3px;
+    height: 8px;
+}
+ 
+.scrollY::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+ 
+.scrollY::-webkit-scrollbar-thumb {
+    background-color: #89898c6f;
+    border-radius: 100px;
+}
 .infoPanier{
   width: 30%;
 }
@@ -50,10 +73,11 @@
   .field .input:placeholder {
     color: #e8ebed !important;
   }
-  .flex {
+  .flexin {
     display: flex;
     flex-direction: row wrap;
     align-items: center;
+    justify-content: space-around;
   }
   .flex.justify-space-between {
     justify-content: space-between;
@@ -118,7 +142,7 @@
   .cardCommand .card-body .payment-type .types .type.selected p {
     color: #28333b;
   }
-  .cardCommand .card-body .payment-type .types .type.selected::after {
+  /* .cardCommand .card-body .payment-type .types .type.selected::after {
     content: '\f00c';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -133,7 +157,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
   .cardCommand .card-body .payment-type .types .type .logoCard,
   .cardCommand .card-body .payment-type .types .type p {
     transition: all 0.5s ease;

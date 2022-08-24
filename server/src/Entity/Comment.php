@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -14,19 +15,28 @@ class Comment
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $message = null;
 
     #[ORM\Column]
+    #[Groups("groupe:get")]
     private ?int $user = null;
 
     #[ORM\Column]
+    #[Groups("groupe:get")]
     private ?int $article = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $username = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $date = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
+    private ?string $commentTitle = null;
 
     public function getId(): ?int
     {
@@ -89,6 +99,18 @@ class Comment
     public function setDate(string $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCommentTitle(): ?string
+    {
+        return $this->commentTitle;
+    }
+
+    public function setCommentTitle(string $commentTitle): self
+    {
+        $this->commentTitle = $commentTitle;
 
         return $this;
     }
