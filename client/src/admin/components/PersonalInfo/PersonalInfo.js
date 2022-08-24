@@ -83,7 +83,7 @@ const PersonalInfo = () => {
     },
     {
       titre: "Date de naissance",
-      ref: user.Birthdate
+      ref: user.birthdate
     },
     {
       titre: "Numéro de téléphone",

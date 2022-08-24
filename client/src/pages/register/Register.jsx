@@ -15,10 +15,12 @@ const Register = () => {
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
+    const [firstname, setFirstname] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [ville, setVille] = useState('');
     const [phone, setPhone] = useState('');
+    const [date, setDate] = useState('');
     const [password, setPassword] = useState('');
     const [codePostal, setCodePostal] = useState('');
     const [error, setError] = useState('');
@@ -26,27 +28,35 @@ const Register = () => {
 
 
     const inputTop = [{
-        type: 'text',placeholder: 'Name',value: name,change: (e) => setName(e.target.value)
+        type: 'text',placeholder: 'Nom',value: name,change: (e) => setName(e.target.value)
     },
     {
-        type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
+        type: 'text',placeholder: 'Prénom',value: firstname,change: (e) => setFirstname(e.target.value)
     }
     ]
     const inputData = [
+
     {
-        type: 'text',placeholder: 'Address',value: address,change: (e) => setAddress(e.target.value)
+        type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
+    },
+    {
+        type: 'text',placeholder: 'Adresse',value: address,change: (e) => setAddress(e.target.value)
     },
     {
         type: 'text',placeholder: 'Ville',value: ville,change: (e) => setVille(e.target.value)
     },
     {
-        type: 'text',placeholder: 'Code Postal',value: codePostal,change: (e) => setCodePostal(e.target.value)
+        type: 'text',placeholder: 'Code Postale',value: codePostal,change: (e) => setCodePostal(e.target.value)
+    },
+    ,
+    {
+        type: 'date',placeholder: 'Numero de téléphone',change: (e) => setDate(e.target.value)
     },
     {
-        type: 'text',placeholder: 'Numero de telephone',value: phone,change: (e) => setPhone(e.target.value)
+        type: 'text',placeholder: 'Numero de téléphone',value: phone,change: (e) => setPhone(e.target.value)
     },
     {
-        type: 'password',placeholder: 'Mots de passe',value: password,change: (e) => setPassword(e.target.value)
+        type: 'password',placeholder: 'Mot de passe',value: password,change: (e) => setPassword(e.target.value)
     }];
     
     useEffect(() => {

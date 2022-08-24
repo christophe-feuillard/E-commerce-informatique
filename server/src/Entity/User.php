@@ -74,9 +74,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private ?string $Firstname = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups("groupe:get")]
-    private ?\DateTimeInterface $Birthdate = null;
+    private ?\DateTimeInterface $birthdate = null;
+
+
 
 
     public function getId(): ?int
@@ -324,14 +326,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getBirthdate(): ?\DateTimeInterface
     {
-        return $this->Birthdate;
+        return $this->birthdate;
     }
 
-    public function setBirthdate(\DateTimeInterface $Birthdate): self
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
     {
-        $this->Birthdate = $Birthdate;
+        $this->birthdate = $birthdate;
 
         return $this;
     }
+
+
 
 }

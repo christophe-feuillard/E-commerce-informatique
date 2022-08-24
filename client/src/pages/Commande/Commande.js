@@ -1,343 +1,519 @@
-import React, { useState } from 'react'
-import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import {RadioGroup} from '@headlessui/react'
+import { CheckCircleIcon, TrashIcon } from '@heroicons/react/solid'
 import InputCard from '../../components/input/InputCard';
-import './commande.css'
-import { PayPalButtons } from "@paypal/react-paypal-js";
-import axios from 'axios';
 
 import { GetGlobalData } from '../../useContext/AuthProviders';
 import { Trash } from '../../components/panier/trash';
+import { useNavigate } from 'react-router-dom';
 
+
+
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+
+  const deliveryMethods = [
+    { id: 1, title: 'Standard', turnaround: '4–10 business days', price: '$5.00' },
+    { id: 2, title: 'Express', turnaround: '2–5 business days', price: '$16.00' },
+  ]
+  const paymentMethods = [
+    { id: 'credit-card', title: 'Credit card' },
+    { id: 'paypal', title: 'PayPal' },
+   ,
+  ]
 export const Commande = () => {
-      const {contextStore, contextTotal,contextUser} = GetGlobalData();
-      const [store, setStore] = contextStore;
-      const [total] = contextTotal;
-      const [user] = contextUser
+  const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
 
-   
-const token = localStorage.getItem("token");
+  const {contextStore, contextTotal,contextUser} = GetGlobalData();
+  const [store, setStore] = contextStore;
+  const [total] = contextTotal;
+  const [user] = contextUser
+
 
   const [name, setName] = useState('');
+  const [firstname, setFirstname] = useState('');
   const [adress, setAdress] = useState('');
   const [city, setCity] = useState('');
   const [zip, setZip] = useState('');
-  const [ville, setVille] = useState('');
+  const [email, setEmail] = useState('');
+  const [country, setCountry] = useState('');
+  const [phone, setPhone] = useState('');
   const [cardName, setCardName] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [cardCvc, setCvc] = useState('');
-  const [orderId, setOrderId] = useState(false);
-  const  [errorMessage, setErrorMessage] = useState("");
+  
   const [isSave, setIsSave] = useState(false);
-
+  
   const navigate = useNavigate()
-
-console.log(user)
+  
+  console.log(user)
   const inputName = [
     {
-
-      type: 'text', id: 'name', for: 'name', placeholder: 'name', value: name, change: (e) => setName(e.target.value)
-
+  
+      type: 'text', id: 'name', for: 'Prénom', value: name, change: (e) => setName(e.target.value)
+  
     },
   ]
-
+  const inputEmail = [
+    {
+  
+      type: 'text', id: 'name', for: 'Email', value: email, change: (e) => setEmail(e.target.value)
+  
+    },
+  ]
+  const inputFName = [
+    {
+  
+      type: 'text', id: 'name', for: 'name', value: firstname, change: (e) => setFirstname(e.target.value)
+  
+    },
+  ]
+  
   const inputAdress = [
     {
-
-      type: 'text', id: 'adress', for: 'adress', placeholder: 'adress', value: adress, change: (e) => setAdress(e.target.value)
-
+  
+      type: 'text', id: 'adress', for: 'adress', value: adress, change: (e) => setAdress(e.target.value)
+  
     }
   ]
 
+  const inputPhone = [
+    {
+  
+      type: 'text', id: 'adress', for: 'adress',value: phone, change: (e) => setPhone(e.target.value)
+  
+    }
+  ]
+  
   const inputZip = [
     {
-      type: 'text', id: 'zip', for: 'zip', placeholder: 'zip', value: zip, change: (e) => setZip(e.target.value)
+      type: 'text', id: 'zip', for: 'zip',value: zip, change: (e) => setZip(e.target.value)
     },
   ]
-
+  
   const inputNameCard = [
     {
-      type: 'text', id: 'nameCard', for: 'nameCard', placeholder: 'name card', value: user?.card?.name , change: (e) => setCardName(e.target.value)
+      type: 'text', id: 'nameCard', for: 'nameCard',value: user?.card?.name , change: (e) => setCardName(e.target.value)
         }
   ]
-
+  
   const InputCvc = [
     {
-      type: 'text', id: 'cvc', for: 'cvc', placeholder: 'cvc', value: cardCvc, change: (e) => setCvc(e.target.value)
+      type: 'text', id: 'cvc', for: 'cvc',value: cardCvc, change: (e) => setCvc(e.target.value)
     }
   ]
   const InputCardNumber = [
     {
-      type: 'text', id: 'number', for: 'number', placeholder: 'number', value: user?.card?.number, change: (e) => setCardNumber(e.target.value)
+      type: 'text', id: 'number', for: 'number',value: user?.card?.number, change: (e) => setCardNumber(e.target.value)
     }
   ]
-
+  
   const InputCity = [
     {
-      type: 'text', id: 'city', for: 'city', placeholder: 'city', value: city, change: (e) => setCity(e.target.value)
+      type: 'text', id: 'city', for: 'city',value: city, change: (e) => setCity(e.target.value)
     },
   ]
-  const InputVille = [
+  const InputCountry = [
     {
-      type: 'text', id: 'ville', for: 'ville', placeholder: 'ville', value: ville, change: (e) => setVille(e.target.value)
+      type: 'text', id: 'Pays', for: 'Pays',value: country, change: (e) => setCountry(e.target.value)
     },
-
+  
   ]
   const InputMonth = [
     {
-      type: 'text', id: 'month', for: 'month', placeholder: 'month', value: month, change: (e) => setMonth(e.target.value)
+      type: 'text', id: 'month', for: 'month', value: month, change: (e) => setMonth(e.target.value)
     },
   ]
   const InputYear = [
     {
-      type: 'text', id: 'year', for: 'year', placeholder: 'year', value: year, change: (e) => setYear(e.target.value)
+      type: 'text', id: 'year', for: 'year', value: year, change: (e) => setYear(e.target.value)
     }
   ]
-
- const product = {
-   amount : total
- }
-
-  const handleChange = event => {
-    if (event.target.checked) {
-      console.log('Checkbox is checked');
-      console.log(name)
-    } else {
-      console.log('Checkbox is NOT checked');
-    }
-    setIsSave(current => !current);
-  };
   
 
-    const callAPI = () => { 
-      if(isSave){
-        var data = JSON.stringify({
-          "name": cardName,
-          "number": cardNumber,
-          "month": month,
-          "year": year,
-        "cvc": cardCvc
-      });
-      
-      var config = {
-        method: 'post',
-        url: 'https://localhost:8000/api/payment',
-        headers: { 
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        alert('Merci pour votre commande')
-      })
-      .catch((error) => {
-          console.log(error)
-          alert('Merci pour votre commande')
-        });
-      } else {
-
-        console.log("Vous n'avez pas acceptez")
-        
-      }
-      }
 
 
+console.log(store)
   return (
-
-    <div className='body mt-7'>
-    <div>
-   <div className="flow-root scrollY ">
-              <ul role="list" className="-my-6 divide-y divide-gray-200">
-                {store.map((product, key) => (
-                  <li key={key} className="py-6 flex space-x-6">
-                    <img
-                      src={product.photo}
-                      alt='produit'
-                      className="flex-none w-24 h-24 object-center object-cover bg-gray-100 rounded-md"
-                    />
-                    <div className="flex-auto">
-                      <div className="space-y-1 sm:flex sm:items-start sm:justify-between sm:space-x-6">
-                        <div className="flex-auto text-sm font-medium space-y-1">
-                          <div className="text-gray-900">
-                            <p>{product.titre}</p>
-                          </div>
-                          <p className="text-gray-900">{product.prix + "€"}</p>
-                         
-                          <p className="hidden text-gray-500 sm:block">{product.quantity}</p>
-                        </div>
-                        <div className="flex-none flex space-x-4">
-                          <div className="flex border-l border-gray-300 pl-4">
-                            <button onClick={() => Trash(product.id, setStore, store)} type="button" className="text-sm font-medium  hover:text-indigo-500">
-                                Remove
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <dl className="text-sm font-medium text-gray-500 mt-10 space-y-6 pr-5">
-              <div className="flex justify-between">
-                <dt>Subtotal</dt>
-                <dd className="text-gray-900">{total}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt>Shipping</dt>
-                <dd className="text-gray-900">{user?.card?.number}</dd>
-              </div>
-              <div className="flex justify-between border-t border-gray-200 text-gray-900 pt-6">
-                <dt className="text-base">Total</dt>
-                <dd className="text-base">{total}</dd>
-              </div>
-            </dl>
-          </div>
-
-      <article className="cardCommand">
-        <div className="containerCard">
+    <div className="bg-gray-50 text-gray-900">    
  
-          <div className="card-body">
-            <div className="payment-type">
-              <h4>Choisissez votre méthode de paiement</h4>
-              <div className="types flexin justify-space-between">
-                <div className="type selected">
-                  <div className="logoCard">
-                    <i><RiBankCardFill/></i>
-                  </div>
-                  <div className="text">
-                    <p>Payer avec votre Carte</p>
-                  </div>
-                </div>
-                
-                {/* Paypal */}
-                <div className="type">
-                  <div className="text">
-                      <p>Payer plus vite</p>
-                  </div>
-                  <div className="logoCard">
-                    
-                          <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
-                            createOrder={async (data, actions) => {
-                              const orderID = await actions.order
-                                .create({
-                                  purchase_units: [
-                                    {
-                                      amount: {
-                                        value: product.amount
-                                      },
-                                    },
-                                  ],
-                                });
-                              setOrderId(orderID);
-                              return orderID;
-                            }}
-                            onApprove={async (data, actions) => {
-                              const details = await actions.order.capture();
-                              const { payer } = details;
-                              navigate("/payment_confirmation");
-                            }}
-                            onError={(data, actions) => {
-                              setErrorMessage("An Error occured with your payment ");
-                            }}
-                          />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="payment-info flexin justify-space-between">
-              <div className="column billing">
-                <div className="title">
-                  <div className="num">1</div>
-                  <h4>Vos infos </h4>
-                </div>
+      <main className="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto lg:max-w-none">
+          <h1 className="sr-only">Checkout</h1>
 
-                <div className='field full'>
-                  {inputAdress.map((input, key) => (
-                    <InputCard key={key} className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+          <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+            <div>
+              <div>
+                <h2 className="text-lg font-medium text-gray-900">Contact</h2>
+
+                <div className="mt-4">
+                  <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                   Adresse Email
+                  </label>
+                  <div className="mt-1">
+                  {inputEmail.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
-                </div>
-                <div className='field full'>
-                  {inputName.map((input, key) => (
-                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                  ))}
-                </div>
-                <div className="flexin justify-space-between">
-                  <div className="field half">
-                    {InputCity.map((input, key) => (
-                      <InputCard key={key}  className='input' type={input.tycommandepe} value={input.value} placeholder={input.placeholder} change={input.change} />
-                    ))}
                   </div>
-                  <div className="field half">
-                    {InputVille.map((input, key) => (
-                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                    ))}
-                  </div>
-                </div>
-                <div className='field full'>
-                  {inputZip.map((input, key) => (
-                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                  ))}
                 </div>
               </div>
-              <div className="column shipping">
-                <div className="title">
-                  <div className="num">2</div>
-                  <h4>Entrez les informations de votre carte</h4>
-                </div>
-                <div className='field full'>
-                  {inputNameCard.map((input, key) => (
-                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+
+              <div className="mt-10 border-t border-gray-200 pt-10">
+                <h2 className="text-lg font-medium text-gray-900">Information sur la livraison</h2>
+
+                <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                  <div>
+                    <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                      Prénom
+                    </label>
+                    <div className="mt-1">
+                    {inputFName.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
-                </div>
-                <div className='field full'>
-                  {InputCardNumber.map((input, key) => (
-                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                      Nom
+                    </label>
+                    <div className="mt-1">
+                    {inputName.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                   ))}
+                    </div>
+                  </div>
+
+            
+                  <div className="sm:col-span-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                      Addresse de livraison 
+                    </label>
+                    <div className="mt-1">
+                    {inputAdress.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  {/* <div className="sm:col-span-2">
+                    <label htmlFor="apartment" className="block text-sm font-medium text-gray-700">
+                      Apartment, suite, etc.
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type="text"
+                        name="apartment"
+                        id="apartment"
+                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      />
+                    </div>
+                  </div> */}
+
+                  <div>
+                    <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                      Ville
+                    </label>
+                    <div className="mt-1">
+                    {InputCity.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                      Pays
+                    </label>
+                    <div className="mt-1">
+                    {InputCountry.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+                      State / Province
+                    </label>
+                    <div className="mt-1">
+                    {inputZip.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+                      Code postal
+                    </label>
+                    <div className="mt-1">
+                    {inputZip.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                      Numéro de téléphone
+                    </label>
+                    <div className="mt-1">
+                    {inputPhone.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="flexin justify-space-between">
-                  <div className='field half'>
-                    {InputMonth.map((input, key) => (
-                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+              </div>
+
+              <div className="mt-10 border-t border-gray-200 pt-10">
+                <RadioGroup value={selectedDeliveryMethod} onChange={setSelectedDeliveryMethod}>
+                  <RadioGroup.Label className="text-lg font-medium text-gray-900">Méthode de livraison</RadioGroup.Label>
+
+                  <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                    {deliveryMethods.map((deliveryMethod) => (
+                      <RadioGroup.Option
+                        key={deliveryMethod.id}
+                        value={deliveryMethod}
+                        className={({ checked, active }) =>
+                          classNames(
+                            checked ? 'border-transparent' : 'border-gray-300',
+                            active ? 'ring-2 ring-indigo-500' : '',
+                            'relative bg-white border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none'
+                          )
+                        }
+                      >
+                        {({ checked, active }) => (
+                          <>
+                            <div className="flex-1 flex">
+                              <div className="flex flex-col">
+                                <RadioGroup.Label as="span" className="block text-sm font-medium text-gray-900">
+                                  {deliveryMethod.title}
+                                </RadioGroup.Label>
+                                <RadioGroup.Description
+                                  as="span"
+                                  className="mt-1 flex items-center text-sm text-gray-500"
+                                >
+                                  {deliveryMethod.turnaround}
+                                </RadioGroup.Description>
+                                <RadioGroup.Description as="span" className="mt-6 text-sm font-medium text-gray-900">
+                                  {deliveryMethod.price}
+                                </RadioGroup.Description>
+                              </div>
+                            </div>
+                            {checked ? (
+                              <CheckCircleIcon className="h-5 w-5 text-indigo-600" aria-hidden="true" />
+                            ) : null}
+                            <div
+                              className={classNames(
+                                active ? 'border' : 'border-2',
+                                checked ? 'border-indigo-500' : 'border-transparent',
+                                'absolute -inset-px rounded-lg pointer-events-none'
+                              )}
+                              aria-hidden="true"
+                            />
+                          </>
+                        )}
+                      </RadioGroup.Option>
                     ))}
                   </div>
-                  <div className='field half'>
+                </RadioGroup>
+              </div>
+
+            
+              <div className="mt-10 border-t border-gray-200 pt-10">
+                <h2 className="text-lg font-medium text-gray-900">Paiement</h2>
+
+                <fieldset className="mt-4">
+                  <legend className="sr-only">Type de paiement</legend>
+                  <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                    {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
+                      <div key={paymentMethod.id} className="flex items-center">
+                        {paymentMethodIdx === 0 ? (
+                          <input
+                            id={paymentMethod.id}
+                            name="payment-type"
+                            type="radio"
+                            defaultChecked
+                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                          />
+                        ) : (
+                          <input
+                            id={paymentMethod.id}
+                            name="payment-type"
+                            type="radio"
+                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                          />
+                        )}
+
+                        <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
+                          {paymentMethod.title}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </fieldset>
+
+                <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
+                  <div className="col-span-4">
+                    <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
+                      Numéro de carte
+                    </label>
+                    <div className="mt-1">
+                    {InputCardNumber.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  <div className="col-span-4">
+                    <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
+                      Nom 
+                    </label>
+                    <div className="mt-1">
+                    {inputNameCard.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  {/* <div className="col-span-3">
+                    <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
+                      Expiration date (MM/YY)
+                    </label>
+                    <div className="mt-1">
                     {InputYear.map((input, key) => (
                       <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
                     ))}
+                    </div>
+                  </div> */}
+
+
+                  <div>
+                  <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
+                      Mois
+                    </label>
+                    <div className="mt-1">
+                    {InputMonth.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+                  <div>
+                  <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
+                      Année
+                    </label>
+                    <div className="mt-1">
+                    {InputYear.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
+                      CVC
+                    </label>
+                    <div className="mt-1">
+                    {InputCvc.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                  ))}
+                    </div>
                   </div>
                 </div>
-                <div className='field full'>
-                  {InputCvc.map((input, key) => (
-                    <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+              </div>
+            </div>
+
+            {/* Order summary */}
+            <div className="mt-10 lg:mt-0">
+              <h2 className="text-lg font-medium text-gray-900">Récapitulatif commande</h2>
+
+              <div className="mt-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                <h3 className="sr-only">Articles dans ton panier</h3>
+                <ul role="list" className="divide-y divide-gray-200">
+                  {store.map((product) => (
+                    <li key={product.id} className="flex py-6 px-4 sm:px-6">
+                      <div className="flex-shrink-0">
+                        <img src={product.photo} className="w-20 rounded-md" />
+                      </div>
+
+                      <div className="ml-6 flex-1 flex flex-col">
+                        <div className="flex">
+                          <div className="min-w-0 flex-1">
+                            <h4 className="text-sm">
+                              <p className="font-medium text-gray-700 hover:text-gray-800">
+                                {product.titre}
+                              </p>
+                            </h4>
+                           
+                            <p className="mt-1 text-sm text-gray-500">{product.weight+ 'kg' + '  ' + product.height+ 'cm'+ '  ' + product.lenght+ 'cm' + '  ' + product.width+ '"'}</p>
+                          </div>
+
+                          <div className="ml-4 flex-shrink-0 flow-root">
+                            <button
+                              type="button"
+                              className="-m-2.5 bg-white p-2.5 flex items-center justify-center text-gray-400 hover:text-gray-500"
+                            >
+                              <span className="sr-only">Supprimer</span>
+                              <TrashIcon onClick={() => Trash(product.id, setStore, store)} className="h-5 w-5" aria-hidden="true" />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="flex-1 pt-2 flex items-end justify-between">
+                          <p className="mt-1 text-sm font-medium text-gray-900">{product.prix} €</p>
+
+                          <div className="ml-4">
+                            <label htmlFor="quantity" className="sr-only">
+                              Quantité
+                            </label>
+                            <p className='font-medium text-gray-900'>{product.quantity}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
                   ))}
+                </ul>
+                <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
+                  <div className="flex items-center justify-between">
+                    <dt className="text-sm">Sous Totale</dt>
+                    <dd className="text-sm font-medium text-gray-900">64.00€</dd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <dt className="text-sm">Frais de port</dt>
+                    <dd className="text-sm font-medium text-gray-900">5.00€</dd>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <dt className="text-sm">Taxes</dt>
+                    <dd className="text-sm font-medium text-gray-900">5.52€</dd>
+                  </div>
+                  <div className="flex items-center justify-between border-t border-gray-200 pt-6">
+                    <dt className="text-base font-medium">Total</dt>
+                    <dd className="text-base font-medium text-gray-900">{total}</dd>
+                  </div>
+                </dl>
+
+                <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                  <button
+                    type="submit"
+                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  >
+                    Confirmer la commande
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="card-actions flexin justify-space-between">
-            <div className="flex-start">
-              <p onClick={()=> navigate("/home") } className="button button-secondary">Retourner sur le store</p>
-            </div>
-            <div className="flex-end">
-              <div>
-              <input type="checkbox" id="save" name="save" value={isSave} onChange={handleChange}/>
-              <label htmlFor="save">Souhaitez-vous enregistrez vos données ?</label>
-              </div>
-              {/* <button className="button button-link">Back to Shipping</button> */}
-              <button onClick={callAPI} className="button button-primary">Proceder au paiement</button>
-            </div>
-          </div>
+          </form>
         </div>
-      </article>
+      </main>
     </div>
   )
 }

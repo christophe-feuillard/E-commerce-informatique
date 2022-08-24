@@ -54,9 +54,11 @@ throw new \Exception('Will be intercepted before getting here');
             $user = new User();
             $user->setEmail($request->request->get('email'));
             $user->setName($request->request->get('name'));
+            $user->setFirstname($request->request->get('firstname'));
             $user->setPhone($request->request->get('phone'));
             $user->setAdresse($request->request->get('adresse'));
             $user->setVille($request->request->get('ville'));
+            $user->setBirthdate($request->request->get('birthdate'));
             $user->setCodePostal($request->request->get('codepostal'));
 
             $hashedPassword = $passwordHasher->hashPassword(

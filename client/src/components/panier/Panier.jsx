@@ -133,7 +133,7 @@ import './Panier.css'
                                     <p class="text-2xl font-bold leading-normal text-right text-gray-800 dark:text-white">{total} €</p>
                                 </div>
                               
-<button class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700" onClick={()=>navigate("/example", {total})}>Passez au paiement</button>
+<button class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700" onClick={()=>navigate("/commande", {total})}>Passez au paiement</button>
 
                             </div>
                         </div>

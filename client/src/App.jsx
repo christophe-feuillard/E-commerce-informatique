@@ -19,13 +19,14 @@ import PaymentConfirmation from './pages/payment_confirmation/PaymentConfirmatio
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
 import { Error } from './components/error/error';
 import Example from './pages/Commande/livraisonDetail/livraisonDetail';
+import { PaiementType } from './pages/Commande/paiementType/paiementType';
 
 function App() {
   return (
     <PayPalScriptProvider options={{"client-id": "AYnNt36sxMGoExbhgbXaaVTz1QYCdi16TOedUbCRJxO4WDKsoitKKiQWBBFhcNBNWb5HnNTCcnV-r8C4"}}>
     <AuthProviders>
     <Routes>
-      {/* <Route path="/" element={<Landing/>}/> */}
+      <Route path="/" element={<Landing/>}/>
       <Route path="/home" element={<Home/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/login" element={<Login/>}/>
@@ -40,6 +41,7 @@ function App() {
       <Route path='/modal' element={<ModalSmall/>}/>
       <Route path='/info' element={<MyInfo/>}/>
       <Route path='/panier' element={<Panier/>}/>
+      <Route path='/paiementType' element={<PaiementType/>}/>
       <Route path="/article_details" element={<ArticleDetails/>}/>
       <Route path="/article_details/:articlesParams" element={<ArticleDetails srcImage=""/>}/>
       <Route path='/payment_confirmation' element={<PaymentConfirmation/>}/>
