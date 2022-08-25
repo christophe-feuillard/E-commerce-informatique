@@ -1,10 +1,11 @@
 
 .h4,.h4_p {
   text-align: center;
+  color: rgb(0, 0, 0);
 }
 .h4_p {
   text-decoration: underline;
-  color: brown;
+  color: rgb(0, 0, 0);
   font-style: italic;
 }
 .separation {
@@ -22,10 +23,23 @@
 .section_com {
   /* background-color: rgb(67, 67, 67); */
 }
-.formCom {
-  height: 50px;
+.textareadiv {
   display: flex;
-  /* border: 1px solid rgb(254, 254, 254); */
+  flex-direction: column;
+}
+.textareadiv > textarea:first-child {
+  border: none;
+  background-color: azure;
+  border-radius: 20px;
+}
+.textareadiv > textarea:nth-child(2) {
+  border-top: 1px solid black;
+  border-bottom:0px solid black ;
+}
+.formCom {
+  /* height: 200px; */
+  display: flex;
+  /* border: 1px solid rgb(20, 78, 119); */
   justify-content: space-between;
   margin: 0 auto;
   width: 50%;
@@ -83,7 +97,6 @@
 }
 
 .container_com_div {
-  margin-top: 15px;
   /* border: 1px solid black; */
   width: 100%;
   display: flex;
