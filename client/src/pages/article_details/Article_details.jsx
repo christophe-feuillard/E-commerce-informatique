@@ -114,36 +114,36 @@ const ArticleDetails = (props) => {
     //   ],
     // }
   
-    // const reviews = {
-    //   average: 3.9,
-    //   totalCount: 512,
-    //   featured: [
-    //     {
-    //       id: 1, // (inutile car c'est auto increment en bdd)
-    //       title: "Can't say enough good things", // rajouter une colonne comment_title dans la bdd
-    //       rating: 5, // ça je peux peut etre reflechir a comment gerer ça en back 
-    //       content: ` 
-    //         <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
-    //         <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
-    //       `,
-    //       author: 'Risako M', // username
-    //       date: 'May 16, 2021', // date 
-    //       datetime: '2021-01-06',
-    //     },
-    //   ],
-    // }
+    const reviews = {
+      average: 3.9,
+      totalCount: 512,
+      featured: [
+        {
+          id: 1, // (inutile car c'est auto increment en bdd)
+          title: "Can't say enough good things", // rajouter une colonne comment_title dans la bdd
+          rating: 5, // ça je peux peut etre reflechir a comment gerer ça en back 
+          content: ` 
+            <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
+            <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
+          `,
+          author: 'Risako M', // username
+          date: 'May 16, 2021', // date 
+          datetime: '2021-01-06',
+        },
+      ],
+    }
 
-    // const relatedProducts = [
-    //   {
-    //     id: 1,
-    //     name: 'Basic Tee',
-    //     href: '#',
-    //     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg',
-    //     imageAlt: "Front of men's Basic Tee in white.",
-    //     price: '$35',
-    //     color: 'Aspen White',
-    //   },
-    // ]
+    const relatedProducts = [
+      {
+        id: 1,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg',
+        imageAlt: "Front of men's Basic Tee in white.",
+        price: '$35',
+        color: 'Aspen White',
+      },
+    ]
    
     
     function classNames(...classes) {
@@ -161,7 +161,7 @@ const ArticleDetails = (props) => {
             </div>
             
             {/* Reviews */}
-            {/* <div className="mt-4">
+            <div className="mt-4">
               <h2 className="sr-only">Reviews</h2>
               <div className="flex items-center">
                 <p className="text-sm text-gray-700">
@@ -193,7 +193,7 @@ const ArticleDetails = (props) => {
                   <div>
                   <p className='mt-4 text-gray-700'>Il reste {articles.stock} en stock</p>
                   </div>
-            </div> */}
+            </div>
           </div>
 
           {/* Image gallery */}
@@ -256,7 +256,6 @@ const ArticleDetails = (props) => {
           <h2 id="reviews-heading" className="text-lg font-medium text-gray-900">
            Commentaires récents
           </h2>
-
           {/* <div className="mt-6 border-t border-b border-gray-200 pb-10 divide-y divide-gray-200 space-y-10">
             {reviews.featured.map((review) => (
               <div key={review.id} className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
@@ -302,12 +301,14 @@ const ArticleDetails = (props) => {
               </div>
             ))}
           </div> */}
+          <Commentaires articleId={articles.id}/>   
 
         </section>
 
 
         
         {/* Related products */}
+        
         {/* <section aria-labelledby="related-heading" className="mt-16 sm:mt-24">
           <h2 id="related-heading" className="text-lg font-medium text-gray-900">
             Customers also purchased
@@ -338,9 +339,8 @@ const ArticleDetails = (props) => {
               </div>
             ))}
           </div>
-        </section> */}
+        </section>  */}
       </main>
-      <Commentaires articleId={articles.id}/>   
     </div>
 
   )

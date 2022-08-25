@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import Comment from "./Comment";
 import { GetGlobalData } from '../../useContext/AuthProviders';
 // import { createContext, useContext, useState } from 'react';
-
 // const ThemeContext = createContext(null);
 
 const Commentaires = ({articleId}) => {
@@ -32,7 +31,7 @@ const Commentaires = ({articleId}) => {
   const isBtnDisabled = comment.length === 0; 
   const isToken = token === null;
   const navigate = useNavigate();
-
+  console.log(dataUser);
   useEffect(() => {
     const callAPI = async () => {
         await axios.get('http://localhost:8000/api/user/role', {
@@ -118,7 +117,6 @@ const Commentaires = ({articleId}) => {
   return (
     <>
     {/* <ThemeContext.Provider value={theme}>
-
     </ThemeContext.Provider> */}
     <section className="section_com">
      
@@ -163,7 +161,7 @@ const Commentaires = ({articleId}) => {
       {comments.map((text) => (
         <Comment 
          commentId={dataUser.id}
-         username={"jeanddd"} 
+         username={dataUser.name} 
          date={moment().format("MMM Do YY")} 
          text={text}
          commentTitle={commentsTitle}
