@@ -1,0 +1,100 @@
+body {
+	font-family: 'Raleway', sans-serif;
+
+}
+
+.arrow{
+	width: 4%;
+}
+
+main {
+	width: 100%;
+	/* background-color: rgba(194, 175, 175, 0.636); */
+}
+.container {
+	display: flex;
+	justify-content: center;
+	
+    /* border-left: 1px solid #eb4f29; */
+	/* border-right: 1px solid #eb4f29; */
+	width: 80%;
+	min-width: 800px;
+	margin: 0 auto;
+	box-sizing: border-box;
+   /* background:-moz-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%); 
+   background:-webkit-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%);
+   background:-o-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FF6A00', endColorstr='#FF6A00', GradientType=1 );
+   background:-ms-linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%);
+   background:linear-gradient(0deg, rgba(255, 106, 0, 1) 0%, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(255, 106, 0, 1) 100%); */
+}
+.img_article {
+	width: 100%;
+    object-fit: cover;
+	height: 500px;
+	border-radius: 20px;
+}
+
+.img_article_container {
+	height: 500px;
+	position: relative;
+	width: 50%;
+}
+h3 {
+	color: white;
+	font-size: 28px;
+	letter-spacing: 3px;
+	align-self: center;
+	width: 100%;
+	padding-bottom: 10px;
+	box-sizing: border-box;
+	border-bottom: 1px solid white;
+}
+.details_article {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  color: white;
+  padding-left: 20px;
+}
+.details_article > div:first-child > ul {
+	margin-top: 10px;
+	list-style-type: disc;
+	box-sizing: border-box;
+	padding-left: 20px;
+	line-height: 30px;
+}
+.details_article > div:first-child > p {
+	margin-top: 20px;
+	list-style-type: disc;
+	box-sizing: border-box;
+	/* padding-left: 20px; */
+	line-height: 25px;
+}
+.container > div:first-child {
+	padding: 20px;
+	display: flex;
+	align-self: center;
+	align-items: center;
+}
+.details_article > div:first-child  {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+@keyframes animation1 {
+	from {
+		border: 0px solid white;
+		background-image: linear-gradient(to right bottom, #eb4f29, #b23532, #77242d, #3d171f, #000000);
+	}
+	to {
+		border: 3px solid white;
+		background-image: linear-gradient(to right bottom, #eb4f29, #b23532, #77242d, #3d171f, #000000);
+	}
+}

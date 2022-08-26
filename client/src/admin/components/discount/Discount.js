@@ -1,8 +1,12 @@
 import {useState} from 'react'
+import { GetGlobalData } from '../../../useContext/AuthProviders';
 import { setDiscount, removeDiscount } from '../../requette/requette';
 
+
 function Discount({elementUpdate, setEdit, setElementUpdate}) {
-      
+    const {contextToken} = GetGlobalData();
+    const [token] = contextToken;
+  
         const initialValues = {
         persentDiscount: elementUpdate.dicount,
         start : elementUpdate.start,
@@ -48,7 +52,7 @@ if(!elementUpdate.discount){
 
             <div className='py-4'>
             <button 
-            onClick={()=> {setDiscount(elementUpdate.id, values, setEdit)}}
+            onClick={()=> {setDiscount(elementUpdate.id, values, setEdit, token)}}
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4  mx-4 rounded">
                 ajouter la reduction
             </button>
@@ -66,7 +70,7 @@ if(!elementUpdate.discount){
 
             <div className='py-4'>
             <button 
-            onClick={()=> {removeDiscount(elementUpdate, setEdit, setElementUpdate)}}
+            onClick={()=> {removeDiscount(elementUpdate, setEdit, setElementUpdate, token)}}
             class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4  mx-4 rounded">
                 supprimer la reduction
             </button>

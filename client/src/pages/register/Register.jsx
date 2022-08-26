@@ -1,40 +1,62 @@
 import React, {useState,useEffect} from 'react';
 import {useNavigate,Navigate} from 'react-router-dom';
-import Input from '../../components/input/Input';
+import InputLogin from '../../components/input/InputLogin';
+import InputRegister from '../../components/input/InputRegister';
 import Button from "../../components/button/Button";
 import axios from 'axios';
+import Image from '../../asset/pc.jpg'
 import './Register.css';
+import { AiFillAmazonSquare } from 'react-icons/ai';
+import { GetGlobalData } from '../../useContext/AuthProviders';
+
 
 const Register = () => {
 
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
+    const [firstname, setFirstname] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [ville, setVille] = useState('');
     const [phone, setPhone] = useState('');
+    const [date, setDate] = useState('');
     const [password, setPassword] = useState('');
+    const [codePostal, setCodePostal] = useState('');
     const [error, setError] = useState('');
     const [islogin, setIslogin] = useState(false);
 
-    const inputData = [{
-        type: 'text',placeholder: 'Name',value: name,change: (e) => setName(e.target.value)
+
+    const inputTop = [{
+        type: 'text',placeholder: 'Nom',value: name,change: (e) => setName(e.target.value)
     },
+    {
+        type: 'text',placeholder: 'Prénom',value: firstname,change: (e) => setFirstname(e.target.value)
+    }
+    ]
+    const inputData = [
+
     {
         type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
     },
     {
-        type: 'text',placeholder: 'Address',value: address,change: (e) => setAddress(e.target.value)
+        type: 'text',placeholder: 'Adresse',value: address,change: (e) => setAddress(e.target.value)
     },
     {
         type: 'text',placeholder: 'Ville',value: ville,change: (e) => setVille(e.target.value)
     },
     {
-        type: 'text',placeholder: 'Numero de telephone',value: phone,change: (e) => setPhone(e.target.value)
+        type: 'text',placeholder: 'Code Postale',value: codePostal,change: (e) => setCodePostal(e.target.value)
+    },
+    ,
+    {
+        type: 'date',placeholder: 'Numero de téléphone',change: (e) => setDate(e.target.value)
     },
     {
-        type: 'password',placeholder: 'Mots de passe',value: password,change: (e) => setPassword(e.target.value)
+        type: 'text',placeholder: 'Numero de téléphone',value: phone,change: (e) => setPhone(e.target.value)
+    },
+    {
+        type: 'password',placeholder: 'Mot de passe',value: password,change: (e) => setPassword(e.target.value)
     }];
     
     useEffect(() => {
@@ -67,12 +89,13 @@ const Register = () => {
             "email": email,
             "password": password,
             "ville": ville,
+            "code_postal": codePostal,
             "phone": phone
         });
           
           var config = {
             method: 'post',
-            url: '/account/register',
+            url: 'http://localhost:8000/account/register',
             headers: { 
               'Content-Type': 'application/json'
             },
@@ -91,19 +114,39 @@ const Register = () => {
           });
           
     }
-    if(islogin) return <Navigate to="/home"/> ;
+    // if(islogin) return <Navigate to="/home"/> ;
     return (
     <div className='registerMain'>
+        <div className='DivRegisterText'>
+            <p className='RegisterText' >Création d'un compte</p>
+        </div>
         <div className='registerContainer'>
-            <h2>S'inscrire</h2>
-            {error && <p className='error'>{error}</p>}
-            <div className='registerFormulaire'>
-                {inputData.map((input) => (
-                    <Input type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
-                ))}
-                <Button value={"S'inscrire"} handelclick={()=>verifyValue()}/>
-                <p>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")} >Connectez-vous</span></p>
+          
+            <div className='displayFlexRegister'>
+                
+            <div className='ImgDivSide'>
+                <img className='ImgSide' src={Image} alt="" />
             </div>
+            <div className='registerFormulaire'>
+                <div className='insideBackgroundWhite'>
+                <div className='inputDivRegister'>
+            {inputTop.map((input, key) => (
+                <InputRegister key={key} type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+                ))}
+                </div>
+                <div className='inputDivLogin'>
+                {inputData.map((input, key) => (
+                    <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder}  change={input.change}/>
+                    ))}
+                    </div>
+                    </div>
+             
+                <Button className='buu'  value={"S'inscrire"} handelclick={()=>verifyValue()}/>
+                <p className='Already'>Vous avez déjà un compte ? <span className='connect' onClick={()=> navigate("/login")}>Connectez-vous</span></p>
+                 
+            </div>
+            </div>
+            {error && <p className='error'>{error}</p>}
         </div>
     </div>
   )

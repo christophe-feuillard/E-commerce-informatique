@@ -41,21 +41,31 @@ class Article
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'articles')]
     private $categorie;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $visit = null;
+
     #[ORM\Column(type: 'integer', nullable: true)]
     #[Groups("groupe:get")]
     private $stock;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $width;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $lenght;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $height;
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $weight = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $weight;
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $lenght = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $height = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?int $width = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups("groupe:get")]
@@ -79,7 +89,6 @@ class Article
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
-        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -171,6 +180,18 @@ class Article
         return $this;
     }
 
+    public function getVisit(): ?int
+    {
+        return $this->visit;
+    }
+
+    public function setVisit(?int $visit): self
+    {
+        $this->visit = $visit;
+
+        return $this;
+    }
+
     public function getStock(): ?int
     {
         return $this->stock;
@@ -219,14 +240,14 @@ class Article
         return $this;
     }
 
-    public function getWeight(): ?int
+    public function getWidth(): ?int
     {
-        return $this->weight;
+        return $this->width;
     }
 
-    public function setWeight(?int $weight): self
+    public function setWidth(?int $width): self
     {
-        $this->weight = $weight;
+        $this->width = $width;
 
         return $this;
     }

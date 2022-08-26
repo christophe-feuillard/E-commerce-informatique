@@ -49,16 +49,17 @@ throw new \Exception('Will be intercepted before getting here');
             }
 
             
-            
-            
 
             $entityManager = $doctrine->getManager();
             $user = new User();
             $user->setEmail($request->request->get('email'));
             $user->setName($request->request->get('name'));
+            $user->setFirstname($request->request->get('firstname'));
             $user->setPhone($request->request->get('phone'));
             $user->setAdresse($request->request->get('adresse'));
             $user->setVille($request->request->get('ville'));
+            $user->setBirthdate($request->request->get('birthdate'));
+            $user->setCodePostal($request->request->get('codepostal'));
 
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
@@ -69,13 +70,11 @@ throw new \Exception('Will be intercepted before getting here');
             try{
                $entityManager->persist($user);
                $entityManager->flush($user);
-               return $this->json('inscription effectué avec succées ');
+               return $this->json('inscription effectué avec succées');
             }
             catch(\Exception $e){
                 return $this->json('impossible d\'inscrire');
-            }
-            
-            
+            }  
         }else{
             return $this->json('utilise une requette post');
         }

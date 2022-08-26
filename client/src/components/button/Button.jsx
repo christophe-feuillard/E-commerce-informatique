@@ -3,7 +3,7 @@ import './Button.css'
 const Button = ({value,handelclick}) => {
   return (
     <>
-    <a onClick={handelclick} class="cta">
+    <a onClick={handelclick} className="cta">
         <span>{value}</span>
     </a>
 </>

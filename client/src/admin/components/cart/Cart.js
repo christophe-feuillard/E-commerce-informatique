@@ -2,10 +2,12 @@ import React from "react";
 import Ptag from "../ptag/Ptag";
 import './Cart.css'
 import { APIdelete } from "../../requette/requette";
+import { GetGlobalData } from "../../../useContext/AuthProviders";
 
 const Cart = ({values, setEdit, setElementUpdate, edit}) => {
 
-   
+    const {contextToken} = GetGlobalData();
+    const [token] = contextToken;
     return (
         <div>
             <article class="mx-5 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -33,7 +35,7 @@ const Cart = ({values, setEdit, setElementUpdate, edit}) => {
                     </div>
 
                     <div className="mx-8" onClick={() => {
-                        APIdelete(values.id)
+                        APIdelete(values.id, setEdit, token)
                 
                     }} class="mx-3 inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                         supprimé

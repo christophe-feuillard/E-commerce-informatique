@@ -1,27 +1,32 @@
 import React, {useState,useEffect} from 'react';
-import {useNavigate,Navigate} from 'react-router-dom';
-import Input from '../../components/input/Input';
+import {useNavigate} from 'react-router-dom';
+import InputLogin from '../../components/input/InputLogin';
 import Button from "../../components/button/Button";
+import { GetGlobalData } from '../../useContext/AuthProviders';
 import axios from "axios";
 import './Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
-
+    
+    const {contextStore, contextUser, contextToken} = GetGlobalData();
+    const [token, setToken] = contextToken
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [islogin, setIslogin] = useState(false);
 
     const inputData = [{
-        type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
+        name : 'email', type: 'text',placeholder: 'Email',value: email,change: (e) => setEmail(e.target.value)
     },
     {
-        type: 'password',placeholder: 'Mots de passe',value: password,change: (e) => setPassword(e.target.value)
+        type: 'password',placeholder: 'Mot de passe',value: password,change: (e) => setPassword(e.target.value)
     }];
 
     useEffect(() => {
         if(localStorage.getItem('token')) setIslogin(true);
+        console.log(islogin)
     },[]);
 
     const verifyValue = () => {
@@ -46,16 +51,17 @@ const Login = () => {
       
       var config = {
         method: 'post',
-        url: '/api/login_check',
+        url: 'http://localhost:8000/api/login_check',
         headers: { 
           'Content-Type': 'application/json'
         },
         data : data
       };
-      
       axios(config)
       .then((response) => {
-        localStorage.setItem("token",response.data.token);
+        setToken(response.data.token)
+        console.log(response.data.token)
+        // localStorage.setItem("token",JSON.stringify(response.data.token));
         navigate('/home');
       })
       .catch((error) => {
@@ -64,19 +70,22 @@ const Login = () => {
       });
       
     }
-    if(islogin) return <Navigate to="/home"/> ;
+    // if(islogin) return <Navigate to="/home"/> ;
   return (
     <div className='loginMain'>
         <div className='loginContainer'>
-            <h2>Se connecter</h2>
-            {error && <p className='error'>{error}</p>}
+          <div className='DivTextLogin'>
+            <p className='TextLogin'>Se connecter</p>
+          </div>
+       
             <div className='loginFormulaire'>
-                {inputData.map((input) => (
-                    <Input type={input.type} placeholder={input.placeholder} value={input.value} change={input.change}/>
+                {inputData.map((input, key) => (
+                    <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>
                 ))}
-                <Button value={"Se connecter"} handelclick={()=>verifyValue()}/>
-                <p>Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>
+                <Button value={"Se connecter"} handelclick={verifyValue}/>
+                <p className='Already' >Vous n'avez pas de compte ? <span className='connect' onClick={()=> navigate("/register")}>Inscrivez-vous</span></p>
             </div>
+        {error && <p className='error'> {error}</p>}
         </div>
     </div>
   )

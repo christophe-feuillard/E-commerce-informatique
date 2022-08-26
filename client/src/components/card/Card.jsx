@@ -1,31 +1,70 @@
 import React, {useEffect, useState} from 'react';
 import './Card.css';
-import {MdOutlineLocalGroceryStore} from "react-icons/md";
-import {AiOutlineHeart} from "react-icons/ai";
+import {MdOutlineFavorite} from "react-icons/md";
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
-const Card = ({imgSrc,title,characteristic,price,handleckick,colorStore,clickStore}) => {
-  const [color,setColor] = useState("white");
+const Card = ({articles,handleckick,colorFavoris,clickFavoris, textStore}) => {
+  const {contextStore} = GetGlobalData();
+  const [store, setStore] = contextStore;
+  const [color,setColor] = useState("black");
+  const [text,setText] = useState("Ajouter dans le panier");
 
   useEffect(() => {
-    if(colorStore) setColor("#eb4f29");
-    else setColor('white');
-  }, [colorStore]);
+    if(colorFavoris) setColor("#eb4f29");
+    else setColor('black');
+
+  }, [colorFavoris]);
+
+  const handleStore = () => {
+console.log(articles)
+   const foundArticleInLocalStorage = store.find(element => element.id === articles.id);
+   if (foundArticleInLocalStorage ) {
   
+    setStore(
+      store.map((item, key) => item.id == articles.id ? {...articles, quantity:foundArticleInLocalStorage.quantity + 1}: item)
+     )
+   } else {
+    setStore([...store, {...articles, quantity: 1}])
+   }
+
+  }
+
   return (
-    <div className='main'>
+    
+    <div id="voirArticles" className='main'>
+      {
+        articles.discount !== null && 
+        <div className='discount'>
+          RÉDUCTION DE 
+             -{articles.discount}%
+          </div>
+      }
         <div className="picture" onClick={handleckick}>
-            <img src={imgSrc} alt="image du produit"/>
+            <img className='imgCard' src={articles.photo} alt="produit"/>
         </div>
         <div className="contentCard">
-            <h3 onClick={handleckick}>{title}</h3>
+            <p className='titleCard' onClick={handleckick}>{articles.titre}</p>
             <div className='divCharacteristic'>
-              <p className='characteristic'>{characteristic}</p>
+              <p className='characteristic'>{articles.caracteristique}</p>
+              {/* <p className='size'>{articles.weight+ 'kg' + ' ' + articles.height+ 'cm'+ ' ' + articles.lenght+ 'cm' + ' ' + articles.width+ '"'}</p> */}
             </div>
-            <p className='price'>{price}</p>
-            <div className='divIconsCard'>
-                <MdOutlineLocalGroceryStore className='iconCard' color={color} onClick={clickStore}/>
-                <AiOutlineHeart className='iconCard'/>
+            {articles.old_price !== null &&
+            <p className='oldPrice'>{articles.old_price + "€"}</p>
+            }
+            <p className='price'>{articles.prix + "€"}</p>
+            <div className='divIconsCard'>                
+                {articles.stock > 0 && 
+                  <p className='addPanier' onClick={handleStore}>{text}</p>
+                }
+                {articles.stock <= 0 && 
+                  <p className='addPanierDisabled'>Indisponible</p>
+                }       
+                <div onClick={clickFavoris} className='fav'>
+                <MdOutlineFavorite color={color} className='iconCard'/>
+                </div>
+        
             </div>
+
         </div>
     </div>
   )

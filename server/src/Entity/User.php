@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -50,10 +51,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $apiToken;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups("groupe:get")]
     private $CodePostal;
 
+
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    #[Groups("groupe:get")]
     private ?Emballage $emballage = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -64,14 +66,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private ?string $BanMethode = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: OrderDetails::class)]
-    private Collection $orderDetails;
-
     public function __construct()
     {
-        $this->orderDetails = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -203,21 +201,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Article $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Article $favori): self
+    {
+        $this->favoris->removeElement($favori);
+
+        return $this;
+    }
+
     public function getCodePostal(): ?string
     {
         return $this->CodePostal;
     }
 
-    public function setCodePostal(?string $CodePostal): self
+    public function setCodePostal(string $CodePostal): self
     {
         $this->CodePostal = $CodePostal;
 
         return $this;
-    }
-
-    public function getEmballage(): ?Emballage
-    {
-        return $this->emballage;
     }
 
     public function setEmballage(?Emballage $emballage): self
@@ -249,7 +266,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
- 
+    /**
+     * @return Collection<int, Payment>
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->removeElement($payment)) {
+            // set the owning side to null (unless already changed)
+            if ($payment->getUser() === $this) {
+                $payment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPhysicalAdresses(): ?PhysicalAdresses
+    {
+        return $this->physicalAdresses;
+    }
+
+    public function setPhysicalAdresses(?PhysicalAdresses $physicalAdresses): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($physicalAdresses === null && $this->physicalAdresses !== null) {
+            $this->physicalAdresses->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($physicalAdresses !== null && $physicalAdresses->getUser() !== $this) {
+            $physicalAdresses->setUser($this);
+        }
+
+        $this->physicalAdresses = $physicalAdresses;
+
+        return $this;
+    }
 
     public function getBanMethode(): ?string
     {
@@ -263,33 +330,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, OrderDetails>
-     */
-    public function getOrderDetails(): Collection
-    {
-        return $this->orderDetails;
-    }
 
-    public function addOrderDetail(OrderDetails $orderDetail): self
-    {
-        if (!$this->orderDetails->contains($orderDetail)) {
-            $this->orderDetails[] = $orderDetail;
-            $orderDetail->setUser($this);
-        }
 
-        return $this;
-    }
-
-    public function removeOrderDetail(OrderDetails $orderDetail): self
-    {
-        if ($this->orderDetails->removeElement($orderDetail)) {
-            // set the owning side to null (unless already changed)
-            if ($orderDetail->getUser() === $this) {
-                $orderDetail->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 }
