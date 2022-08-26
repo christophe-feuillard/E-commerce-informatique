@@ -1,18 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './Article_details.css';
-import Header from "../../components/header/Header";
-import Buy from '../../components/buy/Buy';
 import axios from 'axios';
-import Commentaires from "../../components/commentaires/Commentaires";
-import returnArrow from "../../asset/return.png"
-// import { Fragment } from 'react'
-import { Dialog, Popover, RadioGroup, Tab, Transition } from '@headlessui/react'
-import {
-  CurrencyDollarIcon,
-  GlobeIcon,
-
-} from '@heroicons/react/outline'
 import { StarIcon } from '@heroicons/react/solid'
 
 

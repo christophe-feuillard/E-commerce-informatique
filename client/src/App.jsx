@@ -18,8 +18,9 @@ import ModalSmall from './components/modalSmall/ModalSmall';
 import PaymentConfirmation from './pages/payment_confirmation/PaymentConfirmation';
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
 import { Error } from './components/error/error';
-import Example from './pages/Commande/livraisonDetail/livraisonDetail';
 import { PaiementType } from './pages/Commande/paiementType/paiementType';
+import InvoiceData from './components/fdp/invoiceData';
+import ContactForm from './components/contactForm/contact';
 
 function App() {
   return (
@@ -35,8 +36,8 @@ function App() {
       <Route path='/categories/:id' element={<Categories/>}/>
       <Route path='/favoris' element={<Favoris/>}/>
       <Route path='/frais' element={<Frais/>}/>
-      <Route path='/example' element={<Example/>}/>
       <Route path='/commande' element={<Commande/>}/>
+      <Route path='/contact' element={<ContactForm/>}/>
       <Route path='/payment' element={<PaymentMethode/>}/>
       <Route path='/modal' element={<ModalSmall/>}/>
       <Route path='/info' element={<MyInfo/>}/>

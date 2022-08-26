@@ -9,6 +9,8 @@
     font-weight: bold;
     font-family: 'Raleway', sans-serif;
     outline: none;
+    margin-top: 10px;
+    border: none;
 }
 .searchBar::placeholder{
     color: rgb(149, 149, 149) ;
@@ -57,3 +59,4 @@ color: black;
     width: 100%;
     box-sizing: border-box;
 }
+

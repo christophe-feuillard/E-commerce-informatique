@@ -7,6 +7,7 @@ import axios from 'axios';
 import ArticlesPopulaires from '../../components/articlespopulaires/ArticlesPopulaires'
 import "./Home.css";
 import CatDropDown from '../../components/drop-down-cat/CatDropDown';
+import { MailIcon } from '@heroicons/react/outline'
 
 const Home = () => {
 
@@ -86,7 +87,8 @@ const Home = () => {
     <>
       <Header search={search} change={(e)=>setSearch(e.target.value)} storeClick={()=>setOpenModalSmall(true)} articleNumber={articleNumber} />
       {/* <CatDropDown/> */}
-      <div className='homeContainer'>
+      <div className='homeContainer static'>
+         
            <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
@@ -101,6 +103,11 @@ const Home = () => {
             clickFavoris={()=>{favoris(item, key)}}
           />
         ))}
+          <div  className="fixed bottom-10 right-10">
+          <div onClick={()=> navigate("/contact")} className="bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center">
+         <MailIcon />
+</div> 
+         </div>
       </div>
   </>
   )}

@@ -27,9 +27,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3203328/20210203082949/macbook_pro_myd92fna_-_gris_-_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
 
@@ -41,9 +41,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3285552/20210910082316/ordinateur-portable-classique-inspiron-15-3510-1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
 
@@ -56,9 +56,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3173496/20210120101301/pavilion_laptop_15-eh0006nf_-_gris_3_1200x1200.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
 
@@ -70,9 +70,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3258783/20210601142016/geforce_rtx_3080_ti_ventus_3x_12g_oc_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
 
@@ -84,9 +84,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3255819/20220208134940/nitro_amd_radeon_rx_6900_xt_se_1_1140x1140.png')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
 
@@ -98,9 +98,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3263410/20210604060616/gv-n307taorus_m-8gd_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
 
@@ -112,9 +112,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/medias/2f31a91d12fd3b46a117d18f8005b80a/p_1000x1000/geforce-rtx-3090-xc3-ultra-gaming-triple-fan-24go-1.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article7);
@@ -125,9 +125,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3209032/20210113122635/zotac_geforce_rtx_3090_trinity_oc_1_1200x1200.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article8);
@@ -138,9 +138,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3263410/20210604060616/gv-n307taorus_m-8gd_1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article9);
@@ -151,9 +151,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3260694/20220614025413/CG%20RTX%201_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article10);
@@ -164,9 +164,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3363082/20220120115654/raider-ge76-12uh-094fr-1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article11);
@@ -177,9 +177,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3352194/20211118055631/dash-tuf516pm-hn951w-gris-eclipse-1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article12);
@@ -190,9 +190,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3250665/20210514110728/legion_5_-_15ach6h_-_phantom_blue_3_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article13);
@@ -203,9 +203,9 @@ class ArticleFixtures extends Fixture
         ->setPhoto('https://www.rueducommerce.fr/media/images/web/produit/3274410/20210929130224/pc-gamer-nitro-5-an515-45-r3ha-1_1140x1140.jpg')
         ->setCaracteristique($this->faker->paragraph(2))
         ->setDescription($this->faker->text($maxNbChars = 100))
-        ->setWidth($this->faker->numberBetween($min = 10, $max = 120))
-        ->setLenght($this->faker->numberBetween($min = 10, $max = 120))
-        ->setHeight($this->faker->numberBetween($min = 10, $max = 120))
+        ->setWidth($this->faker->numberBetween($min = 10, $max = 30))
+        ->setLenght($this->faker->numberBetween($min = 10, $max = 30))
+        ->setHeight($this->faker->numberBetween($min = 10, $max = 30))
         ->setWeight($this->faker->numberBetween($min = 5, $max = 10));
 
         $manager->persist($article14);

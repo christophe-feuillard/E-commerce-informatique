@@ -1,19 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {RadioGroup} from '@headlessui/react'
 import { CheckCircleIcon, TrashIcon } from '@heroicons/react/solid'
 import InputCard from '../../components/input/InputCard';
 
+
 import { GetGlobalData } from '../../useContext/AuthProviders';
 import { Trash } from '../../components/panier/trash';
 import { useNavigate } from 'react-router-dom';
-
-
+import axios from 'axios';
 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
 
   const deliveryMethods = [
     { id: 1, title: 'Standard', turnaround: '4–10 business days', price: '$5.00' },
@@ -46,6 +45,10 @@ export const Commande = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [cardCvc, setCvc] = useState('');
+  const [rate, setRate] = useState([]);
+  const [frais, setFdp] = useState(0);
+  const [quantite, setQuantite] = useState(1)
+
   
   const [isSave, setIsSave] = useState(false);
   
@@ -137,8 +140,35 @@ export const Commande = () => {
   
 
 
-
-console.log(store)
+  const callAPI = () => { 
+    var data = JSON.stringify({
+      "name": firstname,
+      "adresse": adress,
+      "numero": phone,
+      "pays": country,
+      "zip": zip,
+      "panier": JSON.stringify(store)
+  });
+console.log(store, 'STOREE')
+console.log(data, 'DATA')
+  var config = {
+    method: 'POST',
+    url: 'http://localhost:8000/api/FDP',
+    headers: { 
+      'Content-Type': 'application/json',
+    },
+    data : data
+  };
+     axios(config)
+    .then(res => {
+        console.log(res);
+        setRate(res.data[0].rates)
+    })
+    .catch(err => {
+    console.log(err);
+    }); 
+  }
+console.log(rate)
   return (
     <div className="bg-gray-50 text-gray-900">    
  
@@ -164,6 +194,7 @@ console.log(store)
               </div>
 
               <div className="mt-10 border-t border-gray-200 pt-10">
+                <h4 className='text-lg font-medium text-red-900 '>Nous livrons seulement aux Us !</h4>
                 <h2 className="text-lg font-medium text-gray-900">Information sur la livraison</h2>
 
                 <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
@@ -188,8 +219,6 @@ console.log(store)
                   ))}
                     </div>
                   </div>
-
-            
                   <div className="sm:col-span-2">
                     <label htmlFor="address" className="block text-sm font-medium text-gray-700">
                       Addresse de livraison 
@@ -277,10 +306,10 @@ console.log(store)
                   <RadioGroup.Label className="text-lg font-medium text-gray-900">Méthode de livraison</RadioGroup.Label>
 
                   <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                    {deliveryMethods.map((deliveryMethod) => (
+                    {rate.map((MethodeLivraison, key) => (
                       <RadioGroup.Option
-                        key={deliveryMethod.id}
-                        value={deliveryMethod}
+                        key={key}
+                        value={MethodeLivraison.id}
                         className={({ checked, active }) =>
                           classNames(
                             checked ? 'border-transparent' : 'border-gray-300',
@@ -294,21 +323,21 @@ console.log(store)
                             <div className="flex-1 flex">
                               <div className="flex flex-col">
                                 <RadioGroup.Label as="span" className="block text-sm font-medium text-gray-900">
-                                  {deliveryMethod.title}
+                                {MethodeLivraison.service}
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
                                   as="span"
                                   className="mt-1 flex items-center text-sm text-gray-500"
                                 >
-                                  {deliveryMethod.turnaround}
+                               {MethodeLivraison.delivery_days} Jours
                                 </RadioGroup.Description>
                                 <RadioGroup.Description as="span" className="mt-6 text-sm font-medium text-gray-900">
-                                  {deliveryMethod.price}
+                                {MethodeLivraison.rate}
                                 </RadioGroup.Description>
                               </div>
                             </div>
                             {checked ? (
-                              <CheckCircleIcon className="h-5 w-5 text-indigo-600" aria-hidden="true" />
+                               setFdp(MethodeLivraison.rate)
                             ) : null}
                             <div
                               className={classNames(
@@ -321,7 +350,7 @@ console.log(store)
                           </>
                         )}
                       </RadioGroup.Option>
-                    ))}
+                     ))}
                   </div>
                 </RadioGroup>
               </div>
@@ -440,6 +469,7 @@ console.log(store)
                 <h3 className="sr-only">Articles dans ton panier</h3>
                 <ul role="list" className="divide-y divide-gray-200">
                   {store.map((product) => (
+                    
                     <li key={product.id} className="flex py-6 px-4 sm:px-6">
                       <div className="flex-shrink-0">
                         <img src={product.photo} className="w-20 rounded-md" />
@@ -469,7 +499,7 @@ console.log(store)
                         </div>
 
                         <div className="flex-1 pt-2 flex items-end justify-between">
-                          <p className="mt-1 text-sm font-medium text-gray-900">{product.prix} €</p>
+                          <p className="mt-1 text-sm font-medium text-gray-900">{ product.prix * product.quantity} €</p>
 
                           <div className="ml-4">
                             <label htmlFor="quantity" className="sr-only">
@@ -482,28 +512,36 @@ console.log(store)
                     </li>
                   ))}
                 </ul>
-                <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
+                <div className='m-auto w-64'>
+
+                <button
+                  type="button"
+                  onClick={callAPI}
+                  className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  >
+                    Calculer vos frais de port
+                  </button>
+
+                  </div>
+                    <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Sous Totale</dt>
                     <dd className="text-sm font-medium text-gray-900">64.00€</dd>
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Frais de port</dt>
-                    <dd className="text-sm font-medium text-gray-900">5.00€</dd>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <dt className="text-sm">Taxes</dt>
-                    <dd className="text-sm font-medium text-gray-900">5.52€</dd>
+                    <dd className="text-sm font-medium text-gray-900">{frais}</dd>
                   </div>
                   <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>
-                    <dd className="text-base font-medium text-gray-900">{total}</dd>
+                    <dd className="text-base font-medium text-gray-900">{ Number(total) +  Number(frais)+ '€'}</dd>
                   </div>
                 </dl>
 
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <button
-                    type="submit"
+                  type="button"
+                    onClick={callAPI}
                     className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                   >
                     Confirmer la commande

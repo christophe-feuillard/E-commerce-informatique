@@ -55,7 +55,7 @@
 .addPanier{
  border: 0.5px solid black;
  padding: 15px;
- font-size: 11px;
+ font-size: 15px;
  color: black;
  width: 70%;
  text-align: center;
@@ -77,7 +77,7 @@
 .fav{
     padding: 10px;
     color: black;
-    border: 1px solid #eb4f29;
+    border: 0.5px solid #eb4f29;
     font-size: 20px;
     text-align: center;
     display: flex;

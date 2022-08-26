@@ -60,7 +60,6 @@ const Login = () => {
       axios(config)
       .then((response) => {
         setToken(response.data.token)
-        console.log(token, 'TOKEN')
         console.log(response.data.token)
         // localStorage.setItem("token",JSON.stringify(response.data.token));
         navigate('/home');

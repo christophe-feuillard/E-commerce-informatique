@@ -59,7 +59,7 @@ const PersonalInfo = () => {
   const date = user.adresse + ' ' + user.ville + ' ' +  user.CodePostal
 
   const titre = [{
-    title: 'Mes Informations'
+    title: 'Mes Iions'
   },
   {
     title: 'Mes commandes'
@@ -187,29 +187,29 @@ const PersonalInfo = () => {
     <div id='cardRotate' className="absolute top-0 left-0 w-full h-full flex flex-col justify-center gap-6 p-6 bg-gradient-to-tr from-gray-900 to-gray-700 transition-all duration-100 delay-200 z-20">
 
       <div className="flex justify-between items-center">
-        {/* <img src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png" alt='Smart card' className="w-12"/> */}
+        {/* <img src="https://raw.githubusercontent.com/muhammederdem/credit-cardaster/src/assets/images/chip.png" alt='Smart card' className="w-12"/> */}
 
         <img src={modeCard[0]?.url} alt="Visa image" className="w-12"/>
       </div>
 
   
       <div className="">
-        <label for="" class="hidden">Numéro de carte</label>
-        <input type="text" id="" value={user?.card?.number} readonly
+        <label className="hidden">Numéro de carte</label>
+        <input type="text" id="" value={user?.card?.number} readOnly
                className="outline-none w-full bg-transparent text-center text-2xl"/>
       </div>
 
       <div className="w-full flex flex-row justify-between">
 
         <div className="w-full flex flex-col">
-          <label for="">Nom</label>
-          <input type="text" id="" value={user?.card?.firstname + ' ' + user?.card?.name }  readonly
+          <label>Nom</label>
+          <input type="text" id="" value={user?.card?.firstname + ' ' + user?.card?.name }  readOnly
                  className="outline-none bg-transparent"/>
         </div>
 
         <div className="w-1/4 flex flex-col">
-          <label for="">Exp</label>
-          <input type="text" id="" value={user?.card?.date} readonly className="outline-none bg-transparent"/>
+          <label>Exp</label>
+          <input type="text" id="" value={user?.card?.date} readOnly className="outline-none bg-transparent"/>
         </div>
 
       </div>
@@ -223,8 +223,8 @@ const PersonalInfo = () => {
 
       <div className="px-6 flex flex-col gap-6 justify-center">
         <div className="flex flex-col items-end">
-          <label for="">cvv</label>
-          <input type="text" id="inputcvv" value={user?.card?.cvc} readonly
+          <label>cvv</label>
+          <input type="text" id="inputcvv" value={user?.card?.cvc} readOnly
                  className="outline-none rounded text-black w-full h-8 text-right"
               />
         </div>
