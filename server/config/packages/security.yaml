@@ -46,6 +46,7 @@ security:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/user,     roles: IS_AUTHENTICATED_FULLY } 
         - { path: ^/api/admin,     roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/commande,     roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api,       roles: PUBLIC_ACCESS}
        
          

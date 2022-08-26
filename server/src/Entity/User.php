@@ -64,10 +64,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private ?string $BanMethode = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: OrderDetails::class)]
+    private Collection $orderDetails;
+
     public function __construct()
     {
-        $this->payments = new ArrayCollection();
+        $this->orderDetails = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -245,57 +249,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Payment>
-     */
-    public function getPayments(): Collection
-    {
-        return $this->payments;
-    }
-
-    public function addPayment(Payment $payment): self
-    {
-        if (!$this->payments->contains($payment)) {
-            $this->payments[] = $payment;
-            $payment->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePayment(Payment $payment): self
-    {
-        if ($this->payments->removeElement($payment)) {
-            // set the owning side to null (unless already changed)
-            if ($payment->getUser() === $this) {
-                $payment->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getPhysicalAdresses(): ?PhysicalAdresses
-    {
-        return $this->physicalAdresses;
-    }
-
-    public function setPhysicalAdresses(?PhysicalAdresses $physicalAdresses): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($physicalAdresses === null && $this->physicalAdresses !== null) {
-            $this->physicalAdresses->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($physicalAdresses !== null && $physicalAdresses->getUser() !== $this) {
-            $physicalAdresses->setUser($this);
-        }
-
-        $this->physicalAdresses = $physicalAdresses;
-
-        return $this;
-    }
+ 
 
     public function getBanMethode(): ?string
     {
@@ -305,6 +259,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBanMethode(?string $BanMethode): self
     {
         $this->BanMethode = $BanMethode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderDetails>
+     */
+    public function getOrderDetails(): Collection
+    {
+        return $this->orderDetails;
+    }
+
+    public function addOrderDetail(OrderDetails $orderDetail): self
+    {
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails[] = $orderDetail;
+            $orderDetail->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderDetail(OrderDetails $orderDetail): self
+    {
+        if ($this->orderDetails->removeElement($orderDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($orderDetail->getUser() === $this) {
+                $orderDetail->setUser(null);
+            }
+        }
 
         return $this;
     }

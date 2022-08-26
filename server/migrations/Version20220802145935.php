@@ -27,7 +27,7 @@ final class Version20220802145935 extends AbstractMigration
         $this->addSql('ALTER TABLE payment ADD CONSTRAINT FK_6D28840D4DE7DC5C FOREIGN KEY (adresse_id) REFERENCES physical_adresses (id)');
         $this->addSql('ALTER TABLE payments ADD CONSTRAINT FK_65D29B328486F9AC FOREIGN KEY (adress_id) REFERENCES physical_adresses (id)');
         $this->addSql('ALTER TABLE physical_adresses ADD CONSTRAINT FK_AAD2C18FA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
-        $this->addSql('ALTER TABLE user ADD country VARCHAR(255) DEFAULT NULL, ADD ban_methode VARCHAR(255) DEFAULT NULL');
+        
     }
 
     public function down(Schema $schema): void
