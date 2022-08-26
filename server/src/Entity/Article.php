@@ -240,17 +240,29 @@ class Article
         return $this;
     }
 
-    public function getWidth(): ?int
+    public function getWeight(): ?int
     {
-        return $this->width;
+        return $this->weight;
     }
 
-    public function setWidth(?int $width): self
+    public function setWeight(?int $weight): self
     {
-        $this->width = $width;
+        $this->weight = $weight;
 
         return $this;
     }
+
+    // public function getWidth(): ?int
+    // {
+    //     return $this->width;
+    // }
+
+    // public function setWidth(?int $width): self
+    // {
+    //     $this->width = $width;
+
+    //     return $this;
+    // }
 
     public function getDiscount(): ?float
     {

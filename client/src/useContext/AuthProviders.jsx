@@ -50,7 +50,6 @@ useEffect(() => {
           'Authorization': `Bearer ${token}`
         }})
         
-        console.log(response.data, 'response data')
 
         setUser(response.data)
       } catch (error) {

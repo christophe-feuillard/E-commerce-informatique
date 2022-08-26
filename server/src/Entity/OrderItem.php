@@ -14,12 +14,15 @@ class OrderItem
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems', fetch: "EAGER")]
+    #[Groups("groupe:get")]
     private ?OrderDetails $commande = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems', fetch: "EAGER")]
+    #[Groups("groupe:get")]
     private ?Article $product = null;
 
     #[ORM\Column]
+    #[Groups("groupe:get")]
     private ?int $quantity = null;
 
     #[ORM\Column(type: 'datetime_immutable', options:['default'=>'CURRENT_TIMESTAMP'])]

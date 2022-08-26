@@ -16,33 +16,42 @@ class OrderDetails
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $adresse_de_livraison = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $code_postale = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $ville = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
     private ?string $numero_de_suivis = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orderDetails')]
+    #[ORM\ManyToOne(inversedBy: 'orderDetails', fetch: "EAGER")]
+  
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: OrderItem::class, fetch: "EAGER")]
+    
     private Collection $orderItems;
 
     public function __construct()

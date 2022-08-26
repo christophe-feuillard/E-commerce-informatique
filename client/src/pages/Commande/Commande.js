@@ -26,10 +26,11 @@ function classNames(...classes) {
 export const Commande = () => {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
 
-  const {contextStore, contextTotal,contextUser} = GetGlobalData();
+  const {contextStore, contextTotal,contextUser, contextToken} = GetGlobalData();
   const [store, setStore] = contextStore;
   const [total] = contextTotal;
-  const [user] = contextUser
+  const [user] = contextUser;
+  const [token] = contextToken
 
 
   const [name, setName] = useState('');
@@ -48,13 +49,13 @@ export const Commande = () => {
   const [rate, setRate] = useState([]);
   const [frais, setFdp] = useState(0);
   const [quantite, setQuantite] = useState(1)
+  const [tracking, setTracking] = useState()
 
   
   const [isSave, setIsSave] = useState(false);
   
   const navigate = useNavigate()
   
-  console.log(user)
   const inputName = [
     {
   
@@ -149,6 +150,7 @@ export const Commande = () => {
       "zip": zip,
       "panier": JSON.stringify(store)
   });
+
 console.log(store, 'STOREE')
 console.log(data, 'DATA')
   var config = {
@@ -161,14 +163,66 @@ console.log(data, 'DATA')
   };
      axios(config)
     .then(res => {
-        console.log(res);
+        setTracking(res.data[0].tracking_code)
         setRate(res.data[0].rates)
     })
     .catch(err => {
     console.log(err);
     }); 
   }
-console.log(rate)
+
+
+const setCommande = () =>{
+  var data = JSON.stringify({
+    "name": name,
+    "firstname" : firstname,
+    "adresse": adress,
+    "numero": phone,
+    "pays": country,
+    "zip": zip,
+    "panier": JSON.stringify(store),
+    "suivis" : tracking,
+    "city" : city,
+    "email" : email
+});
+
+const config = {
+  method: 'POST',
+  url: 'http://localhost:8000/api/commande',
+  headers: { 
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  data : data
+};
+axios(config)
+.then(res => {
+    console.log(res, 'hello')
+})
+.catch(err => {
+console.log(err);
+}); 
+}
+
+
+const getCommande = () =>{
+  const config = {
+    method: 'POST',
+    url: 'http://localhost:8000/api/getCommande',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  };
+  axios(config)
+  .then(res => {
+      console.log(res)
+  })
+  .catch(err => {
+  console.log(err);
+  }); 
+  }
+
   return (
     <div className="bg-gray-50 text-gray-900">    
  
@@ -541,10 +595,18 @@ console.log(rate)
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <button
                   type="button"
-                    onClick={callAPI}
+                    onClick={setCommande}
                     className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                   >
                     Confirmer la commande
+                  </button>
+
+                  <button
+                  type="button"
+                    onClick={getCommande}
+                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  >
+                    test
                   </button>
                 </div>
               </div>
