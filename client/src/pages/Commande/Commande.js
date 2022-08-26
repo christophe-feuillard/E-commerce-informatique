@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import {RadioGroup} from '@headlessui/react'
 import { CheckCircleIcon, TrashIcon } from '@heroicons/react/solid'
 import InputCard from '../../components/input/InputCard';
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 
 import { GetGlobalData } from '../../useContext/AuthProviders';
@@ -31,7 +32,16 @@ export const Commande = () => {
   const [total] = contextTotal;
   const [user] = contextUser
 
-
+  
+  
+  const product = {
+    amount : total
+  }
+  
+  
+  
+  const [orderId, setOrderId] = useState(false);
+  const  [errorMessage, setErrorMessage] = useState("");
   const [name, setName] = useState('');
   const [firstname, setFirstname] = useState('');
   const [adress, setAdress] = useState('');
@@ -48,13 +58,12 @@ export const Commande = () => {
   const [rate, setRate] = useState([]);
   const [frais, setFdp] = useState(0);
   const [quantite, setQuantite] = useState(1)
-
-  
   const [isSave, setIsSave] = useState(false);
   
   const navigate = useNavigate()
+
   
-  console.log(user)
+  // console.log(user)
   const inputName = [
     {
   
@@ -168,13 +177,16 @@ console.log(data, 'DATA')
     console.log(err);
     }); 
   }
-console.log(rate)
+// console.log(rate)
+// console.log(orderID)
   return (
     <div className="bg-gray-50 text-gray-900">    
  
       <main className="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto lg:max-w-none">
           <h1 className="sr-only">Checkout</h1>
+
+
 
           <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
             <div>
@@ -229,21 +241,6 @@ console.log(rate)
                   ))}
                     </div>
                   </div>
-
-                  {/* <div className="sm:col-span-2">
-                    <label htmlFor="apartment" className="block text-sm font-medium text-gray-700">
-                      Apartment, suite, etc.
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="apartment"
-                        id="apartment"
-                        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                    </div>
-                  </div> */}
-
                   <div>
                     <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                       Ville
@@ -304,7 +301,13 @@ console.log(rate)
               <div className="mt-10 border-t border-gray-200 pt-10">
                 <RadioGroup value={selectedDeliveryMethod} onChange={setSelectedDeliveryMethod}>
                   <RadioGroup.Label className="text-lg font-medium text-gray-900">Méthode de livraison</RadioGroup.Label>
-
+                  <button
+                  type="button"
+                  onClick={callAPI}
+                  className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+                  >
+                    Calculer vos frais de port
+                  </button>
                   <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                     {rate.map((MethodeLivraison, key) => (
                       <RadioGroup.Option
@@ -332,7 +335,7 @@ console.log(rate)
                                {MethodeLivraison.delivery_days} Jours
                                 </RadioGroup.Description>
                                 <RadioGroup.Description as="span" className="mt-6 text-sm font-medium text-gray-900">
-                                {MethodeLivraison.rate}
+                                {MethodeLivraison.rate}€
                                 </RadioGroup.Description>
                               </div>
                             </div>
@@ -358,37 +361,35 @@ console.log(rate)
             
               <div className="mt-10 border-t border-gray-200 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">Paiement</h2>
+           
+           
+          <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
+                            createOrder={async (data, actions) => {
+                              const orderID = await actions.order
+                                .create({
+                                  purchase_units: [
+                                    {
+                                      amount: {
+                                        value: product.amount
+                                      },
+                                    },
+                                  ],
+                                });
+                              setOrderId(orderID);
+                             
+                              return orderID;
+                            }}
+                            onApprove={async (data, actions) => {
+                              const details = await actions.order.capture();
+                              const { payer } = details;
+                              navigate("/payment_confirmation" );
+                            }}
+                            onError={(data, actions) => {
+                              setErrorMessage("An Error occured with your payment ");
+                            }}
+          />
 
-                <fieldset className="mt-4">
-                  <legend className="sr-only">Type de paiement</legend>
-                  <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                    {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
-                      <div key={paymentMethod.id} className="flex items-center">
-                        {paymentMethodIdx === 0 ? (
-                          <input
-                            id={paymentMethod.id}
-                            name="payment-type"
-                            type="radio"
-                            defaultChecked
-                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                          />
-                        ) : (
-                          <input
-                            id={paymentMethod.id}
-                            name="payment-type"
-                            type="radio"
-                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                          />
-                        )}
-
-                        <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
-                          {paymentMethod.title}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </fieldset>
-
+     <div className='m-auto w-64'> <p className='text-center'> ou </p></div>
                 <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
                   <div className="col-span-4">
                     <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
@@ -411,19 +412,6 @@ console.log(rate)
                   ))}
                     </div>
                   </div>
-
-                  {/* <div className="col-span-3">
-                    <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
-                      Expiration date (MM/YY)
-                    </label>
-                    <div className="mt-1">
-                    {InputYear.map((input, key) => (
-                      <InputCard key={key}  className='input' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                    ))}
-                    </div>
-                  </div> */}
-
-
                   <div>
                   <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
                       Mois
@@ -461,7 +449,6 @@ console.log(rate)
               </div>
             </div>
 
-            {/* Order summary */}
             <div className="mt-10 lg:mt-0">
               <h2 className="text-lg font-medium text-gray-900">Récapitulatif commande</h2>
 
@@ -469,7 +456,6 @@ console.log(rate)
                 <h3 className="sr-only">Articles dans ton panier</h3>
                 <ul role="list" className="divide-y divide-gray-200">
                   {store.map((product) => (
-                    
                     <li key={product.id} className="flex py-6 px-4 sm:px-6">
                       <div className="flex-shrink-0">
                         <img src={product.photo} className="w-20 rounded-md" />
@@ -486,7 +472,6 @@ console.log(rate)
                            
                             <p className="mt-1 text-sm text-gray-500">{product.weight+ 'kg' + '  ' + product.height+ 'cm'+ '  ' + product.lenght+ 'cm' + '  ' + product.width+ '"'}</p>
                           </div>
-
                           <div className="ml-4 flex-shrink-0 flow-root">
                             <button
                               type="button"
@@ -514,13 +499,7 @@ console.log(rate)
                 </ul>
                 <div className='m-auto w-64'>
 
-                <button
-                  type="button"
-                  onClick={callAPI}
-                  className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                  >
-                    Calculer vos frais de port
-                  </button>
+               
 
                   </div>
                     <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
@@ -530,7 +509,7 @@ console.log(rate)
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Frais de port</dt>
-                    <dd className="text-sm font-medium text-gray-900">{frais}</dd>
+                    <dd className="text-sm font-medium text-gray-900">{frais}€</dd>
                   </div>
                   <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>

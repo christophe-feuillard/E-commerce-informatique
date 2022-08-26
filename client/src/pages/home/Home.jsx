@@ -2,7 +2,6 @@ import React, {useEffect,useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Header from "../../components/header/Header";
 import Card from '../../components/card/Card';
-import ModalSmall from '../../components/modalSmall/ModalSmall';
 import axios from 'axios';
 import ArticlesPopulaires from '../../components/articlespopulaires/ArticlesPopulaires'
 import "./Home.css";

@@ -8,14 +8,13 @@ export default function CatDropDown() {
     const [catData, setCatData] = useState([])
     const navigate = useNavigate()
 
-    //console.log(catData, 'Les cats');
-
     useEffect(() => {
         const callAPI = () => {
           axios.get('http://127.0.0.1:8000/api/categories')
           .then(res => {
     
               setCatData(res.data);
+              console.log(res.data)
             })
             .catch(err => {
               console.log(err);
@@ -26,13 +25,14 @@ export default function CatDropDown() {
     }, []);
 
     const changePage = (e) => {
-        const id = e.target.value // recuperer l'id de la cat
+        const id = e.target.value
        navigate('/categories/' + id)
     }
 
     return (
     <div className="select_container">
-        <select onChange={changePage} className="select_content">
+        <select onChange={changePage} className="select_content outline-none text-slate-900 bg-transparent uppercase font-bold text-sm p-4 mr-4">
+        <option selected disabled>Séléctionner une catégorie</option>
             {catData.map((op,i)=>(     
                <CatOption key={i} data={op}/>
             ))}
@@ -44,8 +44,8 @@ export default function CatDropDown() {
 function CatOption({data}) {
     return (
         <>
-            <option value="">--Sélectionnez une catégorie--</option>
-            <option key={data.id} value={data.id}>{data.titre}</option>
+           
+            <option key={data.id} value={data.id}>{data.name}</option>
         </>
     )  
 }

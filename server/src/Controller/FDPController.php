@@ -24,9 +24,6 @@ class FDPController extends AbstractController {
        
         $content =  $panier;
 
-    
-// dd($content);
-
        foreach($content as $item) {
 
             $totalWidth = $item->width;

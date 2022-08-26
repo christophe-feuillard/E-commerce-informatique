@@ -17,9 +17,6 @@ console.log(token, 'TOKEN')
 console.log(total, 'TOTAL')
 console.log(user, 'USER')
 
-    // const Token = localStorage.getItem("token");    
-    // const dataStorage = JSON.parse(localStorage.getItem('store'));
-
     useEffect(() => {
 
         var config = {

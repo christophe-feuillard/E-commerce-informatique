@@ -36,7 +36,9 @@ const Card = ({store}) => {
   // console.log(sorted, 'ufuf')
 
   // console.log(store)
-  // console.log(JSON.parse(localStorage.getItem("store")))
+  console.log(JSON.parse(localStorage.getItem("store")))
+
+  let windowWidth = window.innerWidth
 
   return (
   <div className='div_articlepopulaires'>
@@ -45,8 +47,8 @@ const Card = ({store}) => {
     <Swiper
     modules={[Pagination, Scrollbar, A11y, Autoplay]}
     spaceBetween={0}
-    slidesPerView={2}
-    // loop={true}
+    slidesPerView={windowWidth > 900 ? 2 : 1 }
+    loop={true}
     // autoplay={{
     //     delay: 5000,
     //     disableOnInteraction: false

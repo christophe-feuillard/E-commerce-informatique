@@ -35,7 +35,7 @@ function Categories() {
 
         callAPI(catId);
     
-    }, [catId]);
+    }, [catData]);
 
     const handleClick = () => {
         navigate('/home')

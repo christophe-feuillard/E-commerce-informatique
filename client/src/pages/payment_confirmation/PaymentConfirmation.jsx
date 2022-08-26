@@ -13,7 +13,7 @@ function PaymentConfirmation() {
     <div>
         <span>Paiement confirmé</span>
         <div className='voirArticles'>
-            <p  onClick={()=>{
+            <p onClick={()=>{
                 setStore([])
                 navigate("/home")
                 }} >

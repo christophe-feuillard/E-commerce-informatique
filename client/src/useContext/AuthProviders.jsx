@@ -64,11 +64,9 @@ useEffect(() => {
       }
   }
 
-
   if(token) {
     userData()
   }
-
     if (token !== null) {
       localStorage.setItem("token", token && JSON.stringify(token))
     }

@@ -17,13 +17,13 @@ class Categorie
     #[Groups("groupe:get")]
     private $id;
 
-    // #[ORM\Column(type: 'string', lenght: 255)]
-    #[Groups("groupe:get")]
-    private $titre;
-
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categorie')]
     #[Groups("groupe:get")]
     private $articles;
+
+    #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
+    private ?string $name = null;
 
     public function __construct()
     {
@@ -35,17 +35,7 @@ class Categorie
         return $this->id;
     }
 
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
-
-    public function setTitre(string $titre): self
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
+ 
 
     /**
      * @return Collection<int, Article>
@@ -70,6 +60,18 @@ class Categorie
         if ($this->articles->removeElement($article)) {
             $article->removeCategorie($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

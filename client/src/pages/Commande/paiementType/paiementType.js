@@ -67,11 +67,6 @@ export const PaiementType = () => {
                 </div>
               </div>
             </div>
-
-
-
-
-
     </div>
   )
 }

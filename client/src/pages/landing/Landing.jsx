@@ -20,7 +20,7 @@ const Landing = () => {
       
       <div className='content'>
         <div className='text'>
-          <h3>Les meilleurs composants pour les meilleurs performances chez <br/><span>Seteup Dream</span> </h3>
+          <h3>Les meilleurs composants pour les meilleurs performances chez <br/><span>Setup Dream</span> </h3>
           <Button value='Commencer' handelclick={()=> navigate("/home")}/>
         </div>
         <img src={ComputerImage} alt="Computer" className='computer'/>

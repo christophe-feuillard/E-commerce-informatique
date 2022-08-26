@@ -1,11 +1,10 @@
 .select_container {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .select_content {
-    background-color: #eb4f29;
-    color: white;
+    color: black;
     border-radius: 2px;
 }

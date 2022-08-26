@@ -34,6 +34,10 @@ class Comment
     #[Groups("groupe:get")]
     private ?string $date = null;
 
+    #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
+    private ?string $commentTitle = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,6 +99,18 @@ class Comment
     public function setDate(string $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCommentTitle(): ?string
+    {
+        return $this->commentTitle;
+    }
+
+    public function setCommentTitle(string $commentTitle): self
+    {
+        $this->commentTitle = $commentTitle;
 
         return $this;
     }
