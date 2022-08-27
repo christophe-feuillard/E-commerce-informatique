@@ -2,19 +2,20 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticleRepository;
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Article;
 use App\Entity\User;
+use App\Entity\Article;
 use App\Entity\Emballage;
+use App\Repository\UserRepository;
+use App\Repository\ArticleRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/api')]
 class AdminUserController extends AbstractController
@@ -23,6 +24,7 @@ class AdminUserController extends AbstractController
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function index(ManagerRegistry $doctrine, UserRepository $userRepo): JsonResponse
     { 
+        dd($userRepo->findAll());
         return $this->json($userRepo->findAll(), 200,[],['groups' => 'groupe:get']);
     }
 

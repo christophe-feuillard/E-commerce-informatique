@@ -83,12 +83,13 @@ class Article
     #[Groups("groupe:get")]
     private ?string $endDiscount = null;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class, fetch:'EAGER')]
+    // #[Groups("groupe:get")]
+    private Collection $orderItems;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
-        $this->user = new ArrayCollection();
-        $this->users = new ArrayCollection();
-        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -204,41 +205,14 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getWidth(): ?int
     {
-        return $this->users;
+        return $this->width;
     }
 
-    public function addUser(User $user): self
+    public function setWidth(?int $width): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addFavori($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeFavori($this);
-        }
-
-        return $this;
-    }
-
-    public function getWeight(): ?int
-    {
-        return $this->weight;
-    }
-
-    public function setWeight(?int $weight): self
-    {
-        $this->weight = $weight;
+        $this->width = $width;
 
         return $this;
     }
@@ -267,17 +241,29 @@ class Article
         return $this;
     }
 
-    public function getWidth(): ?int
+    public function getWeight(): ?int
     {
-        return $this->width;
+        return $this->weight;
     }
 
-    public function setWidth(?int $width): self
+    public function setWeight(?int $weight): self
     {
-        $this->width = $width;
+        $this->weight = $weight;
 
         return $this;
     }
+
+    // public function getWidth(): ?int
+    // {
+    //     return $this->width;
+    // }
+
+    // public function setWidth(?int $width): self
+    // {
+    //     $this->width = $width;
+
+    //     return $this;
+    // }
 
     public function getDiscount(): ?float
     {
@@ -323,6 +309,36 @@ class Article
     public function setEndDiscount(?string $endDiscount): self
     {
         $this->endDiscount = $endDiscount;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderItem>
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): self
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems[] = $orderItem;
+            $orderItem->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): self
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getProduct() === $this) {
+                $orderItem->setProduct(null);
+            }
+        }
 
         return $this;
     }

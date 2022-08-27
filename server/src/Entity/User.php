@@ -62,10 +62,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private $Country = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups("groupe:get")]
-    private ?string $BanMethode = null;
-
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'], fetch: 'EAGER')]
     #[Groups("groupe:get")]
     private ?Card $card = null;
@@ -74,12 +70,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private ?string $Firstname = null;
 
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups("groupe:get")]
     private ?\DateTimeInterface $birthdate = null;
 
 
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $BanMethode = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: OrderDetails::class, fetch: "EAGER")]
+    #[Groups("groupe:get")]
+    private Collection $orderDetails;
+
+    public function __construct()
+    {
+        $this->payments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -214,26 +223,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Article>
      */
-    public function getFavoris(): Collection
-    {
-        return $this->favoris;
-    }
+    // public function getFavoris(): Collection
+    // {
+    //     return $this->favoris;
+    // }
 
-    public function addFavori(Article $favori): self
-    {
-        if (!$this->favoris->contains($favori)) {
-            $this->favoris[] = $favori;
-        }
+    // public function addFavori(Article $favori): self
+    // {
+    //     if (!$this->favoris->contains($favori)) {
+    //         $this->favoris[] = $favori;
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeFavori(Article $favori): self
-    {
-        $this->favoris->removeElement($favori);
+    // public function removeFavori(Article $favori): self
+    // {
+    //     $this->favoris->removeElement($favori);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCodePostal(): ?string
     {
@@ -276,20 +285,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
- 
+    // /**
+    //  * @return Collection<int, Payment>
+    //  */
+    // public function getPayments(): Collection
+    // {
+    //     return $this->payments;
+    // }
 
-    public function getBanMethode(): ?string
-    {
-        return $this->BanMethode;
-    }
+    // public function addPayment(Payment $payment): self
+    // {
+    //     if (!$this->payments->contains($payment)) {
+    //         $this->payments[] = $payment;
+    //         $payment->setUser($this);
+    //     }
 
-    public function setBanMethode(?string $BanMethode): self
-    {
-        $this->BanMethode = $BanMethode;
+    //     return $this;
+    // }
 
-        return $this;
-    }
+    // public function removePayment(Payment $payment): self
+    // {
+    //     if ($this->payments->removeElement($payment)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($payment->getUser() === $this) {
+    //             $payment->setUser(null);
+    //         }
+    //     }
 
+    //     return $this;
+    // }
+
+    // public function getPhysicalAdresses(): ?PhysicalAdresses
+    // {
+    //     return $this->physicalAdresses;
+    // }
+
+    // public function setPhysicalAdresses(?PhysicalAdresses $physicalAdresses): self
+    // {
+    //     // unset the owning side of the relation if necessary
+    //     if ($physicalAdresses === null && $this->physicalAdresses !== null) {
+    //         $this->physicalAdresses->setUser(null);
+    //     }
+
+    //     // set the owning side of the relation if necessary
+    //     if ($physicalAdresses !== null && $physicalAdresses->getUser() !== $this) {
+    //         $physicalAdresses->setUser($this);
+    //     }
+
+    //     $this->physicalAdresses = $physicalAdresses;
+
+    //     return $this;
+    // }
     public function getCard(): ?Card
     {
         return $this->card;
@@ -312,6 +358,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
     public function getFirstname(): ?string
     {
         return $this->Firstname;
@@ -324,14 +381,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBirthdate(): ?\DateTimeInterface
+    public function getBanMethode(): ?string
     {
-        return $this->birthdate;
+        return $this->BanMethode;
     }
 
-    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    public function setBanMethode(?string $BanMethode): self
     {
-        $this->birthdate = $birthdate;
+        $this->BanMethode = $BanMethode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderDetails>
+     */
+    public function getOrderDetails(): Collection
+    {
+        return $this->orderDetails;
+    }
+
+    public function addOrderDetail(OrderDetails $orderDetail): self
+    {
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails[] = $orderDetail;
+            $orderDetail->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderDetail(OrderDetails $orderDetail): self
+    {
+        if ($this->orderDetails->removeElement($orderDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($orderDetail->getUser() === $this) {
+                $orderDetail->setUser(null);
+            }
+        }
 
         return $this;
     }
