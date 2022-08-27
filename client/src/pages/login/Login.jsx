@@ -9,8 +9,8 @@ import './Login.css';
 const Login = () => {
     const navigate = useNavigate();
     
-    const {contextToken} = GetGlobalData();
-    const [setToken] = contextToken
+    const {contextStore, contextUser, contextToken} = GetGlobalData();
+    const [token, setToken] = contextToken
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -61,6 +61,7 @@ const Login = () => {
       .then((response) => {
         setToken(response.data.token)
         console.log(response.data.token)
+        // localStorage.setItem("token",JSON.stringify(response.data.token));
         navigate('/home');
       })
       .catch((error) => {
@@ -69,12 +70,14 @@ const Login = () => {
       });
       
     }
+    // if(islogin) return <Navigate to="/home"/> ;
   return (
     <div className='loginMain'>
         <div className='loginContainer'>
           <div className='DivTextLogin'>
             <p className='TextLogin'>Se connecter</p>
           </div>
+       
             <div className='loginFormulaire'>
                 {inputData.map((input, key) => (
                     <InputLogin key={key} type={input.type} value={input.value}  placeholder={input.placeholder} change={input.change}/>

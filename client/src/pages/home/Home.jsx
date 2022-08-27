@@ -5,8 +5,8 @@ import Card from '../../components/card/Card';
 import axios from 'axios';
 import ArticlesPopulaires from '../../components/articlespopulaires/ArticlesPopulaires'
 import "./Home.css";
-import CatDropDown from '../../components/drop-down-cat/CatDropDown';
-import { MailIcon } from '@heroicons/react/outline'
+import MdOutlineEmail from "react-icons/md"
+import Footer from '../../components/footer/footer';
 
 const Home = () => {
 
@@ -91,7 +91,7 @@ const Home = () => {
            <ArticlesPopulaires/>  
            <div className='hr'>
            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, ducimus repellendus eum earum in optio! Velit sunt perspiciatis natus nisi?
-      </div> 
+         </div> 
 
         {data.filter((item)=>item.titre.toLowerCase().includes(search)).map((item,key) => (
 
@@ -102,12 +102,22 @@ const Home = () => {
             clickFavoris={()=>{favoris(item, key)}}
           />
         ))}
-          <div  className="fixed bottom-10 right-10">
+          <div className="fixed bottom-10 right-10 cursor-pointer">
           <div onClick={()=> navigate("/contact")} className="bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-full h-14 w-14 inline-flex items-center">
-         <MailIcon />
-</div> 
+          <svg
+                      fill="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      // className="fixed"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                    </svg>  
+         </div> 
          </div>
       </div>
+      <Footer/>
   </>
   )}
   

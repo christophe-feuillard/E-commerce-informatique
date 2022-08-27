@@ -32,7 +32,7 @@ export default function CatDropDown() {
     return (
     <div className="select_container">
         <select onChange={changePage} className="select_content outline-none text-slate-900 bg-transparent uppercase font-bold text-sm p-4 mr-4">
-        <option selected disabled>Séléctionner une catégorie</option>
+        <option defaultValue >Séléctionner une catégorie</option>
             {catData.map((op,i)=>(     
                <CatOption key={i} data={op}/>
             ))}

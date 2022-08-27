@@ -28,14 +28,10 @@ const Card = ({store}) => {
           console.log(err);
         });
     }
-
     callAPI();
-
   }, []);
   const sorted = data.sort((el1, el2) => el2.visit - el1.visit)
-  // console.log(sorted, 'ufuf')
 
-  // console.log(store)
   console.log(JSON.parse(localStorage.getItem("store")))
 
   let windowWidth = window.innerWidth

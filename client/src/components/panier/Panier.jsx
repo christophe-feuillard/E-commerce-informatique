@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import {BsTrashFill} from "react-icons/bs"
 import { Trash } from './trash';
 import './Panier.css'
+import Footer from '../footer/footer';
 
  const Panier = () => {
   const {contextStore, contextTotal, contextUser} = GetGlobalData();
@@ -14,11 +15,6 @@ import './Panier.css'
   
     
     const navigate = useNavigate();
-
-    const PriceTotale =(props)=>{
-        console.log(total)
-        navigate('/commande',{totale : 'total'});
-    }
 
     if (total == 0) {
       return(
@@ -141,10 +137,10 @@ import './Panier.css'
                 </div>
             </div>
            
+    <Footer/>
         </div>
         
         
-    
         </div>
     
                  )} }

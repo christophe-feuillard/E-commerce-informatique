@@ -9,6 +9,7 @@ import { GetGlobalData } from '../../useContext/AuthProviders';
 import { Trash } from '../../components/panier/trash';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Footer from '../../components/footer/footer';
 
 
 function classNames(...classes) {
@@ -32,13 +33,24 @@ export const Commande = () => {
   const [total] = contextTotal;
   const [user] = contextUser
 
-  
-  
+console.log(user)
+
+  // const BanMetde = [{
+  //     title: 'carte bancaire'
+  //  }
+  // ]
+
   const product = {
     amount : total
   }
   
   
+  
+  // if (banMethode) {
+    //   console.log('cest vrai')
+  // }else{
+  //   console.log('cest faux')
+  // }
   
   const [orderId, setOrderId] = useState(false);
   const  [errorMessage, setErrorMessage] = useState("");
@@ -57,11 +69,13 @@ export const Commande = () => {
   const [cardCvc, setCvc] = useState('');
   const [rate, setRate] = useState([]);
   const [frais, setFdp] = useState(0);
-  const [quantite, setQuantite] = useState(1)
-  const [isSave, setIsSave] = useState(false);
+  const [isBan, setIsBan] = useState(null);
   
   const navigate = useNavigate()
-
+  
+  // const banMethode = user.BanMethode?.includes(BanMetde.title)
+  
+  // console.log(banMethode, 'ISBAN')
   
   // console.log(user)
   const inputName = [
@@ -148,7 +162,6 @@ export const Commande = () => {
   ]
   
 
-
   const callAPI = () => { 
     var data = JSON.stringify({
       "name": firstname,
@@ -181,13 +194,9 @@ console.log(data, 'DATA')
 // console.log(orderID)
   return (
     <div className="bg-gray-50 text-gray-900">    
- 
       <main className="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto lg:max-w-none">
           <h1 className="sr-only">Checkout</h1>
-
-
-
           <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
             <div>
               <div>
@@ -362,7 +371,7 @@ console.log(data, 'DATA')
               <div className="mt-10 border-t border-gray-200 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">Paiement</h2>
            
-           
+  
           <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
                             createOrder={async (data, actions) => {
                               const orderID = await actions.order
@@ -531,6 +540,7 @@ console.log(data, 'DATA')
           </form>
         </div>
       </main>
+      <Footer/>
     </div>
   )
 }
