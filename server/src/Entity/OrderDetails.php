@@ -48,18 +48,31 @@ class OrderDetails
     #[ORM\Column]
     #[Groups("groupe:get")]
     private ?\DateTimeImmutable $created_at = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'orderDetails', fetch: "EAGER")]
         // #[Groups("groupe:get")]
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: OrderItem::class, fetch: "EAGER")]
-    // #[Groups("groupe:get")]
+    #[Groups("groupe:get")]
     private Collection $orderItems;
 
     #[ORM\Column(length: 255)]
     #[Groups("groupe:get")]
     private ?string $DocTrack = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $frais = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $total = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $service = null;
 
     public function __construct()
     {
@@ -217,6 +230,42 @@ class OrderDetails
     public function setDocTrack(string $DocTrack): self
     {
         $this->DocTrack = $DocTrack;
+
+        return $this;
+    }
+
+    public function getFrais(): ?string
+    {
+        return $this->frais;
+    }
+
+    public function setFrais(?string $frais): self
+    {
+        $this->frais = $frais;
+
+        return $this;
+    }
+
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(?string $total): self
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    public function getService(): ?string
+    {
+        return $this->service;
+    }
+
+    public function setService(?string $service): self
+    {
+        $this->service = $service;
 
         return $this;
     }

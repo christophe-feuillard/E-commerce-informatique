@@ -87,10 +87,11 @@ class Article
     // #[Groups("groupe:get")]
     private Collection $orderItems;
 
-    public function __construct()
-    {
-        $this->categorie = new ArrayCollection();
-    }
+    // public function __construct()
+    // {
+    //     $this->categorie = new ArrayCollection();
+    //     $this->orderItems = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {

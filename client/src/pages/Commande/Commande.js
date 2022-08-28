@@ -63,7 +63,7 @@ console.log(user)
   const [cardCvc, setCvc] = useState('');
   const [rate, setRate] = useState([]);
   const [frais, setFdp] = useState(0);
-  const [isBan, setIsBan] = useState(null);
+  const [service, setService] = useState('');
   const [TrackDoc, setTrackDoc] = useState();
   
   const navigate = useNavigate()
@@ -209,8 +209,9 @@ const setCommande = () =>{
     "city" : city,
     "email" : email,
     "documentTrack": TrackDoc,
-    "total": total,
-    "frais": frais
+    "service": service,
+    'frais': frais,
+    "total": total
 
 });
 
@@ -232,10 +233,10 @@ console.log(err);
 }); 
 }
 
-
+console.log(service, 'SERVICE')
 const getCommande = () =>{
   const config = {
-    method: 'POST',
+    method: 'GET',
     url: 'http://localhost:8000/api/getCommande',
     headers: { 
       'Content-Type': 'application/json',
@@ -254,7 +255,9 @@ const getCommande = () =>{
 
   return (
     <div className="bg-gray-50 text-gray-900">    
+    
       <main className="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+        
         <div className="max-w-2xl mx-auto lg:max-w-none">
           <h1 className="sr-only">Checkout</h1>
           <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
@@ -409,7 +412,8 @@ const getCommande = () =>{
                               </div>
                             </div>
                             {checked ? (
-                               setFdp(MethodeLivraison.rate)
+                               setFdp(MethodeLivraison.rate),
+                               setService(MethodeLivraison.service)
                             ) : null}
                             <div
                               className={classNames(

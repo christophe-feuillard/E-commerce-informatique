@@ -16,7 +16,6 @@ class OrderItem
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems', fetch: "EAGER")]
-    #[Groups("groupe:get")]
     private ?OrderDetails $commande = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems', fetch: "EAGER")]
