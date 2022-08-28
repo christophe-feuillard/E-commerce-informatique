@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderItemRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrderItemRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OrderItemRepository::class)]
 class OrderItem
@@ -14,7 +15,6 @@ class OrderItem
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems', fetch: "EAGER")]
-    #[Groups("groupe:get")]
     private ?OrderDetails $commande = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems', fetch: "EAGER")]

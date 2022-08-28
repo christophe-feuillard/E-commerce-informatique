@@ -9,16 +9,28 @@ use App\Repository\ArticleRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\OrderDetailsRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+
+
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
+
+
+
+
 
 #[Route('/api', name: 'app_commande')]
 class CommandeController extends AbstractController
 {
-    #[Route('/commande', name: 'app_commande')]
+    #[Route('/commande', name: 'app_commande', methods:('POST'))]
     public function index(Request $request,ManagerRegistry $doctrine, UserInterface $user, OrderDetailsRepository $or, ArticleRepository $ar, SerializerInterface $serializer): JsonResponse
     {
        
@@ -34,7 +46,7 @@ class CommandeController extends AbstractController
 
             $request->request->replace($data);
             $entityManager = $doctrine->getManager();
-            
+            dd($request->request);
             $order = new OrderDetails();
             $order->setNom($request->request->get('name'));
             $order->setPrenom($request->request->get('firstname'));
@@ -64,15 +76,17 @@ class CommandeController extends AbstractController
         return $this->json("c'est bon");
     }
 
-    #[Route('/getCommande', name: 'app_commande')]
-    public function getCommand(Request $request,ManagerRegistry $doctrine, UserInterface $user, OrderDetailsRepository $or, ArticleRepository $ar, SerializerInterface $serializer): JsonResponse
+    #[Route('/getCommande', methods:('GET'))]
+    public function getCommand(UserInterface $user)
     {
-        $commande = $or->findOneBy(['user' => $user]);
-        $entityManager = $doctrine->getManager();
-        // $userr = $entityManager->getRepository(User::class)->find();
+        return $this->json($user->getOrderDetails(), 200, [], ['groups' =>"groupe:get"]);
+        
+    }
 
-       // dd($user->getOrderDetails());
-        // return $this->json($jsonContent , 200,[],['groups' => 'groupe:get']);
-        return $this->json($user->getOrderDetails() , 200,[],['groups' => 'groupe:get']);
+    #[Route('/getSingleComm/{id}', methods:('GET'))]
+    public function getSingleComm(OrderDetailsRepository $or, $id)
+    {
+        return $this->json($or->find($id), 200, [], ['groups' =>"groupe:get"]);
+        
     }
 }

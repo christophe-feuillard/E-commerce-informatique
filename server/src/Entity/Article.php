@@ -86,10 +86,11 @@ class Article
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class)]
     private Collection $orderItems;
 
-    public function __construct()
-    {
-        $this->categorie = new ArrayCollection();
-    }
+    // public function __construct()
+    // {
+    //     $this->categorie = new ArrayCollection();
+    //     $this->orderItems = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {

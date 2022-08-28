@@ -6,6 +6,7 @@ use App\Repository\OrderDetailsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OrderDetailsRepository::class)]
 class OrderDetails
@@ -45,13 +46,14 @@ class OrderDetails
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
+    #[Groups("groupe:get")]
 
     #[ORM\ManyToOne(inversedBy: 'orderDetails', fetch: "EAGER")]
-  
+   
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: OrderItem::class, fetch: "EAGER")]
-    
+    #[Groups("groupe:get")]
     private Collection $orderItems;
 
     public function __construct()
