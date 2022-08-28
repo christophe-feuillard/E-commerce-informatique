@@ -207,7 +207,7 @@ console.log(err);
 
 const getCommande = () =>{
   const config = {
-    method: 'POST',
+    method: 'GET',
     url: 'http://localhost:8000/api/getCommande',
     headers: { 
       'Content-Type': 'application/json',
