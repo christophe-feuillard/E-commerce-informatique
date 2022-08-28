@@ -12,6 +12,7 @@ class OrderItem
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
+    #[Groups("groupe:get")]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems', fetch: "EAGER")]
@@ -28,6 +29,14 @@ class OrderItem
 
     #[ORM\Column(type: 'datetime_immutable', options:['default'=>'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $frais = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups("groupe:get")]
+    private ?string $total = null;
 
     public function getId(): ?int
     {
@@ -78,6 +87,30 @@ class OrderItem
     public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getFrais(): ?string
+    {
+        return $this->frais;
+    }
+
+    public function setFrais(?string $frais): self
+    {
+        $this->frais = $frais;
+
+        return $this;
+    }
+
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(?string $total): self
+    {
+        $this->total = $total;
 
         return $this;
     }

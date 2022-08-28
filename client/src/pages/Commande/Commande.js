@@ -46,13 +46,6 @@ console.log(user)
   }
   
   
-  
-  // if (banMethode) {
-    //   console.log('cest vrai')
-  // }else{
-  //   console.log('cest faux')
-  // }
-  
   const [orderId, setOrderId] = useState(false);
   const  [errorMessage, setErrorMessage] = useState("");
   const [name, setName] = useState('');
@@ -71,10 +64,11 @@ console.log(user)
   const [rate, setRate] = useState([]);
   const [frais, setFdp] = useState(0);
   const [isBan, setIsBan] = useState(null);
+  const [TrackDoc, setTrackDoc] = useState();
   
   const navigate = useNavigate()
   
-  // const banMethode = user.BanMethode?.includes(BanMetde.title)
+  // const banMethode = user.BanMethode?.includes('carte bancaire')
   
   // console.log(banMethode, 'ISBAN')
   
@@ -191,6 +185,8 @@ console.log(data, 'DATA')
   };
      axios(config)
     .then(res => {
+      console.log(res)
+      setTrackDoc(res.data[2])
         setTracking(res.data[0].tracking_code)
         setRate(res.data[0].rates)
     })
@@ -211,7 +207,11 @@ const setCommande = () =>{
     "panier": JSON.stringify(store),
     "suivis" : tracking,
     "city" : city,
-    "email" : email
+    "email" : email,
+    "documentTrack": TrackDoc,
+    "total": total,
+    "frais": frais
+
 });
 
 const config = {
@@ -431,9 +431,9 @@ const getCommande = () =>{
               <div className="mt-10 border-t border-gray-200 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">Paiement</h2>
            
-  
-          <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
-                            createOrder={async (data, actions) => {
+             {/* {banMethode ?  */}
+             <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
+             createOrder={async (data, actions) => {
                               const orderID = await actions.order
                                 .create({
                                   purchase_units: [
@@ -444,7 +444,7 @@ const getCommande = () =>{
                                     },
                                   ],
                                 });
-                              setOrderId(orderID);
+                                setOrderId(orderID);
                              
                               return orderID;
                             }}
@@ -456,10 +456,10 @@ const getCommande = () =>{
                             onError={(data, actions) => {
                               setErrorMessage("An Error occured with your payment ");
                             }}
-          />
-
-     <div className='m-auto w-64'> <p className='text-center'> ou </p></div>
-                <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
+                            // :
+                            />
+                            <div className='m-auto w-64'> <p className='text-center'> ou </p></div>
+                            <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
                   <div className="col-span-4">
                     <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
                       Numéro de carte
@@ -487,8 +487,8 @@ const getCommande = () =>{
                     </label>
                     <div className="mt-1">
                     {InputMonth.map((input, key) => (
-                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                  ))}
+                      <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                      ))}
                     </div>
                   </div>
 
@@ -514,6 +514,7 @@ const getCommande = () =>{
                   ))}
                     </div>
                   </div>
+                {/* } */}
                 </div>
               </div>
             </div>

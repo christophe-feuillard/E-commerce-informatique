@@ -14,6 +14,7 @@ class OrderDetails
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
+    #[Groups("groupe:get")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -55,6 +56,10 @@ class OrderDetails
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: OrderItem::class, fetch: "EAGER")]
     // #[Groups("groupe:get")]
     private Collection $orderItems;
+
+    #[ORM\Column(length: 255)]
+    #[Groups("groupe:get")]
+    private ?string $DocTrack = null;
 
     public function __construct()
     {
@@ -200,6 +205,18 @@ class OrderDetails
                 $orderItem->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDocTrack(): ?string
+    {
+        return $this->DocTrack;
+    }
+
+    public function setDocTrack(string $DocTrack): self
+    {
+        $this->DocTrack = $DocTrack;
 
         return $this;
     }

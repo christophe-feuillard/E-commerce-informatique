@@ -11,7 +11,9 @@ function PaymentConfirmation() {
 
   return (
     <div>
-        <span>Paiement confirmé</span>
+      <div className='mx-auto text-center text-6xl text-gray-900 w-2/3'>
+        <span>Votre Paiement à bien été éffectuer</span>
+      </div>
         <div className='voirArticles'>
             <p onClick={()=>{
                 setStore([])

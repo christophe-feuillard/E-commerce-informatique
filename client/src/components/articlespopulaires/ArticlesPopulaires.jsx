@@ -10,11 +10,14 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 
-const Card = ({store}) => {
+const Card = () => {
 
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-
+  const [perView, setPerView] = useState(2)
+  // const [width, setWidth] = useState(window.innerWidth)
+  
+    let windowWidth = window.innerWidth
   useEffect(() => {
 
     const callAPI = () => {
@@ -29,12 +32,22 @@ const Card = ({store}) => {
         });
     }
     callAPI();
+
+    
   }, []);
+  
+    if(windowWidth < 900){
+      setPerView(1)
+    }
+  // useEffect(() => {
+  //   setWidth(width)
+  //   console.log(width)
+  
+  // }, [width])
+
   const sorted = data.sort((el1, el2) => el2.visit - el1.visit)
 
   console.log(JSON.parse(localStorage.getItem("store")))
-
-  let windowWidth = window.innerWidth
 
   return (
   <div className='div_articlepopulaires'>
@@ -43,7 +56,7 @@ const Card = ({store}) => {
     <Swiper
     modules={[Pagination, Scrollbar, A11y, Autoplay]}
     spaceBetween={0}
-    slidesPerView={windowWidth > 900 ? 2 : 1 }
+    slidesPerView={perView}
     loop={true}
     // autoplay={{
     //     delay: 5000,

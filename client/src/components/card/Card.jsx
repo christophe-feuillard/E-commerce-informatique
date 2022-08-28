@@ -15,7 +15,7 @@ const Card = ({articles,handleckick,colorFavoris,clickFavoris, textStore}) => {
 
   }, [colorFavoris]);
 
-  const handleStore = () => {
+const handleStore = () => {
 console.log(articles)
    const foundArticleInLocalStorage = store.find(element => element.id === articles.id);
    if (foundArticleInLocalStorage ) {

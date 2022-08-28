@@ -54,7 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private $CodePostal;
 
-
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Emballage $emballage = null;
 
@@ -70,12 +69,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private ?string $Firstname = null;
 
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups("groupe:get")]
     private ?\DateTimeInterface $birthdate = null;
-
-
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups("groupe:get")]

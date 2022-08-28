@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
 import emailjs from '@emailjs/browser';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function ContactForm() {
   const form = useRef();
-
+const navigate = useNavigate()
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -18,13 +19,16 @@ export default function ContactForm() {
   };
   return (
       <div className="text-gray-900">
-  
+                            <p onClick={()=> navigate("/home")} className="text-sm pl-2 text-2xl leading-none dark:hover:text-gray-200  cursor-pointer">Retourner sur la page d'accueil</p>
         <main className="overflow-hidden">
           <section className="relative " aria-labelledby="contact-heading">
             <div className="absolute w-full h-1/2 bg-warm-gray-50" aria-hidden="true" />
       
             
+              {/* <div className="flex items-center text-gray-500  hover:text-gray-600 dark:text-white cursor-pointer"> */}
+              {/* </div> */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6  sm:mt-40 lg:px-8 mt-0 ">
+  
               <div className="relative  shadow-xl">
                 <h2 id="contact-heading" className="sr-only">
                   Contactez-Nous

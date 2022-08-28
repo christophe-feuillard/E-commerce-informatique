@@ -43,6 +43,7 @@ class CommandeController extends AbstractController
             $order->setCodePostale($request->request->get('zip'));
             $order->setVille($request->request->get('city'));
             $order->setNumeroDeSuivis($request->request->get('suivis'));
+            $order->setDocTrack($request->request->get('documentTrack'));
             $order->setUser($user);
             $order->setCreatedAt(new \DateTimeImmutable('now'));
             $entityManager->persist($order);
@@ -54,6 +55,8 @@ class CommandeController extends AbstractController
             $item = new OrderItem();
             $item->setCommande($order);
             $item->setProduct($product);
+            $item->setFrais($request->request->get('frais'));
+            $item->setTotal($request->request->get('total'));
             $item->setQuantity($pan['quantity']);
             $item->setCreatedAt(new \DateTimeImmutable('now'));
             $entityManager->persist($item);
