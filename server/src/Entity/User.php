@@ -66,8 +66,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups("groupe:get")]
     private ?string $BanMethode = null;
 
+     
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: OrderDetails::class, fetch: "EAGER")]
+    #[Groups("groupe:get")]
     private Collection $orderDetails;
+
 
     public function __construct()
     {

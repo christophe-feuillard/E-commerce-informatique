@@ -45,11 +45,11 @@ class OrderDetails
     private ?string $numero_de_suivis = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
     #[Groups("groupe:get")]
+    private ?\DateTimeImmutable $created_at = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'orderDetails', fetch: "EAGER")]
-   
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: OrderItem::class, fetch: "EAGER")]

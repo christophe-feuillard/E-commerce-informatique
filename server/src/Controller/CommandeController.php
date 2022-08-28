@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\OrderItem;
 use App\Entity\OrderDetails;
@@ -15,10 +16,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
+
+
+
 use Symfony\Component\Security\Core\User\UserInterface;
-
-
-
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
@@ -84,9 +85,8 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/getSingleComm/{id}', methods:('GET'))]
-    public function getSingleComm(OrderDetailsRepository $or, $id)
+    public function getSingleComm(UserInterface $user,OrderDetailsRepository $or, $id)
     {
         return $this->json($or->find($id), 200, [], ['groups' =>"groupe:get"]);
-        
     }
 }
