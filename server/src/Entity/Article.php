@@ -87,11 +87,9 @@ class Article
     // #[Groups("groupe:get")]
     private Collection $orderItems;
 
-    // public function __construct()
-    // {
-    //     $this->categorie = new ArrayCollection();
-    //     $this->orderItems = new ArrayCollection();
-    // }
+    #[ORM\Column(nullable: true)]
+    #[Groups("groupe:get")]
+    private ?\DateTimeImmutable $created_at = null;
 
     public function getId(): ?int
     {
@@ -340,6 +338,18 @@ class Article
                 $orderItem->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

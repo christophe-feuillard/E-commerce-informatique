@@ -24,7 +24,6 @@ class AdminUserController extends AbstractController
     #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas les droits suffisants')]
     public function index(ManagerRegistry $doctrine, UserRepository $userRepo): JsonResponse
     { 
-        dd($userRepo->findAll());
         return $this->json($userRepo->findAll(), 200,[],['groups' => 'groupe:get']);
     }
 

@@ -69,6 +69,7 @@ class AdminController extends AbstractController
             $user->setDescription($request->request->get('description'));
             $user->setCaracteristique($request->request->get('caracteristique'));
             $user->setStock($request->request->get('stock'));
+            $user->setCreatedAt(new \DateTimeImmutable('now'));
             $entityManager->persist($user);
             $entityManager->flush($user);
 
@@ -160,12 +161,9 @@ class AdminController extends AbstractController
     }
 
     try{
-        // $discounted =  $initialPrice - ($initialPrice * ($request->request->get('persentDiscount')/100));
         $product->setStartDicount($request->request->get('start'));
         $product->setEndDiscount($request->request->get('end'));
         $product->setDiscount($request->request->get('persentDiscount'));
-        // $product->setOldPrice($initialPrice);
-        // $product->setPrix($discounted);
         $entityManager->flush();
         return $this->json('ok discount effectué');
     } catch (e) {

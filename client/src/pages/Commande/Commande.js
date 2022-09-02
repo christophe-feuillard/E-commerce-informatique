@@ -505,8 +505,8 @@ const verifyInput = () =>{
                             onApprove={async (data, actions) => {
                               const details = await actions.order.capture();
                               const { payer } = details;
-                              console.log(details)
-                              setPaypal(details)
+                              // console.log(details)
+                              // setPaypal(details)
                               navigate("/payment_confirmation");
                             }}
                             onError={(data, actions) => {
