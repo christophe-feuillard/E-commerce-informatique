@@ -1,13 +1,11 @@
 import "./Commentaires.css";
-// import TitreComment from "./TitreComment";
 import { useState,useEffect } from "react";
 import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Comment from "./Comment";
 import { GetGlobalData } from '../../useContext/AuthProviders';
-// import { createContext, useContext, useState } from 'react';
-// const ThemeContext = createContext(null);
+import localization from 'moment/locale/fr'
 
 const Commentaires = ({articleId}) => {
 
@@ -31,7 +29,7 @@ const Commentaires = ({articleId}) => {
   const isBtnDisabled = comment.length === 0; 
   const isToken = token === null;
   const navigate = useNavigate();
-  console.log(dataUser);
+
   useEffect(() => {
     const callAPI = async () => {
         await axios.get('http://localhost:8000/api/user/role', {
@@ -160,7 +158,7 @@ const Commentaires = ({articleId}) => {
         <Comment 
          commentId={dataUser.id}
          username={dataUser.name} 
-         date={moment().format("MMM Do YY")} 
+         date={moment().locale('fr', localization).format("MMM Do YY")}
          text={text}
          commentTitle={commentsTitle}
         />         

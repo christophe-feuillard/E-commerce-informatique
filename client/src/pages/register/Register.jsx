@@ -1,13 +1,11 @@
 import React, {useState,useEffect} from 'react';
-import {useNavigate,Navigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import InputLogin from '../../components/input/InputLogin';
 import InputRegister from '../../components/input/InputRegister';
 import Button from "../../components/button/Button";
 import axios from 'axios';
 import Image from '../../asset/pc.jpg'
 import './Register.css';
-import { AiFillAmazonSquare } from 'react-icons/ai';
-import { GetGlobalData } from '../../useContext/AuthProviders';
 
 
 const Register = () => {
@@ -85,11 +83,12 @@ const Register = () => {
 
         const data = JSON.stringify({
             "name": name,
+            "firstname": firstname,
             "adresse": address,
             "email": email,
             "password": password,
             "ville": ville,
-            "code_postal": codePostal,
+            "codepostal": codePostal,
             "phone": phone
         });
           
@@ -114,7 +113,6 @@ const Register = () => {
           });
           
     }
-    // if(islogin) return <Navigate to="/home"/> ;
     return (
     <div className='registerMain'>
         <div className='DivRegisterText'>

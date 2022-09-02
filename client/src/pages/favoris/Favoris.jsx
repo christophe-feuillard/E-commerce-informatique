@@ -23,12 +23,6 @@ import {useNavigate} from 'react-router-dom';
       console.log(filtered)
   }
   
-
-// useEffect(() => {
-//   console.log(Favoris.length)
-// }
-//   ,[]);
-
 if (Favoris.length == 0) {
   return(
     <div>

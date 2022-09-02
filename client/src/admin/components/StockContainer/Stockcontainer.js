@@ -1,5 +1,4 @@
 import React from 'react'
-import './stockcontainer.css'
 export default function Stockcontainer({data, setEdit, setElementUpdate}) {
   
     return (

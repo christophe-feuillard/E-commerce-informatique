@@ -17,12 +17,11 @@ const ContainerCart = ({ edit, setEdit}) => {
     const [elementUpdate, setElementUpdate] = useState({})
     const [created, setCreated] = useState({titre:'', prix:'', description:'', caracteristique:'', photo:'', stock:''})
 
-    console.log(elementUpdate)
 
     if(user.roles[0] === 'ROLE_ADMIN'){
         if(edit === 'create'){
             return (
-            <div className='titlecontainerhome'>
+            <div className='titlecontainerhome text-white'>
                 <Input dataTochange={created} isCreated={true} setEdit={setEdit}/>
             </div>
             
@@ -31,7 +30,7 @@ const ContainerCart = ({ edit, setEdit}) => {
 
         if(edit === 'update'){
             return (
-                <div className='titlecontainerhome'>
+                <div className='titlecontainerhome text-white'>
                     <Input dataTochange={elementUpdate} isCreated={false} setEdit={setEdit} edit={edit}/>
                 </div>
             
@@ -40,7 +39,7 @@ const ContainerCart = ({ edit, setEdit}) => {
         }
         if(edit === 'home'){
             return (
-                <div className='titlecontainerhome'>
+                <div className='titlecontainerhome text-white'>
                     <Container2 setEdit={setEdit} setElementUpdate={setElementUpdate} edit={edit}  />
                 </div>
             
@@ -48,7 +47,7 @@ const ContainerCart = ({ edit, setEdit}) => {
         }
         if(edit === 'stock'){
             return (
-                <div className='titlecontainerhome'>
+                <div className='titlecontainerhome text-white'>
                     <Rowstock setEdit={setEdit} setElementUpdate={setElementUpdate}/>
                 </div>
                 
@@ -57,7 +56,7 @@ const ContainerCart = ({ edit, setEdit}) => {
 
         if(edit === 'discount'){
             return (
-                <div className='titlecontainerhome'>
+                <div className='titlecontainerhome text-white'>
                     <Discount setEdit={setEdit} elementUpdate={elementUpdate} setElementUpdate={setElementUpdate}/>
                 </div>
                 

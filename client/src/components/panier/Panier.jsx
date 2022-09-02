@@ -6,6 +6,8 @@ import {BsTrashFill} from "react-icons/bs"
 import { Trash } from './trash';
 import './Panier.css'
 import Footer from '../footer/footer';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
  const Panier = () => {
   const {contextStore, contextTotal, contextUser} = GetGlobalData();
@@ -35,35 +37,23 @@ import Footer from '../footer/footer';
         )
     }else { 
         return (
-            // {store.map((item, key) => (
-            //     <div key={key} className='flexItem'>
-            //       <div className='DivItemProduit'>
-            //        <img className='imgWidth' src={item.photo} alt="" />
-            //       <p className='textUppercase'>{item.titre}</p>
-            //       </div>
-            //       {/* <div className='displayFlex'> */}
-
-            //       <div className='DivItemQuantité'>
-            //         {item.quantity}
-            //       </div>
-            //       <div className='DivItemTotal'>
-            //         {item.prix * item.quantity + '€'}
-            //       </div>
-            //       <div className='trash'>
-            //       <BsTrashFill onClick={()=>Trash(item.id,setStore, store)} /> 
-            //       </div>
-            //       {/* </div> */}
-            //     </div>
-            // ))}
+       
             <div>
-              {/* <Header /> */}
         <div className="w-full h-full bg-black dark:bg-gray-900 bg-opacity-90 top-0 overflow-y-auto overflow-x-hidden fixed sticky-0" id="chec-div">
             <div className="w-full z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="checkout">
                 <div className="flex  lg:flex-row flex-col " id="cart">
                     <div className="w-full lg:px-8 lg:py-14 md:px-6 px-4 md:py-8 py-4 bg-white dark:bg-gray-800 overflow-x-hidden lg:h-screen h-auto" id="scroll">
-                        <div className="flex items-center text-gray-500 hover:text-gray-600 dark:text-white cursor-pointer">
+                   <Breadcrumbs className='text-gray-900' maxItems={2} aria-label="breadcrumb">
+  <Link underline="hover" color="inherit" href="/home">
+    Home
+  </Link>
+  <Link underline="hover" color="red" href="/register">
+    Panier
+  </Link>
+</Breadcrumbs>
+                        {/* <div className="flex items-center text-gray-500 hover:text-gray-600 dark:text-white cursor-pointer">
                             <p onClick={()=> navigate("/home")} className="text-sm pl-2 leading-none dark:hover:text-gray-200">Retourner sur la page d'accueil</p>
-                        </div>
+                        </div> */}
                         <p className="lg:text-4xl text-3xl font-black leading-10 text-gray-800 dark:text-white pt-3">Panier</p>
                         {store.map((item, key) => (
                             <div key={key} className="md:flex justify-center items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50 ">
@@ -94,9 +84,7 @@ import Footer from '../footer/footer';
                                         <p className="text-xs leading-3 underline text-gray-800 dark:text-white cursor-pointer">Ajouter au favoris</p>
                                         <p  onClick={()=>Trash(item.id,setStore, store)} className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Supprimer</p>
                                     </div>
-                                    {/* {item.old_price !== null &&
-                     <p className='text-red-800'>{item.old_price + "€"}</p>
-            } */}
+
                     <div className="text-base text-1xl font-black leading-none text-gray-800 dark:text-white">
                       {item.prix * item.quantity + '€'}
                     </div>
@@ -110,23 +98,12 @@ import Footer from '../footer/footer';
                         <div className="flex flex-col lg:h-screen h-auto lg:px-8 md:px-7 px-4 lg:py-20 md:py-10 py-6 justify-between overflow-y-auto">
                             <div>
                                 <p className="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-white">Récapitulatif</p>
-                                {/* <div className="flex items-center justify-between pt-16">
-                                    <p className="text-base leading-none text-gray-800 dark:text-white">Sous-Total</p>
-                                    <p className="text-base leading-none text-gray-800 dark:text-white">{total} €</p>
-                                </div>
-                                <div className="flex items-center justify-between pt-5">
-                                    <p className="text-base leading-none text-gray-800 dark:text-white">Frais de port</p>
-                                    <p className="text-base leading-none text-gray-800 dark:text-white">$30</p>
-                                </div>
-                                <div className="flex items-center justify-between pt-5">
-                                    <p className="text-base leading-none text-gray-800 dark:text-white">Tax</p>
-                                    <p className="text-base leading-none text-gray-800 dark:text-white">$35</p>
-                                </div> */}
+            
                             </div>
                             <div>
                                 <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
                                     <p className="text-2xl leading-normal text-gray-800 dark:text-white">Total</p>
-                                    <p className="text-2xl font-bold leading-normal text-right text-gray-800 dark:text-white">{total} €</p>
+                                    <p className="text-2xl font-bold leading-normal text-right text-gray-800 dark:text-white">{Math.round(total * 100)/100 } €</p>
                                 </div>
                               
 <button className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700" onClick={()=>navigate("/commande", {total})}>Passez au paiement</button>

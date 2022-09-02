@@ -2,7 +2,6 @@ import React from 'react'
 
 function User({data, setEdit, setElementUpdate}) {
 
-    console.log(data)
 
   return (
     <div>

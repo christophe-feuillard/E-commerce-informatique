@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {RadioGroup} from '@headlessui/react'
-import { CheckCircleIcon, TrashIcon } from '@heroicons/react/solid'
+import { TrashIcon } from '@heroicons/react/solid'
 import InputCard from '../../components/input/InputCard';
 import { PayPalButtons } from "@paypal/react-paypal-js";
-
-
 import { GetGlobalData } from '../../useContext/AuthProviders';
 import { Trash } from '../../components/panier/trash';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../../components/footer/footer';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+
 
 
 function classNames(...classes) {
@@ -28,18 +29,12 @@ function classNames(...classes) {
 export const Commande = () => {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
 
-  const {contextStore, contextTotal,contextUser, contextToken} = GetGlobalData();
+  const {contextStore, contextTotal,contextUser, contextToken, contextPaypal} = GetGlobalData();
   const [store, setStore] = contextStore;
   const [total] = contextTotal;
   const [user] = contextUser;
   const [token] = contextToken
-
-console.log(user)
-
-  // const BanMetde = [{
-  //     title: 'carte bancaire'
-  //  }
-  // ]
+  const [setPaypal] = contextPaypal
 
   const product = {
     amount : total
@@ -47,7 +42,7 @@ console.log(user)
   
   
   const [orderId, setOrderId] = useState(false);
-  const  [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [name, setName] = useState('');
   const [firstname, setFirstname] = useState('');
   const [adress, setAdress] = useState('');
@@ -65,18 +60,15 @@ console.log(user)
   const [frais, setFdp] = useState(0);
   const [service, setService] = useState('');
   const [TrackDoc, setTrackDoc] = useState();
+  const [error, setError] = useState('');
+  const [isSave, setIsSave] = useState(false);
   
   const navigate = useNavigate()
-  
-  // const banMethode = user.BanMethode?.includes('carte bancaire')
-  
-  // console.log(banMethode, 'ISBAN')
-  
-  // console.log(user)
-
-  const [quantite, setQuantite] = useState(1)
   const [tracking, setTracking] = useState()
 
+    const banMethode = user?.BanMethode?.includes('carte bancaire')
+    const banMethode1 = user?.BanMethode?.includes('paypal')
+    console.log(banMethode)
   
   
   const inputName = [
@@ -125,7 +117,7 @@ console.log(user)
   
   const inputNameCard = [
     {
-      type: 'text', id: 'nameCard', for: 'nameCard',value: user?.card?.name , change: (e) => setCardName(e.target.value)
+      type: 'text', id: 'nameCard', for: 'nameCard',value: cardName, change: (e) => setCardName(e.target.value)
         }
   ]
   
@@ -134,9 +126,9 @@ console.log(user)
       type: 'text', id: 'cvc', for: 'cvc',value: cardCvc, change: (e) => setCvc(e.target.value)
     }
   ]
-  const InputCardNumber = [
+const InputCardNumber = [
     {
-      type: 'text', id: 'number', for: 'number',value: user?.card?.number, change: (e) => setCardNumber(e.target.value)
+      type: 'text', id: 'number', for: 'number',value: cardNumber, change: (e) => setCardNumber(e.target.value)
     }
   ]
   
@@ -163,6 +155,48 @@ console.log(user)
   ]
   
 
+  const handleChange = event => {
+    if (event.target.checked) {
+      console.log('Checkbox is checked');
+    } else {
+      console.log('Checkbox is NOT checked');
+    }
+    setIsSave(current => !current);
+  };
+  
+
+  const callpayment = () => { 
+    if(isSave ){
+      var data = JSON.stringify({
+        "name": cardName,
+        "number": cardNumber,
+        "month": month,
+        "year": year,
+        "firstname": firstname,
+        "cvc": cardCvc
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://localhost:8000/api/payment',
+      headers: { 
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+        console.log(error)
+      });
+    }
+    }
+
+
   const callAPI = () => { 
     var data = JSON.stringify({
       "name": firstname,
@@ -173,8 +207,6 @@ console.log(user)
       "panier": JSON.stringify(store)
   });
 
-console.log(store, 'STOREE')
-console.log(data, 'DATA')
   var config = {
     method: 'POST',
     url: 'http://localhost:8000/api/FDP',
@@ -189,11 +221,14 @@ console.log(data, 'DATA')
       setTrackDoc(res.data[2])
         setTracking(res.data[0].tracking_code)
         setRate(res.data[0].rates)
+        // setStore('')
     })
     .catch(err => {
     console.log(err);
     }); 
   }
+
+
 
 
 const setCommande = () =>{
@@ -233,30 +268,38 @@ console.log(err);
 }); 
 }
 
-console.log(service, 'SERVICE')
-const getCommande = () =>{
-  const config = {
-    method: 'GET',
-    url: 'http://localhost:8000/api/getCommande',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  };
-  axios(config)
-  .then(res => {
-      console.log(res)
-  })
-  .catch(err => {
-  console.log(err);
-  }); 
+
+
+const verifyInput = () =>{
+
+  const regexVoidAndSpace = /^\s*$/;
+  if(regexVoidAndSpace.test(email) || regexVoidAndSpace.test(name) || regexVoidAndSpace.test(firstname) || regexVoidAndSpace.test(adress) || regexVoidAndSpace.test(city) || regexVoidAndSpace.test(phone) || regexVoidAndSpace.test(adress) || regexVoidAndSpace.test(zip) || regexVoidAndSpace.test(country)) setError('Veuillez remplir tous les champs !');
+  else if(service == '') setError('Veuillez générer les frais de port !')
+  else if(regexVoidAndSpace.test(month) || regexVoidAndSpace.test(year) || regexVoidAndSpace.test(cardCvc) || regexVoidAndSpace.test(cardNumber) || regexVoidAndSpace.test(cardName)) setError("Vous n'avez pas entrez les informations de votre carte bancaire")
+  else{
+    setError('')
+    callAPI()
+    setCommande()
+    // if(banMethode){
+      callpayment()
+    // }
+    navigate('/account')
   }
-
-
+}
   return (
     <div className="bg-gray-50 text-gray-900">    
-    
       <main className="max-w-7xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+                       <Breadcrumbs className='text-gray-900' separator={'//'} maxItems={2} aria-label="breadcrumb">
+  <Link underline="hover" color="inherit" href="/home">
+    Home
+  </Link>
+  <Link underline="hover" color="inherit" href="/panier">
+    Panier
+  </Link>
+  <Link underline="hover" color="red" href="/commande">
+    Passez votre commande
+  </Link>
+</Breadcrumbs>
         
         <div className="max-w-2xl mx-auto lg:max-w-none">
           <h1 className="sr-only">Checkout</h1>
@@ -264,7 +307,9 @@ const getCommande = () =>{
             <div>
               <div>
                 <h2 className="text-lg font-medium text-gray-900">Contact</h2>
-
+                {error == 'Veuillez remplir tous les champs !' &&
+                 <p className=' text-red-500'>{error}</p> 
+                  }
                 <div className="mt-4">
                   <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
                    Adresse Email
@@ -278,7 +323,7 @@ const getCommande = () =>{
               </div>
 
               <div className="mt-10 border-t border-gray-200 pt-10">
-                <h4 className='text-lg font-medium text-red-900 '>Nous livrons seulement aux Us !</h4>
+                {/* <h4 className='text-lg font-medium text-red-900 '>Nous livrons seulement aux Us !</h4> */}
                 <h2 className="text-lg font-medium text-gray-900">Information sur la livraison</h2>
 
                 <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
@@ -371,6 +416,9 @@ const getCommande = () =>{
               </div>
 
               <div className="mt-10 border-t border-gray-200 pt-10">
+                  {error == 'Veuillez générer les frais de port !' &&
+                 <p className=' text-center text-red-600'>{error}</p> 
+                  }
                 <RadioGroup value={selectedDeliveryMethod} onChange={setSelectedDeliveryMethod}>
                   <RadioGroup.Label className="text-lg font-medium text-gray-900">Méthode de livraison</RadioGroup.Label>
                   <button
@@ -404,7 +452,7 @@ const getCommande = () =>{
                                   as="span"
                                   className="mt-1 flex items-center text-sm text-gray-500"
                                 >
-                               {MethodeLivraison.delivery_days} Jours
+                               {MethodeLivraison.delivery_days ? MethodeLivraison.delivery_days : 1 } Jours
                                 </RadioGroup.Description>
                                 <RadioGroup.Description as="span" className="mt-6 text-sm font-medium text-gray-900">
                                 {MethodeLivraison.rate}€
@@ -433,15 +481,17 @@ const getCommande = () =>{
 
             
               <div className="mt-10 border-t border-gray-200 pt-10">
+
                 <h2 className="text-lg font-medium text-gray-900">Paiement</h2>
-           
-             {/* {banMethode ?  */}
+          {banMethode || !banMethode &&
+          
              <PayPalButtons style={{ layout: "horizontal",color: "blue", label: "pay"}} 
              createOrder={async (data, actions) => {
-                              const orderID = await actions.order
-                                .create({
+               const orderID = await actions.order
+               .create({
                                   purchase_units: [
                                     {
+                                      description:"Setup Dream",
                                       amount: {
                                         value: product.amount
                                       },
@@ -455,15 +505,23 @@ const getCommande = () =>{
                             onApprove={async (data, actions) => {
                               const details = await actions.order.capture();
                               const { payer } = details;
-                              navigate("/payment_confirmation" );
+                              console.log(details)
+                              setPaypal(details)
+                              navigate("/payment_confirmation");
                             }}
                             onError={(data, actions) => {
                               setErrorMessage("An Error occured with your payment ");
                             }}
                             // :
                             />
-                            <div className='m-auto w-64'> <p className='text-center'> ou </p></div>
-                            <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
+                          }
+                            {/* <div className='m-auto w-64'> <p className='text-center'> ou </p></div> */}
+                            { error == "Vous n'avez pas entrez les informations de votre carte bancaire" &&
+                              <p className=' text-center text-red-600'>{error}</p> 
+                            }   
+                            {banMethode1 || !banMethode1 &&
+                      <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
+
                   <div className="col-span-4">
                     <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
                       Numéro de carte
@@ -474,7 +532,6 @@ const getCommande = () =>{
                   ))}
                     </div>
                   </div>
-
                   <div className="col-span-4">
                     <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
                       Nom 
@@ -482,7 +539,17 @@ const getCommande = () =>{
                     <div className="mt-1">
                     {inputNameCard.map((input, key) => (
                     <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                  ))}
+                    ))}
+                    </div>
+                  </div>
+                  <div className="col-span-4">
+                    <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
+                      Prénom 
+                    </label>
+                    <div className="mt-1">
+                    {inputFName.map((input, key) => (
+                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                    ))}
                     </div>
                   </div>
                   <div>
@@ -503,7 +570,7 @@ const getCommande = () =>{
                     <div className="mt-1">
                     {InputYear.map((input, key) => (
                     <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                  ))}
+                    ))}
                     </div>
                   </div>
 
@@ -514,12 +581,17 @@ const getCommande = () =>{
                     </label>
                     <div className="mt-1">
                     {InputCvc.map((input, key) => (
-                    <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
-                  ))}
+                      <InputCard key={key} className='input appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' type={input.type} value={input.value} placeholder={input.placeholder} change={input.change} />
+                      ))}
                     </div>
                   </div>
-                {/* } */}
+                    <div className='col-span-4'>
+              <input type="checkbox" id="save" name="save" value={isSave} onChange={handleChange}/>
+              <label htmlFor="save"> Souhaitez-vous enregistrez vos données pour les prochains paiement ?</label>
+              </div>
+
                 </div>
+            }
               </div>
             </div>
 
@@ -579,33 +651,26 @@ const getCommande = () =>{
                     <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Sous Totale</dt>
-                    <dd className="text-sm font-medium text-gray-900">64.00€</dd>
+                    <dd className="text-sm font-medium text-gray-900">{Number(Math.round(total * 100)/100)}€</dd>
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="text-sm">Frais de port</dt>
-                    <dd className="text-sm font-medium text-gray-900">{frais}€</dd>
+                    <dd className="text-sm font-medium text-gray-900"> {Number(Math.round(frais * 100)/100)}€</dd>
                   </div>
                   <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>
-                    <dd className="text-base font-medium text-gray-900">{ Number(total) +  Number(frais)+ '€'}</dd>
+                    <dd className="text-base font-medium text-gray-900">{ parseInt(total) + parseInt(frais )+ '€'}</dd>
                   </div>
                 </dl>
 
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <button
                   type="button"
-                    onClick={setCommande}
+                    onClick={verifyInput
+                    }
                     className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
                   >
                     Confirmer la commande
-                  </button>
-
-                  <button
-                  type="button"
-                    onClick={getCommande}
-                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                  >
-                    test
                   </button>
                 </div>
               </div>

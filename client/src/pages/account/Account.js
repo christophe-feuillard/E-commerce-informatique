@@ -1,8 +1,6 @@
 import ContainerCart from "../../admin/components/containerCart/ContainerCart";
-import { getRole } from "../../admin/requette/requette";
 import './account.css';
-import {useState, useEffect} from 'react';
-import Header from "../../components/header/Header";
+import {useState} from 'react';
 import PersonalInfo from "../../admin/components/PersonalInfo/PersonalInfo";
 import NavBAr from "../../admin/components/Navbar/NavBar";
 import { GetGlobalData } from '../../useContext/AuthProviders';
@@ -14,19 +12,13 @@ const Account = () =>{
 
 
   const info = [{title:"Articles", url:"home"},{title:"Stock", url:"stock"}, {title:"Créer un article", url:"create"}, {title:"Utlisateurs", url:"users"}];
-
-    const [role, setRole] = useState('')
     const [edit, setEdit] = useState('home')
-
-   
-
-    // console.log(infoPerso)
 
     if(user?.roles[0] === 'ROLE_USER'){
 
         return (
             <div>
-                {/* <Header /> */}
+    
                 <div className="Userhome"><PersonalInfo/></div>
             </div>
             

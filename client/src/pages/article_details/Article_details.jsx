@@ -1,9 +1,9 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
-// import './Article_details.css';
-import Header from "../../components/header/Header";
-import Buy from '../../components/buy/Buy';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import { handleStore } from '../../components/card/addcart';
+import { GetGlobalData } from '../../useContext/AuthProviders';
 
 import axios from 'axios';
 import { StarIcon } from '@heroicons/react/solid'
@@ -16,7 +16,6 @@ const ArticleDetails = (props) => {
     const [articles,setArticles] = useState([]);
     let { articlesParams } = useParams();
     let [cart, setCart] = useState([])
-    let localCart = localStorage.getItem("cart");
     console.log(articles);
 
     const fetchData = () => {
@@ -29,6 +28,22 @@ const ArticleDetails = (props) => {
         console.log(err)
       })
     }
+
+  const handleStore = () => {
+      const {contextStore} = GetGlobalData();
+      const [store, setStore] = contextStore;
+  
+      const foundArticleInLocalStorage = store.find(element => element.id === articles.id);
+      if (foundArticleInLocalStorage ) {
+       setStore(
+         store.map((item, key) => item.id == articles.id ? {...articles, quantity:foundArticleInLocalStorage.quantity + 1}: item)
+        )
+      } else {
+       setStore([...store, {...articles, quantity: 1}])
+      }
+   
+     }
+
     
     useEffect(() => {
       fetchData()
@@ -105,6 +120,14 @@ const ArticleDetails = (props) => {
   return(
     <div className="bg-white">
       <main className="bg-white max-w-2xl mx-auto pb-16 px-4 sm:pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                <Breadcrumbs className='text-gray-900' separator={'//'} maxItems={2} aria-label="breadcrumb">
+  <Link underline="hover" color="inherit" href="/home">
+    Home
+  </Link>
+  <Link underline="hover" color="red" href="/register">
+    Detail de l'article
+  </Link>
+</Breadcrumbs>
         <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
           <div className="pt-8 lg:col-start-8 lg:col-span-5">
             <div className="flex justify-between">
@@ -136,10 +159,10 @@ const ArticleDetails = (props) => {
                   ·
                 </div>
                 <div className="ml-4 flex">
-                  
+{/*                   
                   <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                     Voir les {reviews.totalCount} avis
-                  </a>
+                  </a> */}
                 </div>
               </div>
                   <div>
@@ -158,7 +181,8 @@ const ArticleDetails = (props) => {
             <form>
             
               <button
-                type="submit"
+                // type="submit"
+                onClick={handleStore}
                 className="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Ajouter au panier

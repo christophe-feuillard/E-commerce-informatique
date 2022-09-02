@@ -1,11 +1,10 @@
-import React, {useEffect,useState} from 'react';
+import React from 'react';
 import {useNavigate, Link} from 'react-router-dom';
 import {AiOutlineUser} from "react-icons/ai";
 import {MdOutlineLocalGroceryStore,MdOutlineFavorite} from "react-icons/md";
 import { GetGlobalData } from '../../useContext/AuthProviders';
 
 import './NavItems.css';
-// import Link from '../../admin/components/link/Link';
 
 const NavItems = () => {
     const {contextStore, contextUser, contextToken} = GetGlobalData();
@@ -14,14 +13,6 @@ const NavItems = () => {
     const [token, setToken] = contextToken;
 
     const navigate = useNavigate();
-    // const [isLogged, setIsLogged] = useState(false);
-    
-    // useEffect(() => {
-    //     const Token = localStorage.getItem("token");
-    //     if(Token) setIsLogged(true);
-    //     console.log(login)
-    // },[]);
-
 
     const Deconnexion = () => {
         localStorage.removeItem('token')
@@ -29,11 +20,6 @@ const NavItems = () => {
         setUser(null)
         navigate('/');
     }
-
-    // const handleClick = () => {
-    //     navigate('/login')
-    // }
-
     if(user){
         return(
             <div className='loginFlex'>
@@ -60,7 +46,6 @@ const NavItems = () => {
             <div className='login'>
             <div className='dropdown'>
              <div>
-            {/* <a className='textLogin' onClick={()=>navigate('/register')}>Inscription</a> */}
             <Link className='textLogin' to="/register">S'inscrire</Link>
             &#124;
             

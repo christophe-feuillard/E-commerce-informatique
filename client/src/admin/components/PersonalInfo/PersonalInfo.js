@@ -4,7 +4,9 @@ import { useState } from "react";
 import { Tab } from '@headlessui/react'
 import { useEffect } from "react";
 import { GetGlobalData } from '../../../useContext/AuthProviders';
-import { PaperClipIcon } from '@heroicons/react/solid'
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+
 
 
 const PersonalInfo = () => {
@@ -14,10 +16,6 @@ const PersonalInfo = () => {
   const [user] = contextUser;
   const navigate = useNavigate();
   const [modeCard, setModeCard] = useState('')
-
-
-  // console.log(user, 'User connecté')
-
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -47,16 +45,13 @@ const PersonalInfo = () => {
     }
 
   })
-  // console.log( modeCard )
+
   useEffect(() => (
 
     setModeCard(carteBancaire)
 
   ), [])
 
-  // console.log(modeCard, 'gfchgfhf')
-
-  console.log(user.orderDetails[0].orderItems)
   const date = user.adresse + ' ' + user.ville + ' ' + user.CodePostal
 
   const titre = [{
@@ -96,14 +91,21 @@ const PersonalInfo = () => {
       ref: date
     }
   ]
-  console.log(user)
-  // console.log(user, 'User connecté')
+  
   return (
     <div className="sizeNav">
       <div className="MonProfil">
         <p>Mon profil</p>
       </div>
-      <p onClick={()=> navigate("/home")} className="text-sm pl-2 text-2xl leading-none dark:hover:text-gray-200  cursor-pointer">Retourner sur la page d'accueil</p>
+      <Breadcrumbs className='text-gray-900' separator={'//'} maxItems={2} aria-label="breadcrumb">
+  <Link underline="hover" color="inherit" href="/home">
+    Home
+  </Link>
+  <Link underline="hover" color="red" href="/personal_info">
+    Vos informations
+  </Link>
+
+</Breadcrumbs>
       <Tab.Group>
         <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
           {titre.map((category, key) => (
@@ -125,7 +127,6 @@ const PersonalInfo = () => {
         </Tab.List>
         <Tab.Panels className="mt-2">
           <Tab.Panel
-            // {articles.stock ? }
             className={classNames(
               'rounded-xl p-3',
               'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400  '
@@ -141,10 +142,6 @@ const PersonalInfo = () => {
                       <div className="px-4 py-2 font-semibold">{item.titre}</div>
                       <div className="px-4 py-2">{item.ref}</div>
                     </div>
-                    {/* <div className="grid grid-cols-2" >
-                                <div className="px-4 py-2 font-semibold">Adresse postale</div>
-                                <div className="px-4 py-2">{user.adresse} {user.ville} {user.CodePostal}</div>
-                            </div> */}
                   </div>
                 </div>
 
@@ -157,63 +154,6 @@ const PersonalInfo = () => {
               'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400  '
             )}
           >
-            {/* <div>
-              <div>{user.orderDetails.map((orderInfo, key) =>(
-                <div key={key}>{orderInfo.nom}</div>
-              ))}</div>
-            </div> */}
-              {/* {user.orderDetails.map((orderInfo, key) =>(
-              <div className="bg-white text-gray-900 shadow overflow-hidden sm:rounded-lg mb-20">
-                  
-      <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">Information </h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">Commande n°{orderInfo.numero_de_suivis}</p>
-      </div>
-      <div key={key} className="border-t border-gray-200 px-4 py-5 sm:p-0">
-        <dl className="sm:divide-y sm:divide-gray-200">
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Prénom</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{orderInfo.prenom}</dd>
-          </div>
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Nom</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{orderInfo.nom}</dd>
-          </div>
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Adresse email</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{orderInfo.email}</dd>
-          </div>
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Adresse de livraison</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{orderInfo.adresse_de_livraison} {orderInfo.code_postale} {orderInfo.ville}</dd>
-          </div>
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Numéro de suivi</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-           {orderInfo.numero_de_suivis}
-            </dd>
-          </div>
-          <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Document</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <ul role="list" className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                  <div className="w-0 flex-1 flex items-center">
-                    <PaperClipIcon className="flex-shrink-0 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    <a href={orderInfo.DocTrack} className="ml-2 flex-1 w-0 truncate">{orderInfo.DocTrack}</a>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a href={orderInfo.DocTrack} download className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Voire mon suivi
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </dd>
-          </div>
-        </dl>
-      </div>
-    </div> */}
         {user.orderDetails.map((order, key) => (
         <div className="bg-white mt-16">
           <div className="max-w-3xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -227,23 +167,14 @@ const PersonalInfo = () => {
                 <dd className="text-indigo-600 mt-2">{order.numero_de_suivis}</dd>
               </dl>
             </div>
-               {/* <div className="w-0 items-center text-gray-900 max-w-xl"> */}
                   <a href={order.DocTrack} className=" p-3 text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700">Tracker votre commande </a>
-                {/* </div> */}
                    
-                
-          
-                    {/* <a href={order.DocTrack} download className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Voire mon suivi
-                    </a> */}
-    
             <div className="mt-10 border-t border-gray-200">
               <h2 className="sr-only">Your order</h2>
 
               <h3 className="sr-only">Articles</h3>
               {order.orderItems.map((infoItem, key) => (
                 <div>
-                  {/* {infoItem.product.map((productItem, key) => ( */}
                     <div key={key} className="py-10 border-b border-gray-200 flex space-x-6">
                   <img
                     src={infoItem.product.photo}
@@ -272,18 +203,16 @@ const PersonalInfo = () => {
                   </div>
                 </div>
             
-                  {/* ))} */}
+                
                     </div>
               ))}
-
-                  {/* {user.orderDetails.map((orderInfo, key) =>( */}
               <div className="sm:ml-40 sm:pl-6">
                 <h3 className="sr-only">Your information</h3>
     
                 <h4 className="sr-only">Addresse</h4>
                 <dl className="grid grid-cols-2 gap-x-6 text-sm py-10">
                   <div>
-                    <dt className="font-medium text-gray-900">Shipping address</dt>
+                    <dt className="font-medium text-gray-900">Adresse de livraison</dt>
                     <dd className="mt-2 text-gray-700">
                       <address className="not-italic">
                         <span className="block">{order.prenom} {order.nom}</span>
@@ -295,26 +224,25 @@ const PersonalInfo = () => {
                 </dl>
     
                 <h4 className="sr-only">Payment</h4>
-                {/* {orderTotal.orderItems.map((infoItemTotal, key) => ( */}
                   <div>
 
                   <dl className="grid grid-cols-2 gap-x-6 border-t border-gray-200 text-sm py-10">
                   <div>
-                    <dt className="font-medium text-gray-900">Payment method</dt>
+                    <dt className="font-medium text-gray-900">Méthode de paiement</dt>
                     <dd className="mt-2 text-gray-700">
-                      <p>Apple Pay</p>
-                      <p>Mastercard</p>
+                      <p>Carte bancaire</p>
+                      <p>{ user?.card?.number?.charAt(0) == 4 ? 'Visa': 'Mastercard'}</p>
                       <p>
-                        <span aria-hidden="true">•••• </span>
-                        <span className="sr-only">Ending in </span>1545
+                        <span aria-hidden="true">••••</span>
+                        <span className="sr-only">Ending in </span>{user.card?.number?.substring(1, 5)}
                       </p>
                     </dd>
                   </div>
                   <div>
                     <dt className="font-medium text-gray-900">Méthode de livraison</dt>
                     <dd className="mt-2 text-gray-700">
+                      Service:
                       <p>{order.service}</p>
-                      {/* <p>Takes up to 3 working days</p> */}
                     </dd>
                   </div>
                 </dl>
@@ -337,7 +265,6 @@ const PersonalInfo = () => {
                   </div>
                 </dl>
                   </div>
-                  {/* ))} */}
                   
               </div>
             </div>
@@ -360,7 +287,6 @@ const PersonalInfo = () => {
                   <div id='cardRotate' className="absolute top-0 left-0 w-full h-full flex flex-col justify-center gap-6 p-6 bg-gradient-to-tr from-gray-900 to-gray-700 transition-all duration-100 delay-200 z-20">
 
                     <div className="flex justify-between items-center">
-                      {/* <img src="https://raw.githubusercontent.com/muhammederdem/credit-cardaster/src/assets/images/chip.png" alt='Smart card' className="w-12"/> */}
 
                       <img src={modeCard[0]?.url} alt="Visa image" className="w-12" />
                     </div>
@@ -408,9 +334,6 @@ const PersonalInfo = () => {
 
                   </div>
                 </div>
-                {/* <div className="flex justify-center items-center text-gray-700 ">
-        <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2  ">Supprimer ma carte</button>
-        </div> */}
               </div>
 
             </div>

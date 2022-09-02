@@ -6,7 +6,6 @@ function Userform({setEdit,elementUpdate }) {
 
     const {contextToken} = GetGlobalData();
     const [token] = contextToken;
-  console.log(elementUpdate)
     const initialValues = {
         BanMethode: elementUpdate.BanMethode,
         country: elementUpdate.Country,
@@ -15,7 +14,6 @@ function Userform({setEdit,elementUpdate }) {
         ville: elementUpdate.ville,
         email: elementUpdate.email,
         codeP: elementUpdate.CodePostal,
-        // emballage: elementUpdate.emballage,
         name: elementUpdate.name,
         phone: elementUpdate.phone,
       };
@@ -30,8 +28,6 @@ function Userform({setEdit,elementUpdate }) {
           [name]: value,
         });
       };  
-
-      console.log(elementUpdate.CodePostal)
   return (
     <div class="relative z-0 mb-6 w-full group px-96">
         <div className='py-4'>

@@ -1,62 +1,22 @@
-// import "./Commentaires.css";
-// import { StarIcon } from '@heroicons/react/solid'
-// import TitreComment from "./TitreComment";
-
 const Comment = ({commentId,username,date,text,commentTitle}) => {
   
   return (
     <>
-      {/* 
-       <div className="container_com_div ccd2">
-        <div className="commentaire_div"> 
-          <div>
-           <img className="img_profil_com" src={imgProfil} alt="profil"/>
-          </div>
-          <div>
-            <div>
-             <span className="username_com">{username}</span> 
-             <span className="time_com">{date}</span> 
-            </div>
-            <div>
-              <p>
-                {text}
-              </p>             
-            </div>
-          </div>
-        </div>  
-       </div>         
-      */}
+  
         <div className="mt-6 border-t border-b border-gray-200 pb-10 divide-y divide-gray-200 space-y-10">
               <div key={commentId} className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
                 <div className="lg:col-start-5 lg:col-span-8 xl:col-start-4 xl:col-span-9 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:items-start">
                   <div className="flex items-center xl:col-span-1">
                     <div className="flex items-center">
-                      {/* {[0, 1, 2, 3, 4].map((rating) => (
-                        <StarIcon
-                          key={rating}
-                          className={classNames(
-                            review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
-                            'h-5 w-5 flex-shrink-0'
-                          )}
-                          aria-hidden="true"
-                        />
-                      ))} */}
                     </div>
                     <p className="ml-3 text-sm text-gray-700">
-                      {/* {review.rating} */}
+
                       <span className="sr-only"> out of 5 stars</span>
                     </p>
                   </div>
 
                   <div className="mt-4 lg:mt-6 xl:mt-0 xl:col-span-2">
                   <h3 className="text-sm font-medium text-gray-900">{commentTitle}</h3>
-                    {/* {commentsTitle.map((text) => (
-                      <TitreComment 
-                      commentTitleProps={text}
-                      mapCommentTitle={commentsTitle}
-                      />    
-                    ))}  */}
-
                     <div
                       className="mt-3 space-y-6 text-sm text-gray-500"
                       dangerouslySetInnerHTML={{ __html: text }}

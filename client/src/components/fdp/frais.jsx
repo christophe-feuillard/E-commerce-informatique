@@ -1,15 +1,13 @@
-import React, {useEffect} from 'react';
+
 import axios from 'axios';
 import { GetGlobalData } from '../../useContext/AuthProviders';
 
 
 const Data = () => {
 
-  const {contextStore, contextTotal, contextToken, contextUser} = GetGlobalData();
+  const {contextStore, contextToken} = GetGlobalData();
   const [store] = contextStore;
-  const [total] = contextTotal;
   const [token] = contextToken;
-  const [user] = contextUser;
 
   console.log(token)
 

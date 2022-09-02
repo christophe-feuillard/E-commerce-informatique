@@ -1,6 +1,4 @@
 import React from "react";
-import Ptag from "../ptag/Ptag";
-import './Cart.css'
 import { APIdelete } from "../../requette/requette";
 import { GetGlobalData } from "../../../useContext/AuthProviders";
 

@@ -1,7 +1,4 @@
-import React from "react";
 import axios from "axios";
-import { GetGlobalData } from "../../useContext/AuthProviders";
-// const Token = localStorage.getItem("token");
 
 export const APIdelete = (id, setEdit, token) => {
 
@@ -114,7 +111,6 @@ export const getItem = (setData, token) => {
       }
      
       export const getStock = (setData, setIsLoading, token) => {
-        // const Token = localStorage.getItem("token");
         var config = {
             method: 'get',
 
@@ -134,25 +130,7 @@ export const getItem = (setData, token) => {
     
         }      
 
-
-        // export const getUser= (token) => {
-
-        //   var config = {
-        //       method: 'get',
-        //       url: 'http://localhost:8000/api/user/role',
-        //       headers: { 
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer ${token}`
-        //       }
-        //     };
-            
-        //          axios(config)
-        //   }
-         
-
-
         export const setDiscount = (id, data, setEdit, token) => {
-          // const Token = localStorage.getItem("token");
           var config = {
               method: 'post',
               url: `http://localhost:8000/api/admin/setdiscount/${id}`,
@@ -193,7 +171,6 @@ export const getItem = (setData, token) => {
 
 
             export const getUsers = (setUserData, token) => {
-              // const Token = localStorage.getItem("token");
               var config = {
                   method: 'get',
                   url: `http://localhost:8000/api/admin/user`,
@@ -212,7 +189,6 @@ export const getItem = (setData, token) => {
               } 
 
               export const updateUser = (id, data, setEdit, token) => {
-                // const Token = localStorage.getItem("token");
                 var config = {
                     method: 'post',
                     url: `http://localhost:8000/api/admin/user/update/${id}`,
@@ -233,7 +209,6 @@ export const getItem = (setData, token) => {
 
 
                 export const getCountry = (setCountry, token) => {
-                  // const Token = localStorage.getItem("token");
                   var config = {
                       method: 'get',
                       url: `http://localhost:8000/api/admin/country`,
@@ -273,7 +248,6 @@ export const getItem = (setData, token) => {
 
 
                     export const getCountryBan = (setCountryBan, token) => {
-                      const Token = localStorage.getItem("token");
                       var config = {
                           method: 'get',
                           url: `http://localhost:8000/api/admin/countryban`,
@@ -295,7 +269,6 @@ export const getItem = (setData, token) => {
                         const test = {
                           "country" : data
                         }
-                        // const Token = localStorage.getItem("token");
                         var config = {
                             method: 'post',
                             url: `http://localhost:8000/api/admin/ban/remove`,

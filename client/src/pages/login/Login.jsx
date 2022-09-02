@@ -9,7 +9,7 @@ import './Login.css';
 const Login = () => {
     const navigate = useNavigate();
     
-    const {contextStore, contextUser, contextToken} = GetGlobalData();
+    const {contextToken} = GetGlobalData();
     const [token, setToken] = contextToken
     
     const [email, setEmail] = useState('');
@@ -61,7 +61,6 @@ const Login = () => {
       .then((response) => {
         setToken(response.data.token)
         console.log(response.data.token)
-        // localStorage.setItem("token",JSON.stringify(response.data.token));
         navigate('/home');
       })
       .catch((error) => {
@@ -70,7 +69,6 @@ const Login = () => {
       });
       
     }
-    // if(islogin) return <Navigate to="/home"/> ;
   return (
     <div className='loginMain'>
         <div className='loginContainer'>

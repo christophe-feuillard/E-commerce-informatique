@@ -19,7 +19,6 @@ import PaymentConfirmation from './pages/payment_confirmation/PaymentConfirmatio
 import { PayPalScriptProvider} from "@paypal/react-paypal-js";
 import { Error } from './components/error/error';
 import { PaiementType } from './pages/Commande/paiementType/paiementType';
-import InvoiceData from './components/fdp/invoiceData';
 import ContactForm from './components/contactForm/contact';
 
 function App() {

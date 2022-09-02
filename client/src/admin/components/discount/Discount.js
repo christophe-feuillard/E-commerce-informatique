@@ -24,7 +24,6 @@ function Discount({elementUpdate, setEdit, setElementUpdate}) {
           });
           
         };  
-console.log(values)
 if(!elementUpdate.discount){
     
     return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { RiBankCardFill, RiPaypalFill } from 'react-icons/ri';
+import { RiBankCardFill } from 'react-icons/ri';
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from 'react-router-dom';
 import { GetGlobalData } from '../../../useContext/AuthProviders';

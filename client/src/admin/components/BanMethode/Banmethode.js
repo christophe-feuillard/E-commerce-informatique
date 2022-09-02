@@ -26,7 +26,6 @@ const handleInputChange = (e) => {
       [name]: value,
     });
   };  
-console.log(values)
   return (
     <div className='flex flex-col justify-items-center'>
         <div>

@@ -20,9 +20,9 @@ export const AuthProviders = ({ children }) => {
   const [store, setStore] = useState([])
   const [total, setTotal] = useState(0)
   const [user, setUser] = useState(null)
-  // const [login, setlogin] = useState(false);
   const [role,setRole] = useState();
   const [token,setToken] = useState(null);
+  const [paypal, setPaypal] = useState(null)
 
  
   useEffect(() => {
@@ -71,8 +71,6 @@ useEffect(() => {
     }
 }, [token])
 
-
-
   useEffect(() => {
     localStorage.setItem("store", store && JSON.stringify(store));
     setTotal(store.reduce((actuel, item) => actuel + item.prix * item.quantity, 0));
@@ -84,7 +82,8 @@ useEffect(() => {
     contextStore: [store, setStore],
     contextTotal: [total, setTotal],
     contextToken: [token, setToken],
-    contextUser: [user, setUser]
+    contextUser: [user, setUser],
+    contextPaypal: [paypal, setPaypal],
   }
 
   return (
